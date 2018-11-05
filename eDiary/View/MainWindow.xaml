@@ -12,31 +12,32 @@
     </Window.Effect>
 
     <Grid Margin="10,10,10,10" >
-        <TabControl Name="TabBlock" BorderThickness="0" Margin="0,-25,0,0" VerticalAlignment="Top" BorderBrush="{x:Null}">
+        <TabControl Name="TabBlock" BorderThickness="0" Margin="0,-25,0,0" BorderBrush="{x:Null}">
             <TabItem Header="Auth">
                 <Grid>
                     <Grid.Background>
-                    <ImageBrush ImageSource="/eDiary;component/Resources/Images/Backgrounds/1743.jpg" Stretch="UniformToFill"/>
-                </Grid.Background>
-                <Rectangle MouseDown="OnWindowDrag" Fill="#66DCD3CD"/>
+                        <ImageBrush ImageSource="/eDiary;component/Resources/Images/Backgrounds/1743.jpg" Stretch="UniformToFill"/>
+                    </Grid.Background>
+                    <Rectangle MouseDown="OnWindowDrag" Fill="#66DCD3CD"/>
 
-                <Grid Margin="203,135,207,165" HorizontalAlignment="Center" VerticalAlignment="Center">
-                    <Grid.Effect>
-                        <DropShadowEffect BlurRadius="10" Direction="-90" RenderingBias="Quality" ShadowDepth="0.1" Color="#FFE0E0E0"/>
-                    </Grid.Effect>
-                    <Rectangle Fill="#FF373331" Height="100" VerticalAlignment="Top"/>
-                    <Image HorizontalAlignment="Left" Height="80" Margin="20,10,0,0" VerticalAlignment="Top" Width="80" Source="/eDiary;component/Resources/Images/eDiary-logo-white.png"/>
-                    <Label Content="eDiary" HorizontalAlignment="Left" Height="53" Margin="105,10,0,0" VerticalAlignment="Top" Width="199" Foreground="White" FontFamily="HP Simplified" FontSize="36"/>
-                    <Label Content="future is built here" HorizontalAlignment="Left" Margin="105,53,0,0" VerticalAlignment="Top" Width="260" Height="37" FontFamily="HP Simplified" Foreground="White" FontSize="16"/>
+                    <Grid Margin="0,135,0,165" HorizontalAlignment="Center" VerticalAlignment="Center" Width="370">
+                        <Grid.Effect>
+                            <DropShadowEffect BlurRadius="10" Direction="-90" RenderingBias="Quality" ShadowDepth="0.1" Color="#FFE0E0E0"/>
+                        </Grid.Effect>
+                        <Rectangle Fill="#FF373331" Height="100" VerticalAlignment="Top"/>
+                        <Image HorizontalAlignment="Left" Height="80" Margin="20,10,0,0" VerticalAlignment="Top" Width="80" Source="/eDiary;component/Resources/Images/eDiary-logo-white.png"/>
+                        <Label Content="eDiary" HorizontalAlignment="Left" Height="53" Margin="105,10,0,0" VerticalAlignment="Top" Width="199" Foreground="White" FontFamily="HP Simplified" FontSize="36"/>
+                        <Label Content="future is built here" HorizontalAlignment="Left" Margin="105,53,0,0" VerticalAlignment="Top" Width="260" Height="37" FontFamily="HP Simplified" Foreground="White" FontSize="16"/>
 
-                    <Rectangle Fill="#FFF2DCC5" Height="120" Margin="0,100,0,0" VerticalAlignment="Top"/>
-                    <Rectangle Fill="#FFF6EDE5" Height="120" Margin="0,100,0,0" VerticalAlignment="Top"/>
+                        <Rectangle Fill="#FFF2DCC5" Height="120" Margin="0,100,0,0" VerticalAlignment="Top"/>
+                        <Rectangle Fill="#FFF6EDE5" Height="120" Margin="0,100,0,0" VerticalAlignment="Top"/>
 
-                    <Button Content="+" Click="OpenRegistrationPage" Margin="0,220,0,0" Background="#FFD18040" Foreground="White" FontFamily="HP Simplified" FontSize="48" BorderBrush="{x:Null}" Style="{DynamicResource ButtonActionStyle}" MinHeight="60"/>
-                    <Button Content="" Click="OpenAuthPasswordPage" Height="120" Margin="0,100,0,0" VerticalAlignment="Top" Style="{DynamicResource ButtonUserLoginStyle}" Background="{x:Null}"/>
+                        <Button Content="+" Click="OpenRegistrationPage" Margin="0,220,0,0" Background="#FFD18040" Foreground="White" FontFamily="HP Simplified" FontSize="48" BorderBrush="{x:Null}" Style="{DynamicResource ButtonActionStyle}" MinHeight="60"/>
+                        <Button Content="" Click="OpenAuthPasswordPage" Height="120" Margin="0,100,0,0" VerticalAlignment="Top" Style="{DynamicResource ButtonUserLoginStyle}" Background="{x:Null}"/>
 
-                    <Label Content="Nick" IsHitTestVisible="False" HorizontalAlignment="Left" Margin="128,125,0,0" VerticalAlignment="Top" Height="40" Width="256" FontSize="24" FontFamily="HP Simplified"/>
+                        <Label Content="Nick" IsHitTestVisible="False" HorizontalAlignment="Left" Margin="128,125,0,0" VerticalAlignment="Top" Height="40" Width="256" FontSize="24" FontFamily="HP Simplified"/>
                         <Label Content="Perederii" IsHitTestVisible="False" HorizontalAlignment="Left" Margin="128,157,0,0" VerticalAlignment="Top" Height="40" Width="256" FontSize="24" FontFamily="HP Simplified"/>
+                        <Image IsHitTestVisible="False" HorizontalAlignment="Left" Height="80" Margin="30,120,0,0" VerticalAlignment="Top" Width="80" Source="/eDiary;component/Resources/Images/user.png"/>
                     </Grid>
                 </Grid>
             </TabItem>
@@ -47,7 +48,7 @@
                     </Grid.Background>
                     <Rectangle MouseDown="OnWindowDrag" Fill="#66DCD3CD"/>
 
-                    <Grid Margin="203,135,207,165" HorizontalAlignment="Center" VerticalAlignment="Center">
+                    <Grid Margin="0,135,0,165" HorizontalAlignment="Center" VerticalAlignment="Center" Width="370">
                         <Grid.Effect>
                             <DropShadowEffect BlurRadius="10" Direction="-90" RenderingBias="Quality" ShadowDepth="0.1" Color="#FFE0E0E0"/>
                         </Grid.Effect>
@@ -59,11 +60,10 @@
                         <Rectangle Fill="#FFF2DCC5" Height="120" Margin="0,100,0,0" VerticalAlignment="Top"/>
                         <Rectangle Fill="#FFF6EDE5" Height="120" Margin="0,100,0,0" VerticalAlignment="Top"/>
 
-                        <Button Content="Log in" Click="Authenticate" Margin="0,220,0,0" Background="#FFD18040" Foreground="White" FontFamily="HP Simplified" FontSize="24" BorderBrush="{x:Null}" Style="{DynamicResource ButtonActionStyle}" MinHeight="60"/>
-                        <Button Content="" Height="120" Margin="0,100,0,0" VerticalAlignment="Top" Style="{DynamicResource ButtonUserLoginStyle}" Background="{x:Null}"/>
+                        <TextBlock Text="Enter your password below" TextAlignment="Center" Margin="0,120,0,0" VerticalAlignment="Top" Height="37" FontFamily="HP Simplified" Foreground="Black" FontSize="16" Background="{x:Null}"/>
 
-                        <Label Content="Nick" IsHitTestVisible="False" HorizontalAlignment="Left" Margin="128,125,0,0" VerticalAlignment="Top" Height="40" Width="256" FontSize="24" FontFamily="HP Simplified"/>
-                        <Label Content="Perederii" IsHitTestVisible="False" HorizontalAlignment="Left" Margin="128,157,0,0" VerticalAlignment="Top" Height="40" Width="256" FontSize="24" FontFamily="HP Simplified"/>
+                        <Button Content="Log in" Click="Authenticate" Margin="0,220,0,0" Background="#FFD18040" Foreground="White" FontFamily="HP Simplified" FontSize="24" BorderBrush="{x:Null}" Style="{DynamicResource ButtonActionStyle}" MinHeight="60"/>
+                        <TextBlock Text="______________________________" TextAlignment="Center" IsHitTestVisible="False" Margin="0,166,0,0" VerticalAlignment="Top" Height="31" FontSize="18" FontFamily="HP Simplified"/>
                     </Grid>
                 </Grid>
             </TabItem>
@@ -74,7 +74,7 @@
                     </Grid.Background>
                     <Rectangle MouseDown="OnWindowDrag" Fill="#66DCD3CD"/>
 
-                    <Grid Margin="203,135,207,165" HorizontalAlignment="Center" VerticalAlignment="Center">
+                    <Grid HorizontalAlignment="Center" VerticalAlignment="Center" Height="400" Width="370">
                         <Grid.Effect>
                             <DropShadowEffect BlurRadius="10" Direction="-90" RenderingBias="Quality" ShadowDepth="0.1" Color="#FFE0E0E0"/>
                         </Grid.Effect>
@@ -84,18 +84,30 @@
                         <Label Content="future is built here" HorizontalAlignment="Left" Margin="105,53,0,0" VerticalAlignment="Top" Width="260" Height="37" FontFamily="HP Simplified" Foreground="White" FontSize="16"/>
 
                         <Rectangle Fill="#FFF2DCC5" Height="120" Margin="0,100,0,0" VerticalAlignment="Top"/>
-                        <Rectangle Fill="#FFF6EDE5" Height="120" Margin="0,100,0,0" VerticalAlignment="Top"/>
+                        <Rectangle Fill="#FFF6EDE5" Height="240" Margin="0,100,0,0" VerticalAlignment="Top"/>
 
-                        <Button Content="Register" Click="Register" Margin="0,220,0,0" Background="#FFD18040" Foreground="White" FontFamily="HP Simplified" FontSize="24" BorderBrush="{x:Null}" Style="{DynamicResource ButtonActionStyle}" MinHeight="60"/>
-                        <Button Content="" Height="120" Margin="0,100,0,0" VerticalAlignment="Top" Style="{DynamicResource ButtonUserLoginStyle}" Background="{x:Null}"/>
+                        <TextBlock Text="Register new user" TextAlignment="Center" Margin="0,120,0,0" VerticalAlignment="Top" Height="30" FontFamily="HP Simplified" Foreground="Black" FontSize="16" Background="{x:Null}"/>
+                        <TextBlock Text="First name" TextAlignment="Left" IsHitTestVisible="False" Padding="50,0,0,0" Margin="0,160,0,0" VerticalAlignment="Top" Height="30" FontFamily="HP Simplified" Foreground="#FFAEAEAE" FontSize="16" Background="{x:Null}"/>
+                        <TextBlock Text="Last name" TextAlignment="Left" IsHitTestVisible="False" Padding="50,0,0,0" Margin="0,200,0,0" VerticalAlignment="Top" Height="30" FontFamily="HP Simplified" Foreground="#FFAEAEAE" FontSize="16" Background="{x:Null}"/>
+                        <TextBlock Text="Password" TextAlignment="Left" IsHitTestVisible="False" Padding="50,0,0,0" Margin="0,240,0,0" VerticalAlignment="Top" Height="30" FontFamily="HP Simplified" Foreground="#FFAEAEAE" FontSize="16" Background="{x:Null}"/>
+                        <TextBlock Text="Email" TextAlignment="Left" IsHitTestVisible="False" Padding="50,0,0,0" Margin="0,280,0,0" VerticalAlignment="Top" Height="30" FontFamily="HP Simplified" Foreground="#FFAEAEAE" FontSize="16" Background="{x:Null}"/>
 
-                        <Label Content="Nick" IsHitTestVisible="False" HorizontalAlignment="Left" Margin="128,125,0,0" VerticalAlignment="Top" Height="40" Width="256" FontSize="24" FontFamily="HP Simplified"/>
-                        <Label Content="Perederii" IsHitTestVisible="False" HorizontalAlignment="Left" Margin="128,157,0,0" VerticalAlignment="Top" Height="40" Width="256" FontSize="24" FontFamily="HP Simplified"/>
+                        <TextBlock Text="______________________________" TextAlignment="Center" IsHitTestVisible="False" Margin="0,166,0,0" VerticalAlignment="Top" Height="31" FontSize="18" FontFamily="HP Simplified"/>
+                        <TextBlock Text="______________________________" TextAlignment="Center" IsHitTestVisible="False" Margin="0,206,0,0" VerticalAlignment="Top" Height="31" FontSize="18" FontFamily="HP Simplified"/>
+                        <TextBlock Text="______________________________" TextAlignment="Center" IsHitTestVisible="False" Margin="0,246,0,0" VerticalAlignment="Top" Height="31" FontSize="18" FontFamily="HP Simplified"/>
+                        <TextBlock Text="______________________________" TextAlignment="Center" IsHitTestVisible="False" Margin="0,286,0,0" VerticalAlignment="Top" Height="31" FontSize="18" FontFamily="HP Simplified"/>
+
+
+                        <Button Content="Register" Click="Register" Margin="0,340,0,0" Background="#FFD18040" Foreground="White" FontFamily="HP Simplified" FontSize="24" BorderBrush="{x:Null}" Style="{DynamicResource ButtonActionStyle}" MinHeight="60"/>
                     </Grid>
                 </Grid>
             </TabItem>
             <TabItem Header="Home">
+                <Grid Background="Black">
+                    <Rectangle Fill="#FF373331" Height="100" VerticalAlignment="Top"/>
+                    <Rectangle Fill="#FFF6EDE5" Margin="0,100,0,0"/>
 
+                </Grid>
             </TabItem>
         </TabControl>
 

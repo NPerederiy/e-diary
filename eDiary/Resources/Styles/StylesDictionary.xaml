@@ -177,7 +177,6 @@
                 <ControlTemplate TargetType="{x:Type Button}">
                     <Grid x:Name="border" SnapsToDevicePixels="true" Height="Auto" Width="Auto" Margin="0" Background="#FFF7F3F1">
                         <ContentPresenter x:Name="contentPresenter" Focusable="False" HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}" RecognizesAccessKey="True" SnapsToDevicePixels="{TemplateBinding SnapsToDevicePixels}" VerticalAlignment="{TemplateBinding VerticalContentAlignment}" Margin="167.188,34.82"/>
-                        <Image Source="/eDiary;component/Resources/Images/user.png" Stretch="Fill" Width="80" Height="80" Margin="30,20,260,20"/>
                     </Grid>
                     <ControlTemplate.Triggers>
                         <Trigger Property="IsDefaulted" Value="true">

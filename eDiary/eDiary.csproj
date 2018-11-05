@@ -112,5 +112,8 @@
   <ItemGroup>
     <Resource Include="Resources\Images\Backgrounds\1743.jpg" />
   </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Resources\Images\eDiary-logo-orange.png" />
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>
