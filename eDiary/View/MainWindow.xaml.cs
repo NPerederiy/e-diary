@@ -20,10 +20,14 @@ namespace eDiary
     /// </summary>
     public partial class MainWindow : Window
     {
+        private static bool IsAuthorised = false;
+
         public MainWindow()
         {
             InitializeComponent();
         }
+
+        /* ---- Simple window manipulations ---- */
 
         public void OnWindowDrag(object sender, MouseButtonEventArgs e)
         {
@@ -52,5 +56,53 @@ namespace eDiary
         {
             Close();
         }
+
+        /* ---- Page switch ---- */
+
+        private void SetPage(TabControl tabControl, int pageIndex)
+        {
+            tabControl.SelectedIndex = pageIndex;
+        }
+
+        public void OpenAuthenticationPage(object sender, RoutedEventArgs e)
+        {
+            if(!IsAuthorised)
+                SetPage(TabBlock, 0);
+        }
+
+        public void OpenAuthPasswordPage(object sender, RoutedEventArgs e)
+        {
+            if (!IsAuthorised)
+                SetPage(TabBlock, 1);
+        }
+
+        public void OpenRegistrationPage(object sender, RoutedEventArgs e)
+        {
+            if (!IsAuthorised)
+                SetPage(TabBlock, 2);
+        }
+
+        private void OpenHomePage()
+        {
+            if (IsAuthorised)
+                SetPage(TabBlock, 3);
+        }
+
+        /* ---- Authentication ---- */
+
+        public void Authenticate(object sender, RoutedEventArgs e)
+        {
+            IsAuthorised = true;
+            OpenHomePage();
+        }
+
+        public void Register(object sender, RoutedEventArgs e)
+        {
+            IsAuthorised = true;
+            OpenHomePage();
+        }
+
+        /* ---- - ---- */
+
     }
 }

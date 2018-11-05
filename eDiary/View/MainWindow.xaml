@@ -12,33 +12,95 @@
     </Window.Effect>
 
     <Grid Margin="10,10,10,10" >
-        <Grid.Background>
-            <ImageBrush ImageSource="/eDiary;component/Resources/Images/Backgrounds/1743.jpg" Stretch="UniformToFill"/>
-        </Grid.Background>
-        <Rectangle MouseDown="OnWindowDrag" Fill="#66DCD3CD"/>
+        <TabControl Name="TabBlock" BorderThickness="0" Margin="0,-25,0,0" VerticalAlignment="Top" BorderBrush="{x:Null}">
+            <TabItem Header="Auth">
+                <Grid>
+                    <Grid.Background>
+                    <ImageBrush ImageSource="/eDiary;component/Resources/Images/Backgrounds/1743.jpg" Stretch="UniformToFill"/>
+                </Grid.Background>
+                <Rectangle MouseDown="OnWindowDrag" Fill="#66DCD3CD"/>
+
+                <Grid Margin="203,135,207,165" HorizontalAlignment="Center" VerticalAlignment="Center">
+                    <Grid.Effect>
+                        <DropShadowEffect BlurRadius="10" Direction="-90" RenderingBias="Quality" ShadowDepth="0.1" Color="#FFE0E0E0"/>
+                    </Grid.Effect>
+                    <Rectangle Fill="#FF373331" Height="100" VerticalAlignment="Top"/>
+                    <Image HorizontalAlignment="Left" Height="80" Margin="20,10,0,0" VerticalAlignment="Top" Width="80" Source="/eDiary;component/Resources/Images/eDiary-logo-white.png"/>
+                    <Label Content="eDiary" HorizontalAlignment="Left" Height="53" Margin="105,10,0,0" VerticalAlignment="Top" Width="199" Foreground="White" FontFamily="HP Simplified" FontSize="36"/>
+                    <Label Content="future is built here" HorizontalAlignment="Left" Margin="105,53,0,0" VerticalAlignment="Top" Width="260" Height="37" FontFamily="HP Simplified" Foreground="White" FontSize="16"/>
+
+                    <Rectangle Fill="#FFF2DCC5" Height="120" Margin="0,100,0,0" VerticalAlignment="Top"/>
+                    <Rectangle Fill="#FFF6EDE5" Height="120" Margin="0,100,0,0" VerticalAlignment="Top"/>
+
+                    <Button Content="+" Click="OpenRegistrationPage" Margin="0,220,0,0" Background="#FFD18040" Foreground="White" FontFamily="HP Simplified" FontSize="48" BorderBrush="{x:Null}" Style="{DynamicResource ButtonActionStyle}" MinHeight="60"/>
+                    <Button Content="" Click="OpenAuthPasswordPage" Height="120" Margin="0,100,0,0" VerticalAlignment="Top" Style="{DynamicResource ButtonUserLoginStyle}" Background="{x:Null}"/>
+
+                    <Label Content="Nick" IsHitTestVisible="False" HorizontalAlignment="Left" Margin="128,125,0,0" VerticalAlignment="Top" Height="40" Width="256" FontSize="24" FontFamily="HP Simplified"/>
+                        <Label Content="Perederii" IsHitTestVisible="False" HorizontalAlignment="Left" Margin="128,157,0,0" VerticalAlignment="Top" Height="40" Width="256" FontSize="24" FontFamily="HP Simplified"/>
+                    </Grid>
+                </Grid>
+            </TabItem>
+            <TabItem Header="Auth2">
+                <Grid>
+                    <Grid.Background>
+                        <ImageBrush ImageSource="/eDiary;component/Resources/Images/Backgrounds/1743.jpg" Stretch="UniformToFill"/>
+                    </Grid.Background>
+                    <Rectangle MouseDown="OnWindowDrag" Fill="#66DCD3CD"/>
+
+                    <Grid Margin="203,135,207,165" HorizontalAlignment="Center" VerticalAlignment="Center">
+                        <Grid.Effect>
+                            <DropShadowEffect BlurRadius="10" Direction="-90" RenderingBias="Quality" ShadowDepth="0.1" Color="#FFE0E0E0"/>
+                        </Grid.Effect>
+                        <Rectangle Fill="#FF373331" Height="100" VerticalAlignment="Top"/>
+                        <Image HorizontalAlignment="Left" Height="80" Margin="20,10,0,0" VerticalAlignment="Top" Width="80" Source="/eDiary;component/Resources/Images/eDiary-logo-white.png"/>
+                        <Label Content="eDiary" HorizontalAlignment="Left" Height="53" Margin="105,10,0,0" VerticalAlignment="Top" Width="199" Foreground="White" FontFamily="HP Simplified" FontSize="36"/>
+                        <Label Content="future is built here" HorizontalAlignment="Left" Margin="105,53,0,0" VerticalAlignment="Top" Width="260" Height="37" FontFamily="HP Simplified" Foreground="White" FontSize="16"/>
+
+                        <Rectangle Fill="#FFF2DCC5" Height="120" Margin="0,100,0,0" VerticalAlignment="Top"/>
+                        <Rectangle Fill="#FFF6EDE5" Height="120" Margin="0,100,0,0" VerticalAlignment="Top"/>
+
+                        <Button Content="Log in" Click="Authenticate" Margin="0,220,0,0" Background="#FFD18040" Foreground="White" FontFamily="HP Simplified" FontSize="24" BorderBrush="{x:Null}" Style="{DynamicResource ButtonActionStyle}" MinHeight="60"/>
+                        <Button Content="" Height="120" Margin="0,100,0,0" VerticalAlignment="Top" Style="{DynamicResource ButtonUserLoginStyle}" Background="{x:Null}"/>
+
+                        <Label Content="Nick" IsHitTestVisible="False" HorizontalAlignment="Left" Margin="128,125,0,0" VerticalAlignment="Top" Height="40" Width="256" FontSize="24" FontFamily="HP Simplified"/>
+                        <Label Content="Perederii" IsHitTestVisible="False" HorizontalAlignment="Left" Margin="128,157,0,0" VerticalAlignment="Top" Height="40" Width="256" FontSize="24" FontFamily="HP Simplified"/>
+                    </Grid>
+                </Grid>
+            </TabItem>
+            <TabItem Header="Reg">
+                <Grid>
+                    <Grid.Background>
+                        <ImageBrush ImageSource="/eDiary;component/Resources/Images/Backgrounds/1743.jpg" Stretch="UniformToFill"/>
+                    </Grid.Background>
+                    <Rectangle MouseDown="OnWindowDrag" Fill="#66DCD3CD"/>
+
+                    <Grid Margin="203,135,207,165" HorizontalAlignment="Center" VerticalAlignment="Center">
+                        <Grid.Effect>
+                            <DropShadowEffect BlurRadius="10" Direction="-90" RenderingBias="Quality" ShadowDepth="0.1" Color="#FFE0E0E0"/>
+                        </Grid.Effect>
+                        <Rectangle Fill="#FF373331" Height="100" VerticalAlignment="Top"/>
+                        <Image HorizontalAlignment="Left" Height="80" Margin="20,10,0,0" VerticalAlignment="Top" Width="80" Source="/eDiary;component/Resources/Images/eDiary-logo-white.png"/>
+                        <Label Content="eDiary" HorizontalAlignment="Left" Height="53" Margin="105,10,0,0" VerticalAlignment="Top" Width="199" Foreground="White" FontFamily="HP Simplified" FontSize="36"/>
+                        <Label Content="future is built here" HorizontalAlignment="Left" Margin="105,53,0,0" VerticalAlignment="Top" Width="260" Height="37" FontFamily="HP Simplified" Foreground="White" FontSize="16"/>
+
+                        <Rectangle Fill="#FFF2DCC5" Height="120" Margin="0,100,0,0" VerticalAlignment="Top"/>
+                        <Rectangle Fill="#FFF6EDE5" Height="120" Margin="0,100,0,0" VerticalAlignment="Top"/>
+
+                        <Button Content="Register" Click="Register" Margin="0,220,0,0" Background="#FFD18040" Foreground="White" FontFamily="HP Simplified" FontSize="24" BorderBrush="{x:Null}" Style="{DynamicResource ButtonActionStyle}" MinHeight="60"/>
+                        <Button Content="" Height="120" Margin="0,100,0,0" VerticalAlignment="Top" Style="{DynamicResource ButtonUserLoginStyle}" Background="{x:Null}"/>
+
+                        <Label Content="Nick" IsHitTestVisible="False" HorizontalAlignment="Left" Margin="128,125,0,0" VerticalAlignment="Top" Height="40" Width="256" FontSize="24" FontFamily="HP Simplified"/>
+                        <Label Content="Perederii" IsHitTestVisible="False" HorizontalAlignment="Left" Margin="128,157,0,0" VerticalAlignment="Top" Height="40" Width="256" FontSize="24" FontFamily="HP Simplified"/>
+                    </Grid>
+                </Grid>
+            </TabItem>
+            <TabItem Header="Home">
+
+            </TabItem>
+        </TabControl>
 
         <Button Content="" Name="ButtonClose" Click="OnWindowClose" Margin="0,5,5,0" Foreground="White" FontSize="14" FontFamily="Arial" HorizontalAlignment="Right" Width="20" Height="20" VerticalAlignment="Top" Style="{DynamicResource ButtonCloseStyle}"/>
         <Button Content="" Name="ButtonMin" Click="OnWindowMinimize" Margin="0,5,55,0" Foreground="White" FontSize="14" FontFamily="Arial" HorizontalAlignment="Right" Width="20" Height="20" VerticalAlignment="Top" Style="{DynamicResource ButtonMinimizeStyle}"/>
         <Button Content="" Name="ButtonMax" Click="OnWindowResize" Margin="0,5,30,0" Foreground="White" FontSize="14" FontFamily="Arial" HorizontalAlignment="Right" Width="20" Height="20" VerticalAlignment="Top" Style="{DynamicResource ButtonMaximizeStyle}"/>
-
-        <Grid Margin="203,135,207,165" HorizontalAlignment="Center" VerticalAlignment="Center">
-            <Grid.Effect>
-                <DropShadowEffect BlurRadius="10" Direction="-90" RenderingBias="Quality" ShadowDepth="0.1" Color="#FFE0E0E0"/>
-            </Grid.Effect>
-            <Rectangle Fill="#FF373331" Height="100" VerticalAlignment="Top"/>
-            <Image HorizontalAlignment="Left" Height="80" Margin="20,10,0,0" VerticalAlignment="Top" Width="80" Source="/eDiary;component/Resources/Images/eDiary-logo-white.png"/>
-            <Label Content="eDiary" HorizontalAlignment="Left" Height="53" Margin="105,10,0,0" VerticalAlignment="Top" Width="199" Foreground="White" FontFamily="HP Simplified" FontSize="36"/>
-            <Label Content="future is built here" HorizontalAlignment="Left" Margin="105,53,0,0" VerticalAlignment="Top" Width="260" Height="37" FontFamily="HP Simplified" Foreground="White" FontSize="16"/>
-
-            <Rectangle Fill="#FFF2DCC5" Height="120" Margin="0,100,0,0" VerticalAlignment="Top"/>
-            <Rectangle Fill="#FFF6EDE5" Height="120" Margin="0,100,0,0" VerticalAlignment="Top"/>
-
-            <Button Content="+" Margin="0,220,0,0" Background="#FFD18040" Foreground="White" FontFamily="HP Simplified" FontSize="48" BorderBrush="{x:Null}" Style="{DynamicResource ButtonActionStyle}"/>
-            <Button Content="" HorizontalAlignment="Left" Height="120" Margin="0,100,0,0" VerticalAlignment="Top" Width="370" Style="{DynamicResource ButtonUserLoginStyle}" Background="{x:Null}"/>
-            
-            <Label Content="Nick" HorizontalAlignment="Left" Margin="128,125,0,0" VerticalAlignment="Top" Height="40" Width="256" FontSize="24" FontFamily="HP Simplified"/>
-            <Label Content="Perederii" HorizontalAlignment="Left" Margin="128,157,0,0" VerticalAlignment="Top" Height="40" Width="256" FontSize="24" FontFamily="HP Simplified"/>
-
-        </Grid>
     </Grid>
 </Window>
