@@ -12,7 +12,7 @@
     </Window.Effect>
 
     <Grid Margin="10,10,10,10" >
-        <TabControl Name="TabBlock" BorderThickness="0" Margin="0,-25,0,0" BorderBrush="{x:Null}">
+        <TabControl Name="TabBlock" BorderThickness="0" Margin="0,-25,0,0" BorderBrush="{x:Null}" Style="{DynamicResource TabControlStyle}">
             <TabItem Header="Auth">
                 <Grid>
                     <Grid.Background>
@@ -104,15 +104,34 @@
             </TabItem>
             <TabItem Header="Home">
                 <Grid Background="Black">
+                    <TabControl Margin="0,78,0,0.4" Style="{DynamicResource MainTabControlStyle}">
+                        <TabItem Header="Home">
+                            <Grid Background="#FFF6EDE5"/>
+                        </TabItem>
+                        <TabItem Header="Tasks">
+                            <Grid Background="#FFF6EDE5"/>
+                        </TabItem>
+                        <TabItem Header="Notes">
+                            <Grid Background="#FFF6EDE5"/>
+                        </TabItem>
+                        <TabItem Header="Calendar">
+                            <Grid Background="#FFF6EDE5"/>
+                        </TabItem>
+                    </TabControl>
                     <Rectangle Fill="#FF373331" Height="100" VerticalAlignment="Top"/>
-                    <Rectangle Fill="#FFF6EDE5" Margin="0,100,0,0"/>
+                    <Button Content="" Height="40" Width="37.5" Margin="0,60,0,0" VerticalAlignment="Top" HorizontalAlignment="Right" Style="{DynamicResource ButtonSettingsStyle}"/>
+                    <Button Content="" Height="40" Width="37.5" Margin="0,60,37.5,0" VerticalAlignment="Top" HorizontalAlignment="Right" Style="{DynamicResource ButtonBellStyle}"/>
+                    <Button Content="" Height="100" Width="98" Margin="0,0,678,0" VerticalAlignment="Top" HorizontalAlignment="Left" Style="{DynamicResource ButtonHomeStyle}"/>
+                    <Button Content="Tasks" Height="100" Width="98" Margin="98,0,0,0" VerticalAlignment="Top" HorizontalAlignment="Left" Style="{DynamicResource ButtonMainMenuStyle}" FontFamily="HP Simplified" FontSize="14"/>
+                    <Button Content="Notes" Height="100" Width="98" Margin="196,0,0,0" VerticalAlignment="Top" HorizontalAlignment="Left" Style="{DynamicResource ButtonMainMenuStyle}" FontFamily="HP Simplified" FontSize="14"/>
+                    <Button Content="Calendar" Height="100" Width="98" Margin="294,0,0,0" VerticalAlignment="Top" HorizontalAlignment="Left" Style="{DynamicResource ButtonMainMenuStyle}" FontFamily="HP Simplified" FontSize="14"/>
 
                 </Grid>
             </TabItem>
         </TabControl>
 
-        <Button Content="" Name="ButtonClose" Click="OnWindowClose" Margin="0,5,5,0" Foreground="White" FontSize="14" FontFamily="Arial" HorizontalAlignment="Right" Width="20" Height="20" VerticalAlignment="Top" Style="{DynamicResource ButtonCloseStyle}"/>
-        <Button Content="" Name="ButtonMin" Click="OnWindowMinimize" Margin="0,5,55,0" Foreground="White" FontSize="14" FontFamily="Arial" HorizontalAlignment="Right" Width="20" Height="20" VerticalAlignment="Top" Style="{DynamicResource ButtonMinimizeStyle}"/>
-        <Button Content="" Name="ButtonMax" Click="OnWindowResize" Margin="0,5,30,0" Foreground="White" FontSize="14" FontFamily="Arial" HorizontalAlignment="Right" Width="20" Height="20" VerticalAlignment="Top" Style="{DynamicResource ButtonMaximizeStyle}"/>
+        <Button Content="" Name="ButtonClose" Click="OnWindowClose" Foreground="White" FontSize="14" FontFamily="Arial" HorizontalAlignment="Right" Width="25" Height="30" VerticalAlignment="Top" Style="{DynamicResource ButtonCloseStyle}" IsTabStop="False" Margin="0,-1.008,1.992,0"/>
+        <Button Content="" Name="ButtonMin" Click="OnWindowMinimize" Margin="0,-1.008,51.992,0" Foreground="White" FontSize="14" FontFamily="Arial" HorizontalAlignment="Right" Width="25" Height="30" VerticalAlignment="Top" Style="{DynamicResource ButtonMinimizeStyle}" IsTabStop="False"/>
+        <Button Content="" Name="ButtonMax" Click="OnWindowResize" Margin="0,-1.008,26.992,0" Foreground="White" FontSize="14" FontFamily="Arial" HorizontalAlignment="Right" Width="25" Height="30" VerticalAlignment="Top" Style="{DynamicResource ButtonMaximizeStyle}" IsTabStop="False"/>
     </Grid>
 </Window>
