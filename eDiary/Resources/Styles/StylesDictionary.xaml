@@ -236,18 +236,18 @@
                     <ControlTemplate.Triggers>
                         <Trigger Property="IsDefaulted" Value="true"/>
                         <Trigger Property="IsMouseOver" Value="true">
-                            <Setter Property="Fill" TargetName="rectangle" Value="#FFD18040"/>
+                            <Setter Property="Fill" TargetName="rectangle" Value="#FFFFC000"/>
                             <Setter Property="Fill" TargetName="rectangle1">
                                 <Setter.Value>
-                                    <ImageBrush ImageSource="/eDiary;component/Resources/Images/ButtonIcons/gear-ico-orange.png"/>
+                                    <ImageBrush ImageSource="/eDiary;component/Resources/Images/ButtonIcons/gear-ico-yellow.png"/>
                                 </Setter.Value>
                             </Setter>
                         </Trigger>
                         <Trigger Property="IsPressed" Value="true">
-                            <Setter Property="Fill" TargetName="rectangle" Value="#FFD18040"/>
+                            <Setter Property="Fill" TargetName="rectangle" Value="#FFFFC000"/>
                             <Setter Property="Fill" TargetName="rectangle1">
                                 <Setter.Value>
-                                    <ImageBrush ImageSource="/eDiary;component/Resources/Images/ButtonIcons/gear-ico-orange.png"/>
+                                    <ImageBrush ImageSource="/eDiary;component/Resources/Images/ButtonIcons/gear-ico-yellow.png"/>
                                 </Setter.Value>
                             </Setter>
                         </Trigger>
@@ -348,18 +348,18 @@
                     <ControlTemplate.Triggers>
                         <Trigger Property="IsDefaulted" Value="true"/>
                         <Trigger Property="IsMouseOver" Value="true">
-                            <Setter Property="Fill" TargetName="rectangle" Value="#FFD18040"/>
+                            <Setter Property="Fill" TargetName="rectangle" Value="#FFFFC000"/>
                             <Setter Property="Fill" TargetName="rectangle1">
                                 <Setter.Value>
-                                    <ImageBrush ImageSource="/eDiary;component/Resources/Images/ButtonIcons/bell-ico-orange.png"/>
+                                    <ImageBrush ImageSource="/eDiary;component/Resources/Images/ButtonIcons/bell-ico-yellow.png"/>
                                 </Setter.Value>
                             </Setter>
                         </Trigger>
                         <Trigger Property="IsPressed" Value="true">
-                            <Setter Property="Fill" TargetName="rectangle" Value="#FFD18040"/>
+                            <Setter Property="Fill" TargetName="rectangle" Value="#FFFFC000"/>
                             <Setter Property="Fill" TargetName="rectangle1">
                                 <Setter.Value>
-                                    <ImageBrush ImageSource="/eDiary;component/Resources/Images/ButtonIcons/bell-ico-orange.png"/>
+                                    <ImageBrush ImageSource="/eDiary;component/Resources/Images/ButtonIcons/bell-ico-yellow.png"/>
                                 </Setter.Value>
                             </Setter>
                         </Trigger>
@@ -458,18 +458,18 @@
                     <ControlTemplate.Triggers>
                         <Trigger Property="IsDefaulted" Value="true"/>
                         <Trigger Property="IsMouseOver" Value="true">
-                            <Setter Property="Fill" TargetName="rectangle" Value="#FFD18040"/>
+                            <Setter Property="Fill" TargetName="rectangle" Value="#FFFFC000"/>
                             <Setter Property="Fill" TargetName="rectangle1">
                                 <Setter.Value>
-                                    <ImageBrush ImageSource="/eDiary;component/Resources/Images/eDiary-logo-orange.png"/>
+                                    <ImageBrush ImageSource="/eDiary;component/Resources/Images/ButtonIcons/eDiary-logo-yellow.png"/>
                                 </Setter.Value>
                             </Setter>
                         </Trigger>
                         <Trigger Property="IsPressed" Value="true">
-                            <Setter Property="Fill" TargetName="rectangle" Value="#FFD18040"/>
+                            <Setter Property="Fill" TargetName="rectangle" Value="#FFFFC000"/>
                             <Setter Property="Fill" TargetName="rectangle1">
                                 <Setter.Value>
-                                    <ImageBrush ImageSource="/eDiary;component/Resources/Images/eDiary-logo-orange.png"/>
+                                    <ImageBrush ImageSource="/eDiary;component/Resources/Images/ButtonIcons/eDiary-logo-yellow.png"/>
                                 </Setter.Value>
                             </Setter>
                         </Trigger>
@@ -494,29 +494,29 @@
             <Setter.Value>
                 <ControlTemplate TargetType="{x:Type Button}">
                     <Grid x:Name="border" SnapsToDevicePixels="true" Background="#19FFFFFF">
-                        <ContentPresenter x:Name="contentPresenter" TextBlock.Foreground="#ffffff" TextBlock.TextAlignment="Center" Focusable="False" RecognizesAccessKey="True" SnapsToDevicePixels="{TemplateBinding SnapsToDevicePixels}" Margin="0,0,0,7.02" HorizontalAlignment="Center" VerticalAlignment="Bottom" Height="20.96" Width="98"/>
+                        <ContentPresenter x:Name="contentPresenter" TextBlock.Foreground="#ffffff" TextBlock.TextAlignment="Center" Focusable="False" RecognizesAccessKey="True" SnapsToDevicePixels="{TemplateBinding SnapsToDevicePixels}" Margin="0,0,0,4.52" HorizontalAlignment="Center" VerticalAlignment="Bottom" Height="20.96" Width="98"/>
                         <Rectangle x:Name="rectangle" Fill="#33FFFFFF" Height="5" VerticalAlignment="Bottom"/>
-                        <Rectangle x:Name="img" HorizontalAlignment="Left" Height="59.02" Width="81.5" VerticalAlignment="Top" Margin="8,8,0,0" d:IsHidden="True">
+                        <Rectangle x:Name="img" HorizontalAlignment="Stretch" Height="Auto" Width="Auto" VerticalAlignment="Stretch" Margin="8,8,8,10">
                             <Rectangle.Fill>
-                                <ImageBrush ImageSource="/eDiary;component/Resources/Images/eDiary-logo-white.png"/>
+                                <ImageBrush ImageSource="/eDiary;component/Resources/Images/ButtonIcons/calendar-ico-white.png"/>
                             </Rectangle.Fill>
                         </Rectangle>
                     </Grid>
                     <ControlTemplate.Triggers>
                         <Trigger Property="IsDefaulted" Value="true"/>
                         <Trigger Property="IsMouseOver" Value="true">
-                            <Setter Property="Fill" TargetName="rectangle" Value="#FFD18040"/>
+                            <Setter Property="Fill" TargetName="rectangle" Value="#FFFFC000"/>
                             <Setter Property="Fill" TargetName="img">
                                 <Setter.Value>
-                                    <ImageBrush ImageSource="/eDiary;component/Resources/Images/eDiary-logo-orange.png"/>
+                                    <ImageBrush ImageSource="/eDiary;component/Resources/Images/ButtonIcons/calendar-ico-yellow.png"/>
                                 </Setter.Value>
                             </Setter>
                         </Trigger>
                         <Trigger Property="IsPressed" Value="true">
-                            <Setter Property="Fill" TargetName="rectangle" Value="#FFD18040"/>
+                            <Setter Property="Fill" TargetName="rectangle" Value="#FFFFC000"/>
                             <Setter Property="Fill" TargetName="img">
                                 <Setter.Value>
-                                    <ImageBrush ImageSource="/eDiary;component/Resources/Images/eDiary-logo-orange.png"/>
+                                    <ImageBrush ImageSource="/eDiary;component/Resources/Images/ButtonIcons/calendar-ico-yellow.png"/>
                                 </Setter.Value>
                             </Setter>
                         </Trigger>

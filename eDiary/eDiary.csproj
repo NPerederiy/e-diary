@@ -121,5 +121,14 @@
     <Resource Include="Resources\Images\ButtonIcons\gear-ico-orange.png" />
     <Resource Include="Resources\Images\ButtonIcons\gear-ico-white.png" />
   </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Resources\Images\ButtonIcons\calendar-ico-white.png" />
+    <Resource Include="Resources\Images\ButtonIcons\calendar-ico-yellow.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Resources\Images\ButtonIcons\bell-ico-yellow.png" />
+    <Resource Include="Resources\Images\ButtonIcons\eDiary-logo-yellow.png" />
+    <Resource Include="Resources\Images\ButtonIcons\gear-ico-yellow.png" />
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>
