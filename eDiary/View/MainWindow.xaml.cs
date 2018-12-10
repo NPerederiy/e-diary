@@ -82,7 +82,7 @@ namespace eDiary
                 SetPage(TabBlock, 2);
         }
 
-        private void OpenHomePage()
+        private void LogIntoSystem()
         {
             if (IsAuthorised)
                 SetPage(TabBlock, 3);
@@ -93,16 +93,51 @@ namespace eDiary
         public void Authenticate(object sender, RoutedEventArgs e)
         {
             IsAuthorised = true;
-            OpenHomePage();
+            LogIntoSystem();
         }
 
         public void Register(object sender, RoutedEventArgs e)
         {
             IsAuthorised = true;
-            OpenHomePage();
+            LogIntoSystem();
         }
 
-        /* ---- - ---- */
+        /* ---- Page switch ---- */
 
+        public void OpenHomePage(object sender, RoutedEventArgs e)
+        {
+            if (IsAuthorised)
+                SetPage(PageSwitch, 0);
+        }
+
+        public void OpenTasksPage(object sender, RoutedEventArgs e)
+        {
+            if (IsAuthorised)
+                SetPage(PageSwitch, 1);
+        }
+
+        public void OpenNotesPage(object sender, RoutedEventArgs e)
+        {
+            if (IsAuthorised)
+                SetPage(PageSwitch, 2);
+        }
+
+        public void OpenCalendarPage(object sender, RoutedEventArgs e)
+        {
+            if (IsAuthorised)
+                SetPage(PageSwitch, 3);
+        }
+
+        public void OpenNotificationsPage(object sender, RoutedEventArgs e)
+        {
+            if (IsAuthorised)
+                SetPage(PageSwitch, 4);
+        }
+
+        public void OpenSettingsPage(object sender, RoutedEventArgs e)
+        {
+            if (IsAuthorised)
+                SetPage(PageSwitch, 5);
+        }
     }
 }

@@ -104,27 +104,51 @@
             </TabItem>
             <TabItem Header="Home">
                 <Grid Background="Black">
-                    <TabControl Margin="0,78,0,0.4" Style="{DynamicResource MainTabControlStyle}">
+                    <TabControl Name="PageSwitch" Margin="0,78,0,0.4" Style="{DynamicResource MainTabControlStyle}">
                         <TabItem Header="Home">
-                            <Grid Background="#FFF6EDE5"/>
+                            <Grid Background="#FFF6EDE5">
+                                <Label Content="HOME" HorizontalAlignment="Center" VerticalAlignment="Center" Margin="300,181,300,252.6" Height="44" FontSize="24"/>
+                                <Label Content="This page is under construction" HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                            </Grid>
                         </TabItem>
                         <TabItem Header="Tasks">
-                            <Grid Background="#FFF6EDE5"/>
+                            <Grid Background="#FFF6EDE5">
+                                <Label Content="TASKS" HorizontalAlignment="Center" VerticalAlignment="Center" Margin="300,181,300,252.6" Height="44" FontSize="24"/>
+                                <Label Content="This page is under construction" HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                            </Grid>
                         </TabItem>
                         <TabItem Header="Notes">
-                            <Grid Background="#FFF6EDE5"/>
+                            <Grid Background="#FFF6EDE5">
+                                <Label Content="NOTES" HorizontalAlignment="Center" VerticalAlignment="Center" Margin="300,181,300,252.6" Height="44" FontSize="24"/>
+                                <Label Content="This page is under construction" HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                            </Grid>
                         </TabItem>
                         <TabItem Header="Calendar">
-                            <Grid Background="#FFF6EDE5"/>
+                            <Grid Background="#FFF6EDE5">
+                                <Label Content="CALENDAR" HorizontalAlignment="Center" VerticalAlignment="Center" Margin="300,181,300,252.6" Height="44" FontSize="24"/>
+                                <Label Content="This page is under construction" HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                            </Grid>
+                        </TabItem>
+                        <TabItem Header="Notifications">
+                            <Grid Background="#FFF6EDE5">
+                                <Label Content="NOTIFICATIONS" HorizontalAlignment="Center" VerticalAlignment="Center" Margin="298,181,294,252.6" Height="44" FontSize="24" Width="184"/>
+                                <Label Content="This page is under construction" HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                            </Grid>
+                        </TabItem>
+                        <TabItem Header="Settings">
+                            <Grid Background="#FFF6EDE5">
+                                <Label Content="SETTINGS" HorizontalAlignment="Center" VerticalAlignment="Center" Margin="300,181,300,252.6" Height="44" FontSize="24"/>
+                                <Label Content="This page is under construction" HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                            </Grid>
                         </TabItem>
                     </TabControl>
                     <Rectangle Fill="#FF373331" Height="100" VerticalAlignment="Top"/>
-                    <Button Content="" Height="40" Width="37.5" Margin="0,60,0,0" VerticalAlignment="Top" HorizontalAlignment="Right" Style="{DynamicResource ButtonSettingsStyle}"/>
-                    <Button Content="" Height="40" Width="37.5" Margin="0,60,37.5,0" VerticalAlignment="Top" HorizontalAlignment="Right" Style="{DynamicResource ButtonBellStyle}"/>
-                    <Button Content="" Height="100" Width="98" Margin="0,0,678,0" VerticalAlignment="Top" HorizontalAlignment="Left" Style="{DynamicResource ButtonHomeStyle}"/>
-                    <Button Content="Tasks" Height="100" Width="98" Margin="98,0,0,0" VerticalAlignment="Top" HorizontalAlignment="Left" Style="{DynamicResource ButtonMainMenuStyle}" FontFamily="HP Simplified" FontSize="14"/>
-                    <Button Content="Notes" Height="100" Width="98" Margin="196,0,0,0" VerticalAlignment="Top" HorizontalAlignment="Left" Style="{DynamicResource ButtonMainMenuStyle}" FontFamily="HP Simplified" FontSize="14"/>
-                    <Button Content="Calendar" Height="100" Width="98" Margin="294,0,0,0" VerticalAlignment="Top" HorizontalAlignment="Left" Style="{DynamicResource ButtonMainMenuStyle}" FontFamily="HP Simplified" FontSize="14"/>
+                    <Button Content="" Click="OpenSettingsPage" Height="40" Width="37.5" Margin="0,60,0,0" VerticalAlignment="Top" HorizontalAlignment="Right" Style="{DynamicResource ButtonSettingsStyle}"/>
+                    <Button Content="" Click="OpenNotificationsPage" Height="40" Width="37.5" Margin="0,60,37.5,0" VerticalAlignment="Top" HorizontalAlignment="Right" Style="{DynamicResource ButtonBellStyle}"/>
+                    <Button Content="" Click="OpenHomePage" Height="100" Width="98" Margin="0,0,678,0" VerticalAlignment="Top" HorizontalAlignment="Left" Style="{DynamicResource ButtonHomeStyle}"/>
+                    <Button Content="Tasks" Click="OpenTasksPage" Height="100" Width="98" Margin="98,0,0,0" VerticalAlignment="Top" HorizontalAlignment="Left" Style="{DynamicResource ButtonMainMenuStyle}" FontFamily="HP Simplified" FontSize="14"/>
+                    <Button Content="Notes" Click="OpenNotesPage" Height="100" Width="98" Margin="196,0,0,0" VerticalAlignment="Top" HorizontalAlignment="Left" Style="{DynamicResource ButtonMainMenuStyle}" FontFamily="HP Simplified" FontSize="14"/>
+                    <Button Content="Calendar" Click="OpenCalendarPage" Height="100" Width="98" Margin="294,0,0,0" VerticalAlignment="Top" HorizontalAlignment="Left" Style="{DynamicResource ButtonMainMenuStyle}" FontFamily="HP Simplified" FontSize="14"/>
 
                 </Grid>
             </TabItem>
