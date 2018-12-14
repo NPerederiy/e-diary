@@ -31,7 +31,7 @@
         <Setter Property="Template">
             <Setter.Value>
                 <ControlTemplate TargetType="{x:Type Button}">
-                    <Grid x:Name="border" SnapsToDevicePixels="true" Background="#19FFFFFF">
+                    <Grid x:Name="border" SnapsToDevicePixels="true" Background="#00FFFFFF">
                         <ContentPresenter x:Name="contentPresenter" Focusable="False" HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}" RecognizesAccessKey="True" SnapsToDevicePixels="{TemplateBinding SnapsToDevicePixels}" VerticalAlignment="{TemplateBinding VerticalContentAlignment}" Margin="12.5,4.45"/>
                         <Rectangle x:Name="rectangle" Fill="#33FFFFFF" Stroke="{x:Null}" Height="5" VerticalAlignment="Top"/>
                         <Rectangle x:Name="rectangle1" Fill="White" Margin="5.5,21.75,5.5,0" Stroke="{x:Null}" Height="3" Width="14" VerticalAlignment="Top"/>
@@ -66,7 +66,7 @@
         <Setter Property="Template">
             <Setter.Value>
                 <ControlTemplate TargetType="{x:Type Button}">
-                    <Grid x:Name="border" SnapsToDevicePixels="true" Background="#19FFFFFF">
+                    <Grid x:Name="border" SnapsToDevicePixels="true" Background="#00FFFFFF">
                         <ContentPresenter x:Name="contentPresenter" Focusable="False" HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}" RecognizesAccessKey="True" SnapsToDevicePixels="{TemplateBinding SnapsToDevicePixels}" VerticalAlignment="{TemplateBinding VerticalContentAlignment}" Margin="12.5,4.45"/>
                         <Rectangle x:Name="rectangle" Fill="#33FFFFFF" Height="5" VerticalAlignment="Top" Stroke="{x:Null}"/>
                         <Rectangle x:Name="rectangle1" Fill="{x:Null}" Margin="5.5,10.5,5.5,0" Width="14" Height="14" StrokeThickness="2.9" Stroke="White" VerticalAlignment="Top"/>
@@ -101,7 +101,7 @@
         <Setter Property="Template">
             <Setter.Value>
                 <ControlTemplate TargetType="{x:Type Button}">
-                    <Grid x:Name="border" SnapsToDevicePixels="true" Background="#19FFFFFF">
+                    <Grid x:Name="border" SnapsToDevicePixels="true" Background="#00FFFFFF">
                         <ContentPresenter x:Name="contentPresenter" Focusable="False" HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}" RecognizesAccessKey="True" SnapsToDevicePixels="{TemplateBinding SnapsToDevicePixels}" VerticalAlignment="{TemplateBinding VerticalContentAlignment}" Margin="10,4.45"/>
                         <Rectangle x:Name="rectangle2" Fill="#33FFFFFF" Height="5" VerticalAlignment="Top" Stroke="{x:Null}"/>
                         <Rectangle x:Name="rectangle1" Fill="White" Height="3" Width="16" Stroke="{x:Null}" Margin="4.5,16.3,4.5,0" RenderTransformOrigin="0.5,0.5" VerticalAlignment="Top">
@@ -224,7 +224,7 @@
         <Setter Property="Template">
             <Setter.Value>
                 <ControlTemplate TargetType="{x:Type Button}">
-                    <Grid x:Name="border" SnapsToDevicePixels="true" Background="#19FFFFFF">
+                    <Grid x:Name="border" SnapsToDevicePixels="true" Background="#00FFFFFF">
                         <ContentPresenter x:Name="contentPresenter" Focusable="False" HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}" RecognizesAccessKey="True" SnapsToDevicePixels="{TemplateBinding SnapsToDevicePixels}" VerticalAlignment="{TemplateBinding VerticalContentAlignment}" Margin="18.85,7.02"/>
                         <Rectangle x:Name="rectangle" Fill="#33FFFFFF" Height="5" VerticalAlignment="Bottom"/>
                         <Rectangle x:Name="rectangle1" HorizontalAlignment="Left" Height="20" Width="20" VerticalAlignment="Top" Margin="8,8,0,0">
@@ -336,7 +336,7 @@
         <Setter Property="Template">
             <Setter.Value>
                 <ControlTemplate TargetType="{x:Type Button}">
-                    <Grid x:Name="border" SnapsToDevicePixels="true" Background="#19FFFFFF">
+                    <Grid x:Name="border" SnapsToDevicePixels="true" Background="#00FFFFFF">
                         <ContentPresenter x:Name="contentPresenter" Focusable="False" HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}" RecognizesAccessKey="True" SnapsToDevicePixels="{TemplateBinding SnapsToDevicePixels}" VerticalAlignment="{TemplateBinding VerticalContentAlignment}" Margin="18.85,7.02"/>
                         <Rectangle x:Name="rectangle" Fill="#33FFFFFF" Height="5" VerticalAlignment="Bottom"/>
                         <Rectangle x:Name="rectangle1" HorizontalAlignment="Left" Height="20" Width="20" VerticalAlignment="Top" Margin="8,8,0,0">
@@ -446,7 +446,7 @@
         <Setter Property="Template">
             <Setter.Value>
                 <ControlTemplate TargetType="{x:Type Button}">
-                    <Grid x:Name="border" SnapsToDevicePixels="true" Background="#19FFFFFF">
+                    <Grid x:Name="border" SnapsToDevicePixels="true" Background="#00FFFFFF">
                         <ContentPresenter x:Name="contentPresenter" Focusable="False" HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}" RecognizesAccessKey="True" SnapsToDevicePixels="{TemplateBinding SnapsToDevicePixels}" VerticalAlignment="{TemplateBinding VerticalContentAlignment}" Margin="18.85,7.02"/>
                         <Rectangle x:Name="rectangle" Fill="#33FFFFFF" Height="5" VerticalAlignment="Bottom"/>
                         <Rectangle x:Name="rectangle1" HorizontalAlignment="Left" Height="81.5" Width="81.5" VerticalAlignment="Top" Margin="8,8,0,0">
@@ -493,7 +493,7 @@
         <Setter Property="Template">
             <Setter.Value>
                 <ControlTemplate TargetType="{x:Type Button}">
-                    <Grid x:Name="border" SnapsToDevicePixels="true" Background="#19FFFFFF">
+                    <Grid x:Name="border" SnapsToDevicePixels="true" Background="#00FFFFFF">
                         <ContentPresenter x:Name="contentPresenter" TextBlock.Foreground="#ffffff" TextBlock.TextAlignment="Center" Focusable="False" RecognizesAccessKey="True" SnapsToDevicePixels="{TemplateBinding SnapsToDevicePixels}" Margin="0,0,0,4.52" HorizontalAlignment="Center" VerticalAlignment="Bottom" Height="20.96" Width="98"/>
                         <Rectangle x:Name="rectangle" Fill="#33FFFFFF" Height="5" VerticalAlignment="Bottom"/>
                         <Rectangle x:Name="img" HorizontalAlignment="Stretch" Height="Auto" Width="Auto" VerticalAlignment="Stretch" Margin="8,8,8,10">
