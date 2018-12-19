@@ -29,6 +29,8 @@ namespace eDiary
 
         /* ---- Simple window manipulations ---- */
 
+        #region SimpleWindowManipulations
+
         public void OnWindowDrag(object sender, MouseButtonEventArgs e)
         {
             DragMove();
@@ -57,7 +59,11 @@ namespace eDiary
             Close();
         }
 
+        #endregion
+
         /* ---- Page switch ---- */
+
+        #region GlobalPageSwitch
 
         private void SetPage(TabControl tabControl, int pageIndex)
         {
@@ -88,7 +94,11 @@ namespace eDiary
                 SetPage(TabBlock, 3);
         }
 
+        #endregion
+
         /* ---- Authentication ---- */
+
+        #region Authentication
 
         public void Authenticate(object sender, RoutedEventArgs e)
         {
@@ -102,7 +112,11 @@ namespace eDiary
             LogIntoSystem();
         }
 
+        #endregion
+
         /* ---- Page switch ---- */
+
+        #region PageSwitch
 
         public void OpenHomePage(object sender, RoutedEventArgs e)
         {
@@ -139,5 +153,9 @@ namespace eDiary
             if (IsAuthorised)
                 SetPage(PageSwitch, 5);
         }
+
+        #endregion
+
+
     }
 }
