@@ -5,6 +5,10 @@ VisualStudioVersion = 15.0.28010.2048
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "eDiary", "eDiary\eDiary.csproj", "{0AE8A81F-76C6-4418-9A3F-70A2EBE7FF86}"
 EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "eDiary.Launcher", "eDiary.Launcher\eDiary.Launcher.csproj", "{49584F1E-63DE-4B1F-9697-61FA79B2617B}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "eDiary.API", "eDiary.API\eDiary.API.csproj", "{F8E2EA52-B215-4744-BCE8-D0021276A2B9}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -15,6 +19,14 @@ Global
 		{0AE8A81F-76C6-4418-9A3F-70A2EBE7FF86}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{0AE8A81F-76C6-4418-9A3F-70A2EBE7FF86}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{0AE8A81F-76C6-4418-9A3F-70A2EBE7FF86}.Release|Any CPU.Build.0 = Release|Any CPU
+		{49584F1E-63DE-4B1F-9697-61FA79B2617B}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{49584F1E-63DE-4B1F-9697-61FA79B2617B}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{49584F1E-63DE-4B1F-9697-61FA79B2617B}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{49584F1E-63DE-4B1F-9697-61FA79B2617B}.Release|Any CPU.Build.0 = Release|Any CPU
+		{F8E2EA52-B215-4744-BCE8-D0021276A2B9}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{F8E2EA52-B215-4744-BCE8-D0021276A2B9}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{F8E2EA52-B215-4744-BCE8-D0021276A2B9}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{F8E2EA52-B215-4744-BCE8-D0021276A2B9}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
