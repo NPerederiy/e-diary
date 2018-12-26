@@ -1,5 +1,7 @@
 #container{
     background-color: rgb(0, 155, 160);
+    background-image: url(../../assets/images/backgrounds/background1.jpeg);
+    background-size: cover;
     width: 100%;
     height: 100%;
     min-height: 100vh;
@@ -11,23 +13,50 @@
 #login-form{
     background-color: #F6EDE5;
     grid-column: 2;
-    // display: grid;
-    grid-template-rows: 100px 120px 60px;
+    box-shadow: 0 0 10px rgba(0,0,0,0.5);
 }
 
 .form-header{
     background-color: #373331;
     color: #fff;
-    height: 100px;
-    min-height: 100px;
+    padding: 10px 20px;
+    display: grid;
+    grid-template-columns: 80px 10px auto;
 }
 
 .header, .subheader{
-    margin-left: 105px;
+    grid-column: 3;
+    grid-row:1;
+    align-self: center;
+}
+
+.header{
+    font-size: 20pt;
+    font-weight: 500;
+    margin-bottom: 1em;
+    font-family: HP-Simplified-Regular;
+}
+
+.subheader{
+    font-size: 14pt;
+    font-weight: 400;
+    margin-top: 2em;
+}
+
+.app-icon{
+    height: 80px;
+    width: 80px;
+    background-image: url(../../assets/images/icons/eDiary-logo-white.png);
+    background-size: cover;
+}
+
+.user-profile{
+    cursor: pointer;
 }
 
 .user-profile{
     height: 120px;
+    align-self: center;
 }
 
 .button{

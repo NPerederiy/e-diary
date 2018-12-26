@@ -1,12 +1,12 @@
 <div id="container">
   <div id="login-form">
     <div class="form-header">
-      <div class="icon"></div>
-      <div class="header">{{ header }}</div>
+      <div class="app-icon"></div>
+      <div class="header">{{ header }}</div><br/>
       <div class="subheader">{{ subheader }}</div>
     </div>
-    <div class="user-profile">.1.</div>
-    <div class="user-profile">.2.</div><div class="user-profile">.2.</div>
-    <div class="button">{{ addButton }}</div>
+    <user-profile class="user-profile" (click)="auth()"></user-profile>
+    <user-profile class="user-profile" (click)="auth()"></user-profile> 
+    <div class="button" (click)="reg()">{{ addButton }}</div>
   </div>
 </div>

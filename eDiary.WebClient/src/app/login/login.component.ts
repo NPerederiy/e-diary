@@ -12,11 +12,19 @@ export class LoginComponent implements OnInit {
 
   constructor() {
     this.header = "eDiary";
-    this.subheader = "future is built here";
+    this.subheader = "future is planned here";
     this.addButton = "+"
    }
 
   ngOnInit() {
+  }
+
+  auth(){
+    console.log("auth");
+  }
+
+  reg(){
+    console.log("reg");
   }
 
 }

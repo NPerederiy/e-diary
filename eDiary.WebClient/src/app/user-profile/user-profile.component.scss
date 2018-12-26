@@ -1,0 +1,19 @@
+#container{
+    display: grid;
+    padding: 30px;
+    grid-template-columns: 80px 30px auto;
+}
+
+.user-img{
+    height: 80px;
+    width: 80px;
+    background-image: url(../../assets/images/icons/user.png);
+    background-size: cover;
+}
+
+.user-name{
+    grid-column: 3;
+    color: black;
+    font-size: 20pt;
+    font-weight: 300;
+}
