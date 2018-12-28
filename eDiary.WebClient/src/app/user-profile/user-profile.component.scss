@@ -1,4 +1,11 @@
+/* --- colors --- */
+
+$regular-color: #373331;
+
+/* ------------- */
+
 #container{
+    background-color: inherit;
     display: grid;
     padding: 30px;
     grid-template-columns: 80px 30px auto;
@@ -13,7 +20,8 @@
 
 .user-name{
     grid-column: 3;
-    color: black;
+    color: $regular-color;
     font-size: 20pt;
     font-weight: 300;
+    align-self: center;
 }

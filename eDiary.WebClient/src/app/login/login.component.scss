@@ -1,7 +1,28 @@
+/* --- colors --- */
+
+$warning-color: #d10202;
+$regular-color: #373331;
+$light-color: #fff;
+$page-background-color: #71685f;
+$background-regular-color: #F6EDE5;
+$background-focused-color: #fffbf7;
+$button-regular-color: #D18040;
+$button-focused-color: #D96E1A;
+$box-shadow-color: rgba(0,0,0,0.5);
+
+/* --- fonts --- */
+
+$regular-font: HP-Simplified-Regular;
+$light-font: HP-Simplified-Light;
+$bold-font: HP-Simplified;
+$placeholder-font: -apple-system,system-ui,BlinkMacSystemFont,"Segoe UI",Roboto,"Helvetica Neue",Arial,sans-serif;
+
+/* ------------- */
+
 #container{
-    background-color: rgb(0, 155, 160);
-    background-image: url(../../assets/images/backgrounds/background1.jpeg);
-    background-size: cover;
+    // background-color: $page-background-color;
+    // background-image: url(../../assets/images/backgrounds/background1.jpeg);
+    // background-size: cover;
     width: 100%;
     height: 100%;
     min-height: 100vh;
@@ -11,36 +32,54 @@
 }
 
 #login-form{
-    background-color: #F6EDE5;
+    background-color: $background-regular-color;
     grid-column: 2;
-    box-shadow: 0 0 10px rgba(0,0,0,0.5);
+    box-shadow: 0 0 10px $box-shadow-color;
 }
 
 .form-header{
-    background-color: #373331;
-    color: #fff;
+    background-color: $regular-color;
     padding: 10px 20px;
     display: grid;
     grid-template-columns: 80px 10px auto;
 }
 
 .header, .subheader{
+    color: $light-color;
     grid-column: 3;
     grid-row:1;
     align-self: center;
 }
 
 .header{
-    font-size: 20pt;
     font-weight: 500;
     margin-bottom: 1em;
-    font-family: HP-Simplified-Regular;
+}
+
+.header, .button{
+    font-family: $regular-font
+}
+
+.header, .button.auth{
+    font-size: 20pt;
+}
+
+.subheader, .plain-text, #pass-form{
+    font-size: 14pt;
+    // font-weight: 400;
 }
 
 .subheader{
-    font-size: 14pt;
-    font-weight: 400;
     margin-top: 2em;
+}
+
+.plain-text{
+    margin-bottom: 1em;
+}
+
+#pass-form, .user-profile{
+    // height: 120px;
+    align-self: center;
 }
 
 .app-icon{
@@ -54,11 +93,93 @@
     cursor: pointer;
 }
 
-.user-profile{
-    height: 120px;
-    align-self: center;
+.user-profile:hover, 
+.user-profile:focus{
+    outline-width: 0;
+    background-color: $background-focused-color;
+}
+
+#pass-form{
+    text-align: center;
+    padding: 30px;
+}
+
+.pass-input{
+    height: 28px;
+    width: 80%;
+    padding: 0 5px;
+    letter-spacing: 2px;
+    border-width: 0;
+    border-bottom-width: 1px;
+    border-bottom-color: $regular-color;
+    color: $regular-color;
+    background-color: transparent;
+    text-align: center;
+    font-family: $bold-font;
+    -webkit-transition: border-bottom-color 0.5s;
+    transition: border-bottom-color 0.5s;
+}
+
+.pass-input:focus, 
+.pass-input:hover {
+    outline-width: 0;
+    border-bottom-color: $button-focused-color;
+}
+
+
+.pass-input::-webkit-input-placeholder{
+    font-family: $placeholder-font;
+    letter-spacing: 0.2px;
+    opacity: 1; 
+    color: $warning-color; 
+    transition: opacity 0.3s ease;
+}
+.pass-input::-moz-placeholder{
+    font-family: $placeholder-font;
+    letter-spacing: 0.1px;
+    opacity: 1; 
+    color: $warning-color; 
+    transition: opacity 0.3s ease;
+}
+.pass-input:-moz-placeholder{
+    font-family: $placeholder-font;
+    letter-spacing: 0.1px;
+    opacity: 1; 
+    color: $warning-color; 
+    transition: opacity 0.3s ease;
+}
+.pass-input:-ms-input-placeholder{
+    font-family: $placeholder-font;
+    letter-spacing: 0.1px;
+    opacity: 1; 
+    color: $warning-color; 
+    transition: opacity 0.3s ease;
+}
+.pass-input:focus::-webkit-input-placeholder{
+    opacity: 0; 
+    color: $regular-color; 
+    transition: opacity 0.3s ease;
+}
+.pass-input:focus::-moz-placeholder{
+    opacity: 0; 
+    color: $regular-color; 
+    transition: opacity 0.3s ease;
+}
+.pass-input:focus:-moz-placeholder{
+    opacity: 0; 
+    color: $regular-color; 
+    transition: opacity 0.3s ease;
+}
+.pass-input:focus:-ms-input-placeholder{
+    opacity: 0; 
+    color: $regular-color; 
+    transition: opacity 0.3s ease;
 }
 
 .button{
     font-size: 28pt;
+}
+
+.button.auth{
+    font-family: $light-font;
 }
