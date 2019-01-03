@@ -15,7 +15,7 @@ $box-shadow-color: rgba(0,0,0,0.5);
 $regular-font: HP-Simplified-Regular;
 $light-font: HP-Simplified-Light;
 $bold-font: HP-Simplified;
-$placeholder-font: -apple-system,system-ui,BlinkMacSystemFont,"Segoe UI",Roboto,"Helvetica Neue",Arial,sans-serif;
+$warning-font: -apple-system,system-ui,BlinkMacSystemFont,"Segoe UI",Roboto,"Helvetica Neue",Arial,sans-serif;
 
 /* ------------- */
 
@@ -54,7 +54,7 @@ $placeholder-font: -apple-system,system-ui,BlinkMacSystemFont,"Segoe UI",Roboto,
     margin-bottom: 1em;
 }
 
-.header, .button.auth{
+.header{
     font-size: 20pt;
 }
 
@@ -72,8 +72,9 @@ $placeholder-font: -apple-system,system-ui,BlinkMacSystemFont,"Segoe UI",Roboto,
 }
 
 .plain-text.field{
-    margin-bottom: 0;
-    // margin-top: 1em;
+    margin: 4px 0;
+    align-self: flex-start;
+
 }
 
 .field, #reg-form{
@@ -94,24 +95,19 @@ $placeholder-font: -apple-system,system-ui,BlinkMacSystemFont,"Segoe UI",Roboto,
 
 .input{
     height: 28px;
+    min-height: 28px;
     width: 90%;
     padding: 0 5px;
     font-size: 12pt;
-    font-family: $placeholder-font;
+    font-family: $warning-font;
     border-width: 0;
     border-bottom-width: 1px;
     border-bottom-color: $regular-color;
     color: $regular-color;
     background-color: transparent;
-    // text-align: center;
-    
     -webkit-transition: border-bottom-color 0.5s;
     transition: border-bottom-color 0.5s;
 }
-
-// .input.mb-9{
-//     margin-bottom: 9px;
-// }
 
 .input.warning{
     border-bottom-color: $warning-color;
@@ -130,28 +126,28 @@ $placeholder-font: -apple-system,system-ui,BlinkMacSystemFont,"Segoe UI",Roboto,
 
 
 .input::-webkit-input-placeholder{
-    font-family: $placeholder-font;
+    font-family: $warning-font;
     letter-spacing: 0.2px;
     opacity: 1; 
     color: $warning-color; 
     transition: opacity 0.3s ease;
 }
 .input::-moz-placeholder{
-    font-family: $placeholder-font;
+    font-family: $warning-font;
     letter-spacing: 0.1px;
     opacity: 1; 
     color: $warning-color; 
     transition: opacity 0.3s ease;
 }
 .input:-moz-placeholder{
-    font-family: $placeholder-font;
+    font-family: $warning-font;
     letter-spacing: 0.1px;
     opacity: 1; 
     color: $warning-color; 
     transition: opacity 0.3s ease;
 }
 .input:-ms-input-placeholder{
-    font-family: $placeholder-font;
+    font-family: $warning-font;
     letter-spacing: 0.1px;
     opacity: 1; 
     color: $warning-color; 
@@ -181,7 +177,24 @@ $placeholder-font: -apple-system,system-ui,BlinkMacSystemFont,"Segoe UI",Roboto,
 .fields{
     display: grid;
     grid-template-columns: 100px auto;
-    grid-template-rows: repeat(5, 40px);
-    align-items: center;
+    grid-template-rows: repeat(5, 50px);
+    // align-items: center;    
+    text-align: start;
     row-gap: 10px;
+}
+
+.invalid-feedback{
+
+}
+
+.alert{
+    color: $warning-color;
+    font-family: $warning-font;
+    font-size: 14px;
+    bottom: 0;
+}
+
+.button{
+    width: 100%;
+    border: 0;
 }

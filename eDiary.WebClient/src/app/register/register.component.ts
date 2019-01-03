@@ -10,6 +10,7 @@ import * as SHA from 'js-sha512';
 })
 
 export class RegisterComponent implements OnInit {
+  model: any = {};
   headerText: string;
   subheaderText: string;
   regButtonText: string;
@@ -37,6 +38,10 @@ export class RegisterComponent implements OnInit {
       p.classList.add("warning");
       return false;
     }
+  }
+
+  onSubmit() {
+    console.log('SUCCESS!\n\n' + JSON.stringify(this.model));
   }
 
   register(f: any, l: any, p: any, e: any){

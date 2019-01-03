@@ -5,38 +5,122 @@
       <div class="header">{{ headerText }}</div><br/>
       <div class="subheader">{{ subheaderText }}</div>
     </div>
-    <form (ngSubmit)="onSubmit()">
+    <form name="form" (ngSubmit)="f.form.valid && onSubmit()" #f="ngForm" novalidate>
       <div id="reg-form">
         <div class="plain-text">{{ regFormText }}</div>
-        <!-- <input class="input text mb-9" placeholder="baaa" type="text" tabindex="1" autofocus=true autocomplete="current-password" (blur)="validateInput(fname)" (keyup.enter)="auth(password)" #fname/>
-        <input class="input text mb-9" placeholder="baaa" type="text" tabindex="0" autofocus=true autocomplete="current-password" (blur)="validateInput(lname)" (keyup.enter)="auth(password)" #lname/>
-        <input class="input pass mb-9" type="password" tabindex="0" autofocus=true autocomplete="current-password" (blur)="validateInput(password)" (keyup.enter)="auth(password)" #password/>
-        <input class="input text" type="email" tabindex="0" autofocus=true autocomplete="current-password" (blur)="validateInput(email)" (keyup.enter)="auth(password)" #email/> -->
         <div class="fields">
-          <div class="plain-text field">
-            First name:
+          <div class="plain-text field" for="firstName">
+            First name
           </div> 
-          <input class="input text" type="text" tabindex="1" autofocus=true autocomplete="name" (blur)="validateInput(fname)" (keyup.enter)="auth(password)" #fname/>
-          <div class="plain-text field">
-            Last name:
+          <div>
+            <input 
+              class="input text"
+              type="text"
+              name="fname" 
+              tabindex="1" 
+              autofocus=true 
+              autocomplete="name" 
+              [(ngModel)]="model.fname"
+              [ngClass]="{ 'ng-invalid warning': fname.touched && fname.invalid }"
+              #fname="ngModel"
+              required
+            />
+            <div *ngIf="fname.touched && fname.invalid" class="invalid-feedback">
+              <div *ngIf="fname.errors.required" class="alert">Is required</div>
+            </div>
+          </div>
+          
+          <!--------------------------------------------------------------->
+          <div class="plain-text field" for="lastName">
+            Last name
           </div> 
-          <input class="input text" type="text" tabindex="0" autofocus=true autocomplete="family-name" (blur)="validateInput(lname)" (keyup.enter)="auth(password)" #lname/>
-          <div class="plain-text field">
-            Password:
+          <div>
+            <input 
+              class="input text"
+              type="text"
+              name="lname" 
+              tabindex="0" 
+              autofocus=true 
+              autocomplete="family-name" 
+              [(ngModel)]="model.lname"
+              [ngClass]="{ 'ng-invalid warning': lname.touched && lname.invalid }"
+              #lname="ngModel"
+              required
+            />
+            <div *ngIf="lname.touched && lname.invalid" class="invalid-feedback">
+              <div *ngIf="lname.errors.required" class="alert">Is required</div>
+            </div>
+          </div>
+          <!--------------------------------------------------------------->
+          <div class="plain-text field" for="password">
+            Password
           </div> 
-          <input class="input pass" type="password" tabindex="0" autofocus=true autocomplete="new-password" (blur)="validateInput(password)" (keyup.enter)="auth(password)" #password/>
-          <div class="plain-text field">
-            Repeat password:
+          <div>
+            <input 
+              class="input pass" 
+              type="password" 
+              name="password" 
+              tabindex="0" 
+              autofocus=true 
+              autocomplete="new-password"
+              [(ngModel)]="model.password"
+              [ngClass]="{ 'ng-invalid warning': password.touched && password.invalid }"
+              #password="ngModel"
+              required
+              minlength="6"
+            />
+            <div *ngIf="password.touched && password.invalid" class="invalid-feedback">
+              <div *ngIf="password.errors.required" class="alert">Is required</div>
+              <div *ngIf="password.errors.minlength && !password.errors.required" class="alert">Password must be at least 6 characters</div>
+            </div>
+          </div>
+          <!--------------------------------------------------------------->
+          <div class="plain-text field" for="confirmPassword">
+            Repeat password
           </div> 
-          <input class="input pass" type="password" tabindex="0" autofocus=true (blur)="validateInput(confirmPassword)" (keyup.enter)="auth(password)" #confirmPassword/>
-          <div class="plain-text field">
-            Email:
+          <div>
+              <input 
+                class="input pass" 
+                type="password" 
+                name="confirmPassword" 
+                tabindex="0" 
+                autofocus=true 
+                [(ngModel)]="model.confirmPassword"
+                [ngClass]="{ 'ng-invalid warning': confirmPassword.touched && (confirmPassword.invalid || password.value !== confirmPassword.value) }"
+                #confirmPassword="ngModel"
+                required
+              />
+              <div *ngIf="confirmPassword.touched && (confirmPassword.invalid || password.value !== confirmPassword.value)" class="invalid-feedback">
+                <div *ngIf="confirmPassword.errors.required" class="alert">Is required</div>
+                <div *ngIf="password.value !== confirmPassword.value && !password.errors.required" class="alert">Passwords do not match</div>
+              </div>
+            </div>
+          <!--------------------------------------------------------------->
+          <div class="plain-text field" for="email">
+            Email
           </div> 
-          <input class="input text" type="text" tabindex="0" autofocus=true autocomplete="email" (blur)="validateInput(email)" (keyup.enter)="auth(password)" #email/>
-
+          <div>
+              <input 
+                class="input text"
+                type="email"
+                name="email" 
+                tabindex="0" 
+                autofocus=true 
+                autocomplete="email" 
+                [(ngModel)]="model.email"
+                [ngClass]="{ 'ng-invalid warning': email.touched && email.invalid }"
+                #email="ngModel"
+                required
+                email
+              />
+              <div *ngIf="email.touched && email.invalid" class="invalid-feedback">
+                <div *ngIf="email.errors.required" class="alert">Is required</div>
+                <div *ngIf="email.errors.email" class="alert">Email must be a valid email address</div>
+              </div>
+            </div>
         </div>
       </div>      
-      <div class="button" type="submit" tabindex="0" autofocus=true (keyup.enter)="register(password)" (click)="register(password)">{{ regButtonText }}</div>
+      <button class="button" type="submit" tabindex="0" autofocus=true (keyup.enter)="register(password,password,password,password)">{{ regButtonText }}</button>
     </form>
   </div>
 </div>
