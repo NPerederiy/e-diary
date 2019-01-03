@@ -31,6 +31,7 @@ $bold-font: HP-Simplified;
 :host /deep/ .button{
     background-color: $button-regular-color;
     color: $light-color;
+    font-family: $light-font;
     font-size: 20pt;
     height: 60px;
     min-height: 60px;
@@ -38,6 +39,11 @@ $bold-font: HP-Simplified;
     display: grid;
     align-content: center;
     justify-content: center;
+}
+
+:host /deep/ .button.add{
+    font-family: $regular-font;
+    font-size: 28pt;
 }
 
 :host /deep/ .button:hover,

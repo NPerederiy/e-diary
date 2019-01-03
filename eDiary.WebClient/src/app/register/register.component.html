@@ -1,0 +1,42 @@
+<div id="container">
+  <div id="form">
+    <div class="form-header">
+      <div class="app-icon"></div>
+      <div class="header">{{ headerText }}</div><br/>
+      <div class="subheader">{{ subheaderText }}</div>
+    </div>
+    <form (ngSubmit)="onSubmit()">
+      <div id="reg-form">
+        <div class="plain-text">{{ regFormText }}</div>
+        <!-- <input class="input text mb-9" placeholder="baaa" type="text" tabindex="1" autofocus=true autocomplete="current-password" (blur)="validateInput(fname)" (keyup.enter)="auth(password)" #fname/>
+        <input class="input text mb-9" placeholder="baaa" type="text" tabindex="0" autofocus=true autocomplete="current-password" (blur)="validateInput(lname)" (keyup.enter)="auth(password)" #lname/>
+        <input class="input pass mb-9" type="password" tabindex="0" autofocus=true autocomplete="current-password" (blur)="validateInput(password)" (keyup.enter)="auth(password)" #password/>
+        <input class="input text" type="email" tabindex="0" autofocus=true autocomplete="current-password" (blur)="validateInput(email)" (keyup.enter)="auth(password)" #email/> -->
+        <div class="fields">
+          <div class="plain-text field">
+            First name:
+          </div> 
+          <input class="input text" type="text" tabindex="1" autofocus=true autocomplete="name" (blur)="validateInput(fname)" (keyup.enter)="auth(password)" #fname/>
+          <div class="plain-text field">
+            Last name:
+          </div> 
+          <input class="input text" type="text" tabindex="0" autofocus=true autocomplete="family-name" (blur)="validateInput(lname)" (keyup.enter)="auth(password)" #lname/>
+          <div class="plain-text field">
+            Password:
+          </div> 
+          <input class="input pass" type="password" tabindex="0" autofocus=true autocomplete="new-password" (blur)="validateInput(password)" (keyup.enter)="auth(password)" #password/>
+          <div class="plain-text field">
+            Repeat password:
+          </div> 
+          <input class="input pass" type="password" tabindex="0" autofocus=true (blur)="validateInput(confirmPassword)" (keyup.enter)="auth(password)" #confirmPassword/>
+          <div class="plain-text field">
+            Email:
+          </div> 
+          <input class="input text" type="text" tabindex="0" autofocus=true autocomplete="email" (blur)="validateInput(email)" (keyup.enter)="auth(password)" #email/>
+
+        </div>
+      </div>      
+      <div class="button" type="submit" tabindex="0" autofocus=true (keyup.enter)="register(password)" (click)="register(password)">{{ regButtonText }}</div>
+    </form>
+  </div>
+</div>

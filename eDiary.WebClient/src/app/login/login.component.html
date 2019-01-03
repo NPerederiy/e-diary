@@ -10,17 +10,17 @@
     <form (ngSubmit)="onSubmit()">
       <span *ngIf="!currentLogin">
         <user-profile class="user-profile" tabindex="0" autofocus=true *ngFor="let p of profiles" [profile]="p" (keyup.enter)="chooseLogin(p)" (click)="chooseLogin(p)"></user-profile>
-        <div class="button" tabindex="0" autofocus=true (keyup.enter)="reg()" (click)="reg()">{{ addButtonText }}</div>
+        <div class="button add" tabindex="0" autofocus=true (keyup.enter)="reg()" (click)="reg()">{{ addButtonText }}</div>
       </span>
       <span *ngIf="currentLogin">
-        <div id="pass-form" action="auth">
+        <div id="pass-form">
           <div class="plain-text">{{ authFormText }}</div>    
           <!-- <div class="plain-text">Введите свой пароль</div> -->
           <!-- <div class="plain-text">Введіть свій пароль</div> -->
           <input type="hidden" autocomplete="username" />
           <input class="pass-input" type="password" tabindex="1" autofocus=true autocomplete="current-password" (blur)="validateInput(password)" (keyup.enter)="auth(password)" #password/>
         </div>      
-        <div class="button auth" type="submit" tabindex="0" autofocus=true (keyup.enter)="auth(password)" (click)="auth(password)">{{ authButtonText }}</div>
+        <div class="button" type="submit" tabindex="0" autofocus=true (keyup.enter)="auth(password)" (click)="auth(password)">{{ authButtonText }}</div>
       </span>     
     </form>
   </div>

@@ -1,29 +1,13 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
 import { UserProfile } from 'src/shared/models/user-profile.model';
-// import { trigger, state, style, transition, animate } from '@angular/animations';
 import { AppUser } from 'src/shared/models/app-user.model';
+import { Router } from '@angular/router';
 import * as SHA from 'js-sha512';
 
 @Component({
   selector: 'login',
   templateUrl: './login.component.html',
-  styleUrls: ['./login.component.scss'],
-  // animations: [
-  //   trigger('slideInOut', [
-  //     state('in', style({
-  //       overflow: 'hidden',
-  //       height: '*',
-  //       width: '*'
-  //     })),
-  //     state('out', style({
-  //       overflow: 'hidden',
-  //       height: '140px',
-  //       width: '*'
-  //     })),
-  //     transition('in => out', animate('400ms ease-in-out')),
-  //     transition('out => in', animate('400ms ease-in-out'))
-  //   ])
-  // ]
+  styleUrls: ['./login.component.scss']
 })
 
 export class LoginComponent implements OnInit {
@@ -37,11 +21,10 @@ export class LoginComponent implements OnInit {
 
   appUser: AppUser;
   currentLogin: string;
-  // helpMenuOpen: string;
 
-  constructor() {
+  constructor(private router: Router) {
     this.headerText = "eDiary";
-    this.subheaderText = "future is planned here";
+    this.subheaderText = "Future is planned here";
     this.addButtonText = "+";
     this.authButtonText = "Log in";
     this.authFormText = "Enter your password below";
@@ -51,7 +34,6 @@ export class LoginComponent implements OnInit {
    }
 
   ngOnInit() {
-    // this.helpMenuOpen = 'in';
   }
 
   onSubmit(){ 
@@ -86,10 +68,7 @@ export class LoginComponent implements OnInit {
   }
 
   reg(){
-    console.log("reg");
-    // this.isLoginChecked = !this.isLoginChecked;
-    // this.helpMenuOpen = this.helpMenuOpen === 'out' ? 'in' : 'out';
-    // console.log(this.helpMenuOpen);
+    this.router.navigateByUrl('/registration');
   }
 
 
