@@ -90,13 +90,13 @@ $warning-font: -apple-system,system-ui,BlinkMacSystemFont,"Segoe UI",Roboto,"Hel
 
 #reg-form{
     text-align: center;
-    padding: 30px;
+    padding: 30px 16% 20px 16%;
 }
 
 .input{
     height: 28px;
     min-height: 28px;
-    width: 90%;
+    // width: 100%;
     padding: 0 5px;
     font-size: 12pt;
     font-family: $warning-font;
@@ -107,6 +107,7 @@ $warning-font: -apple-system,system-ui,BlinkMacSystemFont,"Segoe UI",Roboto,"Hel
     background-color: transparent;
     -webkit-transition: border-bottom-color 0.5s;
     transition: border-bottom-color 0.5s;
+    justify-self: stretch;
 }
 
 .input.warning{
@@ -128,63 +129,48 @@ $warning-font: -apple-system,system-ui,BlinkMacSystemFont,"Segoe UI",Roboto,"Hel
 .input::-webkit-input-placeholder{
     font-family: $warning-font;
     letter-spacing: 0.2px;
-    opacity: 1; 
-    color: $warning-color; 
+    opacity: 0.9; 
     transition: opacity 0.3s ease;
 }
 .input::-moz-placeholder{
     font-family: $warning-font;
     letter-spacing: 0.1px;
-    opacity: 1; 
-    color: $warning-color; 
+    opacity: 0.9; 
     transition: opacity 0.3s ease;
 }
 .input:-moz-placeholder{
     font-family: $warning-font;
     letter-spacing: 0.1px;
-    opacity: 1; 
-    color: $warning-color; 
+    opacity: 0.9; 
     transition: opacity 0.3s ease;
 }
 .input:-ms-input-placeholder{
     font-family: $warning-font;
     letter-spacing: 0.1px;
-    opacity: 1; 
-    color: $warning-color; 
+    opacity: 0.9; 
     transition: opacity 0.3s ease;
 }
-.input:focus::-webkit-input-placeholder{
-    opacity: 0; 
-    color: $regular-color; 
-    transition: opacity 0.3s ease;
-}
-.input:focus::-moz-placeholder{
-    opacity: 0; 
-    color: $regular-color; 
-    transition: opacity 0.3s ease;
-}
-.input:focus:-moz-placeholder{
-    opacity: 0; 
-    color: $regular-color; 
-    transition: opacity 0.3s ease;
-}
-.input:focus:-ms-input-placeholder{
-    opacity: 0; 
-    color: $regular-color; 
-    transition: opacity 0.3s ease;
-}
+// .input:focus::-webkit-input-placeholder{
+//     // opacity: 0; 
+//     // transition: opacity 0.3s ease;
+// }
+// .input:focus::-moz-placeholder{
+//     opacity: 0; 
+//     transition: opacity 0.3s ease;
+// }
+// .input:focus:-moz-placeholder{
+//     opacity: 0; 
+//     transition: opacity 0.3s ease;
+// }
+// .input:focus:-ms-input-placeholder{
+//     opacity: 0; 
+//     transition: opacity 0.3s ease;
+// }
 
 .fields{
     display: grid;
-    grid-template-columns: 100px auto;
-    grid-template-rows: repeat(5, 50px);
-    // align-items: center;    
-    text-align: start;
-    row-gap: 10px;
-}
-
-.invalid-feedback{
-
+    grid-template-rows: 30px 18px;
+    margin-bottom: 10px;
 }
 
 .alert{
@@ -192,9 +178,20 @@ $warning-font: -apple-system,system-ui,BlinkMacSystemFont,"Segoe UI",Roboto,"Hel
     font-family: $warning-font;
     font-size: 14px;
     bottom: 0;
+    text-align: start;
 }
 
 .button{
     width: 100%;
     border: 0;
+}
+
+.eye{
+    position: absolute;
+    margin: 4px;
+    // justify-self: end;
+    
+    width: 20px;
+    height: 20px;
+    background-color: $button-focused-color;
 }

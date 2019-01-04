@@ -5,122 +5,100 @@
       <div class="header">{{ headerText }}</div><br/>
       <div class="subheader">{{ subheaderText }}</div>
     </div>
-    <form name="form" (ngSubmit)="f.form.valid && onSubmit()" #f="ngForm" novalidate>
+    <form  (ngSubmit)="onSubmit()"  [formGroup]="form">
       <div id="reg-form">
         <div class="plain-text">{{ regFormText }}</div>
         <div class="fields">
-          <div class="plain-text field" for="firstName">
-            First name
-          </div> 
-          <div>
-            <input 
-              class="input text"
-              type="text"
-              name="fname" 
-              tabindex="1" 
-              autofocus=true 
-              autocomplete="name" 
-              [(ngModel)]="model.fname"
-              [ngClass]="{ 'ng-invalid warning': fname.touched && fname.invalid }"
-              #fname="ngModel"
-              required
-            />
-            <div *ngIf="fname.touched && fname.invalid" class="invalid-feedback">
-              <div *ngIf="fname.errors.required" class="alert">Is required</div>
-            </div>
+          <input 
+            formControlName="fname"
+            class="input text"
+            type="text"
+            name="fname" 
+            tabindex="0" 
+            autofocus=true 
+            autocomplete="name" 
+            placeholder={{fnameText}}
+            [ngClass]="{ 'ng-invalid warning': controls.fname.touched &&  controls.fname.invalid }"
+          />
+          <div *ngIf="controls.fname.touched && controls.fname.errors">
+            <div *ngIf="controls.fname.errors.required" class="alert">First name is required</div>
+            <div *ngIf="controls.fname.errors.pattern" class="alert">Must contain only letters</div>
           </div>
-          
-          <!--------------------------------------------------------------->
-          <div class="plain-text field" for="lastName">
-            Last name
-          </div> 
-          <div>
-            <input 
-              class="input text"
-              type="text"
-              name="lname" 
-              tabindex="0" 
-              autofocus=true 
-              autocomplete="family-name" 
-              [(ngModel)]="model.lname"
-              [ngClass]="{ 'ng-invalid warning': lname.touched && lname.invalid }"
-              #lname="ngModel"
-              required
-            />
-            <div *ngIf="lname.touched && lname.invalid" class="invalid-feedback">
-              <div *ngIf="lname.errors.required" class="alert">Is required</div>
-            </div>
+        </div>  
+        <div class="fields">
+          <input 
+            formControlName="lname"
+            class="input text"
+            type="text"
+            name="lname" 
+            tabindex="0" 
+            autofocus=true 
+            autocomplete="family-name" 
+            placeholder={{lnameText}}
+            [ngClass]="{ 'ng-invalid warning': controls.lname.touched && controls.lname.invalid }"
+          />
+          <div *ngIf="controls.lname.touched && controls.lname.invalid">
+            <div *ngIf="controls.lname.errors.required" class="alert">Last name is required</div>
+            <div *ngIf="controls.lname.errors.pattern" class="alert">Must contain only letters</div>
           </div>
-          <!--------------------------------------------------------------->
-          <div class="plain-text field" for="password">
-            Password
-          </div> 
-          <div>
-            <input 
-              class="input pass" 
-              type="password" 
-              name="password" 
-              tabindex="0" 
-              autofocus=true 
-              autocomplete="new-password"
-              [(ngModel)]="model.password"
-              [ngClass]="{ 'ng-invalid warning': password.touched && password.invalid }"
-              #password="ngModel"
-              required
-              minlength="6"
-            />
-            <div *ngIf="password.touched && password.invalid" class="invalid-feedback">
-              <div *ngIf="password.errors.required" class="alert">Is required</div>
-              <div *ngIf="password.errors.minlength && !password.errors.required" class="alert">Password must be at least 6 characters</div>
-            </div>
+        </div>  
+        <div class="fields" formGroupName="passwords">
+          <!-- <div class="eye"></div> -->
+          <input 
+            formControlName="password"
+            class="input" 
+            type="{{ showPassword ? 'text' : 'password' }}"
+            name="password" 
+            tabindex="0" 
+            autofocus=true 
+            autocomplete="new-password"
+            placeholder={{passText}}
+            [ngClass]="{ 'pass': showPassword === false, 'ng-invalid warning': passwords.controls.password.touched && passwords.controls.password.invalid }"
+          />
+          <div *ngIf="passwords.controls.password.touched && passwords.controls.password.invalid">
+            <div *ngIf="passwords.controls.password.errors.required" class="alert">Password is required</div>
+            <div *ngIf="passwords.controls.password.errors.minlength" class="alert">Password must be at least 6 chars</div>
           </div>
-          <!--------------------------------------------------------------->
-          <div class="plain-text field" for="confirmPassword">
-            Repeat password
-          </div> 
-          <div>
-              <input 
-                class="input pass" 
-                type="password" 
-                name="confirmPassword" 
-                tabindex="0" 
-                autofocus=true 
-                [(ngModel)]="model.confirmPassword"
-                [ngClass]="{ 'ng-invalid warning': confirmPassword.touched && (confirmPassword.invalid || password.value !== confirmPassword.value) }"
-                #confirmPassword="ngModel"
-                required
-              />
-              <div *ngIf="confirmPassword.touched && (confirmPassword.invalid || password.value !== confirmPassword.value)" class="invalid-feedback">
-                <div *ngIf="confirmPassword.errors.required" class="alert">Is required</div>
-                <div *ngIf="password.value !== confirmPassword.value && !password.errors.required" class="alert">Passwords do not match</div>
-              </div>
-            </div>
-          <!--------------------------------------------------------------->
-          <div class="plain-text field" for="email">
-            Email
-          </div> 
-          <div>
-              <input 
-                class="input text"
-                type="email"
-                name="email" 
-                tabindex="0" 
-                autofocus=true 
-                autocomplete="email" 
-                [(ngModel)]="model.email"
-                [ngClass]="{ 'ng-invalid warning': email.touched && email.invalid }"
-                #email="ngModel"
-                required
-                email
-              />
-              <div *ngIf="email.touched && email.invalid" class="invalid-feedback">
-                <div *ngIf="email.errors.required" class="alert">Is required</div>
-                <div *ngIf="email.errors.email" class="alert">Email must be a valid email address</div>
-              </div>
-            </div>
+        </div>
+        <div class="fields" formGroupName="passwords">
+          <input 
+            formControlName="confirmPassword"
+            class="input pass" 
+            type="password" 
+            name="confirmPassword" 
+            tabindex="0" 
+            autofocus=true 
+            placeholder={{confPassText}}
+            [ngClass]="{ 'ng-invalid warning': passwords.controls.confirmPassword.touched && passwords.invalid }"
+          />
+          <div *ngIf="passwords.controls.confirmPassword.touched && passwords.controls.confirmPassword.errors; else passwordGroupErrors">
+            <div *ngIf="passwords.controls.confirmPassword.errors.required"
+             class="alert">Password confirmation is required</div>
+          </div>
+          <ng-template #passwordGroupErrors>
+            <div *ngIf="passwords.errors && passwords.errors.passwordsNotMatch"
+              class="alert">Passwords do not match</div>
+          </ng-template>
+        </div>  
+        <div class="fields">
+          <input 
+            formControlName="email"
+            class="input text"
+            type="email"
+            name="email" 
+            tabindex="0" 
+            autofocus=true 
+            autocomplete="email" 
+            placeholder={{emailText}}
+            [ngClass]="{ 'ng-invalid warning': controls.email.touched && controls.email.invalid }"
+          />
+          <div *ngIf="controls.email.touched && controls.email.invalid">
+            <div *ngIf="controls.email.errors.required" class="alert">Email is required</div>
+            <div *ngIf="controls.email.errors.email" class="alert">Email must be a valid email address</div>
+          </div>
         </div>
       </div>      
-      <button class="button" type="submit" tabindex="0" autofocus=true (keyup.enter)="register(password,password,password,password)">{{ regButtonText }}</button>
+      <button class="button" type="submit" tabindex="0" autofocus=true>{{ regButtonText }}</button>
     </form>
   </div>
 </div>
