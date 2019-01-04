@@ -6,26 +6,31 @@ import { AppComponent } from './app.component';
 import { LoginComponent } from './login/login.component';
 import { UserProfileComponent } from './user-profile/user-profile.component';
 import { RegisterComponent } from './register/register.component';
+import { MainComponent } from './main/main.component';
+import { AuthenticationService } from './services/authentication.service';
+import { MainMenuButtonComponent } from './main-menu-button/main-menu-button.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     LoginComponent,
     UserProfileComponent,
-    RegisterComponent
+    RegisterComponent,
+    MainComponent,
+    MainMenuButtonComponent
   ],
   imports: [
     BrowserModule,
     FormsModule,
     ReactiveFormsModule,
     RouterModule.forRoot([
-      { path: '', component: LoginComponent },
+      { path: '', component: MainComponent },
       { path: 'login', component: LoginComponent },
       { path: 'registration', component: RegisterComponent },
-      { path: '**', component: LoginComponent },
+      { path: '**', component: MainComponent },
     ])
   ],
-  providers: [],
+  providers: [AuthenticationService],
   bootstrap: [AppComponent]
 })
 

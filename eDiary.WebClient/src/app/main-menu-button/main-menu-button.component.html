@@ -1,0 +1,12 @@
+<div id="container" [ngClass]="{ 'active': btn.isActive === true }">
+  <div class="icon" [ngClass]="{
+    'home': btn.type === 1,
+    'tasks': btn.type === 2,
+    'notes': btn.type === 3,
+    'calendar': btn.type === 4,
+    'notifications': btn.type === 5,
+    'settings': btn.type === 6
+   }"></div>
+  <div class="text">{{ btn.content }}</div>
+  <div class="sidebar"></div>
+</div>

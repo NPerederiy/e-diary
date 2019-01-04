@@ -1,0 +1,7 @@
+<div id="container">
+<div class="main-menu">
+<main-menu-button *ngFor="let i of menuButtons" [btn]="i" (click)="openPage(i)"></main-menu-button>
+</div>
+<!-- auxilary routing -->
+<router-outlet></router-outlet> 
+</div>

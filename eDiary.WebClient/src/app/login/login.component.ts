@@ -3,6 +3,7 @@ import { UserProfile } from 'src/shared/models/user-profile.model';
 import { AppUser } from 'src/shared/models/app-user.model';
 import { Router } from '@angular/router';
 import * as SHA from 'js-sha512';
+import { AuthenticationService } from '../services/authentication.service';
 
 @Component({
   selector: 'login',
@@ -18,19 +19,15 @@ export class LoginComponent implements OnInit {
   authFormText: string;
   profiles: UserProfile[] = [];
   submitted = false;
-
-  appUser: AppUser;
   currentLogin: string;
 
-  constructor(private router: Router) {
+  constructor(private router: Router, private authService: AuthenticationService) {
     this.headerText = "eDiary";
     this.subheaderText = "Future is planned here";
     this.addButtonText = "+";
     this.authButtonText = "Log in";
     this.authFormText = "Enter your password below";
-    this.profiles.push(new UserProfile("Nikita", "Perederii"));
-    this.profiles.push(new UserProfile("John", "Doe"));
-    this.profiles.push(new UserProfile("Jack", "Daniels"));
+    this.profiles = authService.getLogins();
    }
 
   ngOnInit() {
@@ -50,18 +47,13 @@ export class LoginComponent implements OnInit {
     }
   }
 
-  auth(p: any){
-    if (this.validateInput(p)) {
-      this.appUser = new AppUser(this.currentLogin, SHA.sha512(`${this.currentLogin.split('.')[1]}${p.value}${this.currentLogin.split('.')[0]}`));
-    }     
-    console.log("to authenticate:", this.appUser);
+  login(p: any){
+    let operationResult = this.authService.login(this.currentLogin, p.value);
+    if (operationResult){
+      this.router.navigateByUrl('/');
+    };  
   }
 
-  temp(e: any){
-    console.log(e);
-  }
-
-  // TODO: make '.' symbol unallowed to use in names
   chooseLogin(p: any){
     this.currentLogin = `${p.firstName}.${p.lastName}`;
     console.log(this.currentLogin);

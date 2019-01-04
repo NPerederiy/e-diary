@@ -18,7 +18,6 @@ export class RegisterComponent implements OnInit {
   regButtonText: string;
   regFormText: string;
   appUser: AppUser;
-  showPassword: boolean = false;
   fnameText: string;
   lnameText: string;
   passText: string;
@@ -83,21 +82,17 @@ export class RegisterComponent implements OnInit {
   ngOnInit() {
   }
 
-  validateInput(p: any): boolean {
-    if (p.value !== undefined && p.value !== "") {
-      p.classList.remove("warning");
-      return true;
-    } else {
-      p.placeholder = "Fill this field please";
-      p.blur();
-      p.classList.add("warning");
-      return false;
-    }
+  showPassword(e: any){
+    e.type = 'text';
+  }
+
+  hidePassword(e: any){
+    e.type = 'password';
   }
 
   onSubmit() {
     console.log(this.controls);
-
-    console.log('SUCCESS!\n\n' + JSON.stringify(this.model));
+    console.log(JSON.stringify(this.model));
+    this.router.navigateByUrl('/');
   }
 }

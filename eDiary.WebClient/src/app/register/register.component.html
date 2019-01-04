@@ -5,7 +5,7 @@
       <div class="header">{{ headerText }}</div><br/>
       <div class="subheader">{{ subheaderText }}</div>
     </div>
-    <form  (ngSubmit)="onSubmit()"  [formGroup]="form">
+    <form (ngSubmit)="form.valid && onSubmit()" [formGroup]="form">
       <div id="reg-form">
         <div class="plain-text">{{ regFormText }}</div>
         <div class="fields">
@@ -43,17 +43,18 @@
           </div>
         </div>  
         <div class="fields" formGroupName="passwords">
-          <!-- <div class="eye"></div> -->
+          <div class="eye" (mousedown)="showPassword(p)" (mouseup)="hidePassword(p)" (mouseleave)="hidePassword(p)"></div>
           <input 
             formControlName="password"
             class="input" 
-            type="{{ showPassword ? 'text' : 'password' }}"
+            type="password"
             name="password" 
             tabindex="0" 
             autofocus=true 
             autocomplete="new-password"
             placeholder={{passText}}
-            [ngClass]="{ 'pass': showPassword === false, 'ng-invalid warning': passwords.controls.password.touched && passwords.controls.password.invalid }"
+            [ngClass]="{ 'pass': type === 'password', 'ng-invalid warning': passwords.controls.password.touched && passwords.controls.password.invalid }"
+            #p
           />
           <div *ngIf="passwords.controls.password.touched && passwords.controls.password.invalid">
             <div *ngIf="passwords.controls.password.errors.required" class="alert">Password is required</div>
@@ -61,22 +62,24 @@
           </div>
         </div>
         <div class="fields" formGroupName="passwords">
+          <div class="eye"  (mousedown)="showPassword(cp)" (mouseup)="hidePassword(cp)" (mouseleave)="hidePassword(cp)"></div>
           <input 
             formControlName="confirmPassword"
-            class="input pass" 
-            type="password" 
+            class="input" 
+            type="password"
             name="confirmPassword" 
             tabindex="0" 
             autofocus=true 
             placeholder={{confPassText}}
-            [ngClass]="{ 'ng-invalid warning': passwords.controls.confirmPassword.touched && passwords.invalid }"
+            [ngClass]="{ 'pass': type === 'password','ng-invalid warning': passwords.controls.confirmPassword.touched && passwords.invalid }"
+            #cp
           />
           <div *ngIf="passwords.controls.confirmPassword.touched && passwords.controls.confirmPassword.errors; else passwordGroupErrors">
             <div *ngIf="passwords.controls.confirmPassword.errors.required"
              class="alert">Password confirmation is required</div>
           </div>
           <ng-template #passwordGroupErrors>
-            <div *ngIf="passwords.errors && passwords.errors.passwordsNotMatch"
+            <div *ngIf="passwords.controls.confirmPassword.value !== '' && passwords.errors && passwords.errors.passwordsNotMatch"
               class="alert">Passwords do not match</div>
           </ng-template>
         </div>  
