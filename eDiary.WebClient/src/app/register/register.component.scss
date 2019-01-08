@@ -199,5 +199,10 @@ $warning-font: -apple-system,system-ui,BlinkMacSystemFont,"Segoe UI",Roboto,"Hel
 
     width: 20px;
     height: 20px;
-    background-color: $button-focused-color;
+    background-image: url(../../assets/images/icons/icon-eye-orange-30.png);
+    background-size: cover;
+}
+
+.eye:active{
+    background-image: url(../../assets/images/icons/icon-invisible-orange-30.png);
 }
