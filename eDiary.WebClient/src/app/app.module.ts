@@ -10,6 +10,10 @@ import { MainComponent } from './main/main.component';
 import { AuthenticationService } from './services/authentication.service';
 import { MainMenuButtonComponent } from './main-menu-button/main-menu-button.component';
 
+import {TranslateLoader, TranslateModule} from '@ngx-translate/core';
+import {TranslateHttpLoader} from '@ngx-translate/http-loader';
+import {HttpClient, HttpClientModule} from '@angular/common/http';
+
 @NgModule({
   declarations: [
     AppComponent,
@@ -23,15 +27,28 @@ import { MainMenuButtonComponent } from './main-menu-button/main-menu-button.com
     BrowserModule,
     FormsModule,
     ReactiveFormsModule,
+    HttpClientModule,
     RouterModule.forRoot([
       { path: '', component: MainComponent },
       { path: 'login', component: LoginComponent },
       { path: 'registration', component: RegisterComponent },
       { path: '**', component: MainComponent },
-    ])
+    ]),
+    TranslateModule.forRoot({
+        loader: {
+            provide: TranslateLoader,
+            useFactory: HttpLoaderFactory,
+            deps: [HttpClient]
+        }
+    })
   ],
   providers: [AuthenticationService],
   bootstrap: [AppComponent]
 })
 
 export class AppModule { }
+
+// The HttpLoaderFactory is required for AOT (ahead of time) compilation in the project
+export function HttpLoaderFactory(http: HttpClient) {
+  return new TranslateHttpLoader(http);
+}

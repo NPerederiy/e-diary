@@ -1,0 +1,10 @@
+{
+    "app": {
+        "name": "eDiary",
+        "tagline": "Управляй будущим"
+    },
+    "auth":{
+        "insertPass": "Введите свой пароль",
+        "loginBtn": "Войти"
+    }
+}

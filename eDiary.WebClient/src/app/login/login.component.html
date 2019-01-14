@@ -2,10 +2,8 @@
   <div id="login-form">
     <div class="form-header">
       <div class="app-icon"></div>
-      <div class="header">{{ headerText }}</div><br/>
-      <div class="subheader">{{ subheaderText }}</div>
-      <!-- <div class="subheader">Управляй будущим</div> -->
-      <!-- <div class="subheader">Контролюй майбутнє</div> -->
+      <div class="header">{{ 'app.name' | translate }}</div><br/>
+      <div class="subheader">{{ 'app.tagline' | translate }}</div>
     </div>
     <form (ngSubmit)="onSubmit()">
       <span *ngIf="!currentLogin">
@@ -14,13 +12,11 @@
       </span>
       <span *ngIf="currentLogin">
         <div id="pass-form">
-          <div class="plain-text">{{ authFormText }}</div>    
-          <!-- <div class="plain-text">Введите свой пароль</div> -->
-          <!-- <div class="plain-text">Введіть свій пароль</div> -->
+          <div class="plain-text">{{ 'auth.insertPass' | translate }}</div>
           <input type="hidden" autocomplete="username" />
           <input class="pass-input" type="password" tabindex="1" autofocus=true autocomplete="current-password" (blur)="validateInput(password)" (keyup.enter)="auth(password)" #password/>
         </div>      
-        <div class="button" type="submit" tabindex="0" autofocus=true (keyup.enter)="login(password)" (click)="login(password)">{{ authButtonText }}</div>
+        <div class="button" type="submit" tabindex="0" autofocus=true (keyup.enter)="login(password)" (click)="login(password)">{{ 'auth.loginBtn' | translate }}</div>
       </span>     
     </form>
   </div>
