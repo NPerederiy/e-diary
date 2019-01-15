@@ -13,28 +13,9 @@ import { passwordMatchingValidator } from './validators/password-matching';
 
 export class RegisterComponent implements OnInit {
   model: any = {};
-  headerText: string;
-  subheaderText: string;
-  regButtonText: string;
-  regFormText: string;
   appUser: AppUser;
-  fnameText: string;
-  lnameText: string;
-  passText: string;
-  confPassText: string;
-  emailText: string;
 
   constructor(private router: Router, private formBuilder: FormBuilder) {
-    this.headerText = "eDiary";
-    this.subheaderText = "future is planned here";
-    this.regFormText = "Register new user";
-    this.regButtonText = "Register";
-
-    this.fnameText = "First name";
-    this.lnameText = "Last name";
-    this.passText = "Password";
-    this.confPassText = "Confirm password";
-    this.emailText = "Email";
   }
 
   public form = new FormGroup({

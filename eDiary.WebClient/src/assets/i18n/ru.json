@@ -1,10 +1,26 @@
 {
     "app": {
         "name": "eDiary",
-        "tagline": "Управляй будущим"
+        "tagline": "Future is planned here"
     },
     "auth":{
         "insertPass": "Введите свой пароль",
-        "loginBtn": "Войти"
+        "loginBtnText": "Войти"
+    },
+    "reg":{
+        "formHeader": "Добавление нового пользователя",
+        "btnText": "Добавить",
+        "fname": "Имя",
+        "lname": "Фамилия",
+        "password": "Пароль",
+        "passwordConfirm": "Подтверждение пароля",
+        "email": "Эл. почта"        
+    },
+    "error": {
+        "isRequired": "Является обязательным полем",
+        "lettersOnly": "Может содержать только буквы",
+        "minLength6": "Минимум 6 символов в длину",
+        "passwordsNotMatch": "Пароли не совпадают",
+        "emailNotValid": "Некорректная форма записи"
     }
 }

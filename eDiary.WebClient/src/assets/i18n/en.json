@@ -5,6 +5,22 @@
     },
     "auth":{
         "insertPass": "Enter your password below",
-        "loginBtn": "Log in"
+        "loginBtnText": "Log in"
+    },
+    "reg":{
+        "formHeader": "Register new user",
+        "btnText": "Register",
+        "fname": "First name",
+        "lname": "Last name",
+        "password": "Password",
+        "passwordConfirm": "Password confirmation",
+        "email": "Email"        
+    },
+    "error": {
+        "isRequired": "Field is required",
+        "lettersOnly": "Must contain only letters",
+        "minLength6": "Must be at least 6 chars",
+        "passwordsNotMatch": "Passwords do not match",
+        "emailNotValid": "Email must be a valid email address"
     }
 }

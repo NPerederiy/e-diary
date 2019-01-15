@@ -12,21 +12,13 @@ import { AuthenticationService } from '../services/authentication.service';
 })
 
 export class LoginComponent implements OnInit {
-  headerText: string;
-  subheaderText: string;
   addButtonText: string;
-  authButtonText: string;
-  authFormText: string;
   profiles: UserProfile[] = [];
   submitted = false;
   currentLogin: string;
 
   constructor(private router: Router, private authService: AuthenticationService) {
-    this.headerText = "eDiary";
-    this.subheaderText = "Future is planned here";
     this.addButtonText = "+";
-    this.authButtonText = "Log in";
-    this.authFormText = "Enter your password below";
     this.profiles = authService.getLogins();
    }
 

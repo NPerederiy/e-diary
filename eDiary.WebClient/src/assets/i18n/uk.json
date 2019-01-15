@@ -1,10 +1,26 @@
 {
     "app": {
         "name": "eDiary",
-        "tagline": "Контролюй майбутнє"
+        "tagline": "Future is planned here"
     },
     "auth":{
         "insertPass": "Введіть свій пароль",
-        "loginBtn": "Увійти"
+        "loginBtnText": "Увійти"
+    },
+    "reg":{
+        "formHeader": "Додавання нового користувача",
+        "btnText": "Додати",
+        "fname": "Ім'я",
+        "lname": "Прізвище",
+        "password": "Пароль",
+        "passwordConfirm": "Підтвердження паролю",
+        "email": "Ел. пошта"        
+    },
+    "error": {
+        "isRequired": "Є обов'язковим полем",
+        "lettersOnly": "Може містити тільки літери",
+        "minLength6": "Мінімум 6 символів у довжину",
+        "passwordsNotMatch": "Паролі не співпадають",
+        "emailNotValid": "Некоректна форма запису"
     }
 }

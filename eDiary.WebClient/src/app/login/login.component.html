@@ -16,7 +16,7 @@
           <input type="hidden" autocomplete="username" />
           <input class="pass-input" type="password" tabindex="1" autofocus=true autocomplete="current-password" (blur)="validateInput(password)" (keyup.enter)="auth(password)" #password/>
         </div>      
-        <div class="button" type="submit" tabindex="0" autofocus=true (keyup.enter)="login(password)" (click)="login(password)">{{ 'auth.loginBtn' | translate }}</div>
+        <div class="button" type="submit" tabindex="0" autofocus=true (keyup.enter)="login(password)" (click)="login(password)">{{ 'auth.loginBtnText' | translate }}</div>
       </span>     
     </form>
   </div>

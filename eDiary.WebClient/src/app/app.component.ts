@@ -7,9 +7,7 @@ import { TranslateService } from '@ngx-translate/core';
   styleUrls: ['./app.component.scss']
 })
 
-export class AppComponent {
-  title = 'eDiary';
-  
+export class AppComponent {  
   constructor(private translate: TranslateService) {
     translate.setDefaultLang('en');
   }
