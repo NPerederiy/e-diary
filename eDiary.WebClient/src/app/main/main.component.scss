@@ -34,6 +34,11 @@ $warning-font: -apple-system,system-ui,BlinkMacSystemFont,"Segoe UI",Roboto,"Hel
     background-color: $regular-color;
 }
 
+#auxilary-router{
+    grid-row: 1;
+    grid-column: 2;
+}
+
 main-menu-button.sidebar{
     background-color: $background-regular-color;
 }

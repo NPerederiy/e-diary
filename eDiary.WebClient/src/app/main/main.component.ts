@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { AuthenticationService } from '../services/authentication.service';
-import { Router } from '@angular/router';
+import { Router, ActivatedRoute } from '@angular/router';
 import { MenuButton } from 'src/shared/models/menu-button.model';
 import { MenuButtonType } from 'src/shared/models/menu-button-type.enum';
 
@@ -13,10 +13,13 @@ import { MenuButtonType } from 'src/shared/models/menu-button-type.enum';
 export class MainComponent implements OnInit {
   menuButtons: MenuButton[] = [];
 
-  constructor(private authService: AuthenticationService, private router: Router) {
+  constructor(private authService: AuthenticationService, private router: Router, private route: ActivatedRoute) {
     if (!authService.checkAuthToken("")){
       //this.router.navigateByUrl('/login');
     }
+    // this.router.navigate(['tasks'], { relativeTo: this.route });
+    // this.router.navigate([{ outlets: { 'inner-pages': ['tasks'] } }], { relativeTo: this.route } );
+
     this.menuButtons.push(
       new MenuButton("", MenuButtonType.Home, true),
       new MenuButton("Tasks", MenuButtonType.Tasks),
@@ -35,6 +38,24 @@ export class MainComponent implements OnInit {
       }
     });
     btn.setActive();
+    switch(btn.type){
+      case MenuButtonType.Home:
+        this.router.navigateByUrl("app");
+        // this.router.navigate([{ outlets: { 'inner-pages': [''] } }], { relativeTo: this.route } );
+        break;
+      case MenuButtonType.Tasks:
+      this.router.navigateByUrl("app");
+        this.router.navigate([{ outlets: { 'inner-pages': ['tasks'] } }], { relativeTo: this.route } );
+        break;
+      case MenuButtonType.Notes:
+      this.router.navigateByUrl("app");
+        this.router.navigate([{ outlets: { 'inner-pages': ['notes'] } }], { relativeTo: this.route } );
+        break;
+      case MenuButtonType.Calendar:
+      this.router.navigateByUrl("app");
+        this.router.navigate([{ outlets: { 'inner-pages': ['calendar'] } }], { relativeTo: this.route } );
+        break;
+    }
     // TODO: implement routing to the specified page
   }
 

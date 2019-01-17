@@ -42,7 +42,7 @@ export class LoginComponent implements OnInit {
   login(p: any){
     let operationResult = this.authService.login(this.currentLogin, p.value);
     if (operationResult){
-      this.router.navigateByUrl('/');
+      this.router.navigateByUrl('/app');
     };  
   }
 

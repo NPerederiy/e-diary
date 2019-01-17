@@ -10,9 +10,13 @@ import { MainComponent } from './main/main.component';
 import { AuthenticationService } from './services/authentication.service';
 import { MainMenuButtonComponent } from './main-menu-button/main-menu-button.component';
 
-import {TranslateLoader, TranslateModule} from '@ngx-translate/core';
-import {TranslateHttpLoader} from '@ngx-translate/http-loader';
-import {HttpClient, HttpClientModule} from '@angular/common/http';
+import { TranslateLoader, TranslateModule } from '@ngx-translate/core';
+import { TranslateHttpLoader } from '@ngx-translate/http-loader';
+import { HttpClient, HttpClientModule } from '@angular/common/http';
+import { HomePageComponent } from './main/home-page/home-page.component';
+import { CalendarPageComponent } from './main/calendar-page/calendar-page.component';
+import { NotesPageComponent } from './main/notes-page/notes-page.component';
+import { TasksPageComponent } from './main/tasks-page/tasks-page.component';
 
 @NgModule({
   declarations: [
@@ -21,7 +25,11 @@ import {HttpClient, HttpClientModule} from '@angular/common/http';
     UserProfileComponent,
     RegisterComponent,
     MainComponent,
-    MainMenuButtonComponent
+    MainMenuButtonComponent,
+    HomePageComponent,
+    CalendarPageComponent,
+    NotesPageComponent,
+    TasksPageComponent
   ],
   imports: [
     BrowserModule,
@@ -29,10 +37,19 @@ import {HttpClient, HttpClientModule} from '@angular/common/http';
     ReactiveFormsModule,
     HttpClientModule,
     RouterModule.forRoot([
-      { path: '', component: MainComponent },
+      { path: '', redirectTo: '/app', pathMatch: 'full' },
+      { 
+        path: 'app', 
+        component: MainComponent,
+        children: [
+          { path: '', component: HomePageComponent, outlet:"inner-pages" },
+          { path: 'tasks', component: TasksPageComponent, outlet:"inner-pages" },
+          { path: 'notes', component: NotesPageComponent, outlet:"inner-pages" },
+          { path: 'calendar', component: CalendarPageComponent, outlet:"inner-pages" }
+        ]
+      },
       { path: 'login', component: LoginComponent },
       { path: 'registration', component: RegisterComponent },
-      { path: '**', component: MainComponent },
     ]),
     TranslateModule.forRoot({
         loader: {
