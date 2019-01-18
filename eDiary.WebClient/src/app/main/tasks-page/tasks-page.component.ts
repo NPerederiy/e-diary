@@ -21,6 +21,7 @@ export class TasksPageComponent implements OnInit {
       new TaskCard("new task(2)")
     ]);
     this.cardLists.push([]);
+    this.cardLists.push([]);
     this.cardLists.push([
       new TaskCard("new task(2)"),
       new TaskCard("new task(2)"),

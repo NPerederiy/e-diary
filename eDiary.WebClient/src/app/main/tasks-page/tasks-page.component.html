@@ -1,3 +1,9 @@
 <div id="container">
-  <task-list *ngFor="let c of cardLists" [cards]="c"></task-list>  
+  <div class="content">
+    <task-list *ngFor="let c of cardLists" [cards]="c"></task-list>  
+    <div class="headline">
+      <div class="button add">+ Add a column</div>
+    </div>
+  </div>
+  <div class="sidebar"></div>
 </div>

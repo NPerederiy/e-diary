@@ -11,22 +11,23 @@
 .status-line{
     min-height: 34px;
     display: flex;
-    flex-direction: column;
-    justify-content: center;
+    flex-direction: row;
+    justify-content: flex-start;
 }
 
 .status-line .icon{
-    position: absolute;
     width: 20px;
     height: 20px;
-    margin: 0 5px 0 16px;
+    margin: 0 8px 0 16px;
+    align-self: center;
 }
 
 .status-line .status{
-    padding-left: 43px;
+    font-family: $regular-font;
     font-size: 14px;
     line-height: 20px;
     font-weight: 500;
+    align-self: center;
 }
 
 .status-line.important{
@@ -76,4 +77,8 @@
 .header, .descr{
     color: rgba($regular-color, 0.7);
     margin: 2px 4px 4px 4px;
+}
+
+.header{
+    font-family: $regular-font;
 }

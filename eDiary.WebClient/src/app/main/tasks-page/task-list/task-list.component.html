@@ -2,11 +2,13 @@
   <div class="header">
     <div class="icon"></div>
     <div class="column-name">
-      column name
+      Column name
     </div>
   </div>
-  <task-card class="card" *ngFor="let c of cards" [card]=c (contextmenu)="showContextMenu()"></task-card>
-  <div class="button shadow">
-    +
+  <div class="scrollable vertical">
+    <task-card class="card" *ngFor="let c of cards" [card]="c" (contextmenu)="showContextMenu()"></task-card>
+    <div class="button shadow">
+      +
+    </div>
   </div>
 </div>
