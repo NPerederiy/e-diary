@@ -19,4 +19,10 @@ export class TaskListComponent implements OnInit {
   showContextMenu(){
     console.log('right click');
   }
+
+  addCard(){
+    if(this.cards.length === 0 || this.cards[this.cards.length-1].header !== ""){
+      this.cards.push(new TaskCard(""));
+    }
+  }
 }

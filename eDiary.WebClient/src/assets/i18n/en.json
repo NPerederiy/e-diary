@@ -23,10 +23,18 @@
         "passwordsNotMatch": "Passwords do not match",
         "emailNotValid": "Email must be a valid email address"
     },
-    "cardStatus":{
+    "module": {
+        "tasks": "Tasks",
+        "notes": "Notes",
+        "calendar": "Calendar"
+    },
+    "cardStatus": {
         "hot": "Hot",
         "important": "Important",
         "completed": "Completed",
         "deleted": "Deleted"
+    },
+    "buttons":{
+        "addColumn": "Add a column"
     }
 }

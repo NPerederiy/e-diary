@@ -1,12 +1,19 @@
 <div id="container" [ngClass]="{ 'active': btn.isActive === true }">
-  <div class="icon" [ngClass]="{
-    'home': btn.type === 1,
-    'tasks': btn.type === 2,
-    'notes': btn.type === 3,
-    'calendar': btn.type === 4,
-    'notifications': btn.type === 5,
-    'settings': btn.type === 6
-   }"></div>
-  <div class="text">{{ btn.content }}</div>
+  <div *ngIf="isHome(); else tasks" class="content">
+    <div class="icon home"></div>
+    <div class="text"></div>
+  </div>
+  <div *ngIf="isTasks(); else notes" class="content" #tasks>
+      <div class="icon tasks"></div>
+      <div class="text">{{ 'module.tasks' | translate }}</div>
+  </div>
+  <div *ngIf="isNotes(); else calendar" class="content" #notes>
+      <div class="icon notes"></div>
+      <div class="text">{{ 'module.notes' | translate }}</div>
+  </div>
+  <div *ngIf="isCalendar()" class="content" #calendar>
+      <div class="icon calendar"></div>
+      <div class="text">{{ 'module.calendar' | translate }}</div>
+  </div>
   <div class="sidebar"></div>
 </div>

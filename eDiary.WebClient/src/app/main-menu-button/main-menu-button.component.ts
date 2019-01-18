@@ -1,5 +1,6 @@
 import { Component, OnInit, Input } from '@angular/core';
 import { MenuButton } from 'src/shared/models/menu-button.model';
+import { MenuButtonType } from 'src/shared/models/menu-button-type.enum';
 
 @Component({
   selector: 'main-menu-button',
@@ -17,4 +18,19 @@ export class MainMenuButtonComponent implements OnInit {
     
   }
 
+  isHome(): boolean {
+    return this.btn.type === MenuButtonType.Home;
+  }
+
+  isTasks(): boolean {
+    return this.btn.type === MenuButtonType.Tasks;
+  }
+  
+  isNotes(): boolean {
+    return this.btn.type === MenuButtonType.Notes;
+  }
+  
+  isCalendar(): boolean {
+    return this.btn.type === MenuButtonType.Calendar;
+  }
 }

@@ -23,10 +23,18 @@
         "passwordsNotMatch": "Паролі не співпадають",
         "emailNotValid": "Некоректна форма запису"
     },
+    "module": {
+        "tasks": "Задачі",
+        "notes": "Нотатки",
+        "calendar": "Календар"
+    },
     "cardStatus":{
         "hot": "Гаряча",
         "important": "Важлива",
         "completed": "Завершена",
         "deleted": "Видалена"
+    },
+    "buttons":{
+        "addColumn": "Додати колонку"
     }
 }

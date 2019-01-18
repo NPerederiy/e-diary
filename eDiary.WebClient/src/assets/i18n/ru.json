@@ -23,10 +23,18 @@
         "passwordsNotMatch": "Пароли не совпадают",
         "emailNotValid": "Некорректная форма записи"
     },
+    "module": {
+        "tasks": "Задачи",
+        "notes": "Заметки",
+        "calendar": "Календарь"
+    },
     "cardStatus":{
         "hot": "Горячая",
         "important": "Важная",
         "completed": "Завершённая",
         "deleted": "Удалённая"
+    },
+    "buttons":{
+        "addColumn": "Добавить колонку"
     }
 }
