@@ -12,12 +12,25 @@ $box-shadow-color: rgba(0,0,0,0.5);
 $button-menu-focused-color: #FFC000;
 $button-menu-regular-color: rgba(83, 83, 83, 0.5);
 
+/* --- card colors --- */
+
+$card-background-color: #fff;
+$card-status-important-back-color: rgba(240, 204, 0, 0.2);
+$card-status-important-text-color: rgb(221, 188, 0); //rgb(240, 204, 0);
+$card-status-hot-back-color: rgba(204, 61, 61, 0.2);
+$card-status-hot-text-color: rgb(204, 61, 61);
+$card-status-completed-back-color: rgba(61, 204, 61, 0.2);
+$card-status-completed-text-color: rgb(61, 204, 61);
+$card-status-deleted-back-color: rgba(150, 150, 150, 0.2);
+$card-status-deleted-text-color: rgb(150, 150, 150);
+
 /* --- fonts --- */
 
-$regular-font: HP-Simplified-Regular;
-$light-font: HP-Simplified-Light;
-$bold-font: HP-Simplified;
-$warning-font: -apple-system,system-ui,BlinkMacSystemFont,"Segoe UI",Roboto,"Helvetica Neue",Arial,sans-serif;
-$placeholder-font: -apple-system,system-ui,BlinkMacSystemFont,"Segoe UI",Roboto,"Helvetica Neue",Arial,sans-serif;
+$default-font: -apple-system,system-ui,BlinkMacSystemFont,"Segoe UI",Roboto,"Helvetica Neue",Arial,sans-serif;
+$regular-font: HP-Simplified-Regular, $default-font;
+$light-font: HP-Simplified-Light, $default-font;
+$bold-font: HP-Simplified, $default-font;
+$warning-font: $default-font;
+$placeholder-font: $default-font;
 
 /* ------------- */

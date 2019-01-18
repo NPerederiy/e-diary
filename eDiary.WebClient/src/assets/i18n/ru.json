@@ -22,5 +22,11 @@
         "minLength6": "Минимум 6 символов в длину",
         "passwordsNotMatch": "Пароли не совпадают",
         "emailNotValid": "Некорректная форма записи"
+    },
+    "cardStatus":{
+        "hot": "Горячая",
+        "important": "Важная",
+        "completed": "Завершённая",
+        "deleted": "Удалённая"
     }
 }

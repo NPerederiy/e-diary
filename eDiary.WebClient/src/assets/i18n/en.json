@@ -22,5 +22,11 @@
         "minLength6": "Must be at least 6 chars",
         "passwordsNotMatch": "Passwords do not match",
         "emailNotValid": "Email must be a valid email address"
+    },
+    "cardStatus":{
+        "hot": "Hot",
+        "important": "Important",
+        "completed": "Completed",
+        "deleted": "Deleted"
     }
 }

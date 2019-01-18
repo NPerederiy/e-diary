@@ -1,0 +1,79 @@
+@import "src/shared/styles/global-variables.scss";
+
+#container{
+    background-color: $light-color;
+    // min-height: 60px;
+    max-width: 240px;
+    margin: 8px;
+    // border-radius: 5px;
+}
+
+.status-line{
+    min-height: 34px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
+
+.status-line .icon{
+    position: absolute;
+    width: 20px;
+    height: 20px;
+    margin: 0 5px 0 16px;
+}
+
+.status-line .status{
+    padding-left: 43px;
+    font-size: 14px;
+    line-height: 20px;
+    font-weight: 500;
+}
+
+.status-line.important{
+    background-color: $card-status-important-back-color;
+    .icon{
+        background-color: rgba(240, 204, 0, 0.7);
+    }
+    .status{
+        color: $card-status-important-text-color;
+    }
+}
+
+.status-line.hot{
+    background-color: $card-status-hot-back-color;
+    .icon{
+        background-color: rgba($card-status-hot-text-color, 0.7);
+    }
+    .status{
+        color: $card-status-hot-text-color;
+    }
+}
+
+.status-line.completed{
+    background-color: $card-status-completed-back-color;
+    .icon{
+        background-color: rgba($card-status-completed-text-color, 0.7);
+    }
+    .status{
+        color: $card-status-completed-text-color;
+    }
+}
+
+.status-line.deleted{
+    background-color: $card-status-deleted-back-color;
+    .icon{
+        background-color: rgba($card-status-deleted-text-color, 0.7);
+    }
+    .status{
+        color: $card-status-deleted-text-color;
+    }
+}
+
+.task-info{
+    padding: 12px;
+}
+
+.header, .descr{
+    color: rgba($regular-color, 0.7);
+    margin: 2px 4px 4px 4px;
+}

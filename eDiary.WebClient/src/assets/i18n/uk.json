@@ -22,5 +22,11 @@
         "minLength6": "Мінімум 6 символів у довжину",
         "passwordsNotMatch": "Паролі не співпадають",
         "emailNotValid": "Некоректна форма запису"
+    },
+    "cardStatus":{
+        "hot": "Гаряча",
+        "important": "Важлива",
+        "completed": "Завершена",
+        "deleted": "Видалена"
     }
 }

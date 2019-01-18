@@ -1,0 +1,12 @@
+<div id="container">
+  <div class="header">
+    <div class="icon"></div>
+    <div class="column-name">
+      column name
+    </div>
+  </div>
+  <task-card class="card" *ngFor="let c of cards" [card]=c (contextmenu)="showContextMenu()"></task-card>
+  <div class="button shadow">
+    +
+  </div>
+</div>

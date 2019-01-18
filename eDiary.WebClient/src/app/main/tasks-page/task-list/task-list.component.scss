@@ -1,0 +1,38 @@
+@import "src/shared/styles/global-variables.scss";
+
+#container{
+    min-height: 60px;
+    min-width: 200px;
+}
+
+.header .column-name{
+    background-color: $regular-color;
+    color: $light-color;
+    padding-left: 52px;
+    min-height: 40px;
+    height: 40px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
+
+.header .icon{
+    position: absolute;
+    width: 28px;
+    height: 28px;
+    margin: 6px 12px;
+    background-color: rgb(100, 100, 100);
+}
+
+.button{
+    margin: 8px 8px 0 8px;
+    min-height: 40px !important;
+    height: 40px;
+    background-color: $light-color;
+    color: rgba($regular-color, 0.7);
+}
+
+.button:hover{
+    color: $light-color;
+    background-color: rgb(255, 225, 100);
+}

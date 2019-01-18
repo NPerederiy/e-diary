@@ -17,6 +17,8 @@ import { HomePageComponent } from './main/home-page/home-page.component';
 import { CalendarPageComponent } from './main/calendar-page/calendar-page.component';
 import { NotesPageComponent } from './main/notes-page/notes-page.component';
 import { TasksPageComponent } from './main/tasks-page/tasks-page.component';
+import { TaskListComponent } from './main/tasks-page/task-list/task-list.component';
+import { TaskCardComponent } from './main/tasks-page/task-list/task-card/task-card.component';
 
 @NgModule({
   declarations: [
@@ -29,7 +31,9 @@ import { TasksPageComponent } from './main/tasks-page/tasks-page.component';
     HomePageComponent,
     CalendarPageComponent,
     NotesPageComponent,
-    TasksPageComponent
+    TasksPageComponent,
+    TaskListComponent,
+    TaskCardComponent
   ],
   imports: [
     BrowserModule,
