@@ -6,38 +6,112 @@
     background-size: cover;
 }
 
-:host /deep/ div{
-    font-family: $light-font;
-    color: $regular-color;
-}
+:host /deep/ {
+    div{
+        font-family: $light-font;
+        color: $regular-color;
+    }
 
-:host /deep/ .button{
-    background-color: $button-regular-color;
-    color: $light-color;
-    font-family: $light-font;
-    font-size: 20pt;
-    height: 60px;
-    min-height: 60px;
-    cursor: pointer;
-    display: grid;
-    align-content: center;
-    justify-content: center;
-}
+    .button{
+        background-color: $button-regular-color;
+        color: $light-color;
+        font-family: $light-font;
+        font-size: 20pt;
+        height: 60px;
+        min-height: 60px;
+        cursor: pointer;
+        display: grid;
+        align-content: center;
+        justify-content: center;
+    }
 
-:host /deep/ .button.add{
-    font-family: $regular-font;
-    font-size: 28pt;
-}
+    .button.add{
+        font-family: $regular-font;
+        font-size: 28pt;
+    }
 
-:host /deep/ .button:hover,
-:host /deep/ .button:focus
-{
-    background-color: $button-focused-color;
-    outline-width: 0;       
-}
+    .button:hover,
+    .button:focus
+    {
+        background-color: $button-focused-color;
+        outline-width: 0;       
+    }
 
-:host /deep/ div.shadow{
-    box-shadow: rgba(0, 0, 0, 0.02) 0px 0px 0px 1px, 
-                rgba(0, 0, 0, 0.05) 0px 1px 2px 0px, 
-                rgba(0, 0, 0, 0.05) 0px 2px 8px 0px;
+    div.shadow{
+        box-shadow: rgba(0, 0, 0, 0.02) 0px 0px 0px 1px, 
+                    rgba(0, 0, 0, 0.05) 0px 1px 2px 0px, 
+                    rgba(0, 0, 0, 0.05) 0px 2px 8px 0px;
+    }
+
+    .input{
+        height: 28px;
+        min-height: 28px;
+        padding: 0 5px;
+        font-size: 12pt;
+        font-family: $warning-font;
+        border-width: 0;
+        border-bottom-width: 1px;
+        border-bottom-color: $regular-color;
+        color: $regular-color;
+        background-color: transparent;
+        -webkit-transition: border-bottom-color 0.5s;
+        transition: border-bottom-color 0.5s;
+        justify-self: stretch;
+    }
+
+    .input.warning{
+        border-bottom-color: $warning-color;
+    }
+        
+    .input.pass{
+        letter-spacing: 2px;
+        font-family: $bold-font;
+    }
+
+    .input:focus, 
+    .input:hover {
+        outline-width: 0;
+        border-bottom-color: $button-focused-color;
+    }
+
+    .input::-webkit-input-placeholder{
+        font-family: $placeholder-font;
+        letter-spacing: 0.2px;
+        opacity: 0.9; 
+        transition: opacity 0.3s ease;
+    }
+    .input::-moz-placeholder{
+        font-family: $placeholder-font;
+        letter-spacing: 0.1px;
+        opacity: 0.9; 
+        transition: opacity 0.3s ease;
+    }
+    .input:-moz-placeholder{
+        font-family: $placeholder-font;
+        letter-spacing: 0.1px;
+        opacity: 0.9; 
+        transition: opacity 0.3s ease;
+    }
+    .input:-ms-input-placeholder{
+        font-family: $placeholder-font;
+        letter-spacing: 0.1px;
+        opacity: 0.9; 
+        transition: opacity 0.3s ease;
+    }
+    // .input:focus::-webkit-input-placeholder{
+    //     // opacity: 0; 
+    //     // transition: opacity 0.3s ease;
+    // }
+    // .input:focus::-moz-placeholder{
+    //     opacity: 0; 
+    //     transition: opacity 0.3s ease;
+    // }
+    // .input:focus:-moz-placeholder{
+    //     opacity: 0; 
+    //     transition: opacity 0.3s ease;
+    // }
+    // .input:focus:-ms-input-placeholder{
+    //     opacity: 0; 
+    //     transition: opacity 0.3s ease;
+    // }
 }

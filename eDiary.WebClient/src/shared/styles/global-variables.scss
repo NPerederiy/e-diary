@@ -27,10 +27,10 @@ $card-status-deleted-text-color: rgb(150, 150, 150);
 /* --- fonts --- */
 
 $default-font: -apple-system,system-ui,BlinkMacSystemFont,"Segoe UI",Roboto,"Helvetica Neue",Arial,sans-serif;
-$regular-font: HP-Simplified-Regular, $default-font;
-$light-font: HP-Simplified-Light, $default-font;
-$bold-font: HP-Simplified, $default-font;
-$warning-font: $default-font;
-$placeholder-font: $default-font;
+$regular-font: HP-Simplified-Regular, Latin-Greek-Cyrillic-Regular, $default-font;
+$light-font: HP-Simplified-Light, Latin-Greek-Cyrillic-Light, $default-font;
+$bold-font: HP-Simplified, Latin-Greek-Cyrillic-Regular, $default-font;
+$warning-font: $regular-font;
+$placeholder-font: $light-font;
 
 /* ------------- */

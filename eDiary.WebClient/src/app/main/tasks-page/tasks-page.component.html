@@ -1,9 +1,9 @@
 <div id="container">
   <div class="content">
-    <task-list *ngFor="let c of cardLists" [cards]="c"></task-list>  
+    <task-list *ngFor="let l of cardLists" [list]="l"></task-list>  
     <div class="headline">
-      <div class="button add">+ {{ 'buttons.addColumn' | translate }}</div>
+      <div class="button add" (click)="addColumn()">+ {{ 'buttons.addColumn' | translate }}</div>
     </div>
   </div>
-  <div class="sidebar"></div>
+  <sidebar></sidebar>
 </div>

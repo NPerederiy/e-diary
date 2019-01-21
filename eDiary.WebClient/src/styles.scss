@@ -11,15 +11,25 @@ body{
 
 @font-face {
     font-family: HP-Simplified;
-    src: url(assets/fonts/HPSimplified.ttf) format("opentype");
+    src: url(assets/fonts/HPSimplified.ttf) format('truetype');
 }
 
 @font-face {
     font-family: HP-Simplified-Regular;
-    src: url(assets/fonts/HPSimplified_Rg.ttf) format("opentype");
+    src: url(assets/fonts/HPSimplified_Rg.ttf) format('truetype');
 }
 
 @font-face {
     font-family: HP-Simplified-Light;
-    src: url(assets/fonts/HPSimplified_Lt.ttf) format("opentype");
+    src: url(assets/fonts/HPSimplified_Lt.ttf) format('truetype');
+}
+
+@font-face {
+    font-family: Latin-Greek-Cyrillic-Light;
+    src: url(assets/fonts/latinGreekCyrillic_Lt.ttf) format('truetype');
+}
+
+@font-face {
+    font-family: Latin-Greek-Cyrillic-Regular;
+    src: url(assets/fonts/latinGreekCyrillic_Rg.ttf) format('truetype');
 }

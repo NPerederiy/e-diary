@@ -1,0 +1,13 @@
+@import "src/shared/styles/global-variables.scss";
+
+#container{
+    background-color: $regular-color;
+    height: 100%;
+    color: $light-color;
+}
+
+.decor-line{
+    width: 6px;
+    height: 100%;
+    background-color: $button-menu-regular-color;
+}
