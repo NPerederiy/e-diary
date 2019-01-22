@@ -1,4 +1,11 @@
 <div id="container">
-  <div class="folder" [ngClass]="{'root': isRoot === true}">{{ folder }}</div>
+  <div class="folder" [ngClass]="{'root': isRoot === true}">
+    <ng-container *ngIf="isRoot; else displayFolderName">
+      {{ 'directories.root' | translate }}
+    </ng-container>
+    <ng-template #displayFolderName>
+      {{ folder }} 
+    </ng-template>
+  </div>
   <div class="arrow">></div>
 </div>

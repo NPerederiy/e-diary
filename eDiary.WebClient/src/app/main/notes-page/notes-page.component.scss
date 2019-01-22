@@ -7,14 +7,6 @@
     grid-template-columns: auto 60px ;
 }
 
-.content{
-    grid-column: 1;
-    grid-row: 1;
-    display: flex;
-    flex-direction: row;
-    overflow-x: auto;
-}
-
 .headline{
     position: relative;
     background-color: rgba($regular-color, 0.4);
@@ -25,6 +17,27 @@
 
 .path{
     height: 100%;
+}
+
+.content{
+    grid-column: 1;
+    grid-row: 1;
+    display: flex;
+    flex-direction: row;
+    overflow-x: hidden;
+    overflow-y: scroll;
+    flex-wrap: wrap;
+    justify-content: flex-start;
+    align-content: flex-start;
+    height: calc(100vh - 40px);
+}
+
+.note{
+    min-width: 160px; 
+    min-height: 160px; 
+    background-color:floralwhite; 
+    flex-basis: 160px;
+    margin: 8px;
 }
 
 .sidebar{

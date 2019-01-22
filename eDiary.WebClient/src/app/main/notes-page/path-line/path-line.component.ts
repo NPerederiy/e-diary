@@ -19,9 +19,7 @@ export class PathLineComponent implements OnInit {
     return path.split('/');
   }
 
-  isRoot(i: number): boolean{
-    console.log(i);
-    
+  isRoot(i: number): boolean{    
     return i === 0;
   }
 

@@ -36,5 +36,8 @@
     },
     "buttons":{
         "addColumn": "Add a column"
+    },
+    "directories":{
+        "root": "Root"
     }
 }

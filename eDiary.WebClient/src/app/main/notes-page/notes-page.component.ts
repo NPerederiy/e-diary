@@ -9,7 +9,7 @@ import { MenuButton } from 'src/shared/models/menu-button.model';
 })
 
 export class NotesPageComponent implements OnInit {
-  currentPath: string = "root/folder name/folder name/folder name/folder name/folder name"
+  currentPath: string = "root"; // example: "root/folder name/folder name/folder name/folder name/folder name"
   sidebarButtons: MenuButton[] = [];
 
   constructor() {

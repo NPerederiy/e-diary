@@ -36,5 +36,8 @@
     },
     "buttons":{
         "addColumn": "Добавить колонку"
+    },
+    "directories":{
+        "root": "Главная"
     }
 }
