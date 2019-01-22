@@ -1,7 +1,6 @@
-import { Component, OnInit, Input, ViewChild, ElementRef } from '@angular/core';
+import { Component, OnInit, Input } from '@angular/core';
 import { TaskCard } from 'src/shared/models/task-card.model';
 import { TaskList } from 'src/shared/models/task-list.model';
-import { linkSync, truncateSync } from 'fs';
 
 @Component({
   selector: 'task-list',
@@ -12,15 +11,13 @@ import { linkSync, truncateSync } from 'fs';
 export class TaskListComponent implements OnInit {
   @Input() list: TaskList;
   headerEditor: string;
-  isHeaderSet: boolean;
   isEditing: boolean;
 
   constructor() {
   }
-
+  
   ngOnInit() {
-    this.isHeaderSet = this.list.name !== "";
-    this.isEditing = this.list.name !== "";
+    this.isEditing = this.list.name === "";
   }
 
   addCard(){
@@ -39,11 +36,7 @@ export class TaskListComponent implements OnInit {
     this.headerEditor = this.list.name;
   }
 
-  newHeader(){
-    
-  }
-
-  updateHeader(){
+  updateHeader(){    
     if(this.isEmpty(this.headerEditor)){
       if(this.list.cards.length == 0) { 
         /* throw event: to delete this list */ 
@@ -62,7 +55,7 @@ export class TaskListComponent implements OnInit {
   }
 
   private isContainNotAllowedSigns(s: string): boolean{
-    if(s[0] === " ") return true;
+    // if(s[0] === " ") return true;
     return false;
   }
 

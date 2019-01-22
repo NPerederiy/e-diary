@@ -21,10 +21,10 @@ export class MainComponent implements OnInit {
     // this.router.navigate([{ outlets: { 'inner-pages': ['tasks'] } }], { relativeTo: this.route } );
 
     this.menuButtons.push(
-      new MenuButton("", MenuButtonType.Home, true),
-      new MenuButton("Tasks", MenuButtonType.Tasks),
-      new MenuButton("Notes", MenuButtonType.Notes),
-      new MenuButton("Calendar", MenuButtonType.Calendar),
+      new MenuButton(MenuButtonType.Home, "", true),
+      new MenuButton(MenuButtonType.Tasks, "Tasks"),
+      new MenuButton(MenuButtonType.Notes, "Notes"),
+      new MenuButton(MenuButtonType.Calendar, "Calendar"),
     )
   }
 

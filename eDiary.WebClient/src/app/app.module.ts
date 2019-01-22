@@ -4,11 +4,11 @@ import { RouterModule } from '@angular/router';
 import { FormsModule, ReactiveFormsModule }   from '@angular/forms';
 import { AppComponent } from './app.component';
 import { LoginComponent } from './login/login.component';
-import { UserProfileComponent } from './user-profile/user-profile.component';
+import { UserProfileComponent } from './login/user-profile/user-profile.component';
 import { RegisterComponent } from './register/register.component';
 import { MainComponent } from './main/main.component';
 import { AuthenticationService } from './services/authentication.service';
-import { MainMenuButtonComponent } from './main-menu-button/main-menu-button.component';
+import { MainMenuButtonComponent } from './main/main-menu-button/main-menu-button.component';
 
 import { TranslateLoader, TranslateModule } from '@ngx-translate/core';
 import { TranslateHttpLoader } from '@ngx-translate/http-loader';
@@ -20,6 +20,9 @@ import { TasksPageComponent } from './main/tasks-page/tasks-page.component';
 import { TaskListComponent } from './main/tasks-page/task-list/task-list.component';
 import { TaskCardComponent } from './main/tasks-page/task-list/task-card/task-card.component';
 import { SidebarComponent } from './main/sidebar/sidebar.component';
+import { SidebarButtonComponent } from './main/sidebar/sidebar-button/sidebar-button.component';
+import { PathLineComponent } from './main/notes-page/path-line/path-line.component';
+import { PathLineItemComponent } from './main/notes-page/path-line/path-line-item/path-line-item.component';
 
 @NgModule({
   declarations: [
@@ -35,7 +38,10 @@ import { SidebarComponent } from './main/sidebar/sidebar.component';
     TasksPageComponent,
     TaskListComponent,
     TaskCardComponent,
-    SidebarComponent
+    SidebarComponent,
+    SidebarButtonComponent,
+    PathLineComponent,
+    PathLineItemComponent
   ],
   imports: [
     BrowserModule,

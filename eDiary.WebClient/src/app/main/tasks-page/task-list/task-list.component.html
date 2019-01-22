@@ -1,10 +1,10 @@
 <div id="container">
   <div class="header">
     <div class="icon"></div>
-    <div *ngIf="isHeaderSet" class="column-name" (click)="openHeaderEditor()">
+    <div *ngIf="!isEditing" class="column-name" (click)="openHeaderEditor()">
       {{ list.name }}
     </div>
-    <div *ngIf="!isHeaderSet">
+    <div *ngIf="isEditing">
       <input 
         class="input" 
         type="text" 
@@ -14,10 +14,9 @@
         (keyup.enter)="updateHeader()"
         [(ngModel)]="headerEditor"
         >
-        <!-- (focusout)="removeIfEmpty()"  -->
     </div>
   </div>
-  <div *ngIf="isHeaderSet" class="scrollable vertical">
+  <div *ngIf="!isEditing" class="scrollable vertical">
     <task-card class="card" *ngFor="let c of cards" [card]="c" (contextmenu)="showContextMenu()"></task-card>
     <div class="button shadow" (click)="addCard()">
       +

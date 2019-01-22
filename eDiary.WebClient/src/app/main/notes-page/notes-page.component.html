@@ -1,3 +1,9 @@
-<p>
-  notes-page works!
-</p>
+<div id="container">
+  <div class="content">
+    <!-- <task-list *ngFor="let l of cardLists" [list]="l"></task-list>   -->
+    <div class="headline">
+      <path-line [fullpath]="currentPath" class="path"></path-line>
+    </div>
+  </div>
+  <sidebar [buttons]="sidebarButtons"></sidebar>
+</div>

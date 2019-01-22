@@ -5,5 +5,5 @@
       <div class="button add" (click)="addColumn()">+ {{ 'buttons.addColumn' | translate }}</div>
     </div>
   </div>
-  <sidebar></sidebar>
+  <sidebar [buttons]="sidebarButtons"></sidebar>
 </div>

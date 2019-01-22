@@ -5,8 +5,8 @@ export class MenuButton{
     type: MenuButtonType;
     isActive: boolean;
 
-    constructor(content: string, type: MenuButtonType, isActive?: boolean) {
-        this.content = content;
+    constructor(type: MenuButtonType, content?: string, isActive?: boolean) {
+        this.content = content || "";
         this.type = type;
         this.isActive = isActive || false;
     }

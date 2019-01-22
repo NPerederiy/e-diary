@@ -41,20 +41,20 @@
 }
 
 .icon.home{
-    background-image: url(../../assets/images/icons/eDiary-logo-white.png);
+    background-image: url(src/assets/images/icons/eDiary-logo-white.png);
     height: 80px;
 }
 
 .icon.tasks{
-    background-image: url(../../assets/images/icons/calendar-ico-white.png);
+    background-image: url(src/assets/images/icons/calendar-ico-white.png);
 }
 
 .icon.notes{
-    background-image: url(../../assets/images/icons/calendar-ico-white.png);
+    background-image: url(src/assets/images/icons/calendar-ico-white.png);
 }
 
 .icon.calendar{
-    background-image: url(../../assets/images/icons/calendar-ico-white.png);
+    background-image: url(src/assets/images/icons/calendar-ico-white.png);
 }
 
 .sidebar{
@@ -69,16 +69,16 @@
 #container:hover,
 #container.active{
     .icon.home{
-        background-image: url(../../assets/images/icons/eDiary-logo-yellow.png);
+        background-image: url(src/assets/images/icons/eDiary-logo-yellow.png);
     }
     .icon.tasks{
-        background-image: url(../../assets/images/icons/calendar-ico-yellow.png);
+        background-image: url(src/assets/images/icons/calendar-ico-yellow.png);
     }
     .icon.notes{
-        background-image: url(../../assets/images/icons/calendar-ico-yellow.png);
+        background-image: url(src/assets/images/icons/calendar-ico-yellow.png);
     }
     .icon.calendar{
-        background-image: url(../../assets/images/icons/calendar-ico-yellow.png);
+        background-image: url(src/assets/images/icons/calendar-ico-yellow.png);
     }
     .sidebar{
         background-color: $button-menu-focused-color;

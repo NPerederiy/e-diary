@@ -1,0 +1,33 @@
+@import "src/shared/styles/global-variables.scss";
+
+#container{
+    padding: 0 5px;
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+}
+
+#container:hover{
+    background-color: rgba($regular-color, 0.1);
+    cursor: pointer;
+}
+
+#container, .folder, .arrow{
+    height: 100%;
+}
+
+.folder, .arrow{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    color: $light-color;
+    font-family: $regular-font;
+}
+
+.arrow{
+    padding-left: 10px;
+}
+
+.folder.root{
+    padding-left: 20px;
+}
