@@ -11,6 +11,12 @@ import { MenuButton } from 'src/shared/models/menu-button.model';
 export class NotesPageComponent implements OnInit {
   currentPath: string = "root"; // example: "root/folder name/folder name/folder name/folder name/folder name"
   sidebarButtons: MenuButton[] = [];
+  scrollbarOptions = { 
+    axis: 'y', 
+    theme: 'minimal-dark', 
+    scrollbarPosition: 'outside',
+    scrollInertia: '200',
+  };
 
   constructor() {
     this.sidebarButtons.push(new MenuButton(MenuButtonType.RecentActions));

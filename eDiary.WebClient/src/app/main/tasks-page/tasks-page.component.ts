@@ -15,32 +15,61 @@ import { MenuButtonType } from 'src/shared/models/menu-button-type.enum';
 export class TasksPageComponent implements OnInit {
   cardLists: TaskList[] = []; 
   sidebarButtons: MenuButton[] = [];
+  scrollbarOptions = { 
+    axis: 'x', 
+    theme: 'minimal-dark', 
+    scrollbarPosition: 'outside',
+    scrollInertia: '200',
+  };
 
   constructor() {
     this.sidebarButtons.push(new MenuButton(MenuButtonType.RecentActions));
     this.sidebarButtons.push(new MenuButton(MenuButtonType.Search));
     this.sidebarButtons.push(new MenuButton(MenuButtonType.Notifications));
     this.sidebarButtons.push(new MenuButton(MenuButtonType.TrashCan));
-    // this.cardLists.push([
-    //   new TaskCard("Lorem ipsum", "", TaskStatus.inProcess, CardStatus.deleted),
-    //   new TaskCard("Dolor sit amet", "", TaskStatus.toDo, CardStatus.important),
-    //   new TaskCard("Some task header", "some dummy description", TaskStatus.done, CardStatus.completed),
-    //   new TaskCard("new task(1)", "", TaskStatus.inProcess, CardStatus.hot),
-    //   new TaskCard("new task(2)")
-    // ]);
+    this.cardLists.push(new TaskList("New list",[
+      new TaskCard("Lorem ipsum", "", TaskStatus.inProcess, CardStatus.deleted),
+      new TaskCard("Dolor sit amet", "", TaskStatus.toDo, CardStatus.important),
+      new TaskCard("Some task header", "some dummy description", TaskStatus.done, CardStatus.completed),
+      new TaskCard("new task(1)", "", TaskStatus.inProcess, CardStatus.hot),
+      new TaskCard("new task(2)"),
+      new TaskCard("new task(2)"),
+      new TaskCard("new task(2)"),
+      new TaskCard("new task(2)"),
+      new TaskCard("new task(2)"),
+      new TaskCard("new task(2)"),
+      new TaskCard("new task(2)"),
+      new TaskCard("new task(2)"),
+      new TaskCard("new task(2)"),
+      new TaskCard("new task(2)"),
+      new TaskCard("new task(2)"),
+      new TaskCard("new task(2)")
+    ]));
     this.cardLists.push(new TaskList("New list"));
-    // this.cardLists.push([]);
-    // this.cardLists.push([
-    //   new TaskCard("new task(2)"),
-    //   new TaskCard("new task(2)"),
-    //   new TaskCard("new task(2)"),
-    //   new TaskCard("new task(2)")
-    // ]);
-    // this.cardLists.push([
-    //   new TaskCard("Dolor sit amet", "", TaskStatus.toDo, CardStatus.important),
-    //   new TaskCard("new task(1)", "", TaskStatus.inProcess, CardStatus.hot),
-    //   new TaskCard("new task(1)", "", TaskStatus.inProcess, CardStatus.hot),
-    // ]);
+    this.cardLists.push(new TaskList("New list"));
+    this.cardLists.push(new TaskList("New list",[
+      new TaskCard("new task(2)"),
+      new TaskCard("new task(2)"),
+      new TaskCard("new task(2)"),
+      new TaskCard("new task(2)")
+    ]));
+    this.cardLists.push(new TaskList("New list",[
+      new TaskCard("Dolor sit amet", "", TaskStatus.toDo, CardStatus.important),
+      new TaskCard("new task(1)", "", TaskStatus.inProcess, CardStatus.hot),
+      new TaskCard("new task(1)", "", TaskStatus.inProcess, CardStatus.hot),
+    ]));
+    this.cardLists.push(new TaskList("New list",[
+      new TaskCard("new task(2)"),
+      new TaskCard("new task(2)"),
+      new TaskCard("new task(2)"),
+      new TaskCard("new task(2)")
+    ]));
+    this.cardLists.push(new TaskList("New list",[
+      new TaskCard("new task(2)"),
+      new TaskCard("new task(2)"),
+      new TaskCard("new task(2)"),
+      new TaskCard("new task(2)")
+    ]));
   }
 
   ngOnInit() {

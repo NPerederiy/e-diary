@@ -12,6 +12,12 @@ export class TaskListComponent implements OnInit {
   @Input() list: TaskList;
   headerEditor: string;
   isEditing: boolean;
+  scrollbarOptions = { 
+    axis: 'y', 
+    theme: 'minimal-dark', 
+    scrollbarPosition: 'outside',
+    scrollInertia: '200',
+  };
 
   constructor() {
   }

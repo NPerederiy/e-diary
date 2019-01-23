@@ -23,6 +23,7 @@ import { SidebarComponent } from './main/sidebar/sidebar.component';
 import { SidebarButtonComponent } from './main/sidebar/sidebar-button/sidebar-button.component';
 import { PathLineComponent } from './main/notes-page/path-line/path-line.component';
 import { PathLineItemComponent } from './main/notes-page/path-line/path-line-item/path-line-item.component';
+import { MalihuScrollbarModule } from 'ngx-malihu-scrollbar';
 
 @NgModule({
   declarations: [
@@ -69,7 +70,8 @@ import { PathLineItemComponent } from './main/notes-page/path-line/path-line-ite
             useFactory: HttpLoaderFactory,
             deps: [HttpClient]
         }
-    })
+    }),
+    MalihuScrollbarModule.forRoot()
   ],
   providers: [AuthenticationService],
   bootstrap: [AppComponent]

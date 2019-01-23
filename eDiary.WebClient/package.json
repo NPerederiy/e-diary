@@ -24,6 +24,7 @@
     "@ngx-translate/http-loader": "^4.0.0",
     "core-js": "^2.6.2",
     "js-sha512": "^0.8.0",
+    "ngx-malihu-scrollbar": "^7.0.0",
     "rxjs": "^6.3.3",
     "zone.js": "^0.8.27"
   },

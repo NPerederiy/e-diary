@@ -16,8 +16,8 @@
         >
     </div>
   </div>
-  <div *ngIf="!isEditing" class="scrollable vertical">
-    <task-card class="card" *ngFor="let c of cards" [card]="c" (contextmenu)="showContextMenu()"></task-card>
+  <div *ngIf="!isEditing" class="scrollable vertical" malihu-scrollbar [scrollbarOptions]="scrollbarOptions">
+    <task-card class="card" *ngFor="let c of list.cards" [card]="c" (contextmenu)="showContextMenu()"></task-card>
     <div class="button shadow" (click)="addCard()">
       +
     </div>
