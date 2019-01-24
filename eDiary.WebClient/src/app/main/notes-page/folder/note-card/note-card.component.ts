@@ -15,22 +15,14 @@ export class NoteCardComponent implements OnInit {
   ngOnInit() {
   }
 
-  isHidden(): boolean {
+  isDefault(): boolean {
     return this.card.cardStatus === CardStatus.hidden;
-  }
-  
-  isHot(): boolean {
-    return this.card.cardStatus === CardStatus.hot;
   }
   
   isImportant(): boolean {
     return this.card.cardStatus === CardStatus.important;
   }
-
-  isCompleted(): boolean {
-    return this.card.cardStatus === CardStatus.completed;
-  }
-
+  
   isDeleted(): boolean {
     return this.card.cardStatus === CardStatus.deleted;
   }

@@ -1,17 +1,27 @@
 <div id="container" class="shadow">
+  <div *ngIf="isDefault(); else important" class="status-line non-highlighted">
+    <div class="flex-start"></div>
+    <!-- <div class="button menu">&#x2630;</div> -->
+    <div class="button plus">+</div>
+  </div>
   <div *ngIf="isImportant(); else deleted" class="status-line important" #important>
-    <div class="icon important"></div>
-    <div class="status" >
-      {{ 'cardStatus.important' | translate }}
+    <div class="flex-start">
+      <div class="icon important"></div>
+      <div class="status" >
+        {{ 'cardStatus.important' | translate }}
+      </div>
     </div>
+    <!-- <div class="button menu">&#x2630;</div> -->
+    <div class="button plus">+</div>
   </div>
   <div *ngIf="isDeleted()" class="status-line deleted" #deleted>
-    <div class="icon deleted"></div>
-    <div class="status" >
-      {{ 'cardStatus.deleted' | translate }}
+    <div class="flex-start">
+      <div class="icon deleted"></div>
+      <div class="status" >
+        {{ 'cardStatus.deleted' | translate }}
+      </div>
     </div>
   </div>
-
   <div class="note-info">
     <div class="header">
       {{ card.header }}

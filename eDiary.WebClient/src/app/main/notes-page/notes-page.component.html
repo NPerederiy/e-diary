@@ -1,14 +1,8 @@
 <div id="container">
-  <!-- <task-list *ngFor="let l of cardLists" [list]="l"></task-list>   -->
   <div>
     <div class="headline">
       <path-line [fullpath]="currentFolder.path" class="path"></path-line>
     </div>
-    <!-- <div style="max-height: calc(100vh - 40px);" malihu-scrollbar [scrollbarOptions]="scrollbarOptions">
-      <div class="content">
-        <div class="note" *ngFor="let i of [{},{},{},{},{},{},{},{},{},{},{},{},{},{},{},{},{},{},{},{},{},{},{},{},{},{},{},{}]"></div>
-      </div>
-    </div> -->
     <folder [folder]="currentFolder"></folder>
   </div> 
   <sidebar [buttons]="sidebarButtons"></sidebar>

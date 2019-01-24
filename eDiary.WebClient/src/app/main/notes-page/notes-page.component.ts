@@ -17,13 +17,13 @@ export class NotesPageComponent implements OnInit {
 
   constructor() {
     this.currentFolder = new Folder([
-      new NoteCard("Magic happens!", "hello world", CardStatus.important),
+      new NoteCard("Magic happens!", "hello world qqqqqq wwwwwww eeeeee 3333333", CardStatus.important),
       new NoteCard("Very looooooooong name")
     ]);
 
     for (let i = 0; i < 200; i++) {
       this.currentFolder.cards.push(
-        new NoteCard(`new note (${i})`, null, CardStatus.important)
+        new NoteCard(`new note (${i})`)
       );
     }
 
