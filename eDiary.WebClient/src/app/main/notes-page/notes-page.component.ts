@@ -1,6 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 import { MenuButtonType } from 'src/shared/models/menu-button-type.enum';
 import { MenuButton } from 'src/shared/models/menu-button.model';
+import { Folder } from 'src/shared/models/note-folder.model';
+import { NoteCard } from 'src/shared/models/note-card.model';
+import { CardStatus } from 'src/shared/models/card-status.enum';
 
 @Component({
   selector: 'notes-page',
@@ -9,16 +12,21 @@ import { MenuButton } from 'src/shared/models/menu-button.model';
 })
 
 export class NotesPageComponent implements OnInit {
-  currentPath: string = "root"; // example: "root/folder name/folder name/folder name/folder name/folder name"
+  currentFolder: Folder; // folder path example: "root/folder name/folder name/folder name/folder name/folder name"
   sidebarButtons: MenuButton[] = [];
-  scrollbarOptions = { 
-    axis: 'y', 
-    theme: 'minimal-dark', 
-    scrollbarPosition: 'outside',
-    scrollInertia: '200',
-  };
 
   constructor() {
+    this.currentFolder = new Folder([
+      new NoteCard("Magic happens!", "hello world", CardStatus.important),
+      new NoteCard("Very looooooooong name")
+    ]);
+
+    for (let i = 0; i < 200; i++) {
+      this.currentFolder.cards.push(
+        new NoteCard(`new note (${i})`, null, CardStatus.important)
+      );
+    }
+
     this.sidebarButtons.push(new MenuButton(MenuButtonType.RecentActions));
     this.sidebarButtons.push(new MenuButton(MenuButtonType.Search));
     this.sidebarButtons.push(new MenuButton(MenuButtonType.Notifications));

@@ -1,0 +1,24 @@
+<div id="container" class="shadow">
+  <div *ngIf="isImportant(); else deleted" class="status-line important" #important>
+    <div class="icon important"></div>
+    <div class="status" >
+      {{ 'cardStatus.important' | translate }}
+    </div>
+  </div>
+  <div *ngIf="isDeleted()" class="status-line deleted" #deleted>
+    <div class="icon deleted"></div>
+    <div class="status" >
+      {{ 'cardStatus.deleted' | translate }}
+    </div>
+  </div>
+
+  <div class="note-info">
+    <div class="header">
+      {{ card.header }}
+    </div>
+    <div class="descr">
+      {{ card.descr }}
+    </div>
+    <div class="info-icons"></div>
+  </div>
+</div>

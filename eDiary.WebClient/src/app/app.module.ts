@@ -24,6 +24,8 @@ import { SidebarButtonComponent } from './main/sidebar/sidebar-button/sidebar-bu
 import { PathLineComponent } from './main/notes-page/path-line/path-line.component';
 import { PathLineItemComponent } from './main/notes-page/path-line/path-line-item/path-line-item.component';
 import { MalihuScrollbarModule } from 'ngx-malihu-scrollbar';
+import { FolderComponent } from './main/notes-page/folder/folder.component';
+import { NoteCardComponent } from './main/notes-page/folder/note-card/note-card.component';
 
 @NgModule({
   declarations: [
@@ -42,7 +44,9 @@ import { MalihuScrollbarModule } from 'ngx-malihu-scrollbar';
     SidebarComponent,
     SidebarButtonComponent,
     PathLineComponent,
-    PathLineItemComponent
+    PathLineItemComponent,
+    FolderComponent,
+    NoteCardComponent
   ],
   imports: [
     BrowserModule,
