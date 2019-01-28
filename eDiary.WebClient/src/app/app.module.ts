@@ -26,6 +26,10 @@ import { PathLineItemComponent } from './main/notes-page/path-line/path-line-ite
 import { MalihuScrollbarModule } from 'ngx-malihu-scrollbar';
 import { FolderComponent } from './main/notes-page/folder/folder.component';
 import { NoteCardComponent } from './main/notes-page/folder/note-card/note-card.component';
+import { CalendarMonthComponent } from './main/calendar-page/calendar-month/calendar-month.component';
+import { CalendarWeekComponent } from './main/calendar-page/calendar-week/calendar-week.component';
+import { CalendarDayComponent } from './main/calendar-page/calendar-day/calendar-day.component';
+import { DayCardComponent } from './main/calendar-page/calendar-month/day-card/day-card.component';
 
 @NgModule({
   declarations: [
@@ -46,7 +50,11 @@ import { NoteCardComponent } from './main/notes-page/folder/note-card/note-card.
     PathLineComponent,
     PathLineItemComponent,
     FolderComponent,
-    NoteCardComponent
+    NoteCardComponent,
+    CalendarMonthComponent,
+    CalendarWeekComponent,
+    CalendarDayComponent,
+    DayCardComponent
   ],
   imports: [
     BrowserModule,

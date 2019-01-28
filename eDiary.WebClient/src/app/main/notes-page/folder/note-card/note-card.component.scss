@@ -1,4 +1,5 @@
 @import "src/shared/styles/global-variables.scss";
+@import "src/shared/styles/base64-icons.scss";
 
 #container{
     background-color: $light-color;
@@ -77,7 +78,8 @@
 .status-line.important{
     background-color: $card-status-important-back-color;
     .icon{
-        background-color: rgba(240, 204, 0, 0.7);
+        background-image: $warn-icon-regular;
+        background-size: cover;
     }
     .status{
         color: $card-status-important-text-color;
@@ -87,7 +89,8 @@
 .status-line.deleted{
     background-color: $card-status-deleted-back-color;
     .icon{
-        background-color: rgba($card-status-deleted-text-color, 0.7);
+        background-image: $trash-icon-regular;
+        background-size: cover;
     }
     .status{
         color: $card-status-deleted-text-color;

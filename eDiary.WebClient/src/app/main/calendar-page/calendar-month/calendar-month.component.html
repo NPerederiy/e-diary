@@ -1,0 +1,10 @@
+<div class="container">
+  <div class="days">
+    <div class="monthes">
+      <div class="month" *ngFor="let i of monthes">{{ 'month.'+i | translate }}</div>
+    </div>
+    <div class="day-of-week" *ngFor="let i of daysOfWeek">{{ 'dayOfWeek.'+i | translate }}</div>
+    <div class="gap" *ngFor="let i of gap"></div>
+    <day-card class="day" [dayInfo]="i" *ngFor="let i of days"></day-card>
+  </div>
+</div>

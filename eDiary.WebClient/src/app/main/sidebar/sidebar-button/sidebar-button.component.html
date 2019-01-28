@@ -1,4 +1,7 @@
 <div id="container">
   <div class="decor-line"></div>
-  <div class="icon"></div>
+  <div class="icon history" *ngIf="isHistory()"></div>
+  <div class="icon search" *ngIf="isSearch()"></div>
+  <div class="icon notifications" *ngIf="isNotifications()"></div>
+  <div class="icon" *ngIf=""></div>
 </div>

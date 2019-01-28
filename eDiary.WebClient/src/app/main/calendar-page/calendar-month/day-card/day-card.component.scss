@@ -1,0 +1,112 @@
+@import "src/shared/styles/global-variables.scss";
+@import "src/shared/styles/base64-icons.scss";
+
+#container{
+    // min-width: 120px;
+    
+    min-width: 64px !important;
+    min-height: 64px;
+    max-width: 120px;
+    max-height: 120px;
+    width: 100%;
+    height: 100%;
+    background-color: white;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-end;
+    text-align: center;
+    cursor: pointer;
+}
+
+#container:hover{
+    .dayNumber{
+        color: rgba($regular-color, 0.8);
+    }
+    .info-panel {
+        .counter{   
+            color: rgba($regular-color, 0.8);
+        }
+        .icon.fire{
+            background-image: $fire-icon-active;
+        }
+        .icon.warn{
+            background-image: $warn-icon-active;
+        }
+        .icon.todo{
+            background-image: $todo-icon-active;
+        }
+    }
+}
+
+.dayNumber{
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-content: center;
+    padding: 8px;
+    font-size: 28pt;
+    transition: color 0.3s;
+    color: rgba($regular-color, 0.4);
+}
+
+.info-panel{
+    height: 20px;
+    min-height: 34px;
+    padding: 0 3px 0 2px;
+    display: flex;
+    flex-direction: row;
+    justify-content: flex-start;
+    .icon{
+        width: 16px;
+        height: 16px;
+        margin: 0 2px;
+        align-self: center;
+    }
+    .icon.fire{
+        background-image: $fire-icon-regular;
+        background-size: cover;
+        transition: background-image 0.3s;
+    }
+    .icon.warn{
+        background-image: $warn-icon-regular;
+        background-size: cover;
+        transition: background-image 0.3s;
+    }
+    .icon.todo{
+        background-image: $todo-icon-regular;
+        background-size: cover;
+        transition: background-image 0.3s;
+    }
+    .counter{
+        align-self: center;
+        margin: 0 2px;
+        font-size: 10pt;
+        color: rgba($regular-color, 0.4);
+        transition: color 0.3s;
+    }
+}
+
+@media (max-width: 606px){
+    .dayNumber{
+        font-size: 18pt;
+    }
+    .info-panel{
+        min-height: 30px;
+    }
+}
+
+@media (min-width: 606px){
+    .dayNumber{
+        font-size: 18pt;
+    }
+    .info-panel{
+        min-height: 30px;
+    }
+}
+
+@media(max-width: 1000px){
+    .info-panel .counter{
+        display: none;
+    }
+}

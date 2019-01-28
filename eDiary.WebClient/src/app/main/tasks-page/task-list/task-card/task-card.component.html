@@ -1,24 +1,24 @@
 <div id="container" class="shadow">
   <div *ngIf="isCompleted(); else hot" class="status-line completed">
-    <div class="icon completed"></div>
+    <div class="icon"></div>
     <div class="status" >
       {{ 'cardStatus.completed' | translate}}
     </div>
   </div>
   <div *ngIf="isHot(); else important" class="status-line hot" #hot>
-    <div class="icon hot"></div>
+    <div class="icon"></div>
     <div class="status" >
       {{ 'cardStatus.hot' | translate}}
     </div>
   </div>
   <div *ngIf="isImportant(); else deleted" class="status-line important" #important>
-    <div class="icon important"></div>
+    <div class="icon"></div>
     <div class="status" >
       {{ 'cardStatus.important' | translate }}
     </div>
   </div>
   <div *ngIf="isDeleted()" class="status-line deleted" #deleted>
-    <div class="icon deleted"></div>
+    <div class="icon"></div>
     <div class="status" >
       {{ 'cardStatus.deleted' | translate }}
     </div>

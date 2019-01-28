@@ -1,0 +1,13 @@
+<div id="container">
+  <div class="dayNumber">
+    {{ dayInfo.dayInMonth }}
+  </div>
+  <div class="info-panel">
+    <div class="icon fire" *ngIf="dayInfo.getTasksCount() === 0"></div>
+    <div class="counter" *ngIf="dayInfo.getTasksCount() === 0">{{ dayInfo.getTasksCount() }}</div>
+    <div class="icon warn" *ngIf="dayInfo.getImportantTasksCount() === 0"></div>
+    <div class="counter" *ngIf="dayInfo.getImportantTasksCount() === 0">{{ dayInfo.getImportantTasksCount() }}</div>
+    <div class="icon todo" *ngIf="dayInfo.getHotTasksCount() === 0"></div>
+    <div class="counter" *ngIf="dayInfo.getHotTasksCount() === 0">{{ dayInfo.getHotTasksCount() }}</div>
+  </div>
+</div>
