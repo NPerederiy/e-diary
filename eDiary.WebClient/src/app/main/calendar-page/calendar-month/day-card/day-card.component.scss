@@ -1,13 +1,11 @@
 @import "src/shared/styles/global-variables.scss";
 @import "src/shared/styles/base64-icons.scss";
 
-#container{
-    // min-width: 120px;
-    
-    min-width: 64px !important;
-    min-height: 64px;
-    max-width: 120px;
-    max-height: 120px;
+#container{    
+    min-width: 100px;
+    // min-height: 64px;
+    // max-width: 120px;
+    // max-height: 120px;
     width: 100%;
     height: 100%;
     background-color: white;
@@ -35,6 +33,18 @@
         .icon.todo{
             background-image: $todo-icon-active;
         }
+        .icon.workload-low{
+            background-image: $workload-icon24-low-active;
+        }
+        .icon.workload-bmedium{
+            background-image: $workload-icon24-below-medium-active;
+        }
+        .icon.workload-amedium{
+            background-image: $workload-icon24-above-medium-active;
+        }
+        .icon.workload-high{
+            background-image: $workload-icon24-high-active;
+        }
     }
 }
 
@@ -45,7 +55,7 @@
     justify-content: center;
     align-content: center;
     padding: 8px;
-    font-size: 28pt;
+    font-size: 20pt;
     transition: color 0.3s;
     color: rgba($regular-color, 0.4);
 }
@@ -78,6 +88,26 @@
         background-size: cover;
         transition: background-image 0.3s;
     }
+    .icon.workload-low{
+        background-image: $workload-icon24-low;
+        background-size: cover;
+        transition: background-image 0.3s;
+    }
+    .icon.workload-bmedium{
+        background-image: $workload-icon24-below-medium;
+        background-size: cover;
+        transition: background-image 0.3s;
+    }
+    .icon.workload-amedium{
+        background-image: $workload-icon24-above-medium;
+        background-size: cover;
+        transition: background-image 0.3s;
+    }
+    .icon.workload-high{
+        background-image: $workload-icon24-high;
+        background-size: cover;
+        transition: background-image 0.3s;
+    }
     .counter{
         align-self: center;
         margin: 0 2px;
@@ -88,25 +118,25 @@
 }
 
 @media (max-width: 606px){
-    .dayNumber{
-        font-size: 18pt;
-    }
+    // .dayNumber{
+    //     font-size: 18pt;
+    // }
     .info-panel{
         min-height: 30px;
     }
 }
 
 @media (min-width: 606px){
-    .dayNumber{
-        font-size: 18pt;
-    }
+    // .dayNumber{
+    //     font-size: 18pt;
+    // }
     .info-panel{
         min-height: 30px;
     }
 }
 
-@media(max-width: 1000px){
-    .info-panel .counter{
-        display: none;
-    }
-}
+// @media(max-width: 900px){
+//     .info-panel .counter{
+//         display: none;
+//     }
+// }

@@ -9,17 +9,31 @@
     padding: 8px 0;
 }
 
-.monthes{
-    grid-column: 1 / span 7;
-    display: flex;
-    flex-direction: row;
-    justify-content: space-between;
+.headline{
+    position: relative;
+    background-color: rgba($regular-color, 0.4);
+    width: 100%;
+    height: 40px;
 }
 
-.month{
+.monthes{
     height: 100%;
-    padding: 0 16px;
-    cursor: pointer;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-evenly;
+}
+
+.button.month{
+    min-height: unset;
+    height: 100%;
+    padding: 0 19px;
+    background-color: transparent;
+    font-family: $regular-font;
+    font-size: unset;
+}
+
+.button.month:hover{
+    background-color: rgba($regular-color, 0.1);
 }
 
 .month, .day-of-week{
@@ -28,25 +42,26 @@
     justify-content: center;
     text-align: center;
     font-family: $regular-font;
+}
+
+.day-of-week{
     color: rgba($regular-color, 0.7);
 }
 
-.month:hover{
-    color: rgba($regular-color, 1);
+.days{
+    // width: 90%;
+    // min-width: 496px;
+    height: calc(100vh - 40px);
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr 1fr 1fr 1fr 1fr; 
+    grid-template-rows: 40px 1fr 1fr 1fr 1fr 1fr 1fr;
+    justify-content: center;    
+    // gap: 8px;
+    padding: 0 4px 8px 4px;
 }
 
-.days{
-    width: 100%;
-    display: grid;
-    grid-template-columns: 1fr 1fr 1fr 1fr 1fr 1fr 1fr ; 
-    grid-template-rows: 40px 40px 1fr 1fr 1fr 1fr 1fr 1fr;
-    justify-content: center;
-    gap: 8px;
-
-    // display: flex;
-    // justify-content: center;
-
-    margin: 8px;
+day-card{
+    margin: 0px 4px 8px 4px;
 }
 
 // @media (min-width: 606px){
