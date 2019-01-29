@@ -9,7 +9,7 @@
     <div class="icon workload-high" *ngIf="dayInfo.getDayWorkload() === 'high'"></div>
     <div class="counter">{{ dayInfo.getWorkloadInPercents() }}%</div>
   </div>
-  <div class="info-panel" *ngIf="dayInfo.getHotTasksCount() !== 0">
+  <div class="info-panel" *ngIf="dayInfo.getHotTasksCount() === 0">
     <div class="icon fire" *ngIf="dayInfo.getHotTasksCount() !== 0"></div>
     <div class="counter" *ngIf="dayInfo.getImportantTasksCount() !== 0">{{ dayInfo.getTasksCount() }}</div>
     <div class="icon warn" *ngIf="dayInfo.getImportantTasksCount() !== 0"></div>

@@ -2,20 +2,42 @@
 @import "src/shared/styles/base64-icons.scss";
 
 #container{
+    flex-grow: 1;
     background-color: $light-color;
     // min-height: 60px;
     // max-width: 240px;
     // min-width: 200px;
-    margin: 8px;
+    // margin: 8px;
     // border-radius: 5px;
-
-    width: 170px;
-    height: 140px;
+    // margin: 4px;
+    // min-width: 140px;
+    // min-height: 140px;
+    height: calc(34px + 1.1em + 3.3em + 30px + 14px);
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
 }
 
 #container:hover{
     .status-line .button{
         opacity: 1;
+    }
+    .dayNumber{
+        color: rgba($regular-color, 0.8);
+    }
+    .info-panel {
+        .counter{   
+            color: rgba($regular-color, 0.8);
+        }
+        .icon.icon.attach{
+            background-image: $attach-icon24-active;
+        }
+        .icon.warn{
+            background-image: $warn-icon-active;
+        }
+        .icon.todo{
+            background-image: $todo-icon-active;
+        }
     }
 }
 
@@ -98,15 +120,114 @@
 }
 
 .note-info{
-    padding: 12px;
+    // padding: 12px;
+    padding: 4px 4px 0 4px;
 }
 
 .header, .descr{
     color: rgba($regular-color, 0.7);
     margin: 2px 4px 4px 4px;
-    white-space: normal;
+    overflow-wrap: break-word;
+    word-wrap: break-word;
+    overflow: hidden;
 }
 
 .header{
     font-family: $regular-font;
+    white-space: nowrap;
+}
+
+.descr{
+    white-space: normal;
+}
+
+.fade-1 {
+    position: relative;
+    height: 1.1em;
+}
+
+.fade-2 {
+    position: relative;
+    height: 2.2em;
+}
+
+.fade-3 {
+    position: relative;
+    height: 3.3em;
+}
+
+.fade-1:after,
+.fade-2:after,
+.fade-3:after {
+    content: "";
+    text-align: right;
+    position: absolute;
+    bottom: 0;
+    right: 0;
+    // width: 50%;
+    width: 2em;
+    height: 1.1em;
+    background: linear-gradient(to right, rgba(255, 255, 255, 0), rgba(255, 255, 255, 1) 50%);
+}
+
+.info-panel{
+    height: 20px;
+    min-height: 30px;
+    padding: 0 3px 0 2px;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    .infographics{
+        display: flex;
+        flex-direction: row;
+        justify-content: flex-start;
+    }
+    .icon{
+        width: 16px;
+        height: 16px;
+        margin: 0 2px;
+        align-self: center;
+    }
+    .icon.attach{
+        background-image: $attach-icon24-regular;
+        background-size: cover;
+        transition: background-image 0.3s;
+    }
+    .icon.warn{
+        background-image: $warn-icon-regular;
+        background-size: cover;
+        transition: background-image 0.3s;
+    }
+    .icon.todo{
+        background-image: $todo-icon-regular;
+        background-size: cover;
+        transition: background-image 0.3s;
+    }
+    .icon.workload-low{
+        background-image: $workload-icon24-low;
+        background-size: cover;
+        transition: background-image 0.3s;
+    }
+    .icon.workload-bmedium{
+        background-image: $workload-icon24-below-medium;
+        background-size: cover;
+        transition: background-image 0.3s;
+    }
+    .icon.workload-amedium{
+        background-image: $workload-icon24-above-medium;
+        background-size: cover;
+        transition: background-image 0.3s;
+    }
+    .icon.workload-high{
+        background-image: $workload-icon24-high;
+        background-size: cover;
+        transition: background-image 0.3s;
+    }
+    .counter{
+        align-self: center;
+        margin: 0 2px;
+        font-size: 10pt;
+        color: rgba($regular-color, 0.4);
+        transition: color 0.3s;
+    }
 }

@@ -1,5 +1,3 @@
-import { Workload } from "./workload.enum";
-
 export class DayInfo{
     dayInMonth: number;
     allTasks: any[] = [];

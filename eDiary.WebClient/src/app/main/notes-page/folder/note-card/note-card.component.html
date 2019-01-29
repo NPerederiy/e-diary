@@ -23,12 +23,21 @@
     </div>
   </div>
   <div class="note-info">
-    <div class="header">
+    <div class="header fade-1">
       {{ card.header }}
     </div>
-    <div class="descr">
+    <div class="descr fade-3">
       {{ card.descr }}
     </div>
     <div class="info-icons"></div>
+  </div>
+  <div class="info-panel">
+    <div class="infographics">
+      <div class="icon attach" *ngIf="true"></div>
+      <div class="counter" *ngIf="true"> 0 </div>
+    </div>
+    <div class="date counter">
+      {{ card.lastEditTime }}
+    </div>
   </div>
 </div>

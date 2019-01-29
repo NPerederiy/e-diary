@@ -30,8 +30,11 @@
     background-color: transparent;
     font-family: $regular-font;
     font-size: unset;
+    flex-grow: 1;
 }
 
+.button.month.active,
+.button.month:focus,
 .button.month:hover{
     background-color: rgba($regular-color, 0.1);
 }

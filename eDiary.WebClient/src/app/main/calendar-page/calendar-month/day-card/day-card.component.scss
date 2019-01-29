@@ -62,7 +62,7 @@
 
 .info-panel{
     height: 20px;
-    min-height: 34px;
+    min-height: 30px;
     padding: 0 3px 0 2px;
     display: flex;
     flex-direction: row;
@@ -117,23 +117,11 @@
     }
 }
 
-@media (max-width: 606px){
-    // .dayNumber{
-    //     font-size: 18pt;
-    // }
-    .info-panel{
-        min-height: 30px;
-    }
-}
+// @media (max-width: 606px){
+// }
 
-@media (min-width: 606px){
-    // .dayNumber{
-    //     font-size: 18pt;
-    // }
-    .info-panel{
-        min-height: 30px;
-    }
-}
+// @media (min-width: 606px){
+// }
 
 // @media(max-width: 900px){
 //     .info-panel .counter{
