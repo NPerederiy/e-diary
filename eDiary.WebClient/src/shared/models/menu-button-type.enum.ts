@@ -13,5 +13,8 @@ export enum MenuButtonType{
     TrashCan = 9,
     AddTask = 10,
     AddNote = 11,
-    AddFolder = 12
+    AddFolder = 12,
+    MonthView = 13,
+    WeekView = 14,
+    DayView = 15
 }

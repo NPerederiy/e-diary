@@ -1,4 +1,6 @@
-<div class="container">
-  <calendar-month></calendar-month>
-  <sidebar></sidebar>
+<div id="container">
+  <calendar-month *ngIf="currentViewType === 1; else week"></calendar-month>
+  <calendar-week *ngIf="currentViewType === 2; else day" #week></calendar-week>
+  <calendar-day *ngIf="currentViewType === 3" #day></calendar-day>
+  <sidebar [buttons]="sidebarButtons"></sidebar>
 </div>

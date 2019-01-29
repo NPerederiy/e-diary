@@ -28,4 +28,31 @@ export class SidebarButtonComponent implements OnInit {
     return this.button.type === MenuButtonType.Notifications;
   }
 
+  isTrashCan(){
+    return this.button.type === MenuButtonType.TrashCan;
+  }
+
+  isAddFolder(){
+    return this.button.type === MenuButtonType.AddFolder;
+  }
+
+  isAddNote(){
+    return this.button.type === MenuButtonType.AddNote;
+  }
+
+  isAddTask(){
+    return this.button.type === MenuButtonType.AddTask;
+  }
+
+  isCalendarMonthView(){
+    return this.button.type === MenuButtonType.MonthView;
+  }
+
+  isCalendarWeekView(){
+    return this.button.type === MenuButtonType.WeekView;
+  }
+
+  isCalendarDayView(){
+    return this.button.type === MenuButtonType.DayView;
+  }
 }

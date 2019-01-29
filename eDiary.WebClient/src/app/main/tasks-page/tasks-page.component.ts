@@ -26,6 +26,7 @@ export class TasksPageComponent implements OnInit {
     this.sidebarButtons.push(new MenuButton(MenuButtonType.RecentActions));
     this.sidebarButtons.push(new MenuButton(MenuButtonType.Search));
     this.sidebarButtons.push(new MenuButton(MenuButtonType.Notifications));
+    this.sidebarButtons.push(new MenuButton(MenuButtonType.AddTask));
     this.sidebarButtons.push(new MenuButton(MenuButtonType.TrashCan));
     this.cardLists.push(new TaskList("New list",[
       new TaskCard("Lorem ipsum", "", TaskStatus.inProcess, CardStatus.deleted),

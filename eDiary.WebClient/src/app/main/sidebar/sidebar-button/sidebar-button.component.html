@@ -3,5 +3,17 @@
   <div class="icon history" *ngIf="isHistory()"></div>
   <div class="icon search" *ngIf="isSearch()"></div>
   <div class="icon notifications" *ngIf="isNotifications()"></div>
-  <div class="icon" *ngIf=""></div>
+  <div class="icon folder" *ngIf="isAddFolder()"></div>
+  <div class="icon note" *ngIf="isAddNote()"></div>
+  <div class="icon task" *ngIf="isAddTask()"></div>
+  <div class="icon trash" *ngIf="isTrashCan()"></div>
+  <div class="icon month-view" *ngIf="isCalendarMonthView()">
+    <div class="text">M</div>
+  </div>
+  <div class="icon week-view" *ngIf="isCalendarWeekView()">
+    <div class="text">W</div>
+  </div>
+  <div class="icon day-view" *ngIf="isCalendarDayView()">
+    <div class="text">D</div>
+  </div>
 </div>

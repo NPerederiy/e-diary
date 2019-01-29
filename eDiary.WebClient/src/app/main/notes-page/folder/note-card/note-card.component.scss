@@ -12,7 +12,7 @@
     // margin: 4px;
     // min-width: 140px;
     // min-height: 140px;
-    height: calc(34px + 1.1em + 3.3em + 30px + 14px);
+    height: calc(34px + 1.1em + 3.3em + 30px + 18px);
     display: flex;
     flex-direction: column;
     justify-content: flex-start;
@@ -25,18 +25,23 @@
     .dayNumber{
         color: rgba($regular-color, 0.8);
     }
-    .info-panel {
+    .info-panel{
         .counter{   
             color: rgba($regular-color, 0.8);
         }
-        .icon.icon.attach{
+        .icon.attach{
             background-image: $attach-icon24-active;
+        }
+        .icon.link{
+            background-image: $link-icon24-active;
         }
         .icon.warn{
             background-image: $warn-icon-active;
         }
-        .icon.todo{
-            background-image: $todo-icon-active;
+    }
+    .status-line{
+        .icon.warn.inactive{
+            opacity: 1;
         }
     }
 }
@@ -75,21 +80,25 @@
     .button:hover{
         color: rgba($regular-color, 0.8);
     }
-}
-
-.status-line .icon{
-    width: 20px;
-    height: 20px;
-    margin: 0 8px 0 16px;
-    align-self: center;
-}
-
-.status-line .status{
-    font-family: $regular-font;
-    font-size: 14px;
-    line-height: 20px;
-    font-weight: 500;
-    align-self: center;
+    .icon.warn.inactive{
+        background-image: $warn-icon24-inactive;
+        background-size: cover;
+        transition: background-image 0.3s;
+        opacity: 0;
+    }
+    .icon{
+        width: 20px;
+        height: 20px;
+        margin: 0 8px 0 16px;
+        align-self: center;
+    }
+    .status{
+        font-family: $regular-font;
+        font-size: 14px;
+        line-height: 20px;
+        font-weight: 500;
+        align-self: center;
+    }
 }
 
 .status-line.non-highlighted{
@@ -126,7 +135,8 @@
 
 .header, .descr{
     color: rgba($regular-color, 0.7);
-    margin: 2px 4px 4px 4px;
+    // margin: 2px 4px 4px 4px;
+    margin: 6px 4px 2px 4px;
     overflow-wrap: break-word;
     word-wrap: break-word;
     overflow: hidden;
@@ -191,6 +201,13 @@
     .icon.attach{
         background-image: $attach-icon24-regular;
         background-size: cover;
+        transform: rotate(45deg);
+        transition: background-image 0.3s;
+    }
+    .icon.link{
+        background-image: $link-icon24-regular;
+        background-size: cover;
+        transform: rotate(-45deg);
         transition: background-image 0.3s;
     }
     .icon.warn{
