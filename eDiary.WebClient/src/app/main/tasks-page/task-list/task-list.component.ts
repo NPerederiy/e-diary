@@ -1,6 +1,48 @@
-import { Component, OnInit, Input } from '@angular/core';
+import { Component, OnInit, Input, ViewChild, ElementRef } from '@angular/core';
 import { TaskCard } from 'src/shared/models/task-card.model';
 import { TaskList } from 'src/shared/models/task-list.model';
+
+interface ITaskListEditor{
+  value: string;
+  list: TaskList;
+  hasContent(): boolean;
+  saveChanges(): void;
+}
+
+class HeaderEditor implements ITaskListEditor{
+  value: string;
+  list: TaskList;
+  constructor(list: TaskList) {
+    this.value = list.name;
+    this.list = list;
+  }
+
+  hasContent(): boolean{
+    return this.list.cards.length !== 0;
+  }
+
+  saveChanges(){
+    this.list.name = this.value;
+  }
+}
+
+class CardCreator implements ITaskListEditor{
+  value: string;
+  list: TaskList;
+
+  constructor(list: TaskList) {
+    this.value = "";
+    this.list = list;
+  }
+
+  hasContent(): boolean{
+    return false;
+  }
+  
+  saveChanges(){
+    this.list.cards.push(new TaskCard(this.value));
+  }
+}
 
 @Component({
   selector: 'task-list',
@@ -10,8 +52,11 @@ import { TaskList } from 'src/shared/models/task-list.model';
 
 export class TaskListComponent implements OnInit {
   @Input() list: TaskList;
-  headerEditor: string;
-  isEditing: boolean;
+  @ViewChild('headerInput') headerInput: ElementRef;
+  @ViewChild('cardInput') cardInput: ElementRef;
+  headerEditor: ITaskListEditor;
+  cardCreator: ITaskListEditor;
+
   scrollbarOptions = { 
     axis: 'y', 
     theme: 'minimal-dark', 
@@ -20,52 +65,74 @@ export class TaskListComponent implements OnInit {
   };
 
   constructor() {
+    this.headerEditor = null;
+    this.cardCreator = null;
   }
   
   ngOnInit() {
-    this.isEditing = this.list.name === "";
+    if(this.isEmpty(this.list.name)){
+      this.headerEditor = new HeaderEditor(this.list);
+      setTimeout(() => this.headerInput.nativeElement.focus());
+    }
   }
 
-  addCard(){
-    if(this.list.cards.length === 0 || this.list.cards[this.list.cards.length-1].header !== ""){
-      this.list.cards.push(new TaskCard(""));
+  openCardCreator(){
+    this.cardCreator = new CardCreator(this.list);
+    setTimeout(() => this.cardInput.nativeElement.focus());
+  }
+
+  openHeaderEditor(){
+    // if(this.list.cards.length !== 0 || !this.isEmpty(this.list.name)){
+    this.headerEditor = new HeaderEditor(this.list);
+    setTimeout(() => this.headerInput.nativeElement.focus());
+    // }
+  }
+
+  closeEditor(editor: ITaskListEditor){
+    if(this.isEmpty(editor.value)){
+      if(editor.hasContent()){
+        console.log("this field can't be empty");
+        // throw alert
+      } else {
+        console.log("case 1: no changes made");
+        this.closeAllEditors()
+      }
+    } else {
+      if(this.isContainNotAllowedSigns(editor.value)){
+        console.log("this field contains not allowed signs");
+        // throw alert
+      } else {
+        console.log("case 2: changes saved");
+        
+        editor.saveChanges();
+        this.closeAllEditors()
+        console.log(this.list);
+      }
     }
-    console.log("actual list: ",this.list);    
   }
 
   showContextMenu(){
     console.log('right click');
   }
 
-  openHeaderEditor(){
-    this.isEditing = true;
-    this.headerEditor = this.list.name;
+  cardInputBlur(){
+    setTimeout(() => this.cardInput.nativeElement.blur());
   }
 
-  updateHeader(){    
-    if(this.isEmpty(this.headerEditor)){
-      if(this.list.cards.length == 0) { 
-        /* throw event: to delete this list */ 
-        console.log("throw event")
-        return;
-      } else { 
-        /* show alert */ 
-        console.log("alert")
-        return;
-      }
-    } 
-    if(this.isContainNotAllowedSigns(this.headerEditor)){ /* show alert */ return; }
-    
-    this.list.name = this.headerEditor;
-    this.isEditing = false;
+  headerInputBlur(){
+    setTimeout(() => this.headerInput.nativeElement.blur());
+  }
+
+  private closeAllEditors(){
+    this.headerEditor = null;
+    this.cardCreator = null;
   }
 
   private isContainNotAllowedSigns(s: string): boolean{
-    // if(s[0] === " ") return true;
     return false;
   }
 
-  private isEmpty(s:string):boolean {
+  private isEmpty(s: string): boolean {
     return s === "";
   }
 

@@ -37,4 +37,5 @@ export class TaskCardComponent implements OnInit {
     return this.card.cardStatus === CardStatus.deleted;
   }
 
+
 }

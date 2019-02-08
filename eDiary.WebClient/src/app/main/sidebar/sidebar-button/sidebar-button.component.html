@@ -8,12 +8,12 @@
   <div class="icon task" *ngIf="isAddTask()"></div>
   <div class="icon trash" *ngIf="isTrashCan()"></div>
   <div class="icon month-view" *ngIf="isCalendarMonthView()">
-    <div class="text">M</div>
+    <div class="text">{{ 'calendarView.month' | translate }}</div>
   </div>
   <div class="icon week-view" *ngIf="isCalendarWeekView()">
-    <div class="text">W</div>
+    <div class="text">{{ 'calendarView.week' | translate }}</div>
   </div>
   <div class="icon day-view" *ngIf="isCalendarDayView()">
-    <div class="text">D</div>
+    <div class="text">{{ 'calendarView.day' | translate }}</div>
   </div>
 </div>

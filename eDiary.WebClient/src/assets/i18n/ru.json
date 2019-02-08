@@ -62,5 +62,10 @@
         "Fri": "ПТ",
         "Sat": "СБ",
         "Sun": "ВС"
+    },
+    "calendarView":{
+        "month": "М",
+        "week": "Н",
+        "day": "Д"
     }
 }

@@ -1,25 +1,38 @@
 <div id="container">
   <div class="header">
     <div class="icon"></div>
-    <div *ngIf="!isEditing" class="column-name" (click)="openHeaderEditor()">
+    <div *ngIf="headerEditor === null" class="column-name" (click)="openHeaderEditor()">
       {{ list.name }}
     </div>
-    <div *ngIf="isEditing">
+    <div *ngIf="headerEditor !== null">
       <input 
         class="input" 
         type="text" 
         tabindex="1" 
         autofocus=true 
-        (blur)="updateHeader()" 
-        (keyup.enter)="updateHeader()"
-        [(ngModel)]="headerEditor"
-        >
+        (blur)="closeEditor(headerEditor)" 
+        (keyup.enter)="headerInputBlur()"
+        [(ngModel)]="headerEditor.value"
+        #headerInput
+      >
     </div>
   </div>
-  <div *ngIf="!isEditing" class="scrollable vertical" malihu-scrollbar [scrollbarOptions]="scrollbarOptions">
+  <div *ngIf="headerEditor === null || headerEditor.hasContent()" class="scrollable vertical" malihu-scrollbar [scrollbarOptions]="scrollbarOptions">
     <task-card class="card" *ngFor="let c of list.cards" [card]="c" (contextmenu)="showContextMenu()"></task-card>
-    <div class="button shadow" (click)="addCard()">
+    <div *ngIf="cardCreator === null" class="button shadow" (click)="openCardCreator()">
       +
+    </div>
+    <div *ngIf="cardCreator !== null" class="card-creator shadow">
+      <input 
+        class="input" 
+        type="text" 
+        tabindex="1" 
+        autofocus=true 
+        (blur)="closeEditor(cardCreator)" 
+        (keyup.enter)="cardInputBlur()"
+        [(ngModel)]="cardCreator.value"
+        #cardInput
+      >
     </div>
   </div>
 </div>

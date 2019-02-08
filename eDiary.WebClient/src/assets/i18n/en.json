@@ -62,5 +62,10 @@
         "Fri": "FRI",
         "Sat": "SAT",
         "Sun": "SUN"
+    },
+    "calendarView":{
+        "month": "M",
+        "week": "W",
+        "day": "D"
     }
 }
