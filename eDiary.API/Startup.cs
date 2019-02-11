@@ -1,5 +1,10 @@
-﻿using Owin;
+﻿using eDiary.API.Util;
+using Ninject;
+using Ninject.Modules;
+using Ninject.Web.Mvc;
+using Owin;
 using System.Web.Http;
+using System.Web.Mvc;
 
 namespace eDiary.API
 {
@@ -16,6 +21,10 @@ namespace eDiary.API
             );
 
             app.UseWebApi(config);
+
+            NinjectModule registrations = new NinjectRegistrations();
+            var kernel = new StandardKernel(registrations);
+            DependencyResolver.SetResolver(new NinjectDependencyResolver(kernel));
         }
     }
 }

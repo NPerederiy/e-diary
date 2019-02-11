@@ -9,7 +9,7 @@ namespace eDiary.API
         {
             using (WebApp.Start<Startup>("http://localhost:8080"))
             {
-                Console.WriteLine("Web Server is running.");
+                Console.WriteLine("Local server is running.");
                 Console.WriteLine("Press any key to quit.");
                 Console.ReadKey();
             }
