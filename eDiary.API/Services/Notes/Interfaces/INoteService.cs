@@ -1,4 +1,4 @@
-﻿namespace eDiary.API.Services.Interfaces
+﻿namespace eDiary.API.Services.Note.Interfaces
 {
     public interface INoteService
     {

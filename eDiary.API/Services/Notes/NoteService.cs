@@ -1,7 +1,7 @@
 ﻿using eDiary.API.Models.EF.Interfaces;
-using eDiary.API.Services.Interfaces;
+using eDiary.API.Services.Note.Interfaces;
 
-namespace eDiary.API.Services
+namespace eDiary.API.Services.Note
 {
     public class NoteService: INoteService
     {

@@ -10,11 +10,11 @@
         /// <summary>
         /// Child UserSettings where [UserSettings].[LanguageId] point to this entity (FK__UserSetti__Langu__73BA3083)
         /// </summary>
-        public virtual System.Collections.Generic.ICollection<UserSetting> UserSettings { get; set; } // UserSettings.FK__UserSetti__Langu__73BA3083
+        public virtual System.Collections.Generic.ICollection<UserSettings> UserSettings { get; set; } // UserSettings.FK__UserSetti__Langu__73BA3083
 
         public Language()
         {
-            UserSettings = new System.Collections.Generic.List<UserSetting>();
+            UserSettings = new System.Collections.Generic.List<UserSettings>();
         }
     }
 }

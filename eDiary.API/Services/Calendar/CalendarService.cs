@@ -1,7 +1,7 @@
 ﻿using eDiary.API.Models.EF.Interfaces;
-using eDiary.API.Services.Interfaces;
+using eDiary.API.Services.Calendar.Interfaces;
 
-namespace eDiary.API.Services
+namespace eDiary.API.Services.Calendar
 {
     public class CalendarService: ICalendarService
     {

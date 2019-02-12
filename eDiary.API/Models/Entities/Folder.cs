@@ -19,7 +19,7 @@
         /// <summary>
         /// Child UserSettings where [UserSettings].[RootFolderId] point to this entity (FK__UserSetti__RootF__74AE54BC)
         /// </summary>
-        public virtual System.Collections.Generic.ICollection<UserSetting> UserSettings { get; set; } // UserSettings.FK__UserSetti__RootF__74AE54BC
+        public virtual System.Collections.Generic.ICollection<UserSettings> UserSettings { get; set; } // UserSettings.FK__UserSetti__RootF__74AE54BC
 
         // Foreign keys
 
@@ -32,7 +32,7 @@
         {
             Folders = new System.Collections.Generic.List<Folder>();
             Notes = new System.Collections.Generic.List<Note>();
-            UserSettings = new System.Collections.Generic.List<UserSetting>();
+            UserSettings = new System.Collections.Generic.List<UserSettings>();
         }
     }
 }

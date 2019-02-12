@@ -145,9 +145,14 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="App_Start\Ninject.Web.Common.cs" />
-    <Compile Include="Controllers\DemoController.cs" />
     <Compile Include="Controllers\PrjCategoriesController.cs" />
     <Compile Include="Controllers\ProjectsController.cs" />
+    <Compile Include="Filters\Authenticated.cs" />
+    <Compile Include="Models\BusinessObjects\ProjectCard.cs" />
+    <Compile Include="Models\BusinessObjects\ProjectCategoryCard.cs" />
+    <Compile Include="Models\BusinessObjects\ProjectPage.cs" />
+    <Compile Include="Models\BusinessObjects\SectionCard.cs" />
+    <Compile Include="Models\BusinessObjects\TaskCard.cs" />
     <Compile Include="Models\EF\Interfaces\IRepository.cs" />
     <Compile Include="Models\EF\Interfaces\IUnitOfWork.cs" />
     <Compile Include="Models\EF\Repository.cs" />
@@ -175,12 +180,23 @@
     <Compile Include="Models\Entities\UserSettings.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="Services\CalendarService.cs" />
-    <Compile Include="Services\Interfaces\ICalendarService.cs" />
-    <Compile Include="Services\Interfaces\INoteService.cs" />
-    <Compile Include="Services\Interfaces\ITaskService.cs" />
-    <Compile Include="Services\NoteService.cs" />
-    <Compile Include="Services\TaskService.cs" />
+    <Compile Include="Services\Calendar\CalendarService.cs" />
+    <Compile Include="Services\Security\Exceptions\SecurityException.cs" />
+    <Compile Include="Services\Calendar\Interfaces\ICalendarService.cs" />
+    <Compile Include="Services\Notes\Interfaces\INoteService.cs" />
+    <Compile Include="Services\Security\IdentityService.cs" />
+    <Compile Include="Services\Security\Interfaces\IIdentityService.cs" />
+    <Compile Include="Services\Security\Interfaces\ICryptographyService.cs" />
+    <Compile Include="Services\Tasks\Interfaces\IProjectCategoryService.cs" />
+    <Compile Include="Services\Tasks\Interfaces\IProjectService.cs" />
+    <Compile Include="Services\Tasks\Interfaces\ISectionService.cs" />
+    <Compile Include="Services\Tasks\Interfaces\ITaskService.cs" />
+    <Compile Include="Services\Notes\NoteService.cs" />
+    <Compile Include="Services\Security\CryptographyService.cs" />
+    <Compile Include="Services\Tasks\ProjectCategoryService.cs" />
+    <Compile Include="Services\Tasks\ProjectService.cs" />
+    <Compile Include="Services\Tasks\SectionService.cs" />
+    <Compile Include="Services\Tasks\TaskService.cs" />
     <Compile Include="Startup.cs" />
     <Compile Include="Util\NinjectRegistrations.cs" />
   </ItemGroup>
@@ -205,9 +221,7 @@
       <Install>false</Install>
     </BootstrapperPackage>
   </ItemGroup>
-  <ItemGroup>
-    <Folder Include="Models\BusinessObjects\" />
-  </ItemGroup>
+  <ItemGroup />
   <ItemGroup>
     <Service Include="{508349B6-6B84-4DF5-91F0-309BEEBAD82D}" />
   </ItemGroup>
