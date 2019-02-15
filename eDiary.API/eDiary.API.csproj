@@ -145,12 +145,21 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="App_Start\Ninject.Web.Common.cs" />
+    <Compile Include="Controllers\LoginController.cs" />
+    <Compile Include="Controllers\LogoutController.cs" />
     <Compile Include="Controllers\PrjCategoriesController.cs" />
     <Compile Include="Controllers\ProjectsController.cs" />
+    <Compile Include="Controllers\RegistrationController.cs" />
+    <Compile Include="Controllers\SectionsController.cs" />
+    <Compile Include="Controllers\TasksController.cs" />
     <Compile Include="Filters\Authenticated.cs" />
+    <Compile Include="Models\BusinessObjects\AuthenticationData.cs" />
+    <Compile Include="Models\BusinessObjects\Folder.cs" />
+    <Compile Include="Models\BusinessObjects\NoteCard.cs" />
     <Compile Include="Models\BusinessObjects\ProjectCard.cs" />
     <Compile Include="Models\BusinessObjects\ProjectCategoryCard.cs" />
     <Compile Include="Models\BusinessObjects\ProjectPage.cs" />
+    <Compile Include="Models\BusinessObjects\RegistrationData.cs" />
     <Compile Include="Models\BusinessObjects\SectionCard.cs" />
     <Compile Include="Models\BusinessObjects\TaskCard.cs" />
     <Compile Include="Models\EF\Interfaces\IRepository.cs" />
@@ -187,6 +196,9 @@
     <Compile Include="Services\Security\IdentityService.cs" />
     <Compile Include="Services\Security\Interfaces\IIdentityService.cs" />
     <Compile Include="Services\Security\Interfaces\ICryptographyService.cs" />
+    <Compile Include="Services\Security\Interfaces\IOperationResult.cs" />
+    <Compile Include="Services\Security\OperationResult.cs" />
+    <Compile Include="Services\Security\ResultCode.cs" />
     <Compile Include="Services\Tasks\Interfaces\IProjectCategoryService.cs" />
     <Compile Include="Services\Tasks\Interfaces\IProjectService.cs" />
     <Compile Include="Services\Tasks\Interfaces\ISectionService.cs" />

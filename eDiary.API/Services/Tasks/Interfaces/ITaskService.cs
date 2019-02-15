@@ -6,9 +6,9 @@ namespace eDiary.API.Services.Tasks.Interfaces
 {
     public interface ITaskService
     {
-        Task<IEnumerable<TaskCard>> GetAllTasks();
-        Task<IEnumerable<TaskCard>> GetTasks(int sectionId);
-        TaskCard GetTask(int id);
+        Task<IEnumerable<TaskCard>> GetAllTasksAsync();
+        Task<IEnumerable<TaskCard>> GetSectionTasksAsync(int sectionId);
+        Task<TaskCard> GetTaskAsync(int id);
         void CreateTask(TaskCard task);
         void UpdateTask(TaskCard task);
         void DeleteTask(int id);

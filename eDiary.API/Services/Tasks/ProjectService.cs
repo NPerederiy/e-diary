@@ -15,22 +15,22 @@ namespace eDiary.API.Services.Tasks
             this.uow = uow;
         }
 
-        public Task<IEnumerable<ProjectCard>> GetAllProjects()
+        public Task<IEnumerable<ProjectCard>> GetAllProjectsAsync()
         {
             throw new System.NotImplementedException();
         }
 
-        public Task<IEnumerable<ProjectCard>> GetProjects(int categoryId)
+        public Task<IEnumerable<ProjectCard>> GetProjectsByCategoryAsync(int categoryId)
         {
             throw new System.NotImplementedException();
         }
 
-        public ProjectCard GetProjectCard(int projectId)
+        public Task<ProjectCard> GetProjectCardAsync(int projectId)
         {
             throw new System.NotImplementedException();
         }
 
-        public ProjectPage GetProjectPage(int projectId)
+        public Task<ProjectPage> GetProjectPageAsync(int projectId)
         {
             throw new System.NotImplementedException();
         }

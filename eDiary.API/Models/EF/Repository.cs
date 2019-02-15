@@ -27,10 +27,10 @@ namespace eDiary.API.Models.EF
             return await context.Set<T>().Where(expression).ToListAsync();
         }
 
-        public void Create(T entity)
+        public async Task CreateAsync(T entity)
         {
             context.Set<T>().Add(entity);
-            Save();
+            await SaveAsync();
         }
 
         public void Update(T entity)
@@ -45,10 +45,10 @@ namespace eDiary.API.Models.EF
             Save();
         }
 
-        //public async Task SaveAsync()
-        //{
-        //    await context.SaveChangesAsync();
-        //}
+        public async Task SaveAsync()
+        {
+            await context.SaveChangesAsync();
+        }
 
         public void Save()
         {

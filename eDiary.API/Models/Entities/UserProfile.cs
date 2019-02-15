@@ -5,6 +5,7 @@
         public int Id { get; set; } // Id (Primary key)
         public string FirstName { get; set; } // FirstName (length: 2147483647)
         public string LastName { get; set; } // LastName (length: 2147483647)
+        public string Email { get; set; } // Email
 
         // Reverse navigation
 

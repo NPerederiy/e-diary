@@ -2,7 +2,8 @@
 {
     public interface ICryptographyService
     {
-        string Encrypt(string pass);
-        string Decrypt(string data);
+        IOperationResult Decrypt(string data);
+        IOperationResult Encrypt(string data);
+        IOperationResult EncryptPassword(string pass);
     }
 }

@@ -1,48 +1,52 @@
 ﻿using eDiary.API.Filters;
+using eDiary.API.Models.BusinessObjects;
 using eDiary.API.Services.Tasks.Interfaces;
 using System.Collections.Generic;
-using System.Web.Http;
+using System.Threading.Tasks;
+using System.Web.Mvc;
 
 namespace eDiary.API.Controllers
 {
     [RoutePrefix("projects")]
-    public class ProjectsController : ApiController
+    public class ProjectsController : Controller
     {
-        private readonly ITaskService ts;
+        private readonly IProjectService ps;
 
-        public ProjectsController(ITaskService ts)
+        public ProjectsController(IProjectService ps)
         {
-            this.ts = ts;
+            this.ps = ps;
         }
 
         // GET api/projects
         [HttpGet]
         [Authenticated]
-        public IEnumerable<object> GetAllProjects()
+        public async Task<IEnumerable<ProjectCard>> GetAllProjects()
         {
-            return null;
+            return await ps.GetAllProjectsAsync();
         }
 
         // GET api/projects/1
         [HttpGet]
         [Authenticated]
-        public object GetProjectById(int id)
+        public async Task<ProjectCard> GetProjectById(int id)
         {
-            return null;
+            return await ps.GetProjectCardAsync(id);
         }
 
         // POST api/projects 
         [HttpPost]
         [Authenticated]
-        public void CreateProject([FromBody]string value)
+        public void CreateProject(ProjectCard project)
         {
+            ps.CreateProject(project);
         }
 
         // PUT api/projects/1 
         [HttpPut]
         [Authenticated]
-        public void UpdateProject(int id, [FromBody]string value)
+        public void UpdateProject(ProjectCard project)
         {
+            ps.UpdateProject(project);
         }
 
         // DELETE api/projects/1 
@@ -50,6 +54,7 @@ namespace eDiary.API.Controllers
         [Authenticated]
         public void DeleteProjectById(int id)
         {
+            ps.DeleteProject(id);
         }
     }
 }

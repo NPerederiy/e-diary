@@ -1,8 +1,14 @@
-﻿namespace eDiary.API.Services.Security.Interfaces
+﻿using System.Threading.Tasks;
+
+namespace eDiary.API.Services.Security.Interfaces
 {
     public interface IIdentityService
     {
-        string Authenticate(string login, string passHash);
-        string Register(string firstName, string lastName, string passHash, string email);
+        Task<IOperationResult> Authenticate(string login, string passHash);
+        Task<IOperationResult> Register(string firstName, string lastName, string passHash, string username, string email);
+        Task<IOperationResult> LogIn();
+        IOperationResult LogOut();
+        Task<IOperationResult> ChangePassword(string currentPassword, string newPassword);
+        Task<IOperationResult> ResetPassword();
     }
 }

@@ -9,10 +9,10 @@ namespace eDiary.API.Models.EF.Interfaces
     {
         Task<IEnumerable<T>> GetAllAsync();
         Task<IEnumerable<T>> GetByConditionAsync(Expression<Func<T, bool>> expression);
-        void Create(T entity);
+        Task CreateAsync(T entity);
         void Update(T entity);
         void Delete(T entity);
-        //Task SaveAsync();
+        Task SaveAsync();
         void Save();
     }
 }

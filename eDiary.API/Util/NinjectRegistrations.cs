@@ -25,6 +25,7 @@ namespace eDiary.API.Util
             Bind<IProjectCategoryService>().To<ProjectCategoryService>();
             Bind<INoteService>().To<NoteService>();
             Bind<ICalendarService>().To<CalendarService>();
+            Bind<IOperationResult>().To<OperationResult>();
         }
     }
 }
