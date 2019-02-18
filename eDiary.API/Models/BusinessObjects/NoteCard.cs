@@ -1,15 +1,23 @@
 ﻿using eDiary.API.Models.Entities;
+using Newtonsoft.Json;
 
 namespace eDiary.API.Models.BusinessObjects
 {
     public class NoteCard
     {
+        [JsonProperty("noteId")]
         public int NoteId { get; set; }
+        [JsonProperty("folderId")]
         public int FolderId { get; set; }
+        [JsonProperty("header")]
         public string Header { get; set; }
+        [JsonProperty("descr")]
         public string Description { get; set; }
+        [JsonProperty("cardStatus")]
         public string CardStatus { get; set; }
+        [JsonProperty("createdAt")]
         public string CreatedAt { get; set; }
+        [JsonProperty("updatedAt")]
         public string UpdatedAt { get; set; }
 
         public NoteCard(Note entity)

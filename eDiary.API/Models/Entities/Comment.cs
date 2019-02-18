@@ -4,6 +4,7 @@
     {
         public int Id { get; set; } // Id (Primary key)
         public string Text { get; set; } // Text (length: 2147483647)
+        public string CreatedAt { get; set; }
         public int TaskId { get; set; } // TaskId
 
         // Foreign keys

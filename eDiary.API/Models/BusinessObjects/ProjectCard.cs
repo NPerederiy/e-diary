@@ -1,17 +1,26 @@
 ﻿using eDiary.API.Models.Entities;
+using Newtonsoft.Json;
 using System.Collections.Generic;
 
 namespace eDiary.API.Models.BusinessObjects
 {
     public class ProjectCard
     {
+        [JsonProperty("name")]
         public string Name { get; set; }
+        [JsonProperty("projectId")]
         public int ProjectId { get; set; }
+        [JsonProperty("hotTaskCount")]
         public int HotTaskCount { get; set; }
+        [JsonProperty("impTaskCount")]
         public int ImportantTaskCount { get; set; }
+        [JsonProperty("complTaskCount")]
         public int CompletedTaskCount { get; set; }
+        [JsonProperty("inProgTaskCount")]
         public int InProgressTaskCount { get; set; }
+        [JsonProperty("overdueTaskCount")]
         public int OverdueTaskCount { get; set; }
+        [JsonProperty("totalTaskCount")]
         public int TotalTaskCount { get; set; }
         private List<Task> Tasks { get; set; }  
 
