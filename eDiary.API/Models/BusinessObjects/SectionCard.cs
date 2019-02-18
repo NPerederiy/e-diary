@@ -6,12 +6,14 @@ namespace eDiary.API.Models.BusinessObjects
     public class SectionCard
     {
         public int SectionId { get; set; }
+        public int ProjectId { get; set; }
         public string Name { get; set; }
         public TaskCard[] Tasks { get; set; }
 
         public SectionCard(Section entity)
         {
             SectionId = entity.Id;
+            ProjectId = entity.ProjectId;
             Name = entity.Name;
 
             var cards = new List<TaskCard>();

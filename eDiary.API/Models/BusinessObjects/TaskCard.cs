@@ -16,6 +16,8 @@ namespace eDiary.API.Models.BusinessObjects
         public string Priority { get; set; }
         public string Difficulty { get; set; }
 
+        // TODO: Add Comments[], Files[], Links[], Tags[], Subtasks[] 
+
         public TaskCard(Task entity)
         {
             TaskId = entity.Id;

@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using System.Threading.Tasks;
 
-namespace eDiary.API.Services.Note.Interfaces
+namespace eDiary.API.Services.Notes.Interfaces
 {
     public interface INoteService
     {

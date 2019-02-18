@@ -1,7 +1,10 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
+using System.Linq;
 using System.Threading.Tasks;
 using eDiary.API.Models.BusinessObjects;
 using eDiary.API.Models.EF.Interfaces;
+using eDiary.API.Models.Entities;
 using eDiary.API.Services.Tasks.Interfaces;
 
 namespace eDiary.API.Services.Tasks
@@ -15,69 +18,74 @@ namespace eDiary.API.Services.Tasks
             this.uow = uow;
         }
 
-        public Task<IEnumerable<ProjectCard>> GetAllProjectsAsync()
+        public async Task<IEnumerable<ProjectCard>> GetAllProjectsAsync()
         {
-            throw new System.NotImplementedException();
+            var projects = await uow.ProjectRepository.GetAllAsync();
+            return ConvertToProjectCards(projects);
         }
 
-        public Task<IEnumerable<ProjectCard>> GetProjectsByCategoryAsync(int categoryId)
+        public async Task<IEnumerable<ProjectCard>> GetProjectsByCategoryAsync(int categoryId)
         {
-            throw new System.NotImplementedException();
+            var category = (await uow.ProjectCategoryRepository.GetByConditionAsync(x => x.Id == categoryId)).FirstOrDefault();
+            if (category == null) throw new Exception("Category not found");
+            return ConvertToProjectCards(category.Projects);
         }
 
-        public Task<ProjectCard> GetProjectCardAsync(int projectId)
+        public async Task<ProjectCard> GetProjectCardAsync(int projectId)
         {
-            throw new System.NotImplementedException();
+            var project = (await uow.ProjectRepository.GetByConditionAsync(x => x.Id == projectId)).FirstOrDefault();
+            if (project == null) throw new Exception("Project not found");
+            return new ProjectCard(project);
         }
 
-        public Task<ProjectPage> GetProjectPageAsync(int projectId)
+        public async Task<ProjectPage> GetProjectPageAsync(int projectId)
         {
-            throw new System.NotImplementedException();
+            var project = (await uow.ProjectRepository.GetByConditionAsync(x => x.Id == projectId)).FirstOrDefault();
+            if (project == null) throw new Exception("Project not found");
+            return new ProjectPage(projectId, uow);
         }
 
-        public void CreateProject(ProjectCard project)
+        public async void CreateProject(ProjectCard card)
         {
-            throw new System.NotImplementedException();
+            if (card == null) throw new ArgumentNullException(nameof(card));
+
+            var p = new Project
+            {
+                Name = card.Name,
+                //UserId = ???                 // TODO: Add userId
+            };
+
+            await uow.ProjectRepository.CreateAsync(p);
         }
 
-        public void UpdateProject(ProjectCard project)
+        public async void UpdateProject(ProjectCard card)
         {
-            throw new System.NotImplementedException();
+            if (card == null) throw new ArgumentNullException(nameof(card));
+
+            var project = (await uow.ProjectRepository.GetByConditionAsync(x => x.Id == card.ProjectId)).FirstOrDefault();
+            if (project == null) throw new Exception("Project not found");
+
+            project.Name = card.Name;
+
+            uow.ProjectRepository.Update(project);
         }
 
-        public void DeleteProject(int id)
+        public async void DeleteProject(int id)
         {
-            throw new System.NotImplementedException();
+            var project = (await uow.ProjectRepository.GetByConditionAsync(x => x.Id == id)).FirstOrDefault();
+            if (project == null) throw new Exception("Project not found");
+            uow.ProjectRepository.Delete(project);
         }
 
-        public int CalcCompletedTaskCount()
+        private List<ProjectCard> ConvertToProjectCards(IEnumerable<Project> projects)
         {
-            throw new System.NotImplementedException();
-        }
+            var cards = new List<ProjectCard>();
+            foreach (var p in projects)
+            {
+                cards.Add(new ProjectCard(p));
+            }
 
-        public int CalcHotTaskCount()
-        {
-            throw new System.NotImplementedException();
-        }
-
-        public int CalcImportantTaskCount()
-        {
-            throw new System.NotImplementedException();
-        }
-
-        public int CalcInProgressTaskCount()
-        {
-            throw new System.NotImplementedException();
-        }
-
-        public int CalcOverdueTaskCount()
-        {
-            throw new System.NotImplementedException();
-        }
-
-        public int CalcTotalTaskCount()
-        {
-            throw new System.NotImplementedException();
+            return cards;
         }
     }
 }

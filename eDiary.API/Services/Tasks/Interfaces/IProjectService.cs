@@ -13,11 +13,5 @@ namespace eDiary.API.Services.Tasks.Interfaces
         void CreateProject(ProjectCard project);
         void UpdateProject(ProjectCard project);
         void DeleteProject(int id);
-        int CalcHotTaskCount();
-        int CalcImportantTaskCount();
-        int CalcCompletedTaskCount();
-        int CalcInProgressTaskCount();
-        int CalcOverdueTaskCount();
-        int CalcTotalTaskCount();
     }
 }

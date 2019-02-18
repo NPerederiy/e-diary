@@ -1,5 +1,4 @@
 ﻿using eDiary.API.Models.Entities;
-using eDiary.API.Services.Tasks.Interfaces;
 using System.Collections.Generic;
 
 namespace eDiary.API.Models.BusinessObjects
@@ -10,14 +9,14 @@ namespace eDiary.API.Models.BusinessObjects
         public int CategoryId { get; set; }
         public ProjectCard[] Projects { get; set; }
 
-        public ProjectCategoryCard(ProjectCategory entity, IProjectService ts)
+        public ProjectCategoryCard(ProjectCategory entity)
         {
             Name = entity.Name;
             CategoryId = entity.Id;
             var cards = new List<ProjectCard>();
             foreach(var p in entity.Projects)
             {
-                cards.Add(new ProjectCard(p, ts));
+                cards.Add(new ProjectCard(p));
             }
             Projects = cards.ToArray();
         }

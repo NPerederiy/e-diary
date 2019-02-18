@@ -7,6 +7,9 @@
         public string Description { get; set; } // Description (length: 2147483647)
         public int StatusId { get; set; } // StatusId
         public int FolderId { get; set; } // FolderId
+        public string CreatedAt { get; set; }
+        public string UpdatedAt { get; set; }
+
 
         // Reverse navigation
 

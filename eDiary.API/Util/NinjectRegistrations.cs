@@ -2,8 +2,8 @@
 using eDiary.API.Models.EF.Interfaces;
 using eDiary.API.Services.Calendar;
 using eDiary.API.Services.Calendar.Interfaces;
-using eDiary.API.Services.Note;
-using eDiary.API.Services.Note.Interfaces;
+using eDiary.API.Services.Notes;
+using eDiary.API.Services.Notes.Interfaces;
 using eDiary.API.Services.Security;
 using eDiary.API.Services.Security.Interfaces;
 using eDiary.API.Services.Tasks;
