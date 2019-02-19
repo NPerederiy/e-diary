@@ -9,8 +9,8 @@ namespace eDiary.API.Services.Notes.Interfaces
         Task<IEnumerable<NoteCard>> GetAllNotesAsync();
         Task<IEnumerable<NoteCard>> GetFolderNotesAsync(int sectionId);
         Task<NoteCard> GetNoteAsync(int id);
-        void CreateNote(NoteCard task);
-        void UpdateNote(NoteCard task);
-        void DeleteNote(int id);
+        void CreateNoteAsync(NoteCard task);
+        void UpdateNoteAsync(NoteCard task);
+        void DeleteNoteAsync(int id);
     }
 }

@@ -5,6 +5,7 @@ using System.Threading.Tasks;
 using eDiary.API.Models.BusinessObjects;
 using eDiary.API.Models.EF.Interfaces;
 using eDiary.API.Models.Entities;
+using eDiary.API.Services.Tasks.Filters;
 using eDiary.API.Services.Tasks.Interfaces;
 
 namespace eDiary.API.Services.Tasks
@@ -20,61 +21,61 @@ namespace eDiary.API.Services.Tasks
 
         public async Task<IEnumerable<ProjectCard>> GetAllProjectsAsync()
         {
-            var projects = await uow.ProjectRepository.GetAllAsync();
-            return ConvertToProjectCards(projects);
+            return ConvertToProjectCards(await uow.ProjectRepository.GetAllAsync(););
         }
 
         public async Task<IEnumerable<ProjectCard>> GetProjectsByCategoryAsync(int categoryId)
         {
-            var category = (await uow.ProjectCategoryRepository.GetByConditionAsync(x => x.Id == categoryId)).FirstOrDefault();
-            if (category == null) throw new Exception("Category not found");
+            ProjectCategory category = await TryFindCategory(categoryId);
             return ConvertToProjectCards(category.Projects);
         }
 
         public async Task<ProjectCard> GetProjectCardAsync(int projectId)
         {
-            var project = (await uow.ProjectRepository.GetByConditionAsync(x => x.Id == projectId)).FirstOrDefault();
-            if (project == null) throw new Exception("Project not found");
-            return new ProjectCard(project);
+            return new ProjectCard(await TryFindProject(projectId));
         }
 
         public async Task<ProjectPage> GetProjectPageAsync(int projectId)
         {
-            var project = (await uow.ProjectRepository.GetByConditionAsync(x => x.Id == projectId)).FirstOrDefault();
-            if (project == null) throw new Exception("Project not found");
-            return new ProjectPage(projectId, uow);
+            return new ProjectPage(await TryFindProject(projectId));
         }
 
-        public async void CreateProject(ProjectCard card)
+        [VerifyProjectCard]
+        public async void CreateProjectAsync(ProjectCard card)
         {
-            if (card == null) throw new ArgumentNullException(nameof(card));
-
             var p = new Project
             {
                 Name = card.Name,
                 //UserId = ???                 // TODO: Add userId
             };
-
             await uow.ProjectRepository.CreateAsync(p);
         }
 
-        public async void UpdateProject(ProjectCard card)
+        [VerifyProjectCard]
+        public async void UpdateProjectAsync(ProjectCard card)
         {
-            if (card == null) throw new ArgumentNullException(nameof(card));
-
-            var project = (await uow.ProjectRepository.GetByConditionAsync(x => x.Id == card.ProjectId)).FirstOrDefault();
-            if (project == null) throw new Exception("Project not found");
-
+            var project = await TryFindProject(card.ProjectId);
             project.Name = card.Name;
-
             uow.ProjectRepository.Update(project);
         }
 
-        public async void DeleteProject(int id)
+        public async void DeleteProjectAsync(int id)
+        {
+            uow.ProjectRepository.Delete(await TryFindProject(id));
+        }
+
+        private async Task<ProjectCategory> TryFindCategory(int categoryId)
+        {
+            var category = (await uow.ProjectCategoryRepository.GetByConditionAsync(x => x.Id == categoryId)).FirstOrDefault();
+            if (category == null) throw new Exception("Category not found");
+            return category;
+        }
+
+        private async Task<Project> TryFindProject(int id)
         {
             var project = (await uow.ProjectRepository.GetByConditionAsync(x => x.Id == id)).FirstOrDefault();
             if (project == null) throw new Exception("Project not found");
-            uow.ProjectRepository.Delete(project);
+            return project;
         }
 
         private List<ProjectCard> ConvertToProjectCards(IEnumerable<Project> projects)
@@ -84,7 +85,6 @@ namespace eDiary.API.Services.Tasks
             {
                 cards.Add(new ProjectCard(p));
             }
-
             return cards;
         }
     }

@@ -4,6 +4,7 @@ using System.Linq;
 using eDiary.API.Models.BusinessObjects;
 using eDiary.API.Models.EF.Interfaces;
 using eDiary.API.Models.Entities;
+using eDiary.API.Services.Tasks.Filters;
 using eDiary.API.Services.Tasks.Interfaces;
 
 namespace eDiary.API.Services.Tasks
@@ -25,26 +26,18 @@ namespace eDiary.API.Services.Tasks
 
         public async System.Threading.Tasks.Task<IEnumerable<TaskCard>> GetSectionTasksAsync(int sectionId)
         {
-            var section = (await uow.SectionRepository.GetByConditionAsync(x => x.Id == sectionId)).FirstOrDefault();
-            if (section == null) throw new Exception("Section not found");
+            Section section = await TryFindSection(sectionId);
             return ConvertToTaskCards(section.Tasks);
         }
 
         public async System.Threading.Tasks.Task<TaskCard> GetTaskAsync(int id)
         {
-            var task = (await uow.TaskRepository.GetByConditionAsync(x => x.Id == id)).FirstOrDefault();
-            if (task == null) throw new Exception("Task not found");
-            return new TaskCard(task);
+            return new TaskCard(await TryFindTask(id));
         }
 
-        public async void CreateTask(TaskCard card)
+        [VerifyTaskCard]
+        public async void CreateTaskAsync(TaskCard card)
         {
-            if (card == null) throw new ArgumentNullException(nameof(card));
-            if (card.TaskStatus == null) throw new ArgumentNullException(nameof(card.TaskStatus));
-            if (card.CardStatus == null) throw new ArgumentNullException(nameof(card.CardStatus));
-            if (card.Priority == null) throw new ArgumentNullException(nameof(card.Priority));
-            if (card.Difficulty == null) throw new ArgumentNullException(nameof(card.Difficulty));
-
             var t = new Task
             {
                 Header = card.Header,
@@ -58,20 +51,13 @@ namespace eDiary.API.Services.Tasks
                 Priority = (await uow.PriorityRepository.GetByConditionAsync(x => x.Name == card.Priority)).FirstOrDefault(),
                 Difficulty = (await uow.DifficultyRepository.GetByConditionAsync(x => x.Name == card.Difficulty)).FirstOrDefault()
             };
-
             await uow.TaskRepository.CreateAsync(t);
         }
 
-        public async void UpdateTask(TaskCard card)
+        [VerifyTaskCard]
+        public async void UpdateTaskAsync(TaskCard card)
         {
-            if (card == null) throw new ArgumentNullException(nameof(card));
-            if (card.TaskStatus == null) throw new ArgumentNullException(nameof(card.TaskStatus));
-            if (card.CardStatus == null) throw new ArgumentNullException(nameof(card.CardStatus));
-            if (card.Priority == null) throw new ArgumentNullException(nameof(card.Priority));
-            if (card.Difficulty == null) throw new ArgumentNullException(nameof(card.Difficulty));
-
-            var task = (await uow.TaskRepository.GetByConditionAsync(x => x.Id == card.TaskId)).FirstOrDefault();
-            if (task == null) throw new Exception("Task not found");
+            var task = await TryFindTask(card.TaskId);
 
             task.Header = card.Header;
             task.Description = card.Description;
@@ -87,11 +73,23 @@ namespace eDiary.API.Services.Tasks
             uow.TaskRepository.Update(task);
         }
 
-        public async void DeleteTask(int id)
+        public async void DeleteTaskAsync(int id)
+        {
+            uow.TaskRepository.Delete(await TryFindTask(id));
+        }
+
+        private async System.Threading.Tasks.Task<Section> TryFindSection(int id)
+        {
+            var section = (await uow.SectionRepository.GetByConditionAsync(x => x.Id == id)).FirstOrDefault();
+            if (section == null) throw new Exception("Section not found");
+            return section;
+        }
+
+        private async System.Threading.Tasks.Task<Task> TryFindTask(int id)
         {
             var task = (await uow.TaskRepository.GetByConditionAsync(x => x.Id == id)).FirstOrDefault();
             if (task == null) throw new Exception("Task not found");
-            uow.TaskRepository.Delete(task);
+            return task;
         }
 
         private static IEnumerable<TaskCard> ConvertToTaskCards(IEnumerable<Task> tasks)

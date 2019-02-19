@@ -5,6 +5,7 @@ using System.Threading.Tasks;
 using eDiary.API.Models.BusinessObjects;
 using eDiary.API.Models.EF.Interfaces;
 using eDiary.API.Models.Entities;
+using eDiary.API.Services.Tasks.Filters;
 using eDiary.API.Services.Tasks.Interfaces;
 
 namespace eDiary.API.Services.Tasks
@@ -21,25 +22,17 @@ namespace eDiary.API.Services.Tasks
         public async Task<IEnumerable<ProjectCategoryCard>> GetAllCategoriesAsync()
         {
             var categories = await uow.ProjectCategoryRepository.GetAllAsync();
-
-            var cards = new List<ProjectCategoryCard>();
-            foreach (var c in categories)
-            {
-                cards.Add(new ProjectCategoryCard(c));
-            }
-            return cards;
+            return ConvertToCategoryCards(categories);
         }
 
         public async Task<ProjectCategoryCard> GetCategoryAsync(int id)
         {
-            var category = (await uow.ProjectCategoryRepository.GetByConditionAsync(x => x.Id == id)).FirstOrDefault();
-            if (category == null) throw new Exception("Category not found");
-            return new ProjectCategoryCard(category);
+            return new ProjectCategoryCard(await TryFindCategory(id));
         }
 
-        public async void CreateCategory(ProjectCategoryCard card)
+        [VerifyCategoryCard]
+        public async void CreateCategoryAsync(ProjectCategoryCard card)
         {
-            if (card == null) throw new ArgumentNullException(nameof(card));
             var c = new ProjectCategory
             {
                 Name = card.Name,
@@ -48,23 +41,34 @@ namespace eDiary.API.Services.Tasks
             await uow.ProjectCategoryRepository.CreateAsync(c);
         }
 
-        public async void UpdateCategory(ProjectCategoryCard card)
+        [VerifyCategoryCard]
+        public async void UpdateCategoryAsync(ProjectCategoryCard card)
         {
-            if (card == null) throw new ArgumentNullException(nameof(card));
-
-            var category = (await uow.ProjectCategoryRepository.GetByConditionAsync(x => x.Id == card.CategoryId)).FirstOrDefault();
-            if (category == null) throw new Exception("Category not found");
-
+            var category = await TryFindCategory(card.CategoryId);
             category.Name = card.Name;
-
             uow.ProjectCategoryRepository.Update(category);
         }
 
-        public async void DeleteCategory(int id)
+        public async void DeleteCategoryAsync(int id)
+        {
+            uow.ProjectCategoryRepository.Delete(await TryFindCategory(id));
+        }
+
+        private async Task<ProjectCategory> TryFindCategory(int id)
         {
             var category = (await uow.ProjectCategoryRepository.GetByConditionAsync(x => x.Id == id)).FirstOrDefault();
             if (category == null) throw new Exception("Category not found");
-            uow.ProjectCategoryRepository.Delete(category);
+            return category;
+        }
+
+        private static List<ProjectCategoryCard> ConvertToCategoryCards(IEnumerable<ProjectCategory> categories)
+        {
+            var cards = new List<ProjectCategoryCard>();
+            foreach (var c in categories)
+            {
+                cards.Add(new ProjectCategoryCard(c));
+            }
+            return cards;
         }
     }
 }

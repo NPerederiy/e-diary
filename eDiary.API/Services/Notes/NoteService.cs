@@ -5,6 +5,7 @@ using eDiary.API.Models.BusinessObjects;
 using eDiary.API.Models.EF.Interfaces;
 using eDiary.API.Services.Notes.Interfaces;
 using System;
+using eDiary.API.Services.Notes.Filters;
 
 namespace eDiary.API.Services.Notes
 {
@@ -25,23 +26,18 @@ namespace eDiary.API.Services.Notes
 
         public async System.Threading.Tasks.Task<IEnumerable<NoteCard>> GetFolderNotesAsync(int folderId)
         {
-            var folder = (await uow.FolderRepository.GetByConditionAsync(x => x.Id == folderId)).FirstOrDefault();
-            if (folder == null) throw new Exception("Folder not found");
+            Folder folder = await TryFindFolder(folderId);
             return ConvertToNoteCards(folder.Notes);
         }
 
         public async System.Threading.Tasks.Task<NoteCard> GetNoteAsync(int id)
         {
-            var note = (await uow.NoteRepository.GetByConditionAsync(x => x.Id == id)).FirstOrDefault();
-            if (note == null) throw new Exception("Note not found");
-            return new NoteCard(note);
+            return new NoteCard(await TryFindNote(id));
         }
 
-        public async void CreateNote(NoteCard card)
+        [VerifyNoteCard]
+        public async void CreateNoteAsync(NoteCard card)
         {
-            if (card == null) throw new ArgumentNullException(nameof(card));
-            if (card.CardStatus == null) throw new ArgumentNullException(nameof(card.CardStatus));
-
             var n = new Note
             {
                 Header = card.Header,
@@ -55,13 +51,10 @@ namespace eDiary.API.Services.Notes
             await uow.NoteRepository.CreateAsync(n);
         }
 
-        public async void UpdateNote(NoteCard card)
+        [VerifyNoteCard]
+        public async void UpdateNoteAsync(NoteCard card)
         {
-            if (card == null) throw new ArgumentNullException(nameof(card));
-            if (card.CardStatus == null) throw new ArgumentNullException(nameof(card.CardStatus));
-
-            var note = (await uow.NoteRepository.GetByConditionAsync(x => x.Id == card.NoteId)).FirstOrDefault();
-            if (note == null) throw new Exception("Note not found");
+            var note = await TryFindNote(card.NoteId);
 
             note.Header = card.Header;
             note.Description = card.Description;
@@ -73,11 +66,23 @@ namespace eDiary.API.Services.Notes
             uow.NoteRepository.Update(note);
         }
 
-        public async void DeleteNote(int id)
+        public async void DeleteNoteAsync(int id)
+        {
+            uow.NoteRepository.Delete(await TryFindNote(id));
+        }
+
+        private async System.Threading.Tasks.Task<Folder> TryFindFolder(int folderId)
+        {
+            var folder = (await uow.FolderRepository.GetByConditionAsync(x => x.Id == folderId)).FirstOrDefault();
+            if (folder == null) throw new Exception("Folder not found");
+            return folder;
+        }
+
+        private async System.Threading.Tasks.Task<Note> TryFindNote(int id)
         {
             var note = (await uow.NoteRepository.GetByConditionAsync(x => x.Id == id)).FirstOrDefault();
             if (note == null) throw new Exception("Note not found");
-            uow.NoteRepository.Delete(note);
+            return note;
         }
 
         private static List<NoteCard> ConvertToNoteCards(IEnumerable<Note> notes)

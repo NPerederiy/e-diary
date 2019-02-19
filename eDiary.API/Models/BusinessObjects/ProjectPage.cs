@@ -1,7 +1,6 @@
-﻿using eDiary.API.Models.EF.Interfaces;
+﻿using eDiary.API.Models.Entities;
 using Newtonsoft.Json;
 using System.Collections.Generic;
-using System.Linq;
 
 namespace eDiary.API.Models.BusinessObjects
 {
@@ -14,15 +13,13 @@ namespace eDiary.API.Models.BusinessObjects
         [JsonProperty("sections")]
         public SectionCard[] Sections { get; set; }
 
-        public ProjectPage(int projectId, IUnitOfWork uow)
+        public ProjectPage(Project entity)
         {
-            var p = (uow.ProjectRepository.GetByConditionAsync(x => x.Id == projectId).Result).FirstOrDefault();
-            if(p == null) throw new System.Exception("Not found");
-            ProjectId = projectId;
-            Name = p.Name;
+            ProjectId = entity.Id;
+            Name = entity.Name;
 
             var cards = new List<SectionCard>();
-            foreach(var s in p.Sections)
+            foreach(var s in entity.Sections)
             {
                 cards.Add(new SectionCard(s));
             }

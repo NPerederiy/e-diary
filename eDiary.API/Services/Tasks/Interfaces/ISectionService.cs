@@ -9,8 +9,8 @@ namespace eDiary.API.Services.Tasks.Interfaces
         Task<IEnumerable<SectionCard>> GetAllSectionsAsync();
         Task<IEnumerable<SectionCard>> GetProjectSectionsAsync(int projectId);
         Task<SectionCard> GetSectionAsync(int id);
-        void CreateSection(SectionCard section);
-        void UpdateSection(SectionCard section);
-        void DeleteSection(int id);
+        void CreateSectionAsync(SectionCard section);
+        void UpdateSectionAsync(SectionCard section);
+        void DeleteSectionAsync(int id);
     }
 }

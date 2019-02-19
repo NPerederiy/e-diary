@@ -37,7 +37,7 @@ namespace eDiary.API.Controllers
         [Authenticated]
         public void CreateTask(TaskCard task)
         {
-            ts.CreateTask(task);
+            ts.CreateTaskAsync(task);
         }
 
         // PUT api/categories/1 
@@ -45,7 +45,7 @@ namespace eDiary.API.Controllers
         [Authenticated]
         public void UpdateTask(TaskCard task)
         {
-            ts.UpdateTask(task);
+            ts.UpdateTaskAsync(task);
         }
 
         // DELETE api/categories/1 
@@ -53,7 +53,7 @@ namespace eDiary.API.Controllers
         [Authenticated]
         public void DeleteTaskById(int id)
         {
-            ts.DeleteTask(id);
+            ts.DeleteTaskAsync(id);
         }
     }
 }

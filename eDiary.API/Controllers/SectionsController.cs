@@ -37,7 +37,7 @@ namespace eDiary.API.Controllers
         [Authenticated]
         public void CreateSection(SectionCard section)
         {
-            ss.CreateSection(section);
+            ss.CreateSectionAsync(section);
         }
 
         // PUT api/categories/1 
@@ -45,7 +45,7 @@ namespace eDiary.API.Controllers
         [Authenticated]
         public void UpdateSection(SectionCard section)
         {
-            ss.UpdateSection(section);
+            ss.UpdateSectionAsync(section);
         }
 
         // DELETE api/categories/1 
@@ -53,7 +53,7 @@ namespace eDiary.API.Controllers
         [Authenticated]
         public void DeleteSectionById(int id)
         {
-            ss.DeleteSection(id);
+            ss.DeleteSectionAsync(id);
         }
     }
 }

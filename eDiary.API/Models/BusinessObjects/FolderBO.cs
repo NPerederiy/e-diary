@@ -2,13 +2,13 @@
 
 namespace eDiary.API.Models.BusinessObjects
 {
-    public class Folder
+    public class FolderBO
     {
         [JsonProperty("name")]
         public string Name { get; set; }
         [JsonProperty("notes")]
         public NoteCard[] Notes { get; set; }
         [JsonProperty("folders")]
-        public Folder[] Folders { get; set; }
+        public FolderBO[] Folders { get; set; }
     }
 }

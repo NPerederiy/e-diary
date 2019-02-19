@@ -1,5 +1,7 @@
-﻿using eDiary.API.Models.EF.Interfaces;
+﻿using eDiary.API.Models.BusinessObjects;
+using eDiary.API.Models.EF.Interfaces;
 using eDiary.API.Services.Security.Exceptions;
+using eDiary.API.Services.Security.Filters;
 using eDiary.API.Services.Security.Interfaces;
 using System;
 using System.Linq;
@@ -18,15 +20,14 @@ namespace eDiary.API.Services.Security
             this.uow = uow;
         }
 
-        public async Task<IOperationResult> Authenticate(string login, string password)
+        [VerifyAuthenticationData]
+        public async Task<IOperationResult> AuthenticateAsync(AuthenticationData data)
         {
-            if (login == null) return new OperationResult(ResultCode.IncorrectUsername);
-            if (password == null) return new OperationResult(ResultCode.IncorrectPassword);
-            var enc = "";
+            string enc;
 
             try
             {
-                enc = cs.EncryptPassword(password).Content;
+                enc = cs.EncryptPassword(data.Password).Content;
             }
             catch (SecurityException ex)
             {
@@ -44,7 +45,7 @@ namespace eDiary.API.Services.Security
                 return new OperationResult(ResultCode.EncryptionError);
             }
 
-            var pas = (await uow.AppUserRepository.GetByConditionAsync(x => x.Username == login)).FirstOrDefault();
+            var pas = (await uow.AppUserRepository.GetByConditionAsync(x => x.Username == data.Username)).FirstOrDefault();
 
             if (pas == null) return new OperationResult(ResultCode.UserNotFound); 
 
@@ -58,26 +59,22 @@ namespace eDiary.API.Services.Security
             }
         }
 
-        public async Task<IOperationResult> Register(string firstName, string lastName, string password, string username, string email)
+        [VerifyRegistrationData]
+        public async Task<IOperationResult> RegisterAsync(RegistrationData data)
         {
-            if (string.IsNullOrWhiteSpace(firstName)) return new OperationResult(ResultCode.IncorrectFirstName);
-            if (string.IsNullOrWhiteSpace(username)) return new OperationResult(ResultCode.IncorrectUsername);
-            if (string.IsNullOrWhiteSpace(password)) return new OperationResult(ResultCode.IncorrectPassword);
-            if (string.IsNullOrWhiteSpace(email)) return new OperationResult(ResultCode.IncorrectEmail);
-
             {
-                var temp = (await uow.AppUserRepository.GetByConditionAsync(x => x.Username == username)).FirstOrDefault();
+                var temp = (await uow.AppUserRepository.GetByConditionAsync(x => x.Username == data.Username)).FirstOrDefault();
                 if (temp != null) return new OperationResult(ResultCode.UsernameAlreadyExists);
             }
             {
-                var temp = (await uow.UserProfileRepository.GetByConditionAsync(x => x.Email == email)).FirstOrDefault();
+                var temp = (await uow.UserProfileRepository.GetByConditionAsync(x => x.Email == data.Email)).FirstOrDefault();
                 if (temp != null) return new OperationResult(ResultCode.EmailAlreadyExists);
             }
 
             var enc = "";
             try
             {
-                enc = cs.EncryptPassword(password).Content;
+                enc = cs.EncryptPassword(data.Password).Content;
             }
             catch (SecurityException ex)
             {
@@ -97,35 +94,37 @@ namespace eDiary.API.Services.Security
 
             await uow.AppUserRepository.CreateAsync(new Models.Entities.AppUser
             {
-                Username = username,
+                Username = data.Username,
                 PasswordHash = enc,
                 UserProfile = new Models.Entities.UserProfile
                 {
-                    FirstName = firstName,
-                    LastName = lastName
+                    FirstName = data.FirstName,
+                    LastName = data.LastName,
+                    Email = data.Email
                 }
             });
 
             return new OperationResult(ResultCode.Succeeded);
         }
 
-        public async Task<IOperationResult> LogIn()
+        public async Task<IOperationResult> LogInAsync()
         {
             throw new NotImplementedException();
         }
 
-        public IOperationResult LogOut()
+        public async Task<IOperationResult> LogOutAsync()
         {
             throw new NotImplementedException();
         }
 
-        public async Task<IOperationResult> ChangePassword(string currentPassword, string newPassword)
+        [VerifyChangePasswordData]
+        public async Task<IOperationResult> ChangePasswordAsync(ChangePasswordData data)
         {
             // TODO: Add email notification about password change
             throw new NotImplementedException();
         }
 
-        public async Task<IOperationResult> ResetPassword()
+        public async Task<IOperationResult> ResetPasswordAsync()
         {
             // TODO: Add email notification about password reset
             throw new NotImplementedException();

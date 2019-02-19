@@ -38,7 +38,7 @@ namespace eDiary.API.Controllers
         [Authenticated]
         public void CreateCategory(ProjectCategoryCard category)
         {
-            pcs.CreateCategory(category);
+            pcs.CreateCategoryAsync(category);
         }
 
         // PUT api/categories/1 
@@ -46,7 +46,7 @@ namespace eDiary.API.Controllers
         [Authenticated]
         public void UpdateCategory(ProjectCategoryCard category)
         {
-            pcs.UpdateCategory(category);
+            pcs.UpdateCategoryAsync(category);
         }
 
         // DELETE api/categories/1 
@@ -54,7 +54,7 @@ namespace eDiary.API.Controllers
         [Authenticated]
         public void DeleteCategoryById(int id)
         {
-            pcs.DeleteCategory(id);
+            pcs.DeleteCategoryAsync(id);
         }
     }
 }

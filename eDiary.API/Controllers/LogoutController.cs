@@ -19,7 +19,7 @@ namespace eDiary.API.Controllers
         {
             try
             {
-                var x = identity.LogOut();
+                var x = identity.LogOutAsync();
                 if(x.Code == Services.Security.ResultCode.Succeeded)
                 {
                     return new HttpStatusCodeResult(HttpStatusCode.OK);

@@ -38,7 +38,7 @@ namespace eDiary.API.Controllers
         [Authenticated]
         public void CreateProject(ProjectCard project)
         {
-            ps.CreateProject(project);
+            ps.CreateProjectAsync(project);
         }
 
         // PUT api/projects/1 
@@ -46,7 +46,7 @@ namespace eDiary.API.Controllers
         [Authenticated]
         public void UpdateProject(ProjectCard project)
         {
-            ps.UpdateProject(project);
+            ps.UpdateProjectAsync(project);
         }
 
         // DELETE api/projects/1 
@@ -54,7 +54,7 @@ namespace eDiary.API.Controllers
         [Authenticated]
         public void DeleteProjectById(int id)
         {
-            ps.DeleteProject(id);
+            ps.DeleteProjectAsync(id);
         }
     }
 }
