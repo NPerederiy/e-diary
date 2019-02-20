@@ -29,6 +29,20 @@ namespace eDiary.API.Services.Tasks
             Section section = await TryFindSection(sectionId);
             return ConvertToTaskCards(section.Tasks);
         }
+        
+        public async System.Threading.Tasks.Task<IEnumerable<TaskCard>> GetTasksByTagAsync(int tagId)
+        {
+            var tag = await TryFindTag(tagId);
+            var tasks = new List<TaskCard>();
+
+            foreach (var x in tag.TagReferences)
+            {
+                if (x.TaskId != null)
+                    tasks.Add(await GetTaskAsync((int)x.TaskId));
+            }
+
+            return tasks.ToArray();
+        }
 
         public async System.Threading.Tasks.Task<TaskCard> GetTaskAsync(int id)
         {
@@ -90,6 +104,13 @@ namespace eDiary.API.Services.Tasks
             var task = (await uow.TaskRepository.GetByConditionAsync(x => x.Id == id)).FirstOrDefault();
             if (task == null) throw new Exception("Task not found");
             return task;
+        }
+        
+        private async System.Threading.Tasks.Task<Tag> TryFindTag(int id)
+        {
+            var tag = (await uow.TagRepository.GetByConditionAsync(x => x.Id == id)).FirstOrDefault();
+            if (tag == null) throw new Exception("Tag not found");
+            return tag;
         }
 
         private static IEnumerable<TaskCard> ConvertToTaskCards(IEnumerable<Task> tasks)

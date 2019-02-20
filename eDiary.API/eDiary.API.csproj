@@ -197,8 +197,11 @@
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Services\Calendar\CalendarService.cs" />
+    <Compile Include="Services\Core\Filters\VerifyTag.cs" />
     <Compile Include="Services\Core\Filters\VerifyUserProfile.cs" />
+    <Compile Include="Services\Core\Interfaces\ITagService.cs" />
     <Compile Include="Services\Core\Interfaces\IUserService.cs" />
+    <Compile Include="Services\Core\TagService.cs" />
     <Compile Include="Services\Core\UserService.cs" />
     <Compile Include="Services\Notes\Filters\VerifyNoteCard.cs" />
     <Compile Include="Services\Security\Exceptions\SecurityException.cs" />

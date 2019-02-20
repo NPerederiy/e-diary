@@ -1,4 +1,9 @@
-﻿namespace eDiary.API.Models.Entities
+﻿using eDiary.API.Models.EF;
+using System.Collections.Generic;
+using System.Data.Entity;
+using System.Linq;
+
+namespace eDiary.API.Models.Entities
 {
     public class Note
     {
@@ -16,15 +21,15 @@
         /// <summary>
         /// Child AttachedFiles where [AttachedFiles].[NoteId] point to this entity (FK__AttachedF__NoteI__6B24EA82)
         /// </summary>
-        public virtual System.Collections.Generic.ICollection<AttachedFile> AttachedFiles { get; set; } // AttachedFiles.FK__AttachedF__NoteI__6B24EA82
+        public virtual ICollection<AttachedFile> AttachedFiles { get; set; } // AttachedFiles.FK__AttachedF__NoteI__6B24EA82
         /// <summary>
         /// Child AttachedLinks where [AttachedLinks].[NoteId] point to this entity (FK__AttachedL__NoteI__628FA481)
         /// </summary>
-        public virtual System.Collections.Generic.ICollection<AttachedLink> AttachedLinks { get; set; } // AttachedLinks.FK__AttachedL__NoteI__628FA481
+        public virtual ICollection<AttachedLink> AttachedLinks { get; set; } // AttachedLinks.FK__AttachedL__NoteI__628FA481
         /// <summary>
         /// Child TagReferences where [TagReferences].[NoteId] point to this entity (FK__TagRefere__NoteI__6754599E)
         /// </summary>
-        public virtual System.Collections.Generic.ICollection<TagReference> TagReferences { get; set; } // TagReferences.FK__TagRefere__NoteI__6754599E
+        public virtual ICollection<TagReference> TagReferences { get; set; } // TagReferences.FK__TagRefere__NoteI__6754599E
 
         // Foreign keys
 
@@ -40,9 +45,22 @@
 
         public Note()
         {
-            AttachedFiles = new System.Collections.Generic.List<AttachedFile>();
-            AttachedLinks = new System.Collections.Generic.List<AttachedLink>();
-            TagReferences = new System.Collections.Generic.List<TagReference>();
+            AttachedFiles = new List<AttachedFile>();
+            AttachedLinks = new List<AttachedLink>();
+            TagReferences = new List<TagReference>();
+        }
+
+        public Tag[] GetTags()
+        {
+            var tags = new List<Tag>();
+            using (DbContext context = new BasicDiaryDbContext())
+            {
+                foreach (var reference in TagReferences)
+                {
+                    tags.Add(context.Set<Tag>().Where(x => x.Id == reference.TagId).FirstOrDefault());
+                }
+            }
+            return tags.ToArray();
         }
     }
 }

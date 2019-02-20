@@ -21,7 +21,7 @@ namespace eDiary.API.Services.Tasks
 
         public async Task<IEnumerable<ProjectCard>> GetAllProjectsAsync()
         {
-            return ConvertToProjectCards(await uow.ProjectRepository.GetAllAsync(););
+            return ConvertToProjectCards(await uow.ProjectRepository.GetAllAsync());
         }
 
         public async Task<IEnumerable<ProjectCard>> GetProjectsByCategoryAsync(int categoryId)

@@ -30,9 +30,23 @@ namespace eDiary.API.Services.Notes
             return ConvertToNoteCards(folder.Notes);
         }
 
-        public async System.Threading.Tasks.Task<NoteCard> GetNoteAsync(int id)
+        public async System.Threading.Tasks.Task<IEnumerable<NoteCard>> GetNotesByTagAsync(int tagId)
         {
-            return new NoteCard(await TryFindNote(id));
+            var tag = await TryFindTag(tagId);
+            var notes = new List<NoteCard>();
+
+            foreach(var x in tag.TagReferences)
+            {
+                if (x.NoteId != null)
+                    notes.Add(await GetNoteAsync((int)x.NoteId));
+            }
+
+            return notes.ToArray();
+        }
+
+        public async System.Threading.Tasks.Task<NoteCard> GetNoteAsync(int noteId)
+        {
+            return new NoteCard(await TryFindNote(noteId));
         }
 
         [VerifyNoteCard]
@@ -83,6 +97,13 @@ namespace eDiary.API.Services.Notes
             var note = (await uow.NoteRepository.GetByConditionAsync(x => x.Id == id)).FirstOrDefault();
             if (note == null) throw new Exception("Note not found");
             return note;
+        }
+
+        private async System.Threading.Tasks.Task<Tag> TryFindTag(int id)
+        {
+            var tag = (await uow.TagRepository.GetByConditionAsync(x => x.Id == id)).FirstOrDefault();
+            if (tag == null) throw new Exception("Tag not found");
+            return tag;
         }
 
         private static List<NoteCard> ConvertToNoteCards(IEnumerable<Note> notes)

@@ -1,5 +1,6 @@
 ﻿using eDiary.API.Models.Entities;
 using Newtonsoft.Json;
+using System.Linq;
 
 namespace eDiary.API.Models.BusinessObjects
 {
@@ -51,6 +52,21 @@ namespace eDiary.API.Models.BusinessObjects
             Progress = entity.Progress.Value;
             Priority = entity.Priority.Name;
             Difficulty = entity.Difficulty.Name;
+
+            Comments = (from c in entity.Comments
+                       select new CommentBO(c)).ToArray();
+
+            Files = (from f in entity.AttachedFiles
+                     select new FileBO(f)).ToArray();
+
+            Links = (from l in entity.AttachedLinks
+                     select new LinkBO(l)).ToArray();
+
+            Subtasks = (from s in entity.Subtasks
+                        select new SubtaskBO(s)).ToArray();
+
+            Tags = (from t in entity.GetTags()
+                    select new TagBO(t)).ToArray();
         }
     }
 }

@@ -2,6 +2,7 @@
 using eDiary.API.Services.Security;
 using eDiary.API.Services.Security.Interfaces;
 using System.Net;
+using System.Threading.Tasks;
 using System.Web.Mvc;
 
 namespace eDiary.API.Controllers
@@ -17,9 +18,9 @@ namespace eDiary.API.Controllers
 
         // POST api/login 
         [HttpPost]
-        public ActionResult Authenticate(AuthenticationData data)
+        public async Task<ActionResult> AuthenticateAsync(AuthenticationData data)
         {
-            var x = identity.Authenticate(data.Username, data.Password).Result;
+            var x = await identity.AuthenticateAsync(data);
             if (x.Code == ResultCode.Succeeded)
             {
                 //HttpContext.Response.Cookies["id"].Value = "ca-4353w";

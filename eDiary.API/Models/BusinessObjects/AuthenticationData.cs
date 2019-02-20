@@ -8,5 +8,11 @@ namespace eDiary.API.Models.BusinessObjects
         public string Username { get; set; }
         [JsonProperty("password")]
         public string Password { get; set; }
+
+        public AuthenticationData(string username, string password)
+        {
+            Username = username;
+            Password = password;
+        }
     }
 }

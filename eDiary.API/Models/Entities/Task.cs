@@ -1,4 +1,9 @@
-﻿namespace eDiary.API.Models.Entities
+﻿using eDiary.API.Models.EF;
+using System.Collections.Generic;
+using System.Data.Entity;
+using System.Linq;
+
+namespace eDiary.API.Models.Entities
 {
     public class Task
     {
@@ -20,23 +25,23 @@
         /// <summary>
         /// Child AttachedFiles where [AttachedFiles].[TaskId] point to this entity (FK__AttachedF__TaskI__6A30C649)
         /// </summary>
-        public virtual System.Collections.Generic.ICollection<AttachedFile> AttachedFiles { get; set; } // AttachedFiles.FK__AttachedF__TaskI__6A30C649
+        public virtual ICollection<AttachedFile> AttachedFiles { get; set; } // AttachedFiles.FK__AttachedF__TaskI__6A30C649
         /// <summary>
         /// Child AttachedLinks where [AttachedLinks].[TaskId] point to this entity (FK__AttachedL__TaskI__619B8048)
         /// </summary>
-        public virtual System.Collections.Generic.ICollection<AttachedLink> AttachedLinks { get; set; } // AttachedLinks.FK__AttachedL__TaskI__619B8048
+        public virtual ICollection<AttachedLink> AttachedLinks { get; set; } // AttachedLinks.FK__AttachedL__TaskI__619B8048
         /// <summary>
         /// Child Comments where [Comments].[TaskId] point to this entity (FK__Comments__TaskId__5812160E)
         /// </summary>
-        public virtual System.Collections.Generic.ICollection<Comment> Comments { get; set; } // Comments.FK__Comments__TaskId__5812160E
+        public virtual ICollection<Comment> Comments { get; set; } // Comments.FK__Comments__TaskId__5812160E
         /// <summary>
         /// Child Subtasks where [Subtasks].[TaskId] point to this entity (FK__Subtasks__TaskId__5535A963)
         /// </summary>
-        public virtual System.Collections.Generic.ICollection<Subtask> Subtasks { get; set; } // Subtasks.FK__Subtasks__TaskId__5535A963
+        public virtual ICollection<Subtask> Subtasks { get; set; } // Subtasks.FK__Subtasks__TaskId__5535A963
         /// <summary>
         /// Child TagReferences where [TagReferences].[TaskId] point to this entity (FK__TagRefere__TaskI__66603565)
         /// </summary>
-        public virtual System.Collections.Generic.ICollection<TagReference> TagReferences { get; set; } // TagReferences.FK__TagRefere__TaskI__66603565
+        public virtual ICollection<TagReference> TagReferences { get; set; } // TagReferences.FK__TagRefere__TaskI__66603565
 
         // Foreign keys
 
@@ -68,11 +73,24 @@
         public Task()
         {
             Progress = 0;
-            AttachedFiles = new System.Collections.Generic.List<AttachedFile>();
-            AttachedLinks = new System.Collections.Generic.List<AttachedLink>();
-            Comments = new System.Collections.Generic.List<Comment>();
-            Subtasks = new System.Collections.Generic.List<Subtask>();
-            TagReferences = new System.Collections.Generic.List<TagReference>();
+            AttachedFiles = new List<AttachedFile>();
+            AttachedLinks = new List<AttachedLink>();
+            Comments = new List<Comment>();
+            Subtasks = new List<Subtask>();
+            TagReferences = new List<TagReference>();
+        }
+        
+        public Tag[] GetTags()
+        {
+            var tags = new List<Tag>();
+            using (DbContext context = new BasicDiaryDbContext())
+            {
+                foreach (var reference in TagReferences)
+                {
+                    tags.Add(context.Set<Tag>().Where(x => x.Id == reference.TagId).FirstOrDefault());
+                }
+            }
+            return tags.ToArray();
         }
     }
 }

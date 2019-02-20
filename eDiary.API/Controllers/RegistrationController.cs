@@ -2,6 +2,7 @@
 using eDiary.API.Services.Security;
 using eDiary.API.Services.Security.Interfaces;
 using System.Net;
+using System.Threading.Tasks;
 using System.Web.Mvc;
 
 namespace eDiary.API.Controllers
@@ -17,9 +18,9 @@ namespace eDiary.API.Controllers
 
         // POST api/registration 
         [HttpPost]
-        public ActionResult Register(RegistrationData data)
+        public async Task<ActionResult> RegisterAsync(RegistrationData data)
         {
-            var x = identity.Register(data.FirstName, data.LastName, data.Password, data.Username, data.Email).Result;
+            var x = await identity.RegisterAsync(data);
             if(x.Code == ResultCode.Succeeded)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.OK);

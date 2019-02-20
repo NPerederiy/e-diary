@@ -14,5 +14,14 @@ namespace eDiary.API.Models.BusinessObjects
         public string Password { get; set; }
         [JsonProperty("email")]
         public string Email { get; set; }
+
+        public RegistrationData(string firstName, string lastName, string username, string password, string email)
+        {
+            FirstName = firstName;
+            LastName = lastName;
+            Username = username;
+            Password = password;
+            Email = email;
+        }
     }
 }

@@ -1,5 +1,6 @@
 ﻿using eDiary.API.Services.Security.Interfaces;
 using System.Net;
+using System.Threading.Tasks;
 using System.Web.Mvc;
 
 namespace eDiary.API.Controllers
@@ -15,11 +16,11 @@ namespace eDiary.API.Controllers
 
         // POST api/logout
         [HttpPost]
-        public ActionResult Logout()
+        public async Task<ActionResult> LogoutAsync()
         {
             try
             {
-                var x = identity.LogOutAsync();
+                var x = await identity.LogOutAsync();
                 if(x.Code == Services.Security.ResultCode.Succeeded)
                 {
                     return new HttpStatusCodeResult(HttpStatusCode.OK);
