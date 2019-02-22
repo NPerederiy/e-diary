@@ -62,10 +62,10 @@ namespace eDiary.API.Services.Security
         [VerifyRegistrationData]
         public async Task<IOperationResult> RegisterAsync(RegistrationData data)
         {
-            {
-                var temp = (await uow.AppUserRepository.GetByConditionAsync(x => x.Username == data.Username)).FirstOrDefault();
-                if (temp != null) return new OperationResult(ResultCode.UsernameAlreadyExists);
-            }
+            //{
+            //    var temp = (await uow.AppUserRepository.GetByConditionAsync(x => x.Username == data.Username)).FirstOrDefault();
+            //    if (temp != null) return new OperationResult(ResultCode.UsernameAlreadyExists);
+            //}
             {
                 var temp = (await uow.UserProfileRepository.GetByConditionAsync(x => x.Email == data.Email)).FirstOrDefault();
                 if (temp != null) return new OperationResult(ResultCode.EmailAlreadyExists);
@@ -92,9 +92,9 @@ namespace eDiary.API.Services.Security
                 return new OperationResult(ResultCode.EncryptionError);
             }
 
-            await uow.AppUserRepository.CreateAsync(new Models.Entities.AppUser
+            var user = new Models.Entities.AppUser
             {
-                Username = data.Username,
+                Username = "undefined" /*data.Username*/,
                 PasswordHash = enc,
                 UserProfile = new Models.Entities.UserProfile
                 {
@@ -102,9 +102,15 @@ namespace eDiary.API.Services.Security
                     LastName = data.LastName,
                     Email = data.Email
                 }
-            });
+            };
 
-            return new OperationResult(ResultCode.Succeeded);
+            await uow.AppUserRepository.CreateAsync(user);
+            
+            user.Username = cs.EncryptSHA256(user.UserProlifeId.ToString()).Content;
+
+            uow.AppUserRepository.Update(user);
+
+            return new OperationResult(ResultCode.Succeeded, "", user.Username);
         }
 
         public async Task<IOperationResult> LogInAsync()

@@ -20,6 +20,7 @@ namespace eDiary.API.Util
         {
             // EF 
             Bind<IUnitOfWork>().To<UnitOfWork<BasicDiaryDbContext>>();
+            Bind(typeof(IRepository<>)).To(typeof(Repository<>));
 
             // Core
             Bind<IUserService>().To<UserService>();

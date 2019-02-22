@@ -8,8 +8,8 @@ namespace eDiary.API.Services.Core.Interfaces
     {
         Task<IEnumerable<UserProfileBO>> GetAllUserProfilesAsync();
         Task<UserProfileBO> GetUserProfileAsync(int id);
-        void CreateUserProfileAsync(UserProfileBO profile);
-        void UpdateUserProfileAsync(UserProfileBO profile);
-        void DeleteUserProfileAsync(int id);
+        Task CreateUserProfileAsync(UserProfileBO profile);
+        Task UpdateUserProfileAsync(UserProfileBO profile);
+        Task DeleteUserProfileAsync(int id);
     }
 }

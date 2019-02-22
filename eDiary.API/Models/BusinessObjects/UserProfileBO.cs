@@ -1,5 +1,6 @@
 ﻿using eDiary.API.Models.Entities;
 using Newtonsoft.Json;
+using System.Linq;
 
 namespace eDiary.API.Models.BusinessObjects
 {
@@ -7,6 +8,8 @@ namespace eDiary.API.Models.BusinessObjects
     {
         [JsonProperty("userId")]
         public int UserId { get; set; }
+        [JsonProperty("username")]
+        public string Username { get; set; }
         [JsonProperty("firstName")]
         public string FirstName { get; set; }
         [JsonProperty("lastName")]
@@ -19,6 +22,7 @@ namespace eDiary.API.Models.BusinessObjects
         public UserProfileBO(UserProfile entity)
         {
             UserId = entity.Id;
+            Username = entity.AppUsers.First().Username;
             FirstName = entity.FirstName;
             LastName = entity.LastName;
             Email = entity.Email;

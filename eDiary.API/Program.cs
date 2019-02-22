@@ -1,4 +1,5 @@
-﻿using Microsoft.Owin.Hosting;
+﻿using eDiary.API.Util;
+using Microsoft.Owin.Hosting;
 using System;
 
 namespace eDiary.API
@@ -7,12 +8,15 @@ namespace eDiary.API
     {
         static void Main(string[] args)
         {
-            using (WebApp.Start<Startup>("http://localhost:8080"))
+            NinjectKernel.SetupKernel();
+            using (WebApp.Start<Startup>("http://localhost:8181"))
             {
+                Console.ForegroundColor = ConsoleColor.White;
                 Console.WriteLine("Local server is running.");
-                Console.WriteLine("Press any key to quit.");
+                Console.WriteLine("Press any key to quit.\n");
                 Console.ReadKey();
             }
         }
+
     }
 }

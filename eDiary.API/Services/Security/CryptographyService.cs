@@ -24,6 +24,13 @@ namespace eDiary.API.Services.Security
         }
 
         [VerifyStringArgument]
+        public IOperationResult EncryptSHA256(string data)
+        {
+            SHA256 sha256Hash = SHA256.Create();
+            return new OperationResult(ResultCode.Succeeded, "", GetHash(sha256Hash, data));
+        }
+
+        [VerifyStringArgument]
         public IOperationResult EncryptPassword(string pass)
         {
             if (pass.Length != controlNumber) throw new SecurityException("Incorrect password length", "password");

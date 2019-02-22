@@ -31,7 +31,7 @@ namespace eDiary.API.Services.Core
         }
 
         [VerifyUserProfile]
-        public async void CreateUserProfileAsync(UserProfileBO profile)
+        public async System.Threading.Tasks.Task CreateUserProfileAsync(UserProfileBO profile)
         {
             var p = new UserProfile
             {
@@ -43,7 +43,7 @@ namespace eDiary.API.Services.Core
         }
 
         [VerifyUserProfile]
-        public async void UpdateUserProfileAsync(UserProfileBO profile)
+        public async System.Threading.Tasks.Task UpdateUserProfileAsync(UserProfileBO profile)
         {
             var p = await TryFindUserProfile(profile.UserId);
 
@@ -55,7 +55,7 @@ namespace eDiary.API.Services.Core
             uow.UserProfileRepository.Update(p);
         }
 
-        public async void DeleteUserProfileAsync(int id)
+        public async System.Threading.Tasks.Task DeleteUserProfileAsync(int id)
         {
             uow.UserProfileRepository.Delete(await TryFindUserProfile(id));
         }
