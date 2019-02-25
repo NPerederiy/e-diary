@@ -10,8 +10,8 @@ namespace eDiary.API.Services.Tasks.Interfaces
         Task<IEnumerable<TaskCard>> GetSectionTasksAsync(int sectionId);
         Task<IEnumerable<TaskCard>> GetTasksByTagAsync(int tagId);
         Task<TaskCard> GetTaskAsync(int taskId);
-        void CreateTaskAsync(TaskCard task);
-        void UpdateTaskAsync(TaskCard task);
-        void DeleteTaskAsync(int taskId);
+        Task CreateTaskAsync(TaskCard task);
+        Task UpdateTaskAsync(TaskCard task);
+        Task DeleteTaskAsync(int taskId);
     }
 }

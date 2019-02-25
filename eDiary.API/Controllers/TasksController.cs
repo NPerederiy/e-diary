@@ -1,59 +1,65 @@
 ﻿using eDiary.API.Filters;
 using eDiary.API.Models.BusinessObjects;
 using eDiary.API.Services.Tasks.Interfaces;
+using eDiary.API.Util;
+using Ninject;
 using System.Collections.Generic;
 using System.Threading.Tasks;
-using System.Web.Mvc;
+using System.Web.Http;
 
 namespace eDiary.API.Controllers
 {
-    public class TasksController : Controller
+    [Authenticated]
+    [ConsoleLogger]
+    [ExceptionFilter]
+    public class TasksController : ApiController
     {
         private readonly ITaskService ts;
 
-        public TasksController(ITaskService ts)
+        public TasksController()
         {
-            this.ts = ts;
+            ts = NinjectKernel.Kernel.Get<ITaskService>();
         }
-
-        // GET api/categories
+        
         [HttpGet]
-        [Authenticated]
-        public async Task<IEnumerable<TaskCard>> GetAllTasks()
+        public async Task<IEnumerable<TaskCard>> GetAllTasksAsync()
         {
             return await ts.GetAllTasksAsync();
         }
-
-        // GET api/categories/1
+        
         [HttpGet]
-        [Authenticated]
-        public async Task<TaskCard> GetTaskById(int id)
+        public async Task<TaskCard> GetTaskByIdAsync(int? id)
         {
-            return await ts.GetTaskAsync(id);
+            Validate(id);
+            return await ts.GetTaskAsync((int)id);
         }
-
-        // POST api/categories 
+        
+        [HttpGet]
+        public async Task<IEnumerable<TaskCard>> GetTasksByTagAsync(int? tag)
+        {
+            Validate(tag);
+            return await ts.GetTasksByTagAsync((int)tag);
+        }
+        
         [HttpPost]
-        [Authenticated]
-        public void CreateTask(TaskCard task)
+        public async Task CreateTaskAsync(TaskCard task)
         {
-            ts.CreateTaskAsync(task);
+            Validate(task);
+            await ts.CreateTaskAsync(task);
         }
-
-        // PUT api/categories/1 
+        
         [HttpPut]
-        [Authenticated]
-        public void UpdateTask(TaskCard task)
+        public async Task UpdateTaskAsync(TaskCard task)
         {
-            ts.UpdateTaskAsync(task);
+            Validate(task);
+            await ts.UpdateTaskAsync(task);
         }
-
-        // DELETE api/categories/1 
+        
         [HttpDelete]
-        [Authenticated]
-        public void DeleteTaskById(int id)
+        public async Task DeleteTaskByIdAsync(int? id)
         {
-            ts.DeleteTaskAsync(id);
+            Validate(id);
+            await ts.DeleteTaskAsync((int)id);
         }
     }
 }

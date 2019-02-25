@@ -1,5 +1,6 @@
 ﻿using eDiary.API.Models.Entities;
 using Newtonsoft.Json;
+using System.ComponentModel.DataAnnotations;
 using System.Linq;
 
 namespace eDiary.API.Models.BusinessObjects
@@ -8,14 +9,24 @@ namespace eDiary.API.Models.BusinessObjects
     {
         [JsonProperty("userId")]
         public int UserId { get; set; }
+
+        [Required(ErrorMessage = "Username is required")]
         [JsonProperty("username")]
         public string Username { get; set; }
+
+        [Required(ErrorMessage = "First name is required")]
         [JsonProperty("firstName")]
         public string FirstName { get; set; }
+
+        [Required(ErrorMessage = "Last name is required")]
         [JsonProperty("lastName")]
         public string LastName { get; set; }
+
+        [Required(ErrorMessage = "Email is required")]
+        [EmailAddress(ErrorMessage = "The email format is not valid")]
         [JsonProperty("email")]
         public string Email { get; set; }
+
         [JsonProperty("profileImage")]
         public string ProfileImage { get; set; }
 

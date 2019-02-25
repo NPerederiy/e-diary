@@ -1,8 +1,7 @@
 ﻿using eDiary.API.Models.BusinessObjects;
 using eDiary.API.Models.EF.Interfaces;
-using eDiary.API.Services.Security.Exceptions;
-using eDiary.API.Services.Security.Filters;
 using eDiary.API.Services.Security.Interfaces;
+using eDiary.API.Services.Validation;
 using System;
 using System.Linq;
 using System.Threading.Tasks;
@@ -19,31 +18,31 @@ namespace eDiary.API.Services.Security
             this.cs = cs;
             this.uow = uow;
         }
-
-        [VerifyAuthenticationData]
+        
         public async Task<IOperationResult> AuthenticateAsync(AuthenticationData data)
         {
+            Validate.NotNull(data, "Authentication data");
             string enc;
 
-            try
-            {
+            //try
+            //{
                 enc = cs.EncryptPassword(data.Password).Content;
-            }
-            catch (SecurityException ex)
-            {
-                if (ex.ParamName == "password")
-                {
-                    return new OperationResult(ResultCode.IncorrectPassword);
-                }
-                else
-                {
-                    return new OperationResult(ResultCode.EncryptionError);
-                }
-            }
-            catch (Exception)
-            {
-                return new OperationResult(ResultCode.EncryptionError);
-            }
+            //}
+            //catch (SecurityException ex)
+            //{
+            //    if (ex.ParamName == "password")
+            //    {
+            //        return new OperationResult(ResultCode.IncorrectPassword);
+            //    }
+            //    else
+            //    {
+            //        return new OperationResult(ResultCode.EncryptionError);
+            //    }
+            //}
+            //catch (Exception)
+            //{
+            //    return new OperationResult(ResultCode.EncryptionError);
+            //}
 
             var pas = (await uow.AppUserRepository.GetByConditionAsync(x => x.Username == data.Username)).FirstOrDefault();
 
@@ -58,10 +57,10 @@ namespace eDiary.API.Services.Security
                 return new OperationResult(ResultCode.PasswordsNotMatch);
             }
         }
-
-        [VerifyRegistrationData]
+        
         public async Task<IOperationResult> RegisterAsync(RegistrationData data)
         {
+            Validate.NotNull(data, "Registration data");
             //{
             //    var temp = (await uow.AppUserRepository.GetByConditionAsync(x => x.Username == data.Username)).FirstOrDefault();
             //    if (temp != null) return new OperationResult(ResultCode.UsernameAlreadyExists);
@@ -72,25 +71,25 @@ namespace eDiary.API.Services.Security
             }
 
             var enc = "";
-            try
-            {
+            //try
+            //{
                 enc = cs.EncryptPassword(data.Password).Content;
-            }
-            catch (SecurityException ex)
-            {
-                if (ex.ParamName == "password")
-                {
-                    return new OperationResult(ResultCode.IncorrectPassword);
-                }
-                else
-                {
-                    return new OperationResult(ResultCode.EncryptionError);
-                }
-            }
-            catch (Exception)
-            {
-                return new OperationResult(ResultCode.EncryptionError);
-            }
+            //}
+            //catch (SecurityException ex)
+            //{
+            //    if (ex.ParamName == "password")
+            //    {
+            //        return new OperationResult(ResultCode.IncorrectPassword);
+            //    }
+            //    else
+            //    {
+            //        return new OperationResult(ResultCode.EncryptionError);
+            //    }
+            //}
+            //catch (Exception)
+            //{
+            //    return new OperationResult(ResultCode.EncryptionError);
+            //}
 
             var user = new Models.Entities.AppUser
             {
@@ -122,10 +121,10 @@ namespace eDiary.API.Services.Security
         {
             throw new NotImplementedException();
         }
-
-        [VerifyChangePasswordData]
+        
         public async Task<IOperationResult> ChangePasswordAsync(ChangePasswordData data)
         {
+            Validate.NotNull(data, "Change password data");
             // TODO: Add email notification about password change
             throw new NotImplementedException();
         }

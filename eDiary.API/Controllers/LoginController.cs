@@ -1,35 +1,38 @@
-﻿using eDiary.API.Models.BusinessObjects;
-using eDiary.API.Services.Security;
+﻿using eDiary.API.Filters;
+using eDiary.API.Models.BusinessObjects;
 using eDiary.API.Services.Security.Interfaces;
-using System.Net;
+using eDiary.API.Util;
+using Ninject;
 using System.Threading.Tasks;
-using System.Web.Mvc;
+using System.Web.Http;
 
 namespace eDiary.API.Controllers
 {
-    public class LoginController : Controller
+    [ConsoleLogger]
+    [ExceptionFilter]
+    public class LoginController : ApiController
     {
         private readonly IIdentityService identity;
 
-        public LoginController(IIdentityService identity)
+        public LoginController()
         {
-            this.identity = identity;
+            identity = NinjectKernel.Kernel.Get<IIdentityService>();
         }
-
-        // POST api/login 
+        
         [HttpPost]
-        public async Task<ActionResult> AuthenticateAsync(AuthenticationData data)
+        public async Task/*<ActionResult>*/ AuthenticateAsync(AuthenticationData data)
         {
+            Validate(data);
             var x = await identity.AuthenticateAsync(data);
-            if (x.Code == ResultCode.Succeeded)
-            {
-                //HttpContext.Response.Cookies["id"].Value = "ca-4353w";
-                return new HttpStatusCodeResult(HttpStatusCode.OK);
-            }
-            else
-            {
-                return new HttpStatusCodeResult(HttpStatusCode.BadRequest, x.Message);
-            }          
+            //if (x.Code == ResultCode.Succeeded)
+            //{
+            //    //HttpContext.Response.Cookies["id"].Value = "ca-4353w";
+            //    return new HttpStatusCodeResult(HttpStatusCode.OK);
+            //}
+            //else
+            //{
+            //    return new HttpStatusCodeResult(HttpStatusCode.BadRequest, x.Message);
+            //}          
         }
     }
 }

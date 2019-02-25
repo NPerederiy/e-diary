@@ -5,8 +5,8 @@ using System.Threading.Tasks;
 using eDiary.API.Models.BusinessObjects;
 using eDiary.API.Models.EF.Interfaces;
 using eDiary.API.Models.Entities;
-using eDiary.API.Services.Core.Filters;
 using eDiary.API.Services.Core.Interfaces;
+using eDiary.API.Services.Validation;
 
 namespace eDiary.API.Services.Core
 {
@@ -29,10 +29,10 @@ namespace eDiary.API.Services.Core
         {
             return new UserProfileBO(await TryFindUserProfile(id));
         }
-
-        [VerifyUserProfile]
+        
         public async System.Threading.Tasks.Task CreateUserProfileAsync(UserProfileBO profile)
         {
+            Validate.NotNull(profile, "User profile");
             var p = new UserProfile
             {
                 FirstName = profile.FirstName,
@@ -41,10 +41,10 @@ namespace eDiary.API.Services.Core
             };
             await uow.UserProfileRepository.CreateAsync(p);
         }
-
-        [VerifyUserProfile]
+        
         public async System.Threading.Tasks.Task UpdateUserProfileAsync(UserProfileBO profile)
         {
+            Validate.NotNull(profile, "User profile");
             var p = await TryFindUserProfile(profile.UserId);
 
             p.FirstName = profile.FirstName;

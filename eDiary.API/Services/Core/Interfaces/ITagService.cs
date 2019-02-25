@@ -8,8 +8,8 @@ namespace eDiary.API.Services.Core.Interfaces
     {
         Task<IEnumerable<TagBO>> GetAllTagsAsync();
         Task<TagBO> GetTagAsync(int id);
-        void CreateTagAsync(TagBO tag);
-        void UpdateTagAsync(TagBO tag);
-        void DeleteTagAsync(int id);
+        Task CreateTagAsync(TagBO tag);
+        Task UpdateTagAsync(TagBO tag);
+        Task DeleteTagAsync(int id);
     }
 }

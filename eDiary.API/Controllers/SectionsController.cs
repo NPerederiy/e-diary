@@ -1,59 +1,57 @@
 ﻿using eDiary.API.Filters;
 using eDiary.API.Models.BusinessObjects;
 using eDiary.API.Services.Tasks.Interfaces;
+using eDiary.API.Util;
+using Ninject;
 using System.Collections.Generic;
 using System.Threading.Tasks;
-using System.Web.Mvc;
+using System.Web.Http;
 
 namespace eDiary.API.Controllers
 {
-    public class SectionsController : Controller
+    [Authenticated]
+    [ConsoleLogger]
+    [ExceptionFilter]
+    public class SectionsController : ApiController
     {
         private readonly ISectionService ss;
 
-        public SectionsController(ISectionService ss)
+        public SectionsController()
         {
-            this.ss = ss;
+            ss = NinjectKernel.Kernel.Get<ISectionService>();
         }
-
-        // GET api/categories
+        
         [HttpGet]
-        [Authenticated]
-        public async Task<IEnumerable<SectionCard>> GetAllSections()
+        public async Task<IEnumerable<SectionCard>> GetAllSectionsAsync()
         {
             return await ss.GetAllSectionsAsync();
         }
-
-        // GET api/categories/1
+        
         [HttpGet]
-        [Authenticated]
-        public async Task<SectionCard> GetSectionById(int id)
+        public async Task<SectionCard> GetSectionByIdAsync(int? id)
         {
-            return await ss.GetSectionAsync(id);
+            Validate(id);
+            return await ss.GetSectionAsync((int)id);
         }
-
-        // POST api/categories 
+        
         [HttpPost]
-        [Authenticated]
-        public void CreateSection(SectionCard section)
+        public async Task CreateSectionAsync(SectionCard section)
         {
-            ss.CreateSectionAsync(section);
+            Validate(section);
+            await ss.CreateSectionAsync(section);
         }
-
-        // PUT api/categories/1 
+        
         [HttpPut]
-        [Authenticated]
-        public void UpdateSection(SectionCard section)
+        public async Task UpdateSectionAsync(SectionCard section)
         {
-            ss.UpdateSectionAsync(section);
+            Validate(section);
+            await ss.UpdateSectionAsync(section);
         }
-
-        // DELETE api/categories/1 
+        
         [HttpDelete]
-        [Authenticated]
-        public void DeleteSectionById(int id)
+        public async Task DeleteSectionByIdAsync(int? id)
         {
-            ss.DeleteSectionAsync(id);
+            await ss.DeleteSectionAsync((int)id);
         }
     }
 }

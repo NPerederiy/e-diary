@@ -1,17 +1,24 @@
 ﻿using eDiary.API.Models.Entities;
 using Newtonsoft.Json;
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
 
 namespace eDiary.API.Models.BusinessObjects
 {
     public class SectionCard
     {
+        [Required(ErrorMessage = "Name is required")]
         [JsonProperty("name")]
         public string Name { get; set; }
+
+        [Required(ErrorMessage = "Section ID is required")]
         [JsonProperty("sectionId")]
         public int SectionId { get; set; }
+
+        [Required(ErrorMessage = "Project ID is required")]
         [JsonProperty("projectId")]
         public int ProjectId { get; set; }
+        
         [JsonProperty("tasks")]
         public TaskCard[] Tasks { get; set; }
 

@@ -1,7 +1,7 @@
-﻿using eDiary.API.Services.Security.Exceptions;
-using eDiary.API.Services.Security.Interfaces;
+﻿using eDiary.API.Services.Security.Interfaces;
+using System;
 
-namespace eDiary.API.Services.Security 
+namespace eDiary.API.Services.Security
 {
     public class OperationResult : IOperationResult
     {
@@ -17,7 +17,7 @@ namespace eDiary.API.Services.Security
         public OperationResult(ResultCode code, string message)
         {
             Code = code;
-            Message = message ?? throw new SecurityException("Message can not be NULL");
+            Message = message ?? throw new Exception("Message can not be NULL");
         }
 
         public OperationResult(ResultCode code, string message, string content)

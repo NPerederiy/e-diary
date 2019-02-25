@@ -1,7 +1,4 @@
-﻿using eDiary.API.Models.EF;
-using System.Collections.Generic;
-using System.Data.Entity;
-using System.Linq;
+﻿using System.Collections.Generic;
 
 namespace eDiary.API.Models.Entities
 {
@@ -48,19 +45,6 @@ namespace eDiary.API.Models.Entities
             AttachedFiles = new List<AttachedFile>();
             AttachedLinks = new List<AttachedLink>();
             TagReferences = new List<TagReference>();
-        }
-
-        public Tag[] GetTags()
-        {
-            var tags = new List<Tag>();
-            using (DbContext context = new BasicDiaryDbContext())
-            {
-                foreach (var reference in TagReferences)
-                {
-                    tags.Add(context.Set<Tag>().Where(x => x.Id == reference.TagId).FirstOrDefault());
-                }
-            }
-            return tags.ToArray();
         }
     }
 }

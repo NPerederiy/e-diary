@@ -1,5 +1,6 @@
 ﻿using eDiary.API.Models.Entities;
 using Newtonsoft.Json;
+using System.ComponentModel.DataAnnotations;
 
 namespace eDiary.API.Models.BusinessObjects
 {
@@ -7,6 +8,8 @@ namespace eDiary.API.Models.BusinessObjects
     {
         [JsonProperty("tagId")]
         public int TagId { get; set; }
+
+        [Required(ErrorMessage = "Name is required")]
         [JsonProperty("name")]
         public string Name { get; set; }
 

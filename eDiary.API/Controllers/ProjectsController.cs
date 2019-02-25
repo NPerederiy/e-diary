@@ -1,60 +1,59 @@
 ﻿using eDiary.API.Filters;
 using eDiary.API.Models.BusinessObjects;
 using eDiary.API.Services.Tasks.Interfaces;
+using eDiary.API.Util;
+using Ninject;
 using System.Collections.Generic;
 using System.Threading.Tasks;
-using System.Web.Mvc;
+using System.Web.Http;
 
 namespace eDiary.API.Controllers
 {
     [RoutePrefix("projects")]
-    public class ProjectsController : Controller
+    [Authenticated]
+    [ConsoleLogger]
+    [ExceptionFilter]
+    public class ProjectsController : ApiController
     {
         private readonly IProjectService ps;
 
-        public ProjectsController(IProjectService ps)
+        public ProjectsController()
         {
-            this.ps = ps;
+            ps = NinjectKernel.Kernel.Get<IProjectService>();
         }
-
-        // GET api/projects
+        
         [HttpGet]
-        [Authenticated]
         public async Task<IEnumerable<ProjectCard>> GetAllProjects()
         {
             return await ps.GetAllProjectsAsync();
         }
-
-        // GET api/projects/1
+        
         [HttpGet]
-        [Authenticated]
-        public async Task<ProjectCard> GetProjectById(int id)
+        public async Task<ProjectCard> GetProjectById(int? id)
         {
-            return await ps.GetProjectCardAsync(id);
+            Validate(id);
+            return await ps.GetProjectCardAsync((int)id);
         }
-
-        // POST api/projects 
+        
         [HttpPost]
-        [Authenticated]
-        public void CreateProject(ProjectCard project)
+        public async Task CreateProject(ProjectCard project)
         {
-            ps.CreateProjectAsync(project);
+            Validate(project);
+            await ps.CreateProjectAsync(project);
         }
-
-        // PUT api/projects/1 
+        
         [HttpPut]
-        [Authenticated]
-        public void UpdateProject(ProjectCard project)
+        public async Task UpdateProject(ProjectCard project)
         {
-            ps.UpdateProjectAsync(project);
+            Validate(project);
+            await ps.UpdateProjectAsync(project);
         }
-
-        // DELETE api/projects/1 
+        
         [HttpDelete]
-        [Authenticated]
-        public void DeleteProjectById(int id)
+        public async Task DeleteProjectById(int? id)
         {
-            ps.DeleteProjectAsync(id);
+            Validate(id);
+            await ps.DeleteProjectAsync((int)id);
         }
     }
 }

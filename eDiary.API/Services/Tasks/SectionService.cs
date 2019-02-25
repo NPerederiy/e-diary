@@ -5,8 +5,8 @@ using System.Threading.Tasks;
 using eDiary.API.Models.BusinessObjects;
 using eDiary.API.Models.EF.Interfaces;
 using eDiary.API.Models.Entities;
-using eDiary.API.Services.Tasks.Filters;
 using eDiary.API.Services.Tasks.Interfaces;
+using eDiary.API.Services.Validation;
 
 namespace eDiary.API.Services.Tasks
 {
@@ -31,32 +31,31 @@ namespace eDiary.API.Services.Tasks
             return ConvertToSectionCards(project.Sections);
         }
 
-
         public async Task<SectionCard> GetSectionAsync(int id)
         {
             return new SectionCard(await TryFindSection(id));
         }
-
-        [VerifySectionCard]
-        public async void CreateSectionAsync(SectionCard section)
+        
+        public async System.Threading.Tasks.Task CreateSectionAsync(SectionCard card)
         {
+            Validate.NotNull(card, "Section card");
             var s = new Section
             {
-                Name = section.Name,
-                ProjectId = section.ProjectId
+                Name = card.Name,
+                ProjectId = card.ProjectId
             };
             await uow.SectionRepository.CreateAsync(s);
         }
-
-        [VerifySectionCard]
-        public async void UpdateSectionAsync(SectionCard card)
+        
+        public async System.Threading.Tasks.Task UpdateSectionAsync(SectionCard card)
         {
+            Validate.NotNull(card, "Section card");
             var section = await TryFindSection(card.SectionId);
             section.Name = card.Name;
             uow.SectionRepository.Update(section);
         }
 
-        public async void DeleteSectionAsync(int id)
+        public async System.Threading.Tasks.Task DeleteSectionAsync(int id)
         {
             uow.SectionRepository.Delete(await TryFindSection(id));
         }

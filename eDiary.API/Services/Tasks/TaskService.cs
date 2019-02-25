@@ -1,10 +1,10 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using eDiary.API.Services.Validation;
 using eDiary.API.Models.BusinessObjects;
 using eDiary.API.Models.EF.Interfaces;
 using eDiary.API.Models.Entities;
-using eDiary.API.Services.Tasks.Filters;
 using eDiary.API.Services.Tasks.Interfaces;
 
 namespace eDiary.API.Services.Tasks
@@ -48,10 +48,10 @@ namespace eDiary.API.Services.Tasks
         {
             return new TaskCard(await TryFindTask(id));
         }
-
-        [VerifyTaskCard]
-        public async void CreateTaskAsync(TaskCard card)
+        
+        public async System.Threading.Tasks.Task CreateTaskAsync(TaskCard card)
         {
+            Validate.NotNull(card, "Task card");
             var t = new Task
             {
                 Header = card.Header,
@@ -67,10 +67,10 @@ namespace eDiary.API.Services.Tasks
             };
             await uow.TaskRepository.CreateAsync(t);
         }
-
-        [VerifyTaskCard]
-        public async void UpdateTaskAsync(TaskCard card)
+        
+        public async System.Threading.Tasks.Task UpdateTaskAsync(TaskCard card)
         {
+            Validate.NotNull(card, "Task card");
             var task = await TryFindTask(card.TaskId);
 
             task.Header = card.Header;
@@ -87,7 +87,7 @@ namespace eDiary.API.Services.Tasks
             uow.TaskRepository.Update(task);
         }
 
-        public async void DeleteTaskAsync(int id)
+        public async System.Threading.Tasks.Task DeleteTaskAsync(int id)
         {
             uow.TaskRepository.Delete(await TryFindTask(id));
         }

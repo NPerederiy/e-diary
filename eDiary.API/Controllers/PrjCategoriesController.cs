@@ -3,12 +3,15 @@ using eDiary.API.Models.BusinessObjects;
 using eDiary.API.Services.Tasks.Interfaces;
 using System.Collections.Generic;
 using System.Threading.Tasks;
-using System.Web.Mvc;
+using System.Web.Http;
 
 namespace eDiary.API.Controllers
 {
     [RoutePrefix("categories")]
-    public class PrjCategoriesController : Controller
+    [Authenticated]
+    [ConsoleLogger]
+    [ExceptionFilter]
+    public class PrjCategoriesController : ApiController
     {
         private readonly IProjectCategoryService pcs;
 
@@ -16,45 +19,39 @@ namespace eDiary.API.Controllers
         {
             this.pcs = pcs;
         }
-
-        // GET api/categories
+        
         [HttpGet]
-        [Authenticated]
         public async Task<IEnumerable<ProjectCategoryCard>> GetAllCategories()
         {
             return await pcs.GetAllCategoriesAsync();
         }
-
-        // GET api/categories/1
+        
         [HttpGet]
-        [Authenticated]
-        public async Task<ProjectCategoryCard> GetCategoryById(int id)
+        public async Task<ProjectCategoryCard> GetCategoryById(int? id)
         {
-            return await pcs.GetCategoryAsync(id);
+            Validate(id);
+            return await pcs.GetCategoryAsync((int)id);
         }
-
-        // POST api/categories 
+        
         [HttpPost]
-        [Authenticated]
-        public void CreateCategory(ProjectCategoryCard category)
+        public async Task CreateCategory(ProjectCategoryCard category)
         {
-            pcs.CreateCategoryAsync(category);
+            Validate(category);
+            await pcs.CreateCategoryAsync(category);
         }
-
-        // PUT api/categories/1 
+        
         [HttpPut]
-        [Authenticated]
-        public void UpdateCategory(ProjectCategoryCard category)
+        public async Task UpdateCategory(ProjectCategoryCard category)
         {
-            pcs.UpdateCategoryAsync(category);
+            Validate(category);
+            await pcs.UpdateCategoryAsync(category);
         }
-
-        // DELETE api/categories/1 
+        
         [HttpDelete]
-        [Authenticated]
-        public void DeleteCategoryById(int id)
+        public async Task DeleteCategoryById(int? id)
         {
-            pcs.DeleteCategoryAsync(id);
+            Validate(id);
+            await pcs.DeleteCategoryAsync((int)id);
         }
     }
 }

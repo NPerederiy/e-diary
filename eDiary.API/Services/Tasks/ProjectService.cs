@@ -5,8 +5,8 @@ using System.Threading.Tasks;
 using eDiary.API.Models.BusinessObjects;
 using eDiary.API.Models.EF.Interfaces;
 using eDiary.API.Models.Entities;
-using eDiary.API.Services.Tasks.Filters;
 using eDiary.API.Services.Tasks.Interfaces;
+using eDiary.API.Services.Validation;
 
 namespace eDiary.API.Services.Tasks
 {
@@ -39,10 +39,10 @@ namespace eDiary.API.Services.Tasks
         {
             return new ProjectPage(await TryFindProject(projectId));
         }
-
-        [VerifyProjectCard]
-        public async void CreateProjectAsync(ProjectCard card)
+        
+        public async System.Threading.Tasks.Task CreateProjectAsync(ProjectCard card)
         {
+            Validate.NotNull(card, "Project card");
             var p = new Project
             {
                 Name = card.Name,
@@ -50,16 +50,16 @@ namespace eDiary.API.Services.Tasks
             };
             await uow.ProjectRepository.CreateAsync(p);
         }
-
-        [VerifyProjectCard]
-        public async void UpdateProjectAsync(ProjectCard card)
+        
+        public async System.Threading.Tasks.Task UpdateProjectAsync(ProjectCard card)
         {
+            Validate.NotNull(card, "Project card");
             var project = await TryFindProject(card.ProjectId);
             project.Name = card.Name;
             uow.ProjectRepository.Update(project);
         }
 
-        public async void DeleteProjectAsync(int id)
+        public async System.Threading.Tasks.Task DeleteProjectAsync(int id)
         {
             uow.ProjectRepository.Delete(await TryFindProject(id));
         }

@@ -5,7 +5,7 @@ using eDiary.API.Models.BusinessObjects;
 using eDiary.API.Models.EF.Interfaces;
 using eDiary.API.Services.Notes.Interfaces;
 using System;
-using eDiary.API.Services.Notes.Filters;
+using eDiary.API.Services.Validation;
 
 namespace eDiary.API.Services.Notes
 {
@@ -48,10 +48,10 @@ namespace eDiary.API.Services.Notes
         {
             return new NoteCard(await TryFindNote(noteId));
         }
-
-        [VerifyNoteCard]
-        public async void CreateNoteAsync(NoteCard card)
+        
+        public async System.Threading.Tasks.Task CreateNoteAsync(NoteCard card)
         {
+            Validate.NotNull(card, "Note card");
             var n = new Note
             {
                 Header = card.Header,
@@ -64,10 +64,10 @@ namespace eDiary.API.Services.Notes
 
             await uow.NoteRepository.CreateAsync(n);
         }
-
-        [VerifyNoteCard]
-        public async void UpdateNoteAsync(NoteCard card)
+        
+        public async System.Threading.Tasks.Task UpdateNoteAsync(NoteCard card)
         {
+            Validate.NotNull(card, "Note card");
             var note = await TryFindNote(card.NoteId);
 
             note.Header = card.Header;
@@ -80,7 +80,7 @@ namespace eDiary.API.Services.Notes
             uow.NoteRepository.Update(note);
         }
 
-        public async void DeleteNoteAsync(int id)
+        public async System.Threading.Tasks.Task DeleteNoteAsync(int id)
         {
             uow.NoteRepository.Delete(await TryFindNote(id));
         }

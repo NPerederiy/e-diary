@@ -1,15 +1,19 @@
 ﻿using eDiary.API.Models.Entities;
 using Newtonsoft.Json;
+using System.ComponentModel.DataAnnotations;
 using System.Linq;
 
 namespace eDiary.API.Models.BusinessObjects
 {
     public class FolderBO
     {
+        [Required(ErrorMessage = "Name is required")]
         [JsonProperty("name")]
         public string Name { get; set; }
+
         [JsonProperty("notes")]
         public NoteCard[] Notes { get; set; }
+
         [JsonProperty("folders")]
         public FolderBO[] Folders { get; set; }
 

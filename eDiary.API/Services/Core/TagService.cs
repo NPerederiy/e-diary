@@ -5,8 +5,8 @@ using System.Threading.Tasks;
 using eDiary.API.Models.BusinessObjects;
 using eDiary.API.Models.EF.Interfaces;
 using eDiary.API.Models.Entities;
-using eDiary.API.Services.Core.Filters;
 using eDiary.API.Services.Core.Interfaces;
+using eDiary.API.Services.Validation;
 
 namespace eDiary.API.Services.Core
 {
@@ -29,26 +29,26 @@ namespace eDiary.API.Services.Core
         {
             return new TagBO(await TryFindTag(id));
         }
-
-        [VerifyTag]
-        public async void CreateTagAsync(TagBO tag)
+        
+        public async System.Threading.Tasks.Task CreateTagAsync(TagBO tag)
         {
+            Validate.NotNull(tag, nameof(tag));
             var t = new Tag
             {
                 Name = tag.Name
             };
             await uow.TagRepository.CreateAsync(t);
         }
-
-        [VerifyTag]
-        public async void UpdateTagAsync(TagBO tag)
+        
+        public async System.Threading.Tasks.Task UpdateTagAsync(TagBO tag)
         {
+            Validate.NotNull(tag, nameof(tag));
             var t = await TryFindTag(tag.TagId);
             t.Name = tag.Name;
             uow.TagRepository.Update(t);
         }
 
-        public async void DeleteTagAsync(int id)
+        public async System.Threading.Tasks.Task DeleteTagAsync(int id)
         {
             uow.TagRepository.Delete(await TryFindTag(id));
         }

@@ -5,8 +5,8 @@ using System.Threading.Tasks;
 using eDiary.API.Models.BusinessObjects;
 using eDiary.API.Models.EF.Interfaces;
 using eDiary.API.Models.Entities;
-using eDiary.API.Services.Tasks.Filters;
 using eDiary.API.Services.Tasks.Interfaces;
+using eDiary.API.Services.Validation;
 
 namespace eDiary.API.Services.Tasks
 {
@@ -29,10 +29,10 @@ namespace eDiary.API.Services.Tasks
         {
             return new ProjectCategoryCard(await TryFindCategory(id));
         }
-
-        [VerifyCategoryCard]
-        public async void CreateCategoryAsync(ProjectCategoryCard card)
+        
+        public async System.Threading.Tasks.Task CreateCategoryAsync(ProjectCategoryCard card)
         {
+            Validate.NotNull(card, "Project category card");
             var c = new ProjectCategory
             {
                 Name = card.Name,
@@ -40,16 +40,16 @@ namespace eDiary.API.Services.Tasks
             };
             await uow.ProjectCategoryRepository.CreateAsync(c);
         }
-
-        [VerifyCategoryCard]
-        public async void UpdateCategoryAsync(ProjectCategoryCard card)
+        
+        public async System.Threading.Tasks.Task UpdateCategoryAsync(ProjectCategoryCard card)
         {
+            Validate.NotNull(card, "Project category card");
             var category = await TryFindCategory(card.CategoryId);
             category.Name = card.Name;
             uow.ProjectCategoryRepository.Update(category);
         }
 
-        public async void DeleteCategoryAsync(int id)
+        public async System.Threading.Tasks.Task DeleteCategoryAsync(int id)
         {
             uow.ProjectCategoryRepository.Delete(await TryFindCategory(id));
         }

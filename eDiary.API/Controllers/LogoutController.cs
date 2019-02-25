@@ -1,36 +1,40 @@
-﻿using eDiary.API.Services.Security.Interfaces;
-using System.Net;
+﻿using eDiary.API.Filters;
+using eDiary.API.Services.Security.Interfaces;
+using eDiary.API.Util;
+using Ninject;
 using System.Threading.Tasks;
-using System.Web.Mvc;
+using System.Web.Http;
 
 namespace eDiary.API.Controllers
 {
-    public class LogoutController : Controller
+    [Authenticated]
+    [ConsoleLogger]
+    [ExceptionFilter]
+    public class LogoutController : ApiController
     {
         private readonly IIdentityService identity;
 
-        public LogoutController(IIdentityService identity)
+        public LogoutController()
         {
-            this.identity = identity;
+            identity = NinjectKernel.Kernel.Get<IIdentityService>();
         }
-
-        // POST api/logout
+        
         [HttpPost]
-        public async Task<ActionResult> LogoutAsync()
+        public async Task/*<ActionResult>*/ LogoutAsync()
         {
-            try
-            {
+            //try
+            //{
                 var x = await identity.LogOutAsync();
-                if(x.Code == Services.Security.ResultCode.Succeeded)
-                {
-                    return new HttpStatusCodeResult(HttpStatusCode.OK);
-                }
-            }
-            catch (System.Exception ex)
-            {
-                return new HttpStatusCodeResult(HttpStatusCode.BadRequest, ex.Message);
-            }
-            return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+                //if(x.Code == Services.Security.ResultCode.Succeeded)
+                //{
+                //    return new HttpStatusCodeResult(HttpStatusCode.OK);
+                //}
+            //}
+            //catch (System.Exception ex)
+            //{
+            //    return new HttpStatusCodeResult(HttpStatusCode.BadRequest, ex.Message);
+            //}
+            //return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
         }
     }
 }
