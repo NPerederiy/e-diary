@@ -6,6 +6,8 @@ using eDiary.API.Models.BusinessObjects;
 using eDiary.API.Models.EF.Interfaces;
 using eDiary.API.Models.Entities;
 using eDiary.API.Services.Tasks.Interfaces;
+using eDiary.API.Util;
+using Ninject;
 
 namespace eDiary.API.Services.Tasks
 {
@@ -13,9 +15,9 @@ namespace eDiary.API.Services.Tasks
     {
         private readonly IUnitOfWork uow;
 
-        public TaskService(IUnitOfWork uow)
+        public TaskService()
         {
-            this.uow = uow;
+            uow = NinjectKernel.Kernel.Get<IUnitOfWork>();
         }
 
         public async System.Threading.Tasks.Task<IEnumerable<TaskCard>> GetAllTasksAsync()

@@ -1,6 +1,8 @@
 ﻿using eDiary.API.Filters;
 using eDiary.API.Models.BusinessObjects;
 using eDiary.API.Services.Tasks.Interfaces;
+using eDiary.API.Util;
+using Ninject;
 using System.Collections.Generic;
 using System.Threading.Tasks;
 using System.Web.Http;
@@ -15,9 +17,9 @@ namespace eDiary.API.Controllers
     {
         private readonly IProjectCategoryService pcs;
 
-        public PrjCategoriesController(IProjectCategoryService pcs)
+        public PrjCategoriesController()
         {
-            this.pcs = pcs;
+            pcs = NinjectKernel.Kernel.Get<IProjectCategoryService>();
         }
         
         [HttpGet]

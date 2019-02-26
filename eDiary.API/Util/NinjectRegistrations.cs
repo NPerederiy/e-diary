@@ -29,7 +29,6 @@ namespace eDiary.API.Util
             // Security
             Bind<IIdentityService>().To<IdentityService>();
             Bind<ICryptographyService>().To<CryptographyService>();
-            Bind<IOperationResult>().To<OperationResult>();
 
             // Tasks page
             Bind<ITaskService>().To<TaskService>();

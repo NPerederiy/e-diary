@@ -7,6 +7,8 @@ using eDiary.API.Models.EF.Interfaces;
 using eDiary.API.Models.Entities;
 using eDiary.API.Services.Tasks.Interfaces;
 using eDiary.API.Services.Validation;
+using eDiary.API.Util;
+using Ninject;
 
 namespace eDiary.API.Services.Tasks
 {
@@ -14,9 +16,9 @@ namespace eDiary.API.Services.Tasks
     {
         private readonly IUnitOfWork uow;
 
-        public ProjectCategoryService(IUnitOfWork uow)
+        public ProjectCategoryService()
         {
-            this.uow = uow;
+            uow = NinjectKernel.Kernel.Get<IUnitOfWork>();
         }
 
         public async Task<IEnumerable<ProjectCategoryCard>> GetAllCategoriesAsync()

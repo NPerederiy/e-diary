@@ -6,6 +6,8 @@ using eDiary.API.Models.EF.Interfaces;
 using eDiary.API.Services.Notes.Interfaces;
 using System;
 using eDiary.API.Services.Validation;
+using eDiary.API.Util;
+using Ninject;
 
 namespace eDiary.API.Services.Notes
 {
@@ -13,9 +15,9 @@ namespace eDiary.API.Services.Notes
     {
         private readonly IUnitOfWork uow;
 
-        public NoteService(IUnitOfWork uow)
+        public NoteService()
         {
-            this.uow = uow;
+            uow = NinjectKernel.Kernel.Get<IUnitOfWork>();
         }
 
         public async System.Threading.Tasks.Task<IEnumerable<NoteCard>> GetAllNotesAsync()

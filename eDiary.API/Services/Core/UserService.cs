@@ -7,6 +7,8 @@ using eDiary.API.Models.EF.Interfaces;
 using eDiary.API.Models.Entities;
 using eDiary.API.Services.Core.Interfaces;
 using eDiary.API.Services.Validation;
+using eDiary.API.Util;
+using Ninject;
 
 namespace eDiary.API.Services.Core
 {
@@ -14,9 +16,9 @@ namespace eDiary.API.Services.Core
     {
         private readonly IUnitOfWork uow;
 
-        public UserService(IUnitOfWork uow)
+        public UserService()
         {
-            this.uow = uow;
+            uow = NinjectKernel.Kernel.Get<IUnitOfWork>();
         }
 
         public async Task<IEnumerable<UserProfileBO>> GetAllUserProfilesAsync()

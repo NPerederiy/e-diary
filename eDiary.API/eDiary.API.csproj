@@ -135,12 +135,10 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Controllers\LoginController.cs" />
-    <Compile Include="Controllers\LogoutController.cs" />
     <Compile Include="Controllers\PrjCategoriesController.cs" />
     <Compile Include="Controllers\ProjectsController.cs" />
-    <Compile Include="Controllers\RegistrationController.cs" />
     <Compile Include="Controllers\SectionsController.cs" />
+    <Compile Include="Controllers\SessionController.cs" />
     <Compile Include="Controllers\TasksController.cs" />
     <Compile Include="Controllers\UserProfilesController.cs" />
     <Compile Include="Filters\ActionDetails.cs" />
@@ -200,9 +198,6 @@
     <Compile Include="Services\Security\IdentityService.cs" />
     <Compile Include="Services\Security\Interfaces\IIdentityService.cs" />
     <Compile Include="Services\Security\Interfaces\ICryptographyService.cs" />
-    <Compile Include="Services\Security\Interfaces\IOperationResult.cs" />
-    <Compile Include="Services\Security\OperationResult.cs" />
-    <Compile Include="Services\Security\ResultCode.cs" />
     <Compile Include="Services\Tasks\Interfaces\IProjectCategoryService.cs" />
     <Compile Include="Services\Tasks\Interfaces\IProjectService.cs" />
     <Compile Include="Services\Tasks\Interfaces\ISectionService.cs" />
