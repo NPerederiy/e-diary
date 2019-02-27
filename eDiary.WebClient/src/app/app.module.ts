@@ -17,8 +17,8 @@ import { HomePageComponent } from './main/home-page/home-page.component';
 import { CalendarPageComponent } from './main/calendar-page/calendar-page.component';
 import { NotesPageComponent } from './main/notes-page/notes-page.component';
 import { TasksPageComponent } from './main/tasks-page/tasks-page.component';
-import { TaskListComponent } from './main/tasks-page/task-list/task-list.component';
-import { TaskCardComponent } from './main/tasks-page/task-list/task-card/task-card.component';
+import { TaskListComponent } from './main/tasks-page/project-page/task-list/task-list.component';
+import { TaskCardComponent } from './main/tasks-page/project-page/task-list/task-card/task-card.component';
 import { SidebarComponent } from './main/sidebar/sidebar.component';
 import { SidebarButtonComponent } from './main/sidebar/sidebar-button/sidebar-button.component';
 import { PathLineComponent } from './main/notes-page/path-line/path-line.component';
@@ -30,6 +30,13 @@ import { CalendarMonthComponent } from './main/calendar-page/calendar-month/cale
 import { CalendarWeekComponent } from './main/calendar-page/calendar-week/calendar-week.component';
 import { CalendarDayComponent } from './main/calendar-page/calendar-day/calendar-day.component';
 import { DayCardComponent } from './main/calendar-page/calendar-month/day-card/day-card.component';
+import { ProjectPageComponent } from './main/tasks-page/project-page/project-page.component';
+import { AccountService } from './services/account.service';
+import { UserProfileService } from './services/user-profile.service';
+import { CategoryCardComponent } from './main/tasks-page/category-card/category-card.component';
+import { ProjectCardComponent } from './main/tasks-page/project-card/project-card.component';
+import { ChartsModule } from 'ng2-charts';
+import { ChartLegendItemComponent } from './main/tasks-page/project-card/chart-legend-item/chart-legend-item.component';
 
 @NgModule({
   declarations: [
@@ -54,7 +61,11 @@ import { DayCardComponent } from './main/calendar-page/calendar-month/day-card/d
     CalendarMonthComponent,
     CalendarWeekComponent,
     CalendarDayComponent,
-    DayCardComponent
+    DayCardComponent,
+    ProjectPageComponent,
+    CategoryCardComponent,
+    ProjectCardComponent,
+    ChartLegendItemComponent
   ],
   imports: [
     BrowserModule,
@@ -83,9 +94,14 @@ import { DayCardComponent } from './main/calendar-page/calendar-month/day-card/d
             deps: [HttpClient]
         }
     }),
-    MalihuScrollbarModule.forRoot()
+    MalihuScrollbarModule.forRoot(),
+    ChartsModule
   ],
-  providers: [AuthenticationService],
+  providers: [
+    AuthenticationService,
+    AccountService,
+    UserProfileService
+  ],
   bootstrap: [AppComponent]
 })
 

@@ -1,0 +1,21 @@
+<div id="container" class="shadow">
+  <div class="content">
+    <div class="header">
+      {{ card.projectName }}
+    </div>
+    <canvas class="chart" baseChart
+      style="display: block; height: 220px; width: 220px;"
+      [data]="doughnutChartData"
+      [labels]="doughnutChartLabels"
+      [options]="doughnutChartOptions"
+      [colors]="doughnutChartColors"
+      [chartType]="doughnutChartType">
+      <!-- (chartHover)="chartHovered($event)"
+      (chartClick)="chartClicked($event)"> -->
+    </canvas>
+    <div class="total-count">{{ card.totalTaskCount }}</div>
+    <div class="chart-legend">
+      <chart-legend-item *ngFor="let l of doughnutChartLabels; let j = index" [value]='l' [color]='colors[j]' [count]='doughnutChartData[j]'></chart-legend-item>
+    </div>
+  </div>
+</div>

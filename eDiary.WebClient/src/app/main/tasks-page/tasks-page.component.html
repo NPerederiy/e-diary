@@ -1,11 +1,12 @@
 <div id="container">
-  <div style="max-width: calc(100vw - 170px);" malihu-scrollbar [scrollbarOptions]="scrollbarOptions">
-    <div class="content">
-      <task-list *ngFor="let l of cardLists" [list]="l"></task-list>  
-      <div class="headline">
-        <div class="button add" (click)="addColumn()">+ {{ 'buttons.addColumn' | translate }}</div>
-      </div>
+  <div class="categories">
+    <category-card *ngFor="let c of categories" [card]="c" (click)="openCategoryProjects(c)"></category-card>
+  </div>
+
+  <div style="width: calc(100vw - 111px); height: 100%;" malihu-scrollbar [scrollbarOptions]="scrollbarOptions">
+    <div class="projects">
+      <project-card *ngFor="let p of projects" [card]="p" (click)="openProjectPage(p)"></project-card>
     </div>
   </div>
-  <sidebar [buttons]="sidebarButtons"></sidebar>
+  <!-- <sidebar [buttons]="sidebarButtons"></sidebar> -->
 </div>

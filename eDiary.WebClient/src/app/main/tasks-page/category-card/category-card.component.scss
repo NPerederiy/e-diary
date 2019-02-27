@@ -1,0 +1,14 @@
+@import "src/shared/styles/global-variables.scss";
+@import "src/shared/styles/base64-icons.scss";
+
+#container{
+    background-color: $light-color;
+    max-width: 240px;
+    padding: 12px;
+}
+
+.content{
+    margin: 2px 4px 4px 4px;
+    font-family: $regular-font;
+    color: rgba($regular-color, 0.7);
+}

@@ -1,0 +1,29 @@
+@import "src/shared/styles/global-variables.scss";
+
+#container{
+    display: flex;
+    flex-direction: row;
+    justify-content: flex-start;
+}
+
+.color-mark{
+    height: 14px;
+    width: 14px;
+    background-color: rgb(211, 211, 211); 
+    align-self: center;
+    margin: 2px 0;
+}
+
+.content{
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    width: 100%;
+    .text{
+        align-self: center;
+        margin-left: 8px;
+        margin-right: 1px;
+        color: rgba($regular-color, 0.7);
+    }
+
+}

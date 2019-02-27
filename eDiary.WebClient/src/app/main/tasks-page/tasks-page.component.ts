@@ -1,10 +1,6 @@
 import { Component, OnInit } from '@angular/core';
-import { TaskCard } from 'src/shared/models/task-card.model';
-import { TaskStatus } from 'src/shared/models/task-status.enum';
-import { CardStatus } from 'src/shared/models/card-status.enum';
-import { TaskList } from 'src/shared/models/task-list.model';
-import { MenuButton } from 'src/shared/models/menu-button.model';
-import { MenuButtonType } from 'src/shared/models/menu-button-type.enum';
+import { CategoryCard } from 'src/shared/models/category-card.model';
+import { ProjectCard } from 'src/shared/models/project-card.model';
 
 @Component({
   selector: 'tasks-page',
@@ -13,8 +9,8 @@ import { MenuButtonType } from 'src/shared/models/menu-button-type.enum';
 })
 
 export class TasksPageComponent implements OnInit {
-  cardLists: TaskList[] = []; 
-  sidebarButtons: MenuButton[] = [];
+  categories: CategoryCard[] = []; 
+  projects: ProjectCard[] = [];
   scrollbarOptions = { 
     axis: 'x', 
     theme: 'minimal-dark', 
@@ -23,61 +19,29 @@ export class TasksPageComponent implements OnInit {
   };
 
   constructor() {
-    this.sidebarButtons.push(new MenuButton(MenuButtonType.RecentActions));
-    this.sidebarButtons.push(new MenuButton(MenuButtonType.Search));
-    this.sidebarButtons.push(new MenuButton(MenuButtonType.Notifications));
-    this.sidebarButtons.push(new MenuButton(MenuButtonType.AddTask));
-    this.sidebarButtons.push(new MenuButton(MenuButtonType.TrashCan));
-    this.cardLists.push(new TaskList("New list",[
-      new TaskCard("Lorem ipsum", "", TaskStatus.inProcess, CardStatus.deleted),
-      new TaskCard("Dolor sit amet", "", TaskStatus.toDo, CardStatus.important),
-      new TaskCard("Some task header", "some dummy description", TaskStatus.done, CardStatus.completed),
-      new TaskCard("new task(1)", "", TaskStatus.inProcess, CardStatus.hot),
-      new TaskCard("new task(2)"),
-      new TaskCard("new task(2)"),
-      new TaskCard("new task(2)"),
-      new TaskCard("new task(2)"),
-      new TaskCard("new task(2)"),
-      new TaskCard("new task(2)"),
-      new TaskCard("new task(2)"),
-      new TaskCard("new task(2)"),
-      new TaskCard("new task(2)"),
-      new TaskCard("new task(2)"),
-      new TaskCard("new task(2)"),
-      new TaskCard("new task(2)")
-    ]));
-    this.cardLists.push(new TaskList("New list"));
-    this.cardLists.push(new TaskList("New list"));
-    this.cardLists.push(new TaskList("New list",[
-      new TaskCard("new task(2)"),
-      new TaskCard("new task(2)"),
-      new TaskCard("new task(2)"),
-      new TaskCard("new task(2)")
-    ]));
-    this.cardLists.push(new TaskList("New list",[
-      new TaskCard("Dolor sit amet", "", TaskStatus.toDo, CardStatus.important),
-      new TaskCard("new task(1)", "", TaskStatus.inProcess, CardStatus.hot),
-      new TaskCard("new task(1)", "", TaskStatus.inProcess, CardStatus.hot),
-    ]));
-    this.cardLists.push(new TaskList("New list",[
-      new TaskCard("new task(2)"),
-      new TaskCard("new task(2)"),
-      new TaskCard("new task(2)"),
-      new TaskCard("new task(2)")
-    ]));
-    this.cardLists.push(new TaskList("New list",[
-      new TaskCard("new task(2)"),
-      new TaskCard("new task(2)"),
-      new TaskCard("new task(2)"),
-      new TaskCard("new task(2)")
-    ]));
+    this.categories.push(new CategoryCard("University"));
+    this.categories.push(new CategoryCard("Work"));
+    this.categories.push(new CategoryCard("Family"));
+    this.categories.push(new CategoryCard("TRVL"));
+
+    this.projects.push(new ProjectCard("Project name1"));
+    this.projects.push(new ProjectCard("Flight to the Moon", 0, 2, 10, 15, 7, 3, ));
+    this.projects.push(new ProjectCard("Hyperloop launch", 0, 95, 131, 452, 33, 31));
+    this.projects.push(new ProjectCard("Trip around the world", 0, 30, 55, 201, 115, 9));
+    this.projects.push(new ProjectCard("Complete the diary", 0, 30, 15, 281, 105, 9));
   }
 
   ngOnInit() {
   }
 
-  addColumn(){
-    this.cardLists.push(new TaskList());
+  openProjectPage(card: CategoryCard){
+    console.log('Click: ', card);
+    
+  }
+
+  openCategoryProjects(card: ProjectCard){
+    console.log('Click: ', card);
+    
   }
 
 }
