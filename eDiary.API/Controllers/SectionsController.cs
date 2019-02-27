@@ -6,12 +6,14 @@ using Ninject;
 using System.Collections.Generic;
 using System.Threading.Tasks;
 using System.Web.Http;
+using System.Web.Http.Cors;
 
 namespace eDiary.API.Controllers
 {
     [Authenticated]
     [ConsoleLogger]
     [ExceptionFilter]
+    [EnableCors(origins: "http://localhost:4200", headers: "*", methods: "*")]
     public class SectionsController : ApiController
     {
         private readonly ISectionService ss;

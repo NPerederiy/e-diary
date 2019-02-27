@@ -5,11 +5,13 @@ using eDiary.API.Util;
 using Ninject;
 using System.Threading.Tasks;
 using System.Web.Http;
+using System.Web.Http.Cors;
 
 namespace eDiary.API.Controllers
 {
     [ConsoleLogger]
     [ExceptionFilter]
+    [EnableCors(origins: "http://localhost:4200", headers: "*", methods: "*")]
     public class SessionController : ApiController
     {
         private readonly IIdentityService identity;

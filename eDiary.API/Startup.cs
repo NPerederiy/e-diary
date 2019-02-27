@@ -9,6 +9,9 @@ namespace eDiary.API
         {
             // Configure Web API for self-host. 
             var config = new HttpConfiguration();
+
+            config.EnableCors();
+
             config.Routes.MapHttpRoute(
                 name: "DiaryApi",
                 routeTemplate: "api/{controller}/{id}",
