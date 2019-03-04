@@ -1,7 +1,10 @@
-﻿namespace eDiary.API.Models.Entities
+﻿using System.ComponentModel.DataAnnotations;
+
+namespace eDiary.API.Models.Entities
 {
     public class UserProfile
     {
+        [Key]
         public int Id { get; set; } // Id (Primary key)
         public string FirstName { get; set; } // FirstName (length: 2147483647)
         public string LastName { get; set; } // LastName (length: 2147483647)

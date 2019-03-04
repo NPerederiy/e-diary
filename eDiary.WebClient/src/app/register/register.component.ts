@@ -4,6 +4,7 @@ import { Router } from '@angular/router';
 import * as SHA from 'js-sha512';
 import { FormGroup, FormBuilder, FormControl, Validators, AbstractControl } from '@angular/forms';
 import { passwordMatchingValidator } from './validators/password-matching';
+import { AccountService } from '../services/account.service';
 
 @Component({
   selector: 'register',
@@ -15,7 +16,7 @@ export class RegisterComponent implements OnInit {
   model: any = {};
   appUser: AppUser;
 
-  constructor(private router: Router, private formBuilder: FormBuilder) {
+  constructor(private router: Router, private formBuilder: FormBuilder, private accountService: AccountService) {
   }
 
   public form = new FormGroup({
@@ -72,8 +73,14 @@ export class RegisterComponent implements OnInit {
   }
 
   onSubmit() {
-    console.log(this.controls);
-    console.log(JSON.stringify(this.model));
+
+    this.accountService.registration(
+      this.form.controls.fname.value,
+      this.form.controls.lname.value,
+      this.form.controls.email.value,
+      SHA.sha512(this.form.controls.passwords.get(['password']).value)
+    );
+
     this.router.navigateByUrl('/');
   }
 }

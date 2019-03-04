@@ -7,8 +7,8 @@
     </div>
     <form (ngSubmit)="onSubmit()">
       <span *ngIf="!currentLogin">
-        <user-profile class="user-profile" tabindex="0" autofocus=true *ngFor="let p of profiles" [profile]="p" (keyup.enter)="chooseLogin(p)" (click)="chooseLogin(p)"></user-profile>
-        <div class="button add" tabindex="0" autofocus=true (keyup.enter)="reg()" (click)="reg()">{{ addButtonText }}</div>
+        <user-profile class="user-profile" tabindex="0" autofocus=true *ngFor="let a of accounts" [profile]="a.profile" (keyup.enter)="chooseLogin(a)" (click)="chooseLogin(a)"></user-profile>
+        <div class="button add" tabindex="0" autofocus=true (keyup.enter)="redirectToRegistration()" (click)="redirectToRegistration()">{{ addButtonText }}</div>
       </span>
       <span *ngIf="currentLogin">
         <div id="pass-form">

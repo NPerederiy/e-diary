@@ -15,7 +15,7 @@ export class MainComponent implements OnInit {
 
   constructor(private authService: AuthenticationService, private router: Router, private route: ActivatedRoute) {
     if (!authService.checkAuthToken("")){
-      //this.router.navigateByUrl('/login');
+      this.router.navigateByUrl('/login');
     }
     // this.router.navigate(['tasks'], { relativeTo: this.route });
     // this.router.navigate([{ outlets: { 'inner-pages': ['tasks'] } }], { relativeTo: this.route } );

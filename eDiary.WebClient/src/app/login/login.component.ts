@@ -1,9 +1,10 @@
-import { Component, OnInit, ViewChild } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { UserProfile } from 'src/shared/models/user-profile.model';
 import { AppUser } from 'src/shared/models/app-user.model';
 import { Router } from '@angular/router';
 import * as SHA from 'js-sha512';
 import { AuthenticationService } from '../services/authentication.service';
+import { AccountService } from '../services/account.service';
 
 @Component({
   selector: 'login',
@@ -13,13 +14,13 @@ import { AuthenticationService } from '../services/authentication.service';
 
 export class LoginComponent implements OnInit {
   addButtonText: string;
-  profiles: UserProfile[] = [];
+  accounts: AppUser[] = [];
   submitted = false;
   currentLogin: string;
 
-  constructor(private router: Router, private authService: AuthenticationService) {
+  constructor(private router: Router, private authService: AuthenticationService, private accountService: AccountService) {
     this.addButtonText = "+";
-    this.profiles = authService.getLogins();
+    this.redirectToRegisterIfNoAccountsReceived();
    }
 
   ngOnInit() {
@@ -46,14 +47,41 @@ export class LoginComponent implements OnInit {
     };  
   }
 
-  chooseLogin(p: any){
-    this.currentLogin = `${p.firstName}.${p.lastName}`;
-    console.log(this.currentLogin);
+  chooseLogin(u: AppUser){
+    this.currentLogin = u.username;
   }
 
-  reg(){
+  redirectToRegistration(){
     this.router.navigateByUrl('/registration');
   }
 
+  private async redirectToRegisterIfNoAccountsReceived(){
+    await this.loadAccounts().then(()=>{
+      if(this.accounts.length === 0){
+        this.redirectToRegistration();
+      }
+    });
+  }
 
+  private async loadAccounts(){
+    await this.accountService.getAccounts().then(
+      (data: any) => {
+        data.forEach((e: { username: string; firstName: string; lastName: string; email: string; profileImage: string; userId: number; }) => {
+          this.accounts.push(
+            new AppUser(
+              e.username,
+              null,
+              new UserProfile(
+                  e.firstName,
+                  e.lastName,
+                  e.email,
+                  e.profileImage,
+                  e.userId
+              )
+            )
+          );
+        }),
+        (error: any) => console.error(error);
+      });       
+  }
 }

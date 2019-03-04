@@ -1,5 +1,6 @@
 ﻿using eDiary.API.Models.BusinessObjects;
 using eDiary.API.Models.EF.Interfaces;
+using eDiary.API.Services.Core.Interfaces;
 using eDiary.API.Services.Security.Interfaces;
 using eDiary.API.Services.Validation;
 using eDiary.API.Util;
@@ -14,11 +15,13 @@ namespace eDiary.API.Services.Security
     {
         private readonly ICryptographyService cs;
         private readonly IUnitOfWork uow;
+        private readonly IUserService ups;
 
         public IdentityService()
         {
             cs = NinjectKernel.Kernel.Get<ICryptographyService>();
             uow = NinjectKernel.Kernel.Get<IUnitOfWork>();
+            ups = NinjectKernel.Kernel.Get<IUserService>();
         }
         
         public async Task<string> AuthenticateAsync(AuthenticationData data)
@@ -37,29 +40,39 @@ namespace eDiary.API.Services.Security
         public async Task<(string username, string token)> RegisterAsync(RegistrationData data)
         {
             Validate.NotNull(data, "Registration data");
+            Validate.NotNull(data.FirstName, "First name");
+            Validate.NotNull(data.LastName, "Last name");
+            Validate.NotNull(data.Email, "Email");
 
-            {
-                var temp = (await uow.UserProfileRepository.GetByConditionAsync(x => x.Email == data.Email)).FirstOrDefault();
-                if (temp != null) throw new Exception("Email already exists");
-            }
+            //{
+            //    var temp = (await uow.UserProfileRepository.GetByConditionAsync(x => x.Email == data.Email)).FirstOrDefault();
+            //    if (temp != null) throw new Exception("Email already in use");
+            //}
 
             var enc = cs.EncryptPassword(data.Password);
+
+            var profile = new Models.Entities.UserProfile
+            {
+                FirstName = data.FirstName,
+                LastName = data.LastName,
+                Email = data.Email
+            };
+
+            await uow.UserProfileRepository.CreateAsync(profile);
+
+            //profile = await uow.UserProfileRepository.GetByConditionAsync(x => x.);
 
             var user = new Models.Entities.AppUser
             {
                 Username = "undefined",
                 PasswordHash = enc,
-                UserProfile = new Models.Entities.UserProfile
-                {
-                    FirstName = data.FirstName,
-                    LastName = data.LastName,
-                    Email = data.Email
-                }
+                UserProfile = profile,
+                UserProfileId = profile.Id
             };
 
             await uow.AppUserRepository.CreateAsync(user);
             
-            user.Username = cs.EncryptSHA256(user.UserProlifeId.ToString());
+            user.Username = cs.EncryptSHA256(user.UserProfileId.ToString());
 
             uow.AppUserRepository.Update(user);
 

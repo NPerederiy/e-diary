@@ -7,8 +7,8 @@ namespace eDiary.API.Services.Security
 {
     internal sealed class CryptographyService : ICryptographyService
     {
-        private readonly string localsalt = "h37sG3Gark-yfTQEy#fRX4uydN^E+gz?*TW7FpjN5vsyy^$md9&n2va&S$2HprUnSzjpYyepu6NAgW&FMb9AA@w?4CDE3-*7u^a_rBMe_NK*-vPX#rNsDL*_XF*YB^Q*tYYCJvdJSbjMs$8qM5-B=km?wAk*UrrStazmQCZXyWKA!V93q9qWCXYdD=sExdZXv5rRf84njg!wu6Uq8aZ_nJ+M3kt6vPzsNDFr-SuCnAv&@Zc_PNV-bN-zKWx+V-*CNZbGWp?$H2=f2^k9C*N4=TN*AJ^by-KWY!dYckFZBV^u?8mh6r^Q?+59ZNR8tm!W+htcZ=P+$JD+2ncVwhGt?%^CrGnJEMzmcYd_#!AV_EY$6xTLUB7J$5x84V$3xwDk3-eDdZvG-M!%#@gfxzxve2^wJNLRUbpZAPHujZ!ub$x9RggDU+Z_^a5Qd%m&4+adnunr9@z_TBRB3@hy7M8sDHwVXYVK&C%qS5-URqG&?!g48-Du#Bjuw=QjMcYv%?Cu";
-        private readonly int controlNumber = 512;
+        private readonly string localsalt = "RPBSRE8Tsy4jct9BJ3yLnYHcDT9rFgKw7nrQrb2jmEcMyLkT6KWsavTD8rz2G98HRhf2yeVGzF7SrQGMbnBf3ekqRgEuqxGKzPhkBEc4jUnzF7ryUC3SBDTTSvn4Szva";
+        private readonly int controlNumber = 128;
         
         public string Decrypt(string data)
         {

@@ -9,9 +9,11 @@ using System.Web.Http.Cors;
 
 namespace eDiary.API.Controllers
 {
+    [RoutePrefix("Session")]
     [ConsoleLogger]
     [ExceptionFilter]
-    [EnableCors(origins: "http://localhost:4200", headers: "*", methods: "*")]
+
+    [EnableCors(origins: "*", headers: "*", methods: "POST")]
     public class SessionController : ApiController
     {
         private readonly IIdentityService identity;
@@ -22,7 +24,8 @@ namespace eDiary.API.Controllers
         }
 
         [HttpPost]
-        [Route("authenticate")]
+        [Route("Session/authenticate")]
+        [EnableCors(origins: "*", headers: "*", methods: "POST")]
         public async Task<string> AuthenticateAsync(AuthenticationData data)
         {
             Validate(data);
@@ -35,17 +38,18 @@ namespace eDiary.API.Controllers
 
         [HttpPost]
         [Route("register")]
-        public async Task<(string username, string token)> RegisterAsync(RegistrationData data)
+        public /*async Task<*/(string username, string token)/*>*/ RegisterAsync(RegistrationData data)
         {
             Validate(data);
-            var x = await identity.RegisterAsync(data);
+            var x =/* await */identity.RegisterAsync(data).Result;
             if (x.token == null) throw new System.Exception("Authentication token wasn't received.");
             if (x.username == null) throw new System.Exception("Username wasn't generated.");
             return x;
         }
 
         [HttpPost]
-        [Route("logout")]
+        [Route("Session/logout")]
+        [EnableCors(origins: "*", headers: "*", methods: "POST")]
         [Authenticated]
         public async Task LogoutAsync()
         {

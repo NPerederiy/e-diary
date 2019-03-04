@@ -12,10 +12,10 @@ export class AuthenticationService{
     public getLogins(){
         // TODO: implement GET method
 
-        /* dummy data */
-        this.profiles.push(new UserProfile("Nikita", "Perederii"));
-        this.profiles.push(new UserProfile("John", "Doe"));
-        this.profiles.push(new UserProfile("Jack", "Daniels"));
+        // /* dummy data */
+        // this.profiles.push(new UserProfile("Nikita", "Perederii"));
+        // this.profiles.push(new UserProfile("John", "Doe"));
+        // this.profiles.push(new UserProfile("Jack", "Daniels"));
         /* ---------- */
 
         return this.profiles;

@@ -1,9 +1,15 @@
-﻿namespace eDiary.API.Models.Entities
+﻿using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
+
+namespace eDiary.API.Models.Entities
 {
     public class AppUser
     {
+        [Key]
         public int Id { get; set; } // Id (Primary key)
-        public int UserProlifeId { get; set; } // UserProlifeId
+        [Column("UserProlifeId")]
+        [ForeignKey("UserProfile")]
+        public int UserProfileId { get; set; } // UserProfileId
         public string PasswordHash { get; set; } // PasswordHash (length: 2147483647)
         public string Username { get; set; } // Username (length: 2147483647)
 
