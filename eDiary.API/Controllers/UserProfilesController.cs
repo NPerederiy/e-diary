@@ -24,13 +24,14 @@ namespace eDiary.API.Controllers
         }
         
         [HttpGet]
+        [AllowAnonymous]
         public async Task<IEnumerable<UserProfileBO>> GetAllProfilesAsync()
         {
             return await ups.GetAllUserProfilesAsync();
         }
         
         [HttpGet]
-        [Authenticated]
+        [JwtAuthentication]
         public async Task<UserProfileBO> GetProfileByIdAsync(int? id)
         {
             Validate(id);
@@ -38,7 +39,7 @@ namespace eDiary.API.Controllers
         }
         
         [HttpPost]
-        [Authenticated]
+        [JwtAuthentication]
         public async Task CreateProfileAsync(UserProfileBO profile)
         {
             Validate(profile);
@@ -46,7 +47,7 @@ namespace eDiary.API.Controllers
         }
         
         [HttpPut]
-        [Authenticated]
+        [JwtAuthentication]
         public async Task UpdateProfileAsync(UserProfileBO profile)
         {
             Validate(profile);
@@ -54,7 +55,7 @@ namespace eDiary.API.Controllers
         }
         
         [HttpDelete]
-        [Authenticated]
+        [JwtAuthentication]
         public async Task DeleteProfileByIdAsync(int? id)
         {
             Validate(id);

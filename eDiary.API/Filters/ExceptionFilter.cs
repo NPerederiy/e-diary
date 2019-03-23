@@ -27,7 +27,7 @@ namespace eDiary.API.Filters
                 LogError(context, message);
                 context.Response = new HttpResponseMessage(HttpStatusCode.BadRequest)
                 {
-                    ReasonPhrase = context.Exception.Message
+                    //ReasonPhrase = context.Exception.Message
                 };
             }
 

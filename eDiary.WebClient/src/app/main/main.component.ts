@@ -1,8 +1,9 @@
 import { Component, OnInit } from '@angular/core';
-import { AuthenticationService } from '../services/authentication.service';
 import { Router, ActivatedRoute } from '@angular/router';
 import { MenuButton } from 'src/shared/models/menu-button.model';
 import { MenuButtonType } from 'src/shared/models/menu-button-type.enum';
+import { AccountService } from '../services/account.service';
+import { UserProfile } from 'src/shared/models/user-profile.model';
 
 @Component({
   selector: 'app-main',
@@ -12,11 +13,15 @@ import { MenuButtonType } from 'src/shared/models/menu-button-type.enum';
 
 export class MainComponent implements OnInit {
   menuButtons: MenuButton[] = [];
+  userProfile: UserProfile;
 
-  constructor(private authService: AuthenticationService, private router: Router, private route: ActivatedRoute) {
-    if (!authService.checkAuthToken("")){
-      this.router.navigateByUrl('/login');
-    }
+  constructor(private accountService: AccountService, private router: Router, private route: ActivatedRoute) {
+   accountService.printTokens();
+    // if (this.userProfile === null){
+    //   console.log('navigate from main to login');
+      
+    //   this.router.navigateByUrl('/login');
+    // }
     // this.router.navigate(['tasks'], { relativeTo: this.route });
     // this.router.navigate([{ outlets: { 'inner-pages': ['tasks'] } }], { relativeTo: this.route } );
 
@@ -29,9 +34,10 @@ export class MainComponent implements OnInit {
   }
 
   ngOnInit() {
+    this.accountService.userProfile.subscribe(profile => this.userProfile = profile);
   }
 
-  openPage(btn: MenuButton){
+  async openPage(btn: MenuButton){
     this.menuButtons.forEach(b => {
       if(b.content !== btn.content){
         b.setNotActive();
@@ -52,6 +58,7 @@ export class MainComponent implements OnInit {
         this.router.navigate([{ outlets: { 'inner-pages': ['notes'] } }], { relativeTo: this.route } );
         break;
       case MenuButtonType.Calendar:
+      console.log(await this.accountService.getProfile(3));;
       this.router.navigateByUrl("app");
         this.router.navigate([{ outlets: { 'inner-pages': ['calendar'] } }], { relativeTo: this.route } );
         break;

@@ -3,7 +3,6 @@ import { UserProfile } from 'src/shared/models/user-profile.model';
 import { AppUser } from 'src/shared/models/app-user.model';
 import { Router } from '@angular/router';
 import * as SHA from 'js-sha512';
-import { AuthenticationService } from '../services/authentication.service';
 import { AccountService } from '../services/account.service';
 
 @Component({
@@ -16,9 +15,9 @@ export class LoginComponent implements OnInit {
   addButtonText: string;
   accounts: AppUser[] = [];
   submitted = false;
-  currentLogin: string;
+  currentUser: AppUser;
 
-  constructor(private router: Router, private authService: AuthenticationService, private accountService: AccountService) {
+  constructor(private router: Router, private accountService: AccountService) {
     this.addButtonText = "+";
     this.redirectToRegisterIfNoAccountsReceived();
    }
@@ -40,18 +39,20 @@ export class LoginComponent implements OnInit {
     }
   }
 
-  login(p: any){
-    let operationResult = this.authService.login(this.currentLogin, p.value);
-    if (operationResult){
+  async login(p: any){
+    let result = await this.accountService.authentication(this.currentUser, SHA.sha512(p.value))   
+    if (result !== false){
       this.router.navigateByUrl('/app');
     };  
   }
 
-  chooseLogin(u: AppUser){
-    this.currentLogin = u.username;
+  chooseLogin(user: AppUser){
+    this.currentUser = user;
   }
 
   redirectToRegistration(){
+    console.log('redirect to registration');
+    
     this.router.navigateByUrl('/registration');
   }
 
@@ -72,11 +73,11 @@ export class LoginComponent implements OnInit {
               e.username,
               null,
               new UserProfile(
-                  e.firstName,
-                  e.lastName,
-                  e.email,
-                  e.profileImage,
-                  e.userId
+                e.firstName,
+                e.lastName,
+                e.email,
+                e.profileImage,
+                e.userId
               )
             )
           );

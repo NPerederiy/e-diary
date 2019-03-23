@@ -7,7 +7,6 @@ namespace eDiary.API.Models.Entities
     {
         [Key]
         public int Id { get; set; } // Id (Primary key)
-        [Column("UserProlifeId")]
         [ForeignKey("UserProfile")]
         public int UserProfileId { get; set; } // UserProfileId
         public string PasswordHash { get; set; } // PasswordHash (length: 2147483647)

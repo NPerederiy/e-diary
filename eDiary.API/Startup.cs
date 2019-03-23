@@ -10,6 +10,8 @@ namespace eDiary.API
             // Configure Web API for self-host. 
             var config = new HttpConfiguration();
 
+            config.Filters.Add(new AuthorizeAttribute());
+
             config.EnableCors();
 
             config.Routes.MapHttpRoute(

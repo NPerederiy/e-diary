@@ -8,6 +8,9 @@ using Ninject;
 using System;
 using System.Linq;
 using System.Threading.Tasks;
+using System.IdentityModel.Tokens.Jwt;
+using Microsoft.IdentityModel.Tokens;
+using System.Security.Claims;
 
 namespace eDiary.API.Services.Security
 {
@@ -24,30 +27,30 @@ namespace eDiary.API.Services.Security
             ups = NinjectKernel.Kernel.Get<IUserService>();
         }
         
-        public async Task<string> AuthenticateAsync(AuthenticationData data)
+        public async Task<AuthTokens> AuthenticateAsync(AuthenticationData data)
         {
             Validate.NotNull(data, "Authentication data");
             string enc = cs.EncryptPassword(data.Password);
 
-            var pas = (await uow.AppUserRepository.GetByConditionAsync(x => x.Username == data.Username)).FirstOrDefault();
-            if (pas == null) throw new Exception("User not found");
+            var user = (await uow.AppUserRepository.GetByConditionAsync(x => x.Username == data.Username)).FirstOrDefault();
+            if (user == null) throw new Exception("User not found");
 
-            if (enc != pas.PasswordHash) throw new Exception("Passwords are not match");
+            if (enc != user.PasswordHash) throw new Exception("Passwords are not match");
 
-            return "some token";    // TODO: Implement
+            return GenerateTokens(user);
         }
         
-        public async Task<(string username, string token)> RegisterAsync(RegistrationData data)
+        public async Task<AuthTokens> RegisterAsync(RegistrationData data)
         {
             Validate.NotNull(data, "Registration data");
             Validate.NotNull(data.FirstName, "First name");
             Validate.NotNull(data.LastName, "Last name");
             Validate.NotNull(data.Email, "Email");
 
-            //{
-            //    var temp = (await uow.UserProfileRepository.GetByConditionAsync(x => x.Email == data.Email)).FirstOrDefault();
-            //    if (temp != null) throw new Exception("Email already in use");
-            //}
+            {
+                var temp = (await uow.UserProfileRepository.GetByConditionAsync(x => x.Email == data.Email)).FirstOrDefault();
+                if (temp != null) throw new Exception("Email already in use");
+            }
 
             var enc = cs.EncryptPassword(data.Password);
 
@@ -60,8 +63,6 @@ namespace eDiary.API.Services.Security
 
             await uow.UserProfileRepository.CreateAsync(profile);
 
-            //profile = await uow.UserProfileRepository.GetByConditionAsync(x => x.);
-
             var user = new Models.Entities.AppUser
             {
                 Username = "undefined",
@@ -72,18 +73,98 @@ namespace eDiary.API.Services.Security
 
             await uow.AppUserRepository.CreateAsync(user);
             
-            user.Username = cs.EncryptSHA256(user.UserProfileId.ToString());
+            user.Username = cs.GenerateUsername();
 
             uow.AppUserRepository.Update(user);
 
-            return (user.Username, "some token");   // TODO: Implement
+            return GenerateTokens(user); 
         }
 
-        public async Task LogOutAsync()
+        public AuthTokens GenerateTokens(Models.Entities.AppUser user)
         {
-            throw new NotImplementedException();
+            var refresh = GenerateRefreshToken();
+            var access = GenerateAccessToken(user);
+            return new AuthTokens(access, refresh);
         }
-        
+
+        public string GenerateAccessToken(Models.Entities.AppUser user)
+        {
+            var now = DateTime.UtcNow;
+            var jwt = new JwtSecurityToken(
+                    issuer: AuthOptions.ISSUER,
+                    audience: AuthOptions.AUDIENCE,
+                    claims: new[]
+                    {
+                        new Claim(ClaimTypes.Name, user.Username)
+                    },
+                    expires: now.AddMinutes(AuthOptions.LIFETIME),
+                    signingCredentials: new SigningCredentials(
+                        AuthOptions.GetSymmetricSecurityKey(),
+                        SecurityAlgorithms.HmacSha256
+                    )
+                );
+
+            var handler = new JwtSecurityTokenHandler();
+            return handler.WriteToken(jwt);
+        }
+
+        public string GenerateRefreshToken()
+        {
+            var token = cs.GenerateRefreshToken();
+            var pin = "";    // TODO: Implement
+
+            return cs.EncryptToken(token, pin);
+        }
+
+        public void ValidateRefreshToken(string token)
+        {
+            var key = new byte[64];
+            var decrypted = cs.DecryptAES(token, key);
+            if (" here should be a refresh token from DB " != decrypted)    // TODO: Implement
+                throw new Exception("Refresh token is invalid.");
+        }
+
+        public bool ValidateAccessToken(string token, out string username)
+        {
+            username = null;
+
+            var principal = GetPrincipal(token);
+
+            if (!(principal.Identity is ClaimsIdentity identity))
+                return false;
+
+            if (!identity.IsAuthenticated)
+                return false;
+
+            var usernameClaim = identity.FindFirst(ClaimTypes.Name);
+            username = usernameClaim?.Value;
+
+            if (string.IsNullOrEmpty(username))
+                return false;
+            var uname = username;
+            var user = (uow.AppUserRepository.GetByConditionAsync(x => x.Username == uname).Result).FirstOrDefault();
+            if (user == null) return false;
+
+            return true;
+        }
+
+        //public bool ValidateToken(string token)
+        //{
+        //    var tokenHandler = new JwtSecurityTokenHandler();
+        //    var validationParameters = new TokenValidationParameters
+        //    {
+        //        ValidateLifetime = true,
+        //        ValidateAudience = true, 
+        //        ValidateIssuer = true,   
+        //        ValidIssuer = AuthOptions.ISSUER,
+        //        ValidAudience = AuthOptions.AUDIENCE,
+        //        IssuerSigningKey = AuthOptions.GetSymmetricSecurityKey()
+        //    };
+
+        //    IPrincipal principal = tokenHandler.ValidateToken(token, validationParameters, out SecurityToken validatedToken);
+        //    return true;
+        //}
+
         public async Task ChangePasswordAsync(ChangePasswordData data)
         {
             Validate.NotNull(data, "Change password data");
@@ -95,6 +176,35 @@ namespace eDiary.API.Services.Security
         {
             // TODO: Add email notification about password reset
             throw new NotImplementedException();
+        }
+
+        private ClaimsPrincipal GetPrincipal(string token)
+        {
+            //try
+            //{
+            var tokenHandler = new JwtSecurityTokenHandler();
+
+            if (!(tokenHandler.ReadToken(token) is JwtSecurityToken jwtToken))
+                return null;
+
+            var validationParameters = new TokenValidationParameters()
+            {
+                RequireExpirationTime = true,
+                ValidateIssuer = false,
+                ValidateAudience = false,
+                ValidateIssuerSigningKey = true,
+                ValidIssuer = AuthOptions.ISSUER,
+                ValidAudience = AuthOptions.AUDIENCE,
+                IssuerSigningKey = AuthOptions.GetSymmetricSecurityKey()
+            };
+
+            return tokenHandler.ValidateToken(token, validationParameters, out SecurityToken securityToken);
+            //}
+            //catch (Exception ex)
+            //{
+            //    Console.WriteLine(ex.Message);
+            //    return null;
+            //}
         }
     }
 }

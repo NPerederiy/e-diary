@@ -6,15 +6,15 @@
       <div class="subheader">{{ 'app.tagline' | translate }}</div>
     </div>
     <form (ngSubmit)="onSubmit()">
-      <span *ngIf="!currentLogin">
+      <span *ngIf="!currentUser">
         <user-profile class="user-profile" tabindex="0" autofocus=true *ngFor="let a of accounts" [profile]="a.profile" (keyup.enter)="chooseLogin(a)" (click)="chooseLogin(a)"></user-profile>
         <div class="button add" tabindex="0" autofocus=true (keyup.enter)="redirectToRegistration()" (click)="redirectToRegistration()">{{ addButtonText }}</div>
       </span>
-      <span *ngIf="currentLogin">
+      <span *ngIf="currentUser">
         <div id="pass-form">
           <div class="plain-text">{{ 'auth.insertPass' | translate }}</div>
           <input type="hidden" autocomplete="username" />
-          <input class="input" type="password" tabindex="1" autofocus=true autocomplete="current-password" (blur)="validateInput(password)" (keyup.enter)="auth(password)" #password/>
+          <input class="input" type="password" tabindex="1" autofocus=true autocomplete="current-password" (blur)="validateInput(password)" (keyup.enter)="login(password)" #password/>
         </div>      
         <div class="button" type="submit" tabindex="0" autofocus=true (keyup.enter)="login(password)" (click)="login(password)">{{ 'auth.loginBtnText' | translate }}</div>
       </span>     

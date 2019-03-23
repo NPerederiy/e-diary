@@ -9,27 +9,27 @@ using System.Web.Http.Cors;
 
 namespace eDiary.API.Controllers
 {
-    [RoutePrefix("Registration")]
+    [RoutePrefix("Authentication")]
     [ConsoleLogger]
     [ExceptionFilter]
     [EnableCors(origins: "*", headers: "*", methods: "POST")]
-    public class RegistrationController : ApiController
+    public class AuthenticationController: ApiController
     {
         private readonly IIdentityService identity;
 
-        public RegistrationController()
+        public AuthenticationController()
         {
             identity = NinjectKernel.Kernel.Get<IIdentityService>();
         }
 
         [HttpPost]
         [AllowAnonymous]
-        public async Task<AuthTokens> RegisterAsync(RegistrationData data)
+        public async Task<AuthTokens> AuthenticateAsync(AuthenticationData data)
         {
             Validate(data);
-            var x = await identity.RegisterAsync(data);
-            if (x == null) throw new System.Exception("Tokens weren't generated.");
-            return x;
+            var token = await identity.AuthenticateAsync(data);
+            if(token == null) throw new System.Exception("Tokens weren't generated.");
+            return token;
         }
     }
 }

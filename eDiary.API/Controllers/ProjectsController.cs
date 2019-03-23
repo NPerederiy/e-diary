@@ -11,7 +11,7 @@ using System.Web.Http.Cors;
 namespace eDiary.API.Controllers
 {
     [RoutePrefix("projects")]
-    [Authenticated]
+    [JwtAuthentication]
     [ConsoleLogger]
     [ExceptionFilter]
     [EnableCors(origins: "http://localhost:4200", headers: "*", methods: "*")]

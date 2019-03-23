@@ -25,6 +25,7 @@
     "chart.js": "^2.7.3",
     "core-js": "^2.6.2",
     "js-sha512": "^0.8.0",
+    "jwt-decode": "^2.2.0",
     "ng2-charts": "^1.6.0",
     "ngx-malihu-scrollbar": "^7.0.0",
     "rxjs": "^6.3.3",

@@ -1,5 +1,5 @@
 import { BrowserModule } from '@angular/platform-browser';
-import { NgModule } from '@angular/core';
+import { NgModule, ErrorHandler } from '@angular/core';
 import { RouterModule } from '@angular/router';
 import { FormsModule, ReactiveFormsModule }   from '@angular/forms';
 import { AppComponent } from './app.component';
@@ -7,12 +7,11 @@ import { LoginComponent } from './login/login.component';
 import { UserProfileComponent } from './login/user-profile/user-profile.component';
 import { RegisterComponent } from './register/register.component';
 import { MainComponent } from './main/main.component';
-import { AuthenticationService } from './services/authentication.service';
 import { MainMenuButtonComponent } from './main/main-menu-button/main-menu-button.component';
 
 import { TranslateLoader, TranslateModule } from '@ngx-translate/core';
 import { TranslateHttpLoader } from '@ngx-translate/http-loader';
-import { HttpClient, HttpClientModule } from '@angular/common/http';
+import { HttpClient, HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 import { HomePageComponent } from './main/home-page/home-page.component';
 import { CalendarPageComponent } from './main/calendar-page/calendar-page.component';
 import { NotesPageComponent } from './main/notes-page/notes-page.component';
@@ -32,11 +31,15 @@ import { CalendarDayComponent } from './main/calendar-page/calendar-day/calendar
 import { DayCardComponent } from './main/calendar-page/calendar-month/day-card/day-card.component';
 import { ProjectPageComponent } from './main/tasks-page/project-page/project-page.component';
 import { AccountService } from './services/account.service';
-import { UserProfileService } from './services/user-profile.service';
+import { TokenService } from './services/token.service';
 import { CategoryCardComponent } from './main/tasks-page/category-card/category-card.component';
 import { ProjectCardComponent } from './main/tasks-page/project-card/project-card.component';
 import { ChartsModule } from 'ng2-charts';
 import { ChartLegendItemComponent } from './main/tasks-page/project-card/chart-legend-item/chart-legend-item.component';
+import { AuthGuard } from './services/authGuard';
+import { RequestOptions } from '@angular/http';
+import { AuthErrorHandler } from './services/authErrorHandler';
+import { AppendAuthHeader } from './services/authInterceptor';
 
 @NgModule({
   declarations: [
@@ -73,7 +76,12 @@ import { ChartLegendItemComponent } from './main/tasks-page/project-card/chart-l
     ReactiveFormsModule,
     HttpClientModule,
     RouterModule.forRoot([
-      { path: '', redirectTo: '/app', pathMatch: 'full' },
+      { 
+        path: '', 
+        redirectTo: '/app', 
+        pathMatch: 'full',
+        canActivate: [AuthGuard]
+      },
       { 
         path: 'app', 
         component: MainComponent,
@@ -88,19 +96,28 @@ import { ChartLegendItemComponent } from './main/tasks-page/project-card/chart-l
       { path: 'registration', component: RegisterComponent },
     ]),
     TranslateModule.forRoot({
-        loader: {
-            provide: TranslateLoader,
-            useFactory: HttpLoaderFactory,
-            deps: [HttpClient]
-        }
+      loader: {
+        provide: TranslateLoader,
+        useFactory: HttpLoaderFactory,
+        deps: [HttpClient]
+      }
     }),
     MalihuScrollbarModule.forRoot(),
     ChartsModule
   ],
   providers: [
-    AuthenticationService,
+    {
+      provide: HTTP_INTERCEPTORS,
+      useClass: AppendAuthHeader,
+      multi: true
+    },
+    {
+      provide: ErrorHandler, 
+      useClass: AuthErrorHandler
+    },
     AccountService,
-    UserProfileService
+    AuthGuard,
+    TokenService,
   ],
   bootstrap: [AppComponent]
 })

@@ -59,6 +59,15 @@
     <Reference Include="EntityFramework.SqlServer, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
       <HintPath>..\packages\EntityFramework.6.2.0\lib\net45\EntityFramework.SqlServer.dll</HintPath>
     </Reference>
+    <Reference Include="Microsoft.IdentityModel.JsonWebTokens, Version=5.4.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.IdentityModel.JsonWebTokens.5.4.0\lib\net461\Microsoft.IdentityModel.JsonWebTokens.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.IdentityModel.Logging, Version=5.4.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.IdentityModel.Logging.5.4.0\lib\net461\Microsoft.IdentityModel.Logging.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.IdentityModel.Tokens, Version=5.4.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.IdentityModel.Tokens.5.4.0\lib\net461\Microsoft.IdentityModel.Tokens.dll</HintPath>
+    </Reference>
     <Reference Include="Microsoft.Owin, Version=4.0.1.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
       <HintPath>..\packages\Microsoft.Owin.4.0.1\lib\net45\Microsoft.Owin.dll</HintPath>
     </Reference>
@@ -96,9 +105,13 @@
     <Reference Include="System.Data.SQLite.Linq, Version=1.0.109.0, Culture=neutral, PublicKeyToken=db937bc2d44ff139, processorArchitecture=MSIL">
       <HintPath>..\packages\System.Data.SQLite.Linq.1.0.109.0\lib\net46\System.Data.SQLite.Linq.dll</HintPath>
     </Reference>
+    <Reference Include="System.IdentityModel.Tokens.Jwt, Version=5.4.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\System.IdentityModel.Tokens.Jwt.5.4.0\lib\net461\System.IdentityModel.Tokens.Jwt.dll</HintPath>
+    </Reference>
     <Reference Include="System.Net.Http.Formatting, Version=5.2.7.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
       <HintPath>..\packages\Microsoft.AspNet.WebApi.Client.5.2.7\lib\net45\System.Net.Http.Formatting.dll</HintPath>
     </Reference>
+    <Reference Include="System.Runtime.Serialization" />
     <Reference Include="System.Web" />
     <Reference Include="System.Web.Cors, Version=5.2.7.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
       <HintPath>..\packages\Microsoft.AspNet.Cors.5.2.7\lib\net45\System.Web.Cors.dll</HintPath>
@@ -141,18 +154,22 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Controllers\AuthenticationController.cs" />
     <Compile Include="Controllers\PrjCategoriesController.cs" />
     <Compile Include="Controllers\ProjectsController.cs" />
     <Compile Include="Controllers\RegistrationController.cs" />
     <Compile Include="Controllers\SectionsController.cs" />
-    <Compile Include="Controllers\SessionController.cs" />
     <Compile Include="Controllers\TasksController.cs" />
+    <Compile Include="Controllers\TokenController.cs" />
     <Compile Include="Controllers\UserProfilesController.cs" />
     <Compile Include="Filters\ActionDetails.cs" />
-    <Compile Include="Filters\Authenticated.cs" />
+    <Compile Include="Filters\AddChallengeOnUnauthorizedResult.cs" />
+    <Compile Include="Filters\HttpAuthChallengeContextExtensions.cs" />
+    <Compile Include="Filters\JwtAuthentication.cs" />
     <Compile Include="Filters\ConsoleLogger.cs" />
     <Compile Include="Filters\ExceptionFilter.cs" />
     <Compile Include="Models\BusinessObjects\AuthenticationData.cs" />
+    <Compile Include="Models\BusinessObjects\AuthTokens.cs" />
     <Compile Include="Models\BusinessObjects\ChangePasswordData.cs" />
     <Compile Include="Models\BusinessObjects\CommentBO.cs" />
     <Compile Include="Models\BusinessObjects\FileBO.cs" />
@@ -167,6 +184,7 @@
     <Compile Include="Models\BusinessObjects\SubtaskBO.cs" />
     <Compile Include="Models\BusinessObjects\TagBO.cs" />
     <Compile Include="Models\BusinessObjects\TaskCard.cs" />
+    <Compile Include="Models\BusinessObjects\TokenPayload.cs" />
     <Compile Include="Models\BusinessObjects\UserProfileBO.cs" />
     <Compile Include="Models\EF\Interfaces\IRepository.cs" />
     <Compile Include="Models\EF\Interfaces\IUnitOfWork.cs" />
@@ -202,6 +220,7 @@
     <Compile Include="Services\Core\UserService.cs" />
     <Compile Include="Services\Calendar\Interfaces\ICalendarService.cs" />
     <Compile Include="Services\Notes\Interfaces\INoteService.cs" />
+    <Compile Include="Services\Security\AuthOptions.cs" />
     <Compile Include="Services\Security\IdentityService.cs" />
     <Compile Include="Services\Security\Interfaces\IIdentityService.cs" />
     <Compile Include="Services\Security\Interfaces\ICryptographyService.cs" />
