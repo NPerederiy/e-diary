@@ -37,7 +37,7 @@ export class MainComponent implements OnInit {
     this.accountService.userProfile.subscribe(profile => this.userProfile = profile);
   }
 
-  async openPage(btn: MenuButton){
+  public openPage(btn: MenuButton){
     this.menuButtons.forEach(b => {
       if(b.content !== btn.content){
         b.setNotActive();
@@ -46,21 +46,22 @@ export class MainComponent implements OnInit {
     btn.setActive();
     switch(btn.type){
       case MenuButtonType.Home:
-        this.router.navigateByUrl("app");
+        this.router.navigate(["app"]);
         // this.router.navigate([{ outlets: { 'inner-pages': [''] } }], { relativeTo: this.route } );
         break;
       case MenuButtonType.Tasks:
-      this.router.navigateByUrl("app");
-        this.router.navigate([{ outlets: { 'inner-pages': ['tasks'] } }], { relativeTo: this.route } );
+      this.router.navigate(["tasks"], {relativeTo: this.route});
+        // this.router.navigate([{ outlets: { 'inner-pages': ['tasks'] } }], { relativeTo: this.route } );
         break;
       case MenuButtonType.Notes:
-      this.router.navigateByUrl("app");
-        this.router.navigate([{ outlets: { 'inner-pages': ['notes'] } }], { relativeTo: this.route } );
+      this.router.navigate(["notes"], {relativeTo: this.route});
+      // this.router.navigateByUrl("app");
+      //   this.router.navigate([{ outlets: { 'inner-pages': ['notes'] } }], { relativeTo: this.route } );
         break;
       case MenuButtonType.Calendar:
-      console.log(await this.accountService.getProfile(3));;
-      this.router.navigateByUrl("app");
-        this.router.navigate([{ outlets: { 'inner-pages': ['calendar'] } }], { relativeTo: this.route } );
+      this.router.navigate(["calendar"], {relativeTo: this.route});
+      // this.router.navigateByUrl("app");
+      //   this.router.navigate([{ outlets: { 'inner-pages': ['calendar'] } }], { relativeTo: this.route } );
         break;
     }
     // TODO: implement routing to the specified page

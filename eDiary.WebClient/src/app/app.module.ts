@@ -40,6 +40,7 @@ import { AuthGuard } from './services/authGuard';
 import { RequestOptions } from '@angular/http';
 import { AuthErrorHandler } from './services/authErrorHandler';
 import { AppendAuthHeader } from './services/authInterceptor';
+import { appRoutes } from './app.routes';
 
 @NgModule({
   declarations: [
@@ -75,26 +76,7 @@ import { AppendAuthHeader } from './services/authInterceptor';
     FormsModule,
     ReactiveFormsModule,
     HttpClientModule,
-    RouterModule.forRoot([
-      { 
-        path: '', 
-        redirectTo: '/app', 
-        pathMatch: 'full',
-        canActivate: [AuthGuard]
-      },
-      { 
-        path: 'app', 
-        component: MainComponent,
-        children: [
-          { path: '', component: HomePageComponent, outlet:"inner-pages" },
-          { path: 'tasks', component: TasksPageComponent, outlet:"inner-pages" },
-          { path: 'notes', component: NotesPageComponent, outlet:"inner-pages" },
-          { path: 'calendar', component: CalendarPageComponent, outlet:"inner-pages" }
-        ]
-      },
-      { path: 'login', component: LoginComponent },
-      { path: 'registration', component: RegisterComponent },
-    ]),
+    RouterModule.forRoot(appRoutes),
     TranslateModule.forRoot({
       loader: {
         provide: TranslateLoader,
@@ -110,10 +92,6 @@ import { AppendAuthHeader } from './services/authInterceptor';
       provide: HTTP_INTERCEPTORS,
       useClass: AppendAuthHeader,
       multi: true
-    },
-    {
-      provide: ErrorHandler, 
-      useClass: AuthErrorHandler
     },
     AccountService,
     AuthGuard,

@@ -5,7 +5,6 @@ import { AppUser } from 'src/shared/models/app-user.model';
 import * as SHA from 'js-sha512';
 import { UserProfile } from 'src/shared/models/user-profile.model';
 import { TokenService } from './token.service';
-import { AuthRequestOptions } from './authRequest';
 
 @Injectable()
 export class AccountService {
@@ -22,11 +21,11 @@ export class AccountService {
         this.tokenService.logTokens();
     }
 
-    async getProfile(id: number) {   // TODO: Remove this one
-        // const headers = new HttpHeaders();
-        // headers.set();
-        return await this.http.get(`${this.serverURI}/api/userprofiles/${id}`).toPromise();
-    }
+    // async getProfile(id: number) {   // TODO: Remove this one
+    //     // const headers = new HttpHeaders();
+    //     // headers.set();
+    //     return await this.http.get(`${this.serverURI}/api/userprofiles/${id}`).toPromise();
+    // }
 
     async getAccounts() {
         return await this.http.get(`${this.serverURI}/api/userprofiles`).toPromise();

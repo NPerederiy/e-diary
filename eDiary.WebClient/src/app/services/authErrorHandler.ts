@@ -1,7 +1,9 @@
 import { ErrorHandler, Injectable, Injector } from '@angular/core';
 import { Router } from '@angular/router';
 
-@Injectable()
+@Injectable({
+    providedIn: 'root'
+})
 export class AuthErrorHandler implements ErrorHandler {
 
     constructor(private injector: Injector) { }
