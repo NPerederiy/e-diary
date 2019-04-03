@@ -5,6 +5,7 @@ import { AppUser } from 'src/shared/models/app-user.model';
 import * as SHA from 'js-sha512';
 import { UserProfile } from 'src/shared/models/user-profile.model';
 import { TokenService } from './token.service';
+import { TranslateService } from '@ngx-translate/core';
 
 @Injectable()
 export class AccountService {
@@ -15,7 +16,7 @@ export class AccountService {
     
     public userProfile = this.activeAccountProfile.asObservable();
 
-    constructor(private http: HttpClient, private tokenService: TokenService) {}
+    constructor(private http: HttpClient, private tokenService: TokenService, private translate: TranslateService) {}
 
     printTokens(){  // TODO: Remove this one
         this.tokenService.logTokens();
@@ -36,7 +37,8 @@ export class AccountService {
         body.firstName = fname;
         body.lastName = lname;
         body.email = email;
-        body.password = this.encode(password);        
+        body.password = this.encode(password);      
+        body.language = this.translate.currentLang;  
         return await this.http.post(`${this.serverURI}/api/Registration`, body).toPromise()
             .then((tokens: { access: string; refresh: string; }) => {
                 if(tokens){

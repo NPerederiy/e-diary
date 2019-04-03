@@ -24,5 +24,6 @@ namespace eDiary.API.Models.EF.Interfaces
         IRepository<Task> TaskRepository { get; }
         IRepository<UserProfile> UserProfileRepository { get; }
         IRepository<UserSettings> UserSettingsRepository { get; }
+        IRepository<Session> SessionRepository { get; }
     }
 }

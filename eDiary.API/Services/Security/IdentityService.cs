@@ -7,10 +7,10 @@ using eDiary.API.Util;
 using Ninject;
 using System;
 using System.Linq;
-using System.Threading.Tasks;
 using System.IdentityModel.Tokens.Jwt;
 using Microsoft.IdentityModel.Tokens;
 using System.Security.Claims;
+using eDiary.API.Models.Entities;
 
 namespace eDiary.API.Services.Security
 {
@@ -27,7 +27,7 @@ namespace eDiary.API.Services.Security
             ups = NinjectKernel.Kernel.Get<IUserService>();
         }
         
-        public async Task<AuthTokens> AuthenticateAsync(AuthenticationData data)
+        public async System.Threading.Tasks.Task<AuthTokens> AuthenticateAsync(AuthenticationData data)
         {
             Validate.NotNull(data, "Authentication data");
             string enc = cs.EncryptPassword(data.Password);
@@ -40,54 +40,78 @@ namespace eDiary.API.Services.Security
             return GenerateTokens(user);
         }
         
-        public async Task<AuthTokens> RegisterAsync(RegistrationData data)
+        public async System.Threading.Tasks.Task<AuthTokens> RegisterAsync(RegistrationData data)
         {
             Validate.NotNull(data, "Registration data");
             Validate.NotNull(data.FirstName, "First name");
             Validate.NotNull(data.LastName, "Last name");
             Validate.NotNull(data.Email, "Email");
+            Validate.NotNull(data.LanguageCode, "Language code");
 
             {
                 var temp = (await uow.UserProfileRepository.GetByConditionAsync(x => x.Email == data.Email)).FirstOrDefault();
                 if (temp != null) throw new Exception("Email already in use");
             }
 
+            var language = (await uow.LanguageRepository.GetByConditionAsync(x => x.ShortCode == data.LanguageCode)).FirstOrDefault();
+            if (language == null) throw new Exception("Language not found");
+
             var enc = cs.EncryptPassword(data.Password);
 
-            var profile = new Models.Entities.UserProfile
+            var rootFolder = new Folder
+            {
+                Name = "Root",
+                ParentFolderId = null
+            };
+
+            var settings = new UserSettings
+            {
+                LanguageId = language.Id,
+                Folder = rootFolder
+            };
+
+            var profile = new UserProfile
             {
                 FirstName = data.FirstName,
                 LastName = data.LastName,
-                Email = data.Email
+                Email = data.Email,
+                UserSettings = new System.Collections.Generic.List<UserSettings> { settings }
             };
 
-            await uow.UserProfileRepository.CreateAsync(profile);
-
-            var user = new Models.Entities.AppUser
+            var user = new AppUser
             {
                 Username = "undefined",
                 PasswordHash = enc,
-                UserProfile = profile,
-                UserProfileId = profile.Id
+                UserProfile = profile
             };
 
             await uow.AppUserRepository.CreateAsync(user);
             
             user.Username = cs.GenerateUsername();
-
             uow.AppUserRepository.Update(user);
 
-            return GenerateTokens(user); 
+            var tokens = GenerateTokens(user);
+
+            var session = new Session
+            {
+                AppUserId = user.Id,
+                Token = tokens.RefreshToken,
+                CreatedAt = DateTime.UtcNow.ToLongTimeString()
+            };
+
+            await uow.SessionRepository.CreateAsync(session);
+
+            return tokens; 
         }
 
-        public AuthTokens GenerateTokens(Models.Entities.AppUser user)
+        public AuthTokens GenerateTokens(AppUser user)
         {
             var refresh = GenerateRefreshToken();
             var access = GenerateAccessToken(user);
             return new AuthTokens(access, refresh);
         }
 
-        public string GenerateAccessToken(Models.Entities.AppUser user)
+        public string GenerateAccessToken(AppUser user)
         {
             var now = DateTime.UtcNow;
             var jwt = new JwtSecurityToken(
@@ -165,14 +189,14 @@ namespace eDiary.API.Services.Security
         //    return true;
         //}
 
-        public async Task ChangePasswordAsync(ChangePasswordData data)
+        public async System.Threading.Tasks.Task ChangePasswordAsync(ChangePasswordData data)
         {
             Validate.NotNull(data, "Change password data");
             // TODO: Add email notification about password change
             throw new NotImplementedException();
         }
 
-        public async Task ResetPasswordAsync()
+        public async System.Threading.Tasks.Task ResetPasswordAsync()
         {
             // TODO: Add email notification about password reset
             throw new NotImplementedException();

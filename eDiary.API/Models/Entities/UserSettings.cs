@@ -1,10 +1,17 @@
-﻿namespace eDiary.API.Models.Entities
+﻿using System.ComponentModel.DataAnnotations.Schema;
+
+namespace eDiary.API.Models.Entities
 {
     public class UserSettings
     {
         public int Id { get; set; } // Id (Primary key)
+
+        [ForeignKey("UserProfile")]
         public int UserId { get; set; } // UserId
+
         public int? LanguageId { get; set; } // LanguageId
+
+        [ForeignKey("Folder")]
         public int RootFolderId { get; set; } // RootFolderId
 
         // Foreign keys

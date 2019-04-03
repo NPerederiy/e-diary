@@ -18,5 +18,7 @@ namespace eDiary.API.Models.Entities
         /// Parent UserProfile pointed by [AppUsers].([UserProlifeId]) (FK__AppUsers__UserPr__6E01572D)
         /// </summary>
         public virtual UserProfile UserProfile { get; set; } // FK__AppUsers__UserPr__6E01572D
+
+        public virtual System.Collections.Generic.ICollection<Session> Sessions { get; set; }
     }
 }

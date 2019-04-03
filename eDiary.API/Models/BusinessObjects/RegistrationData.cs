@@ -20,6 +20,11 @@ namespace eDiary.API.Models.BusinessObjects
         [EmailAddress(ErrorMessage = "Email is not valid")]
         [JsonProperty("email")]
         public string Email { get; set; }
+
+        [Required(ErrorMessage = "Language code is required")]
+        [StringLength(2)]
+        [JsonProperty("language")]
+        public string LanguageCode { get; set; }
         
         //[JsonProperty("username")]
         //public string Username { get; set; }
@@ -33,12 +38,13 @@ namespace eDiary.API.Models.BusinessObjects
         //    Email = email;
         //}
 
-        public RegistrationData(string firstName, string lastName, string password, string email)
+        public RegistrationData(string firstName, string lastName, string password, string email, string language)
         {
             FirstName = firstName;
             LastName = lastName;
             Password = password;
             Email = email;
+            LanguageCode = language;
         }
     }
 }

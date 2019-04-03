@@ -35,12 +35,14 @@ namespace eDiary.API.Services.Core
         public async System.Threading.Tasks.Task CreateUserProfileAsync(UserProfileBO profile)
         {
             Validate.NotNull(profile, "User profile");
+
             var p = new UserProfile
             {
                 FirstName = profile.FirstName,
                 LastName = profile.LastName,
-                Email = profile.Email                
+                Email = profile.Email         
             };
+
             await uow.UserProfileRepository.CreateAsync(p);
         }
         

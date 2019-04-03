@@ -204,6 +204,7 @@
     <Compile Include="Models\Entities\Project.cs" />
     <Compile Include="Models\Entities\ProjectCategory.cs" />
     <Compile Include="Models\Entities\Section.cs" />
+    <Compile Include="Models\Entities\Session.cs" />
     <Compile Include="Models\Entities\Status.cs" />
     <Compile Include="Models\Entities\Subtask.cs" />
     <Compile Include="Models\Entities\Tag.cs" />

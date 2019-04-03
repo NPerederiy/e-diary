@@ -30,5 +30,6 @@ namespace eDiary.API.Models.EF
         public IRepository<Task> TaskRepository => new Repository<Task>(db);
         public IRepository<UserProfile> UserProfileRepository => new Repository<UserProfile>(db);
         public IRepository<UserSettings> UserSettingsRepository => new Repository<UserSettings>(db);
+        public IRepository<Session> SessionRepository => new Repository<Session>(db); 
     }
 }

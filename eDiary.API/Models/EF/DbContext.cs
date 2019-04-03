@@ -24,6 +24,7 @@ namespace eDiary.API.Models.EF
         public System.Data.Entity.DbSet<Task> Tasks { get; set; }
         public System.Data.Entity.DbSet<UserProfile> UserProfiles { get; set; }
         public System.Data.Entity.DbSet<UserSettings> UserSettings { get; set; }
+        public System.Data.Entity.DbSet<Session> Sessions { get; set; }
 
         static BasicDiaryDbContext()
         {
