@@ -1,40 +1,41 @@
-﻿using System.Collections.Generic;
-using System.Linq;
-using eDiary.API.Models.Entities;
-using eDiary.API.Models.BusinessObjects;
+﻿using eDiary.API.Models.BusinessObjects;
 using eDiary.API.Models.EF.Interfaces;
 using eDiary.API.Services.Notes.Interfaces;
-using System;
 using eDiary.API.Services.Validation;
 using eDiary.API.Util;
 using Ninject;
+using System;
+using System.Collections.Generic;
+using System.Linq.Expressions;
+using System.Threading.Tasks;
+using Entities = eDiary.API.Models.Entities;
 
 namespace eDiary.API.Services.Notes
 {
-    public class NoteService: INoteService
+    public class NoteService: BaseService, INoteService
     {
-        private readonly IUnitOfWork uow;
+        private IUnitOfWork uow;
 
         public NoteService()
         {
             uow = NinjectKernel.Kernel.Get<IUnitOfWork>();
         }
 
-        public async System.Threading.Tasks.Task<IEnumerable<NoteCard>> GetAllNotesAsync()
+        public async Task<IEnumerable<NoteCard>> GetAllNotesAsync()
         {
             var notes = await uow.NoteRepository.GetAllAsync();
             return ConvertToNoteCards(notes);
         }
 
-        public async System.Threading.Tasks.Task<IEnumerable<NoteCard>> GetFolderNotesAsync(int folderId)
+        public async Task<IEnumerable<NoteCard>> GetFolderNotesAsync(int folderId)
         {
-            Folder folder = await TryFindFolder(folderId);
+            var folder = await FindFolderAsync(x => x.Id == folderId);
             return ConvertToNoteCards(folder.Notes);
         }
 
-        public async System.Threading.Tasks.Task<IEnumerable<NoteCard>> GetNotesByTagAsync(int tagId)
+        public async Task<IEnumerable<NoteCard>> GetNotesByTagAsync(int tagId)
         {
-            var tag = await TryFindTag(tagId);
+            var tag = await FindTagAsync(x => x.Id == tagId);
             var notes = new List<NoteCard>();
 
             foreach(var x in tag.TagReferences)
@@ -46,69 +47,62 @@ namespace eDiary.API.Services.Notes
             return notes.ToArray();
         }
 
-        public async System.Threading.Tasks.Task<NoteCard> GetNoteAsync(int noteId)
+        public async Task<NoteCard> GetNoteAsync(int noteId)
         {
-            return new NoteCard(await TryFindNote(noteId));
+            return new NoteCard(await FindNoteAsync(x => x.Id == noteId));
         }
         
-        public async System.Threading.Tasks.Task CreateNoteAsync(NoteCard card)
+        public async Task CreateNoteAsync(NoteCard card)
         {
             Validate.NotNull(card, "Note card");
-            var n = new Note
+            var n = new Entities.Note
             {
                 Header = card.Header,
                 Description = card.Description,
                 CreatedAt = card.CreatedAt,
                 UpdatedAt = card.CreatedAt,
-                Status = (await uow.StatusRepository.GetByConditionAsync(x => x.Name == card.CardStatus)).FirstOrDefault(),
+                Status = await FindEntityAsync(uow.StatusRepository, x => x.Name == card.CardStatus),
                 FolderId = card.FolderId
             };
 
             await uow.NoteRepository.CreateAsync(n);
         }
         
-        public async System.Threading.Tasks.Task UpdateNoteAsync(NoteCard card)
+        public async Task UpdateNoteAsync(NoteCard card)
         {
             Validate.NotNull(card, "Note card");
-            var note = await TryFindNote(card.NoteId);
-
+            var note = await FindNoteAsync(x => x.Id == card.NoteId);
             note.Header = card.Header;
             note.Description = card.Description;
             note.CreatedAt = card.CreatedAt;
             note.UpdatedAt = card.UpdatedAt;
             note.FolderId = card.FolderId;
-            note.Status = (await uow.StatusRepository.GetByConditionAsync(x => x.Name == card.CardStatus)).FirstOrDefault();
+            note.Status = await FindEntityAsync(uow.StatusRepository, x => x.Name == card.CardStatus);
 
             uow.NoteRepository.Update(note);
         }
-
-        public async System.Threading.Tasks.Task DeleteNoteAsync(int id)
+        
+        public async Task DeleteNoteAsync(int id)
         {
-            uow.NoteRepository.Delete(await TryFindNote(id));
+            uow.NoteRepository.Delete(await FindNoteAsync(x => x.Id == id));
         }
 
-        private async System.Threading.Tasks.Task<Folder> TryFindFolder(int folderId)
+        private async Task<Entities.Folder> FindFolderAsync(Expression<Func<Entities.Folder, bool>> condition)
         {
-            var folder = (await uow.FolderRepository.GetByConditionAsync(x => x.Id == folderId)).FirstOrDefault();
-            if (folder == null) throw new Exception("Folder not found");
-            return folder;
+            return await FindEntityAsync(uow.FolderRepository, condition);
         }
 
-        private async System.Threading.Tasks.Task<Note> TryFindNote(int id)
+        private async Task<Entities.Note> FindNoteAsync(Expression<Func<Entities.Note, bool>> condition)
         {
-            var note = (await uow.NoteRepository.GetByConditionAsync(x => x.Id == id)).FirstOrDefault();
-            if (note == null) throw new Exception("Note not found");
-            return note;
+            return await FindEntityAsync(uow.NoteRepository, condition);
         }
 
-        private async System.Threading.Tasks.Task<Tag> TryFindTag(int id)
+        private async Task<Entities.Tag> FindTagAsync(Expression<Func<Entities.Tag, bool>> condition)
         {
-            var tag = (await uow.TagRepository.GetByConditionAsync(x => x.Id == id)).FirstOrDefault();
-            if (tag == null) throw new Exception("Tag not found");
-            return tag;
+            return await FindEntityAsync(uow.TagRepository, condition);
         }
 
-        private static List<NoteCard> ConvertToNoteCards(IEnumerable<Note> notes)
+        private static List<NoteCard> ConvertToNoteCards(IEnumerable<Entities.Note> notes)
         {
             var cards = new List<NoteCard>();
             foreach (var n in notes)

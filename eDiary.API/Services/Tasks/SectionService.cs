@@ -1,18 +1,18 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
-using eDiary.API.Models.BusinessObjects;
+﻿using eDiary.API.Models.BusinessObjects;
 using eDiary.API.Models.EF.Interfaces;
-using eDiary.API.Models.Entities;
 using eDiary.API.Services.Tasks.Interfaces;
 using eDiary.API.Services.Validation;
 using eDiary.API.Util;
 using Ninject;
+using System;
+using System.Collections.Generic;
+using System.Linq.Expressions;
+using System.Threading.Tasks;
+using Entities = eDiary.API.Models.Entities;
 
 namespace eDiary.API.Services.Tasks
 {
-    public class SectionService : ISectionService
+    public class SectionService : BaseService, ISectionService
     {
         private readonly IUnitOfWork uow;
 
@@ -29,19 +29,19 @@ namespace eDiary.API.Services.Tasks
 
         public async Task<IEnumerable<SectionCard>> GetProjectSectionsAsync(int projectId)
         {
-            Project project = await TryFindProject(projectId);
+            Entities.Project project = await FindEntityAsync(uow.ProjectRepository, x => x.Id == projectId);
             return ConvertToSectionCards(project.Sections);
         }
 
         public async Task<SectionCard> GetSectionAsync(int id)
         {
-            return new SectionCard(await TryFindSection(id));
+            return new SectionCard(await FindSectionAsync(x => x.Id == id));
         }
         
-        public async System.Threading.Tasks.Task CreateSectionAsync(SectionCard card)
+        public async Task CreateSectionAsync(SectionCard card)
         {
             Validate.NotNull(card, "Section card");
-            var s = new Section
+            var s = new Entities.Section
             {
                 Name = card.Name,
                 ProjectId = card.ProjectId
@@ -49,34 +49,25 @@ namespace eDiary.API.Services.Tasks
             await uow.SectionRepository.CreateAsync(s);
         }
         
-        public async System.Threading.Tasks.Task UpdateSectionAsync(SectionCard card)
+        public async Task UpdateSectionAsync(SectionCard card)
         {
             Validate.NotNull(card, "Section card");
-            var section = await TryFindSection(card.SectionId);
+            var section = await FindSectionAsync(x => x.Id == card.SectionId);
             section.Name = card.Name;
             uow.SectionRepository.Update(section);
         }
 
-        public async System.Threading.Tasks.Task DeleteSectionAsync(int id)
+        public async Task DeleteSectionAsync(int id)
         {
-            uow.SectionRepository.Delete(await TryFindSection(id));
+            uow.SectionRepository.Delete(await FindSectionAsync(x => x.Id == id));
         }
 
-        private async Task<Project> TryFindProject(int id)
+        private async Task<Entities.Section> FindSectionAsync(Expression<Func<Entities.Section, bool>> condition)
         {
-            var project = (await uow.ProjectRepository.GetByConditionAsync(x => x.Id == id)).FirstOrDefault();
-            if (project == null) throw new Exception("Project not found");
-            return project;
+            return await FindEntityAsync(uow.SectionRepository, condition);
         }
 
-        private async Task<Section> TryFindSection(int id)
-        {
-            var section = (await uow.SectionRepository.GetByConditionAsync(x => x.Id == id)).FirstOrDefault();
-            if (section == null) throw new Exception("Section not found");
-            return section;
-        }
-
-        private static List<SectionCard> ConvertToSectionCards(IEnumerable<Section> sections)
+        private static List<SectionCard> ConvertToSectionCards(IEnumerable<Entities.Section> sections)
         {
             var cards = new List<SectionCard>();
             foreach (var s in sections)

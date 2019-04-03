@@ -1,18 +1,18 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
-using eDiary.API.Models.BusinessObjects;
+﻿using eDiary.API.Models.BusinessObjects;
 using eDiary.API.Models.EF.Interfaces;
-using eDiary.API.Models.Entities;
 using eDiary.API.Services.Tasks.Interfaces;
 using eDiary.API.Services.Validation;
 using eDiary.API.Util;
 using Ninject;
+using System;
+using System.Collections.Generic;
+using System.Linq.Expressions;
+using System.Threading.Tasks;
+using Entities = eDiary.API.Models.Entities;
 
 namespace eDiary.API.Services.Tasks
 {
-    public class ProjectService : IProjectService
+    public class ProjectService : BaseService, IProjectService
     {
         private readonly IUnitOfWork uow;
 
@@ -28,24 +28,24 @@ namespace eDiary.API.Services.Tasks
 
         public async Task<IEnumerable<ProjectCard>> GetProjectsByCategoryAsync(int categoryId)
         {
-            ProjectCategory category = await TryFindCategory(categoryId);
+            Entities.ProjectCategory category = await FindCategoryAsync(x => x.Id == categoryId);
             return ConvertToProjectCards(category.Projects);
         }
 
         public async Task<ProjectCard> GetProjectCardAsync(int projectId)
         {
-            return new ProjectCard(await TryFindProject(projectId));
+            return new ProjectCard(await FindProjectAsync(x => x.Id == projectId));
         }
 
         public async Task<ProjectPage> GetProjectPageAsync(int projectId)
         {
-            return new ProjectPage(await TryFindProject(projectId));
+            return new ProjectPage(await FindProjectAsync(x => x.Id == projectId));
         }
         
-        public async System.Threading.Tasks.Task CreateProjectAsync(ProjectCard card)
+        public async Task CreateProjectAsync(ProjectCard card)
         {
             Validate.NotNull(card, "Project card");
-            var p = new Project
+            var p = new Entities.Project
             {
                 Name = card.Name,
                 //UserId = ???                 // TODO: Add userId
@@ -53,34 +53,35 @@ namespace eDiary.API.Services.Tasks
             await uow.ProjectRepository.CreateAsync(p);
         }
         
-        public async System.Threading.Tasks.Task UpdateProjectAsync(ProjectCard card)
+        public async Task UpdateProjectAsync(ProjectCard card)
         {
             Validate.NotNull(card, "Project card");
-            var project = await TryFindProject(card.ProjectId);
+            var project = await FindProjectAsync(x => x.Id == card.ProjectId);
             project.Name = card.Name;
             uow.ProjectRepository.Update(project);
         }
 
-        public async System.Threading.Tasks.Task DeleteProjectAsync(int id)
+        public async Task DeleteProjectAsync(int id)
         {
-            uow.ProjectRepository.Delete(await TryFindProject(id));
+            uow.ProjectRepository.Delete(await FindProjectAsync(x => x.Id == id));
         }
 
-        private async Task<ProjectCategory> TryFindCategory(int categoryId)
+        private async Task<Entities.ProjectCategory> TryFindCategoryAsync(Expression<Func<Entities.ProjectCategory, bool>> condition)
         {
-            var category = (await uow.ProjectCategoryRepository.GetByConditionAsync(x => x.Id == categoryId)).FirstOrDefault();
-            if (category == null) throw new Exception("Category not found");
-            return category;
+            return await FindEntityAsync(uow.ProjectCategoryRepository, condition);
         }
 
-        private async Task<Project> TryFindProject(int id)
+        private async Task<Entities.ProjectCategory> FindCategoryAsync(Expression<Func<Entities.ProjectCategory, bool>> condition)
         {
-            var project = (await uow.ProjectRepository.GetByConditionAsync(x => x.Id == id)).FirstOrDefault();
-            if (project == null) throw new Exception("Project not found");
-            return project;
+            return await FindEntityAsync(uow.ProjectCategoryRepository, condition);
         }
 
-        private List<ProjectCard> ConvertToProjectCards(IEnumerable<Project> projects)
+        private async Task<Entities.Project> FindProjectAsync(Expression<Func<Entities.Project, bool>> condition)
+        {
+            return await FindEntityAsync(uow.ProjectRepository, condition);
+        }
+
+        private List<ProjectCard> ConvertToProjectCards(IEnumerable<Entities.Project> projects)
         {
             var cards = new List<ProjectCard>();
             foreach (var p in projects)

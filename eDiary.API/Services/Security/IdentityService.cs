@@ -4,17 +4,19 @@ using eDiary.API.Services.Core.Interfaces;
 using eDiary.API.Services.Security.Interfaces;
 using eDiary.API.Services.Validation;
 using eDiary.API.Util;
+using Microsoft.IdentityModel.Tokens;
 using Ninject;
 using System;
-using System.Linq;
 using System.IdentityModel.Tokens.Jwt;
-using Microsoft.IdentityModel.Tokens;
+using System.Linq;
+using System.Linq.Expressions;
 using System.Security.Claims;
-using eDiary.API.Models.Entities;
+using System.Threading.Tasks;
+using Entities = eDiary.API.Models.Entities;
 
 namespace eDiary.API.Services.Security
 {
-    public class IdentityService : IIdentityService
+    public class IdentityService : BaseService, IIdentityService
     {
         private readonly ICryptographyService cs;
         private readonly IUnitOfWork uow;
@@ -27,58 +29,56 @@ namespace eDiary.API.Services.Security
             ups = NinjectKernel.Kernel.Get<IUserService>();
         }
         
-        public async System.Threading.Tasks.Task<AuthTokens> AuthenticateAsync(AuthenticationData data)
+        public async Task<AuthTokens> AuthenticateAsync(AuthenticationData data)
         {
             Validate.NotNull(data, "Authentication data");
-            string enc = cs.EncryptPassword(data.Password);
 
-            var user = (await uow.AppUserRepository.GetByConditionAsync(x => x.Username == data.Username)).FirstOrDefault();
-            if (user == null) throw new Exception("User not found");
+            var user = await FindAppUserAsync(x => x.Username == data.Username);
 
+            var enc = cs.EncryptPassword(data.Password);
             if (enc != user.PasswordHash) throw new Exception("Passwords are not match");
 
             return GenerateTokens(user);
         }
         
-        public async System.Threading.Tasks.Task<AuthTokens> RegisterAsync(RegistrationData data)
+        public async Task<AuthTokens> RegisterAsync(RegistrationData data)
         {
             Validate.NotNull(data, "Registration data");
             Validate.NotNull(data.FirstName, "First name");
             Validate.NotNull(data.LastName, "Last name");
             Validate.NotNull(data.Email, "Email");
             Validate.NotNull(data.LanguageCode, "Language code");
-
+            
             {
                 var temp = (await uow.UserProfileRepository.GetByConditionAsync(x => x.Email == data.Email)).FirstOrDefault();
                 if (temp != null) throw new Exception("Email already in use");
             }
 
-            var language = (await uow.LanguageRepository.GetByConditionAsync(x => x.ShortCode == data.LanguageCode)).FirstOrDefault();
-            if (language == null) throw new Exception("Language not found");
+            var language = await FindEntityAsync(uow.LanguageRepository, x => x.ShortCode == data.LanguageCode);
 
             var enc = cs.EncryptPassword(data.Password);
 
-            var rootFolder = new Folder
+            var rootFolder = new Entities.Folder
             {
                 Name = "Root",
                 ParentFolderId = null
             };
 
-            var settings = new UserSettings
+            var settings = new Entities.UserSettings
             {
                 LanguageId = language.Id,
                 Folder = rootFolder
             };
 
-            var profile = new UserProfile
+            var profile = new Entities.UserProfile
             {
                 FirstName = data.FirstName,
                 LastName = data.LastName,
                 Email = data.Email,
-                UserSettings = new System.Collections.Generic.List<UserSettings> { settings }
+                UserSettings = new System.Collections.Generic.List<Entities.UserSettings> { settings }
             };
 
-            var user = new AppUser
+            var user = new Entities.AppUser
             {
                 Username = "undefined",
                 PasswordHash = enc,
@@ -92,7 +92,7 @@ namespace eDiary.API.Services.Security
 
             var tokens = GenerateTokens(user);
 
-            var session = new Session
+            var session = new Entities.Session
             {
                 AppUserId = user.Id,
                 Token = tokens.RefreshToken,
@@ -104,14 +104,14 @@ namespace eDiary.API.Services.Security
             return tokens; 
         }
 
-        public AuthTokens GenerateTokens(AppUser user)
+        public AuthTokens GenerateTokens(Entities.AppUser user)
         {
             var refresh = GenerateRefreshToken();
             var access = GenerateAccessToken(user);
             return new AuthTokens(access, refresh);
         }
 
-        public string GenerateAccessToken(AppUser user)
+        public string GenerateAccessToken(Entities.AppUser user)
         {
             var now = DateTime.UtcNow;
             var jwt = new JwtSecurityToken(
@@ -166,7 +166,7 @@ namespace eDiary.API.Services.Security
             if (string.IsNullOrEmpty(username))
                 return false;
             var uname = username;
-            var user = (uow.AppUserRepository.GetByConditionAsync(x => x.Username == uname).Result).FirstOrDefault();
+            var user = FindAppUserAsync(x => x.Username == uname).Result;
             if (user == null) return false;
 
             return true;
@@ -189,17 +189,22 @@ namespace eDiary.API.Services.Security
         //    return true;
         //}
 
-        public async System.Threading.Tasks.Task ChangePasswordAsync(ChangePasswordData data)
+        public async Task ChangePasswordAsync(ChangePasswordData data)
         {
             Validate.NotNull(data, "Change password data");
             // TODO: Add email notification about password change
             throw new NotImplementedException();
         }
 
-        public async System.Threading.Tasks.Task ResetPasswordAsync()
+        public async Task ResetPasswordAsync()
         {
             // TODO: Add email notification about password reset
             throw new NotImplementedException();
+        }
+
+        private async Task<Entities.AppUser> FindAppUserAsync(Expression<Func<Entities.AppUser, bool>> condition)
+        {
+            return await FindEntityAsync(uow.AppUserRepository, condition);
         }
 
         private ClaimsPrincipal GetPrincipal(string token)

@@ -1,18 +1,18 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
-using eDiary.API.Models.BusinessObjects;
+﻿using eDiary.API.Models.BusinessObjects;
 using eDiary.API.Models.EF.Interfaces;
-using eDiary.API.Models.Entities;
 using eDiary.API.Services.Core.Interfaces;
 using eDiary.API.Services.Validation;
 using eDiary.API.Util;
 using Ninject;
+using System;
+using System.Collections.Generic;
+using System.Linq.Expressions;
+using System.Threading.Tasks;
+using Entities = eDiary.API.Models.Entities;
 
 namespace eDiary.API.Services.Core
 {
-    public class UserService : IUserService
+    public class UserService : BaseService, IUserService
     {
         private readonly IUnitOfWork uow;
 
@@ -29,14 +29,14 @@ namespace eDiary.API.Services.Core
 
         public async Task<UserProfileBO> GetUserProfileAsync(int id)
         {
-            return new UserProfileBO(await TryFindUserProfile(id));
+            return new UserProfileBO(await FindProfileAsync(x => x.Id == id));
         }
         
-        public async System.Threading.Tasks.Task CreateUserProfileAsync(UserProfileBO profile)
+        public async Task CreateUserProfileAsync(UserProfileBO profile)
         {
             Validate.NotNull(profile, "User profile");
 
-            var p = new UserProfile
+            var p = new Entities.UserProfile
             {
                 FirstName = profile.FirstName,
                 LastName = profile.LastName,
@@ -46,10 +46,10 @@ namespace eDiary.API.Services.Core
             await uow.UserProfileRepository.CreateAsync(p);
         }
         
-        public async System.Threading.Tasks.Task UpdateUserProfileAsync(UserProfileBO profile)
+        public async Task UpdateUserProfileAsync(UserProfileBO profile)
         {
             Validate.NotNull(profile, "User profile");
-            var p = await TryFindUserProfile(profile.UserId);
+            var p = await FindProfileAsync(x => x.Id == profile.UserId);
 
             p.FirstName = profile.FirstName;
             p.LastName = profile.LastName;
@@ -59,19 +59,17 @@ namespace eDiary.API.Services.Core
             uow.UserProfileRepository.Update(p);
         }
 
-        public async System.Threading.Tasks.Task DeleteUserProfileAsync(int id)
+        public async Task DeleteUserProfileAsync(int id)
         {
-            uow.UserProfileRepository.Delete(await TryFindUserProfile(id));
+            uow.UserProfileRepository.Delete(await FindProfileAsync(x => x.Id == id));
         }
 
-        private async Task<UserProfile> TryFindUserProfile(int id)
+        private async Task<Entities.UserProfile> FindProfileAsync(Expression<Func<Entities.UserProfile, bool>> condition)
         {
-            var p = (await uow.UserProfileRepository.GetByConditionAsync(x => x.Id == id)).FirstOrDefault();
-            if (p == null) throw new Exception("User profile not found");
-            return p;
+            return await FindEntityAsync(uow.UserProfileRepository, condition);
         }
 
-        private static List<UserProfileBO> ConvertToBusinessObjects(IEnumerable<UserProfile> profiles)
+        private static List<UserProfileBO> ConvertToBusinessObjects(IEnumerable<Entities.UserProfile> profiles)
         {
             var userProfiles = new List<UserProfileBO>();
             foreach (var p in profiles)

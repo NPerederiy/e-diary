@@ -1,18 +1,17 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
-using eDiary.API.Models.BusinessObjects;
+﻿using eDiary.API.Models.BusinessObjects;
 using eDiary.API.Models.EF.Interfaces;
-using eDiary.API.Models.Entities;
 using eDiary.API.Services.Core.Interfaces;
 using eDiary.API.Services.Validation;
 using eDiary.API.Util;
 using Ninject;
+using System.Collections.Generic;
+using System.Linq;
+using System.Threading.Tasks;
+using Entities = eDiary.API.Models.Entities;
 
 namespace eDiary.API.Services.Core
 {
-    public class TagService : ITagService
+    public class TagService : BaseService, ITagService
     {
         private readonly IUnitOfWork uow;
 
@@ -29,37 +28,30 @@ namespace eDiary.API.Services.Core
 
         public async Task<TagBO> GetTagAsync(int id)
         {
-            return new TagBO(await TryFindTag(id));
+            return new TagBO(await FindEntityAsync(uow.TagRepository, x => x.Id == id));
         }
         
-        public async System.Threading.Tasks.Task CreateTagAsync(TagBO tag)
+        public async Task CreateTagAsync(TagBO tag)
         {
             Validate.NotNull(tag, nameof(tag));
-            var t = new Tag
+            var t = new Entities.Tag
             {
                 Name = tag.Name
             };
             await uow.TagRepository.CreateAsync(t);
         }
         
-        public async System.Threading.Tasks.Task UpdateTagAsync(TagBO tag)
+        public async Task UpdateTagAsync(TagBO tag)
         {
             Validate.NotNull(tag, nameof(tag));
-            var t = await TryFindTag(tag.TagId);
+            var t = await FindEntityAsync(uow.TagRepository, x => x.Id == tag.TagId);
             t.Name = tag.Name;
             uow.TagRepository.Update(t);
         }
 
-        public async System.Threading.Tasks.Task DeleteTagAsync(int id)
+        public async Task DeleteTagAsync(int id)
         {
-            uow.TagRepository.Delete(await TryFindTag(id));
-        }
-
-        private async Task<Tag> TryFindTag(int id)
-        {
-            var tag = (await uow.TagRepository.GetByConditionAsync(x => x.Id == id)).FirstOrDefault();
-            if (tag == null) throw new Exception("Tag not found");
-            return tag;
+            uow.TagRepository.Delete(await FindEntityAsync(uow.TagRepository, x => x.Id == id));
         }
     }
 }

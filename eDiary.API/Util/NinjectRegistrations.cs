@@ -25,6 +25,7 @@ namespace eDiary.API.Util
             // Core
             Bind<IUserService>().To<UserService>();
             Bind<ITagService>().To<TagService>();
+            Bind<ISettingsService>().To<SettingsService>();
 
             // Security
             Bind<IIdentityService>().To<IdentityService>();
