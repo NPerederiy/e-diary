@@ -2,8 +2,10 @@ import { Component, OnInit } from '@angular/core';
 import { Router, ActivatedRoute } from '@angular/router';
 import { MenuButton } from 'src/shared/models/menu-button.model';
 import { MenuButtonType } from 'src/shared/models/menu-button-type.enum';
-import { AccountService } from '../services/account.service';
 import { UserProfile } from 'src/shared/models/user-profile.model';
+import { UserSettings } from 'src/shared/models/user-settings.model';
+import { UserProfileService } from '../services/user-profile.service';
+import { UserSettingsService } from '../services/user-settings.service';
 
 @Component({
   selector: 'app-main',
@@ -14,17 +16,14 @@ import { UserProfile } from 'src/shared/models/user-profile.model';
 export class MainComponent implements OnInit {
   menuButtons: MenuButton[] = [];
   userProfile: UserProfile;
+  userSettings: UserSettings;
 
-  constructor(private accountService: AccountService, private router: Router, private route: ActivatedRoute) {
-   accountService.printTokens();
-    // if (this.userProfile === null){
-    //   console.log('navigate from main to login');
-      
-    //   this.router.navigateByUrl('/login');
-    // }
-    // this.router.navigate(['tasks'], { relativeTo: this.route });
-    // this.router.navigate([{ outlets: { 'inner-pages': ['tasks'] } }], { relativeTo: this.route } );
-
+  constructor(
+      private userProfileService: UserProfileService, 
+      private userSettingsService: UserSettingsService, 
+      private router: Router, 
+      private route: ActivatedRoute
+    ) {
     this.menuButtons.push(
       new MenuButton(MenuButtonType.Home, "", true),
       new MenuButton(MenuButtonType.Tasks, "Tasks"),
@@ -34,7 +33,11 @@ export class MainComponent implements OnInit {
   }
 
   ngOnInit() {
-    this.accountService.userProfile.subscribe(profile => this.userProfile = profile);
+    this.userProfileService.userProfile.subscribe(profile => this.userProfile = profile);
+    this.userSettingsService.userSettings.subscribe(settings => this.userSettings = settings);
+
+    console.log(this.userProfile);
+    console.log(this.userSettings);
   }
 
   public openPage(btn: MenuButton){
@@ -47,24 +50,16 @@ export class MainComponent implements OnInit {
     switch(btn.type){
       case MenuButtonType.Home:
         this.router.navigate(["app"]);
-        // this.router.navigate([{ outlets: { 'inner-pages': [''] } }], { relativeTo: this.route } );
         break;
       case MenuButtonType.Tasks:
       this.router.navigate(["tasks"], {relativeTo: this.route});
-        // this.router.navigate([{ outlets: { 'inner-pages': ['tasks'] } }], { relativeTo: this.route } );
         break;
       case MenuButtonType.Notes:
       this.router.navigate(["notes"], {relativeTo: this.route});
-      // this.router.navigateByUrl("app");
-      //   this.router.navigate([{ outlets: { 'inner-pages': ['notes'] } }], { relativeTo: this.route } );
         break;
       case MenuButtonType.Calendar:
       this.router.navigate(["calendar"], {relativeTo: this.route});
-      // this.router.navigateByUrl("app");
-      //   this.router.navigate([{ outlets: { 'inner-pages': ['calendar'] } }], { relativeTo: this.route } );
         break;
     }
-    // TODO: implement routing to the specified page
   }
-
 }

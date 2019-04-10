@@ -71,13 +71,15 @@ export class RegisterComponent implements OnInit {
     e.type = 'password';
   }
 
-  onSubmit() {
-    this.accountService.registration(
+  async onSubmit() {
+    var result = await this.accountService.register(
       this.form.controls.fname.value,
       this.form.controls.lname.value,
       this.form.controls.email.value,
       SHA.sha512(this.form.controls.passwords.get(['password']).value)
-    );
-    this.router.navigateByUrl('/');
+    )
+    if(result) {
+      this.router.navigateByUrl('/');
+    }
   }
 }

@@ -88,12 +88,13 @@ namespace eDiary.API.Filters
         protected Task<IPrincipal> AuthenticateJwtToken(string token)
         {
             var identityService = NinjectKernel.Kernel.Get<Services.Security.Interfaces.IIdentityService>();
-            if (identityService.ValidateAccessToken(token, out string username))
+            if (identityService.ValidateAccessToken(token, out string username, out string profileId))
             {
                 // based on username to get more information from database in order to build local identity
                 var claims = new List<Claim>
                 {
-                    new Claim(ClaimTypes.Name, username)
+                    new Claim("username", username),
+                    new Claim("profileId", profileId)
                     // Add more claims if needed: Roles, ...
                 };
 

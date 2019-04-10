@@ -36,11 +36,13 @@ import { CategoryCardComponent } from './main/tasks-page/category-card/category-
 import { ProjectCardComponent } from './main/tasks-page/project-card/project-card.component';
 import { ChartsModule } from 'ng2-charts';
 import { ChartLegendItemComponent } from './main/tasks-page/project-card/chart-legend-item/chart-legend-item.component';
-import { AuthGuard } from './services/authGuard';
+import { AuthGuard } from './services/auth/authGuard';
 import { RequestOptions } from '@angular/http';
-import { AuthErrorHandler } from './services/authErrorHandler';
-import { AppendAuthHeader } from './services/authInterceptor';
+import { AuthErrorHandler } from './services/auth/authErrorHandler';
+import { AppendAuthHeader } from './services/auth/authInterceptor';
 import { appRoutes } from './app.routes';
+import { UserSettingsService } from './services/user-settings.service';
+import { UserProfileService } from './services/user-profile.service';
 
 @NgModule({
   declarations: [
@@ -96,6 +98,8 @@ import { appRoutes } from './app.routes';
     AccountService,
     AuthGuard,
     TokenService,
+    UserProfileService,
+    UserSettingsService
   ],
   bootstrap: [AppComponent]
 })

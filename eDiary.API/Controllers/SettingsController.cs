@@ -10,8 +10,10 @@ using System.Web.Http.Cors;
 
 namespace eDiary.API.Controllers
 {
+    [Route("Settings")]
     [ConsoleLogger]
     [ExceptionFilter]
+    [JwtAuthentication]
     [EnableCors(origins: "http://localhost:4200", headers: "*", methods: "*")]
     public class SettingsController : ApiController
     {

@@ -1,15 +1,15 @@
 export class UserProfile{
-    userId: number;
+    profileId: number;
     firstName: string;
     lastName: string;
     email: string;
-    userImage: string;
+    profileImage: string;
 
-    constructor(fname: string, lname: string, email: string, userImg?: string, userId?: number) {
-        this.userId = userId;
+    constructor(fname: string, lname: string, email: string, profileImg?: string, profileId?: number) {
+        this.profileId = profileId;
         this.firstName = fname;
         this.lastName = lname;
         this.email = email;
-        this.userImage = userImg || "";
+        this.profileImage = profileImg || "";
     }
 }

@@ -7,8 +7,8 @@ namespace eDiary.API.Models.BusinessObjects
 {
     public class UserProfileBO
     {
-        [JsonProperty("userId")]
-        public int UserId { get; set; }
+        [JsonProperty("profileId")]
+        public int ProfileId { get; set; }
 
         [Required(ErrorMessage = "Username is required")]
         [JsonProperty("username")]
@@ -32,7 +32,7 @@ namespace eDiary.API.Models.BusinessObjects
 
         public UserProfileBO(UserProfile entity)
         {
-            UserId = entity.Id;
+            ProfileId = entity.Id;
             Username = entity.AppUsers.First().Username;
             FirstName = entity.FirstName;
             LastName = entity.LastName;

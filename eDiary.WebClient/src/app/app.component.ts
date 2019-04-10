@@ -10,8 +10,14 @@ import { Router } from '@angular/router';
 })
 
 export class AppComponent implements OnInit {  
+
+  private defaultLang: string;
+
   constructor(private translate: TranslateService, private router: Router, private tokenService: TokenService) {
-    translate.setDefaultLang('uk');
+    translate.addLangs(['en', 'uk', 'ru']);
+    this.defaultLang = translate.langs[1];
+    translate.setDefaultLang(this.defaultLang);
+    translate.use(this.defaultLang);
   }
 
   ngOnInit(){

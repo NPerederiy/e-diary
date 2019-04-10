@@ -11,26 +11,25 @@ export class TokenService {
 
     constructor(private http: HttpClient) {}
 
-    logTokens(){
-        console.log("Access token: ", sessionStorage.getItem(this.tokenKey));
-        console.log("Refresh token: ", localStorage.getItem(this.tokenKey));
-    }
+    // logTokens(){
+    //     console.log("Access token: ", sessionStorage.getItem(this.tokenKey));
+    //     console.log("Refresh token: ", localStorage.getItem(this.tokenKey));
+    // }
 
-    getAccessToken(): string {
+    public getAccessToken(): string {
         return sessionStorage.getItem(this.tokenKey);
     }
 
-    getRefreshToken(): string {
+    public getRefreshToken(): string {
         return localStorage.getItem(this.tokenKey);
     }
 
-    async refreshTokens(){
+    public async refreshTokens(){
         let body: any = {};
         body.refreshToken = localStorage.getItem(this.tokenKey);
         return await this.http.post(`${this.serverURI}/api/token`, body).toPromise()
             .then((tokens: { access: string; refresh: string; }) => {
                 if(tokens){
-                    console.log('new tokens: ', tokens); // TODO: Remove this line 
                     this.saveTokens(tokens);
                     return true;
                 }
@@ -42,7 +41,7 @@ export class TokenService {
             });
     }
 
-    getDecodedAccessToken(token: string): any {
+    public getDecodedAccessToken(token: string): any {
         try{
             return jwtDecode(token);
         }
@@ -51,7 +50,7 @@ export class TokenService {
         }
     }
     
-    isTokenExpired(token?: string): boolean {
+    public isTokenExpired(token?: string): boolean {        
         if(!token) token = this.getAccessToken();
         if(!token) return true;
         
@@ -60,12 +59,12 @@ export class TokenService {
         return !(date.valueOf() > new Date().valueOf());
     }
 
-    saveTokens(tokens: { access: string; refresh: string; }) {
+    public saveTokens(tokens: { access: string; refresh: string; }) {
         localStorage.setItem(this.tokenKey, tokens.refresh);
         sessionStorage.setItem(this.tokenKey, tokens.access);
     }
     
-    removeTokens(){
+    public removeTokens(){
         sessionStorage.removeItem(this.tokenKey);
         localStorage.removeItem(this.tokenKey);
     }
@@ -73,10 +72,12 @@ export class TokenService {
     private getTokenExpirationDate(token: string): Date {
         const tokenInfo = jwtDecode(token);
 
-        if (tokenInfo.exp === undefined) return null;
+        if (tokenInfo["exp"] === undefined) return null;
 
         const date = new Date(0); 
-        date.setUTCSeconds(tokenInfo.exp);
+        date.setUTCSeconds(tokenInfo["exp"]);
+        console.log("access token expires at: " + date);
+        
         return date;
     }
 }

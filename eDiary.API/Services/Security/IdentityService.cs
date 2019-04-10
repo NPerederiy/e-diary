@@ -119,7 +119,8 @@ namespace eDiary.API.Services.Security
                     audience: AuthOptions.AUDIENCE,
                     claims: new[]
                     {
-                        new Claim(ClaimTypes.Name, user.Username)
+                        new Claim(ClaimTypes.Name, user.Username),
+                        new Claim("profileId", user.UserProfileId.ToString())
                     },
                     expires: now.AddMinutes(AuthOptions.LIFETIME),
                     signingCredentials: new SigningCredentials(
@@ -148,10 +149,11 @@ namespace eDiary.API.Services.Security
                 throw new Exception("Refresh token is invalid.");
         }
 
-        public bool ValidateAccessToken(string token, out string username)
+        public bool ValidateAccessToken(string token, out string username, out string profileId)
         {
             username = null;
-
+            profileId = null;
+            
             var principal = GetPrincipal(token);
 
             if (!(principal.Identity is ClaimsIdentity identity))
@@ -163,11 +165,15 @@ namespace eDiary.API.Services.Security
             var usernameClaim = identity.FindFirst(ClaimTypes.Name);
             username = usernameClaim?.Value;
 
-            if (string.IsNullOrEmpty(username))
+            var profileIdClaim = identity.FindFirst("profileId");
+            profileId = profileIdClaim?.Value;
+
+            if (string.IsNullOrEmpty(username) || string.IsNullOrEmpty(profileId))
                 return false;
-            var uname = username;
+            var uname = username; // its not allowed to use out param inside of arrow functions
             var user = FindAppUserAsync(x => x.Username == uname).Result;
-            if (user == null) return false;
+            if (user == null || user.UserProfileId.ToString() != profileId)
+                return false;
 
             return true;
         }

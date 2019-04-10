@@ -41,9 +41,9 @@ export class LoginComponent implements OnInit {
   }
 
   async login(p: any){
-    let result = await this.accountService.authentication(this.currentUser, SHA.sha512(p.value))   
-    if (result !== false){
-      //this.translate.set()
+    let result = await this.accountService.login(this.currentUser, SHA.sha512(p.value))   
+    //if (result !== false){
+    if(result){
       this.router.navigateByUrl('/app');
     };  
   }
@@ -69,7 +69,7 @@ export class LoginComponent implements OnInit {
   private async loadAccounts(){
     await this.accountService.getAccounts().then(
       (data: any) => {
-        data.forEach((e: { username: string; firstName: string; lastName: string; email: string; profileImage: string; userId: number; }) => {
+        data.forEach((e: { username: string; firstName: string; lastName: string; email: string; profileImage: string; profileId: number; }) => {
           this.accounts.push(
             new AppUser(
               e.username,
@@ -79,7 +79,7 @@ export class LoginComponent implements OnInit {
                 e.lastName,
                 e.email,
                 e.profileImage,
-                e.userId
+                e.profileId
               )
             )
           );

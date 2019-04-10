@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { Router, CanActivate } from '@angular/router';
-import { TokenService } from './token.service';
+import { TokenService } from 'src/app/services/token.service';
 
 @Injectable({
   providedIn: 'root'
@@ -13,6 +13,7 @@ export class AuthGuard implements CanActivate {
     if (!this.tokenService.isTokenExpired()) {
       return true;
     }
+    console.log("token has been expired");
     this.router.navigate(['/login']);
     return false;
   }

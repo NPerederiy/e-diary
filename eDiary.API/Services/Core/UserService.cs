@@ -49,7 +49,7 @@ namespace eDiary.API.Services.Core
         public async Task UpdateUserProfileAsync(UserProfileBO profile)
         {
             Validate.NotNull(profile, "User profile");
-            var p = await FindProfileAsync(x => x.Id == profile.UserId);
+            var p = await FindProfileAsync(x => x.Id == profile.ProfileId);
 
             p.FirstName = profile.FirstName;
             p.LastName = profile.LastName;

@@ -29,6 +29,6 @@ namespace eDiary.API.Services.Security.Interfaces
 
         AuthTokens GenerateTokens(Models.Entities.AppUser user);
 
-        bool ValidateAccessToken(string token, out string username);
+        bool ValidateAccessToken(string token, out string username, out string profileId);
     }
 }
