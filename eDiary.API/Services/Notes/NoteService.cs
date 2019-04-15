@@ -14,7 +14,7 @@ namespace eDiary.API.Services.Notes
 {
     public class NoteService: BaseService, INoteService
     {
-        private IUnitOfWork uow;
+        private readonly IUnitOfWork uow;
 
         public NoteService()
         {

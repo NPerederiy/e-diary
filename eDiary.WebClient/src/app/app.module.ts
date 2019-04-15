@@ -42,7 +42,9 @@ import { AuthErrorHandler } from './services/auth/authErrorHandler';
 import { AppendAuthHeader } from './services/auth/authInterceptor';
 import { appRoutes } from './app.routes';
 import { UserSettingsService } from './services/user-settings.service';
+import { NoteFolderService } from './services/note-folder.service';
 import { UserProfileService } from './services/user-profile.service';
+import { NoteService } from './services/note.service';
 
 @NgModule({
   declarations: [
@@ -99,7 +101,9 @@ import { UserProfileService } from './services/user-profile.service';
     AuthGuard,
     TokenService,
     UserProfileService,
-    UserSettingsService
+    UserSettingsService,
+    NoteFolderService,
+    NoteService
   ],
   bootstrap: [AppComponent]
 })

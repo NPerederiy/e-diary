@@ -39,6 +39,7 @@ namespace eDiary.API.Util
 
             // Notes page 
             Bind<INoteService>().To<NoteService>();
+            Bind<IFolderService>().To<FolderService>();
 
             // Calendar page 
             Bind<ICalendarService>().To<CalendarService>();

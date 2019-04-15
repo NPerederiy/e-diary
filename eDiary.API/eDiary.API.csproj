@@ -155,6 +155,8 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Controllers\AuthenticationController.cs" />
+    <Compile Include="Controllers\FolderController.cs" />
+    <Compile Include="Controllers\NotesController.cs" />
     <Compile Include="Controllers\PrjCategoriesController.cs" />
     <Compile Include="Controllers\ProjectsController.cs" />
     <Compile Include="Controllers\RegistrationController.cs" />
@@ -224,6 +226,8 @@
     <Compile Include="Services\Core\TagService.cs" />
     <Compile Include="Services\Core\UserService.cs" />
     <Compile Include="Services\Calendar\Interfaces\ICalendarService.cs" />
+    <Compile Include="Services\Notes\FolderService.cs" />
+    <Compile Include="Services\Notes\Interfaces\IFolderService.cs" />
     <Compile Include="Services\Notes\Interfaces\INoteService.cs" />
     <Compile Include="Services\Security\AuthOptions.cs" />
     <Compile Include="Services\Security\IdentityService.cs" />

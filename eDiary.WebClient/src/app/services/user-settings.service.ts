@@ -7,7 +7,6 @@ import { BehaviorSubject } from "rxjs";
 @Injectable()
 export class UserSettingsService{
     private readonly serverURI = "http://localhost:8181";
-    
     private currentUserSettings = new BehaviorSubject({} as UserSettings);
 
     public userSettings = this.currentUserSettings.asObservable();
@@ -16,8 +15,7 @@ export class UserSettingsService{
     constructor(
         private http: HttpClient, 
         private translate: TranslateService
-        ) {
-    }
+        ) { }
 
     public async loadSettings(profileId: number){
         await this.http.get(`${this.serverURI}/api/settings/${profileId}`).toPromise()

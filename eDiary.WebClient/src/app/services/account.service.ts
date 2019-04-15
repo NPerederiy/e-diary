@@ -9,10 +9,14 @@ import { UserProfileService } from './user-profile.service';
 
 @Injectable()
 export class AccountService {
-
     private readonly serverURI = "http://localhost:8181";
 
-    constructor(private http: HttpClient, private tokenService: TokenService, private userProfileService: UserProfileService, private translate: TranslateService) {}
+    constructor(
+        private http: HttpClient, 
+        private tokenService: TokenService, 
+        private userProfileService: UserProfileService, 
+        private translate: TranslateService
+        ) {}
 
     public async getAccounts() {
         return await this.http.get(`${this.serverURI}/api/userprofiles`).toPromise();
