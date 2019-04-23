@@ -44,10 +44,10 @@ namespace eDiary.API.Controllers
         }
 
         [HttpPut]
-        public async Task UpdateFolderAsync(FolderBO folder)
+        public void UpdateFolderAsync(FolderBO folder)
         {
             Validate(folder);
-            await ns.UpdateFolderAsync(folder);
+            ns.UpdateFolder(folder);
         }
 
         [HttpDelete]

@@ -7,6 +7,9 @@ namespace eDiary.API.Models.BusinessObjects
 {
     public class FolderBO
     {
+        [JsonProperty("id")]
+        public int Id { get; set; }
+
         [Required(ErrorMessage = "Name is required")]
         [JsonProperty("name")]
         public string Name { get; set; }
@@ -17,9 +20,16 @@ namespace eDiary.API.Models.BusinessObjects
         [JsonProperty("folders")]
         public FolderBO[] Folders { get; set; }
 
+        [JsonProperty("parentFolderId")]
+        public int? ParentFolderId { get; set; }
+
         public FolderBO(Folder entity)
         {
+            Id = entity.Id;
+
             Name = entity.Name;
+
+            ParentFolderId = entity.ParentFolderId;
 
             Notes = (from n in entity.Notes
                      select new NoteCard(n)).ToArray();

@@ -35,12 +35,29 @@ namespace eDiary.API.Services.Notes
 
         public async Task CreateFolderAsync(FolderBO folder)
         {
-            throw new NotImplementedException();
+            Validation.Validate.NotNull(folder);
+
+            var entity = new Entities.Folder
+            {
+                Name = folder.Name,
+                ParentFolderId = folder.ParentFolderId
+            };
+
+            await uow.FolderRepository.CreateAsync(entity);
         }
 
-        public async Task UpdateFolderAsync(FolderBO folder)
+        public void UpdateFolder(FolderBO folder)
         {
-            throw new NotImplementedException();
+            Validation.Validate.NotNull(folder);
+
+            var entity = new Entities.Folder
+            {
+                Id = folder.Id,
+                Name = folder.Name,
+                ParentFolderId = folder.ParentFolderId      
+            };
+
+            uow.FolderRepository.Update(entity);
         }
 
         public async Task DeleteFolderAsync(int id)

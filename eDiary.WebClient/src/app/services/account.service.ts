@@ -61,6 +61,7 @@ export class AccountService {
     private async saveTokensAndProfile(tokens: { access: string; refresh: string; }, profile: UserProfile): Promise<boolean>{
         if(tokens){
             this.tokenService.saveTokens(tokens);
+            profile.profileId = this.tokenService.getDecodedAccessToken(tokens.access)["profileId"];
             await this.userProfileService.setProfile(profile);
             return true;
         }

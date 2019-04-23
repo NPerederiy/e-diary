@@ -27,12 +27,6 @@ namespace eDiary.API.Services.Notes
             return ConvertToNoteCards(notes);
         }
 
-        public async Task<IEnumerable<NoteCard>> GetFolderNotesAsync(int folderId)
-        {
-            var folder = await FindFolderAsync(x => x.Id == folderId);
-            return ConvertToNoteCards(folder.Notes);
-        }
-
         public async Task<IEnumerable<NoteCard>> GetNotesByTagAsync(int tagId)
         {
             var tag = await FindTagAsync(x => x.Id == tagId);
@@ -85,11 +79,6 @@ namespace eDiary.API.Services.Notes
         public async Task DeleteNoteAsync(int id)
         {
             uow.NoteRepository.Delete(await FindNoteAsync(x => x.Id == id));
-        }
-
-        private async Task<Entities.Folder> FindFolderAsync(Expression<Func<Entities.Folder, bool>> condition)
-        {
-            return await FindEntityAsync(uow.FolderRepository, condition);
         }
 
         private async Task<Entities.Note> FindNoteAsync(Expression<Func<Entities.Note, bool>> condition)

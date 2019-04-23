@@ -7,7 +7,6 @@ namespace eDiary.API.Services.Notes.Interfaces
     public interface INoteService
     {
         Task<IEnumerable<NoteCard>> GetAllNotesAsync();
-        Task<IEnumerable<NoteCard>> GetFolderNotesAsync(int sectionId);
         Task<IEnumerable<NoteCard>> GetNotesByTagAsync(int tagId);
         Task<NoteCard> GetNoteAsync(int noteId);
         Task CreateNoteAsync(NoteCard task);

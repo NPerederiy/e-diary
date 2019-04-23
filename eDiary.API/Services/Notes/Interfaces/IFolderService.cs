@@ -12,7 +12,7 @@ namespace eDiary.API.Services.Notes.Interfaces
         Task<IEnumerable<FolderBO>> GetAllFoldersAsync();
         Task<FolderBO> GetFolderAsync(int id);
         Task CreateFolderAsync(FolderBO folder);
-        Task UpdateFolderAsync(FolderBO folder);
+        void UpdateFolder(FolderBO folder);
         Task DeleteFolderAsync(int id);
     }
 }
