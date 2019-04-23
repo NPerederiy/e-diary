@@ -1,0 +1,25 @@
+@import "src/shared/styles/global-variables.scss";
+@import "src/shared/styles/base64-icons.scss";
+
+#container{
+    
+}
+
+#container1{
+    border-right: 34px solid transparent;
+    border-bottom: 16px solid $light-color; //34px
+    width: 60px;
+}
+
+#container2{
+    background-color: $light-color;
+    height: calc(1.1em + 3.3em + 30px + 18px + 18px);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.name{
+    font-family: $regular-font;
+    color: rgba($regular-color, 0.7);
+}

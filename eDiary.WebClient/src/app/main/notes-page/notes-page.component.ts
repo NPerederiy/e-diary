@@ -17,9 +17,19 @@ export class NotesPageComponent implements OnInit {
 
   constructor() {
     this.currentFolder = new Folder([
-      new NoteCard("Magic happens!", "hello world qqqqqq wwwwwww eeeeee 3333333 3333 33333 33333 333333", CardStatus.important),
-      new NoteCard("Very loooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooong name")
+      new NoteCard("Magic happens!", "hello world qqqqqq wwwwwww eeeeee 3333333 3333 33333 33333 333333"),
+      new NoteCard("Very loooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooong name","good times are comin'"),
+      new NoteCard("Bug detected","user profile & user settings disappears after page refreshes", CardStatus.important),
+      new NoteCard("To implement","add handling of looooong folder names", CardStatus.important),
+      new NoteCard("Feature","display the number of items contained in each folder", CardStatus.important),
     ]);
+
+    this.currentFolder.subfolders.push(new Folder());
+    this.currentFolder.subfolders.push(new Folder());
+    this.currentFolder.subfolders.push(new Folder());
+    this.currentFolder.subfolders.push(new Folder());
+    this.currentFolder.subfolders.push(new Folder());
+    this.currentFolder.subfolders.push(new Folder());
 
     for (let i = 0; i < 200; i++) {
       this.currentFolder.cards.push(

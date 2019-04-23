@@ -2,7 +2,7 @@ import { Component, OnInit, Input } from '@angular/core';
 import { Folder } from 'src/shared/models/note-folder.model';
 
 @Component({
-  selector: 'folder',
+  selector: 'folder-page',
   templateUrl: './folder.component.html',
   styleUrls: ['./folder.component.scss']
 })

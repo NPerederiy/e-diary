@@ -45,6 +45,7 @@ import { UserSettingsService } from './services/user-settings.service';
 import { NoteFolderService } from './services/note-folder.service';
 import { UserProfileService } from './services/user-profile.service';
 import { NoteService } from './services/note.service';
+import { FolderCardComponent } from './main/notes-page/folder/folder-card/folder-card.component';
 
 @NgModule({
   declarations: [
@@ -73,7 +74,8 @@ import { NoteService } from './services/note.service';
     ProjectPageComponent,
     CategoryCardComponent,
     ProjectCardComponent,
-    ChartLegendItemComponent
+    ChartLegendItemComponent,
+    FolderCardComponent
   ],
   imports: [
     BrowserModule,

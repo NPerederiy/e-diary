@@ -1,5 +1,6 @@
 <div id="container" malihu-scrollbar [scrollbarOptions]="scrollbarOptions">
   <div class="content">
+    <folder-card class="item" *ngFor="let f of folder.subfolders" [folder]="f"></folder-card>
     <note-card class="item" *ngFor="let c of folder.cards" [card]="c"></note-card>
   </div> 
 </div>
