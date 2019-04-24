@@ -44,4 +44,14 @@ export class TasksPageComponent implements OnInit {
     
   }
 
+  addCategory(){
+    console.log('addCategory');
+    
+  }
+
+  addProject(){
+    console.log('addProject');
+    
+  }
+
 }

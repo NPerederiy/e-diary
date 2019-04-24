@@ -1,11 +1,13 @@
 <div id="container">
   <div class="categories">
     <category-card *ngFor="let c of categories" [card]="c" (click)="openCategoryProjects(c)"></category-card>
+    <div class="add-category-button" (click)="addCategory()">+ Category</div>
   </div>
 
   <div style="width: calc(100vw - 111px); height: 100%;" malihu-scrollbar [scrollbarOptions]="scrollbarOptions">
     <div class="projects">
       <project-card *ngFor="let p of projects" [card]="p" (click)="openProjectPage(p)"></project-card>
+      <div class="add-project-button" (click)="addProject()">+ Project</div>
     </div>
   </div>
   <!-- <sidebar [buttons]="sidebarButtons"></sidebar> -->
