@@ -1,0 +1,91 @@
+@import "src/shared/styles/global-variables.scss";
+
+#upper-container,
+#lower-container{
+    border: 2px dashed rgba($regular-color, 0.2);
+    height: calc((30px + 1.1em + 3.3em + 30px + 18px)/2);
+
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+#upper-container{
+    border-bottom: 0;
+}
+
+#lower-container{
+    border-top: 0;  // uncomment this laters
+}
+
+.folder{
+    .upper{
+        border-right: 8px solid transparent;
+        border-bottom: 6px solid rgba($regular-color, 0.2);//$light-color; //34px
+        width: 16px;
+    }
+
+    .lower{
+        // background-color: $light-color;
+        height: 34px;
+        width: 56px;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+
+        border: 2px solid rgba($regular-color, 0.2);
+    }
+}
+
+.notes{
+    .infront,
+    .behind{
+        height: 34px;
+        width: 34px;
+        border: 2px solid rgba($regular-color, 0.2);
+    }
+    
+    .infront{
+        background-color: $background-regular-color;
+        transform: rotate(-10deg);
+        margin-top: -37px;
+
+        .hr{
+            height: 0;
+            margin: 4px; 
+            border: 1.6px solid rgba($regular-color, 0.2);
+        }
+
+        .hr.line-1{
+            width: 1.1em;
+        }
+
+        .hr.line-2{
+            width: 0.6em;
+        }
+        
+    }
+
+    .behind{
+        transform: rotate(11deg);
+    }
+}
+
+#upper-container:hover,
+#lower-container:hover{
+    cursor: pointer;
+    background-color: rgba($light-color, 0.6);
+}
+
+#upper-container:hover{
+    .folder .lower{
+        background-color: $light-color;
+    }
+}
+
+#lower-container:hover{
+    .notes .behind,
+    .notes .infront{
+        background-color: $light-color;
+    }
+}

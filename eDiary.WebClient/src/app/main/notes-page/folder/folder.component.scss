@@ -4,16 +4,65 @@
 }
 
 .content{
-    display: flex;
-    flex-direction: row;
-    flex-wrap: wrap;
-    justify-content: center;
-    align-content: flex-start;
+    // display: flex;
+    // flex-direction: row;
+    // flex-wrap: wrap;
+    // justify-content: center;
+    // align-content: flex-start;
+    display: grid;
     padding: 4px;
+    justify-items: center;	
 }
 
+@media only screen and (min-width: 540px){
+    .content{
+        grid-template-columns: repeat(2, 1fr);
+    }
+}
+
+@media only screen and (min-width: 760px){
+    .content{
+        grid-template-columns: repeat(3, 1fr);
+    }
+}
+
+@media only screen and (min-width: 950px){
+    .content{
+        grid-template-columns: repeat(4, 1fr);
+    }
+}
+
+@media only screen and (min-width: 1150px){ 
+    .content{
+        grid-template-columns: repeat(5, 1fr);
+    }
+}
+
+@media only screen and (min-width: 1340px){ 
+    .content{
+        grid-template-columns: repeat(6, 1fr);
+    }
+}
+
+@media only screen and (min-width: 1540px){ 
+    .content{
+        grid-template-columns: repeat(7, 1fr);
+    }
+}
+
+@media only screen and (min-width: 1740px){ 
+    .content{
+        grid-template-columns: repeat(8, 1fr);
+    }
+}
+
+// @media only screen and (min-width: 1920px){
+
+// }
+
 note-card,
-folder-card{
+folder-card,
+folder-add-button{
     width: 186px;
     flex-grow: 1;
     margin: 4px;

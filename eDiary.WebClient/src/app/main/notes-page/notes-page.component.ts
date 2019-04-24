@@ -31,11 +31,11 @@ export class NotesPageComponent implements OnInit {
     this.currentFolder.subfolders.push(new Folder());
     this.currentFolder.subfolders.push(new Folder());
 
-    for (let i = 0; i < 200; i++) {
-      this.currentFolder.cards.push(
-        new NoteCard(`new note (${i})`)
-      );
-    }
+    // for (let i = 0; i < 198; i++) {
+    //   this.currentFolder.cards.push(
+    //     new NoteCard(`new note (${i})`)
+    //   );
+    // }
 
     this.sidebarButtons.push(new MenuButton(MenuButtonType.RecentActions));
     this.sidebarButtons.push(new MenuButton(MenuButtonType.Search));
