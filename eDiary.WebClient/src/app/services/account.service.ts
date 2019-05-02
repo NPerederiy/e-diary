@@ -6,6 +6,7 @@ import { UserProfile } from 'src/shared/models/user-profile.model';
 import { TokenService } from './token.service';
 import { TranslateService } from '@ngx-translate/core';
 import { UserProfileService } from './user-profile.service';
+import { Router } from '@angular/router';
 
 @Injectable()
 export class AccountService {
@@ -15,7 +16,8 @@ export class AccountService {
         private http: HttpClient, 
         private tokenService: TokenService, 
         private userProfileService: UserProfileService, 
-        private translate: TranslateService
+        private translate: TranslateService,
+        private router: Router
         ) {}
 
     public async getAccounts() {
@@ -54,8 +56,10 @@ export class AccountService {
     }
 
     public async logout(){
+        sessionStorage.clear();
         this.tokenService.removeTokens();
-        await this.userProfileService.setProfile(null);
+        // await this.userProfileService.setProfile(null);
+        this.router.navigateByUrl('/login');
     }
 
     private async saveTokensAndProfile(tokens: { access: string; refresh: string; }, profile: UserProfile): Promise<boolean>{

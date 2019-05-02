@@ -8,6 +8,7 @@ import { UserSettingsService } from "./user-settings.service";
 export class UserProfileService{
     private readonly serverURI = "http://localhost:8181";
     private currentUserProfile = new BehaviorSubject({} as UserProfile);
+    private readonly profileKey = "uprofile";
 
     public userProfile = this.currentUserProfile.asObservable();
 
@@ -17,8 +18,13 @@ export class UserProfileService{
         ) {}
 
     public async setProfile(profile: UserProfile){
-        this.currentUserProfile.next(profile);
+        this.updateUserProfile(profile);
         await this.userSettingsService.loadSettings(profile.profileId);
+    }
+    
+    public updateUserProfile(profile: UserProfile){
+        this.currentUserProfile.next(profile);
+        sessionStorage.setItem(this.profileKey, JSON.stringify(profile));
     }
 
     public changeFirstName(name: string){

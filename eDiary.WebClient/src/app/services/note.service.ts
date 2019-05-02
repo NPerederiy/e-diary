@@ -18,9 +18,9 @@ export class NoteService{
         return null;
     }
 
-    public createNote(parentfolderId: number, header: string){
+    public async createNote(parentfolderId: number, header: string){
         let note = new NoteCard(header);
-        let folder = this.folderService.getFolder(parentfolderId);
+        let folder = await this.folderService.getFolder(parentfolderId);
         folder.cards.push(note);
 
         // Save folder changes

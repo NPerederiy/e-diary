@@ -8,6 +8,7 @@ import { Folder } from 'src/shared/models/note-folder.model';
 })
 export class FolderComponent implements OnInit {
   @Input() folder: Folder;
+  
   scrollbarOptions = { 
     axis: 'y', 
     theme: 'minimal-dark', 
@@ -16,8 +17,7 @@ export class FolderComponent implements OnInit {
   };
   
   constructor() { }
-
-  ngOnInit() {
-  }
+  
+  ngOnInit() { }
 
 }

@@ -56,6 +56,11 @@ project-card,
     align-items: center;
 }
 
+.add-category-button:hover,
+.add-project-button:hover{
+    background-color: rgba($light-color, 0.6);
+}
+
 // .button.add{
 //     min-height: unset;
 //     min-width: 210px;

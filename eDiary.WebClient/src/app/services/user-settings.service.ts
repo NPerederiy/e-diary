@@ -8,6 +8,7 @@ import { BehaviorSubject } from "rxjs";
 export class UserSettingsService{
     private readonly serverURI = "http://localhost:8181";
     private currentUserSettings = new BehaviorSubject({} as UserSettings);
+    private readonly settingsKey = "usettings"
 
     public userSettings = this.currentUserSettings.asObservable();
 
@@ -21,11 +22,17 @@ export class UserSettingsService{
         await this.http.get(`${this.serverURI}/api/settings/${profileId}`).toPromise()
             .then((s: { setttingsId: number, userId: number, language: string, rootFolderId: number }) => {
                 this.changeLanguage(s.language);
-                this.currentUserSettings.next(new UserSettings(s.setttingsId, s.userId, s.language, s.rootFolderId));
+                let settings = new UserSettings(s.setttingsId, s.userId, s.language, s.rootFolderId)
+                this.updateUserSettings(settings);
             })
             .catch((error: any) => {
                 console.error(error);
             });
+    }
+
+    public updateUserSettings(settings: UserSettings){
+        this.currentUserSettings.next(settings);
+        sessionStorage.setItem(this.settingsKey, JSON.stringify(settings));
     }
 
     public changeLanguage(languageCode: string){

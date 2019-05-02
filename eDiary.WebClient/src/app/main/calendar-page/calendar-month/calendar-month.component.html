@@ -1,7 +1,7 @@
 <div class="container">
   <div class="headline shadow">
     <div class="monthes">
-      <div class="button month" *ngFor="let i of monthes">{{ 'month.'+i | translate }}</div>
+      <div class="button month" *ngFor="let i of monthes; let j = index" (click)="selectMonth(j)">{{ 'month.'+i | translate }}</div>
     </div>
   </div>
   <div class="days">

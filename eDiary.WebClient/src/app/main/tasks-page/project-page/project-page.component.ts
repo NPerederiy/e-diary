@@ -1,10 +1,11 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Input } from '@angular/core';
 import { TaskCard } from 'src/shared/models/task-card.model';
 import { TaskStatus } from 'src/shared/models/task-status.enum';
 import { CardStatus } from 'src/shared/models/card-status.enum';
 import { TaskList } from 'src/shared/models/task-list.model';
 import { MenuButton } from 'src/shared/models/menu-button.model';
 import { MenuButtonType } from 'src/shared/models/menu-button-type.enum';
+import { ProjectCard } from 'src/shared/models/project-card.model';
 
 @Component({
   selector: 'project-page',
@@ -13,8 +14,11 @@ import { MenuButtonType } from 'src/shared/models/menu-button-type.enum';
 })
 
 export class ProjectPageComponent implements OnInit {
+  @Input() project: ProjectCard;
+  
   cardLists: TaskList[] = []; 
   sidebarButtons: MenuButton[] = [];
+
   scrollbarOptions = { 
     axis: 'x', 
     theme: 'minimal-dark', 
@@ -28,6 +32,7 @@ export class ProjectPageComponent implements OnInit {
     this.sidebarButtons.push(new MenuButton(MenuButtonType.Notifications));
     this.sidebarButtons.push(new MenuButton(MenuButtonType.AddTask));
     this.sidebarButtons.push(new MenuButton(MenuButtonType.TrashCan));
+    
     this.cardLists.push(new TaskList("New list",[
       new TaskCard("Lorem ipsum", "", TaskStatus.inProcess, CardStatus.deleted),
       new TaskCard("Dolor sit amet", "", TaskStatus.toDo, CardStatus.important),

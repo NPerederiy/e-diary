@@ -6,6 +6,7 @@ import { UserProfile } from 'src/shared/models/user-profile.model';
 import { UserSettings } from 'src/shared/models/user-settings.model';
 import { UserProfileService } from '../services/user-profile.service';
 import { UserSettingsService } from '../services/user-settings.service';
+import { AccountService } from '../services/account.service';
 
 @Component({
   selector: 'app-main',
@@ -22,7 +23,8 @@ export class MainComponent implements OnInit {
       private userProfileService: UserProfileService, 
       private userSettingsService: UserSettingsService, 
       private router: Router, 
-      private route: ActivatedRoute
+      private route: ActivatedRoute,
+      private accountService: AccountService
     ) {
     this.menuButtons.push(
       new MenuButton(MenuButtonType.Home, "", true),
@@ -36,8 +38,20 @@ export class MainComponent implements OnInit {
     this.userProfileService.userProfile.subscribe(profile => this.userProfile = profile);
     this.userSettingsService.userSettings.subscribe(settings => this.userSettings = settings);
 
-    console.log(this.userProfile);
-    console.log(this.userSettings);
+    if(!this.userProfile.profileId){
+    if(sessionStorage["uprofile"]){
+      this.userProfileService.updateUserProfile(JSON.parse(sessionStorage.getItem("uprofile")));
+    } else {
+      this.accountService.logout();
+    }}
+    
+    if(!this.userSettings.userId){ 
+      if (sessionStorage["uprofile"]){
+        this.userSettingsService.updateUserSettings(JSON.parse(sessionStorage.getItem("usettings")));
+      } else {
+        this.accountService.logout();
+      }
+    }
   }
 
   public openPage(btn: MenuButton){

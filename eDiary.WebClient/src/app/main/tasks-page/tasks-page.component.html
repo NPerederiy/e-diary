@@ -1,4 +1,4 @@
-<div id="container">
+<div id="container" *ngIf="!isProjectSelected()">
   <div class="categories">
     <category-card *ngFor="let c of categories" [card]="c" (click)="openCategoryProjects(c)"></category-card>
     <div class="add-category-button" (click)="addCategory()">+ Category</div>
@@ -12,3 +12,4 @@
   </div>
   <!-- <sidebar [buttons]="sidebarButtons"></sidebar> -->
 </div>
+<project-page [project]="currentProject" *ngIf="isProjectSelected()"></project-page>

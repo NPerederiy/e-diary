@@ -11,6 +11,10 @@ import { ProjectCard } from 'src/shared/models/project-card.model';
 export class TasksPageComponent implements OnInit {
   categories: CategoryCard[] = []; 
   projects: ProjectCard[] = [];
+
+  currentCategory: CategoryCard = null;
+  currentProject: ProjectCard = null;
+
   scrollbarOptions = { 
     axis: 'x', 
     theme: 'minimal-dark', 
@@ -32,14 +36,18 @@ export class TasksPageComponent implements OnInit {
   }
 
   ngOnInit() {
+    console.log(this.currentProject);
   }
 
-  openProjectPage(card: CategoryCard){
-    console.log('Click: ', card);
-    
+  isProjectSelected(): boolean{
+    return this.currentProject !== null;
   }
 
-  openCategoryProjects(card: ProjectCard){
+  openProjectPage(card: ProjectCard){
+    this.currentProject = card;
+  }
+
+  openCategoryProjects(card: CategoryCard){
     console.log('Click: ', card);
     
   }
