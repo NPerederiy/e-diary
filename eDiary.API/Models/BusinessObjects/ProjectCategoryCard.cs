@@ -22,11 +22,13 @@ namespace eDiary.API.Models.BusinessObjects
         {
             Name = entity.Name;
             CategoryId = entity.Id;
+
             var cards = new List<ProjectCard>();
-            foreach(var p in entity.Projects)
-            {
-                cards.Add(new ProjectCard(p));
-            }
+            if (entity.Projects != null)
+                foreach(var p in entity.Projects)
+                {
+                    cards.Add(new ProjectCard(p));
+                }
             Projects = cards.ToArray();
         }
     }

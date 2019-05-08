@@ -1,10 +1,16 @@
-﻿namespace eDiary.API.Models.Entities
+﻿using System.ComponentModel.DataAnnotations.Schema;
+
+namespace eDiary.API.Models.Entities
 {
     public class Project
     {
         public int Id { get; set; } // Id (Primary key)
         public string Name { get; set; } // Name (length: 2147483647)
+
+        [ForeignKey("ProjectCategory")]
         public int? CategoryId { get; set; } // CategoryId
+
+        [ForeignKey("UserProfile")]
         public int UserId { get; set; } // UserId
 
         // Reverse navigation

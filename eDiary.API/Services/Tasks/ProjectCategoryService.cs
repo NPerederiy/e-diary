@@ -27,6 +27,12 @@ namespace eDiary.API.Services.Tasks
             return ConvertToCategoryCards(categories);
         }
 
+        public async Task<IEnumerable<ProjectCategoryCard>> GetCategoriesByProfileIdAsync(int profileId)
+        {
+            var categories = await uow.ProjectCategoryRepository.GetByConditionAsync(x => x.UserId == profileId);
+            return ConvertToCategoryCards(categories);
+        }
+
         public async Task<ProjectCategoryCard> GetCategoryAsync(int id)
         {
             return new ProjectCategoryCard(await FindCategoryAsync(x => x.Id == id));

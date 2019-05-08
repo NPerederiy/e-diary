@@ -3,7 +3,11 @@ using eDiary.API.Models.BusinessObjects;
 using eDiary.API.Services.Tasks.Interfaces;
 using eDiary.API.Util;
 using Ninject;
+using System;
 using System.Collections.Generic;
+using System.IdentityModel.Tokens.Jwt;
+using System.Linq;
+using System.Text;
 using System.Threading.Tasks;
 using System.Web.Http;
 using System.Web.Http.Cors;
@@ -27,7 +31,23 @@ namespace eDiary.API.Controllers
         [HttpGet]
         public async Task<IEnumerable<ProjectCategoryCard>> GetAllCategories()
         {
-            return await pcs.GetAllCategoriesAsync();
+            var headers = Request.Headers;
+            if (headers.Contains("Authorization"))
+            {
+                var token = headers.GetValues("Authorization").First().Split(' ')[1];
+
+                var handler = new JwtSecurityTokenHandler();
+                var jsonToken = handler.ReadToken(token) as JwtSecurityToken;
+                var l = jsonToken.Payload.Claims as List<System.Security.Claims.Claim>;
+
+                var profileIdClaim = (from x in jsonToken.Payload.Claims
+                        where x.Type == "profileId"
+                        select x).First();
+
+                return await pcs.GetCategoriesByProfileIdAsync(Convert.ToInt32(profileIdClaim.Value));
+            }
+
+            throw new Exception("Missing profileId in token payload");
         }
         
         [HttpGet]

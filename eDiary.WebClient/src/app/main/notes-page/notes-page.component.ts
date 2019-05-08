@@ -51,10 +51,11 @@ export class NotesPageComponent implements OnInit {
     this.currentFolder.cards.push(
       new NoteCard("Magic happens!", "hello world qqqqqq wwwwwww eeeeee 3333333 3333 33333 33333 333333"),
       new NoteCard("Very loooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooong name","good times are comin'"),
-      new NoteCard("Bug detected","user profile & user settings disappears after page refreshes", CardStatus.important),
       new NoteCard("To implement","add handling of looooong folder names", CardStatus.important),
       new NoteCard("Feature","display the number of items contained in each folder", CardStatus.important),
       new NoteCard("To implement","Добавить ExceptionHandler для 401 ошибки и отправлять токены на бэк для получения новой пары токенов. ", CardStatus.important),
+      new NoteCard("To implement","Добавить поле для ввода имени категории при её создании", CardStatus.important),
+      new NoteCard("To implement","Добавить возможность переименовать, удалить категорию", CardStatus.important),
     );
     
     // for (let i = 0; i < 198; i++) {
