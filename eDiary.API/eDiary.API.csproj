@@ -157,7 +157,7 @@
     <Compile Include="Controllers\AuthenticationController.cs" />
     <Compile Include="Controllers\FolderController.cs" />
     <Compile Include="Controllers\NotesController.cs" />
-    <Compile Include="Controllers\PrjCategoriesController.cs" />
+    <Compile Include="Controllers\ProjectCategoriesController.cs" />
     <Compile Include="Controllers\ProjectsController.cs" />
     <Compile Include="Controllers\RegistrationController.cs" />
     <Compile Include="Controllers\SectionsController.cs" />

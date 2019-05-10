@@ -38,15 +38,18 @@ namespace eDiary.API.Services.Tasks
             return new ProjectCategoryCard(await FindCategoryAsync(x => x.Id == id));
         }
         
-        public async Task CreateCategoryAsync(ProjectCategoryCard card)
+        public async Task<int> CreateCategoryAsync(string name, int profileId)
         {
-            Validate.NotNull(card, "Project category card");
-            var c = new Entities.ProjectCategory
+            Validate.NotNull(name, "Category name");
+
+            var category = new Entities.ProjectCategory
             {
-                Name = card.Name,
-                //UserId = ???                 // TODO: Add userId
+                Name = name,
+                UserId = profileId
             };
-            await uow.ProjectCategoryRepository.CreateAsync(c);
+            await uow.ProjectCategoryRepository.CreateAsync(category);
+
+            return category.Id;
         }
         
         public async Task UpdateCategoryAsync(ProjectCategoryCard card)

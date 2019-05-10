@@ -7,6 +7,7 @@ using eDiary.API.Util;
 using Microsoft.IdentityModel.Tokens;
 using Ninject;
 using System;
+using System.Collections.Generic;
 using System.IdentityModel.Tokens.Jwt;
 using System.Linq;
 using System.Linq.Expressions;
@@ -194,6 +195,21 @@ namespace eDiary.API.Services.Security
         //    IPrincipal principal = tokenHandler.ValidateToken(token, validationParameters, out SecurityToken validatedToken);
         //    return true;
         //}
+
+        public int GetProfileIdFromTokenPayload(string token)
+        {
+            var handler = new JwtSecurityTokenHandler();
+            var jsonToken = handler.ReadToken(token) as JwtSecurityToken;
+            var l = jsonToken.Payload.Claims as List<Claim>;
+
+            var profileIdClaim = (from x in jsonToken.Payload.Claims
+                                  where x.Type == "profileId"
+                                  select x).FirstOrDefault();
+
+            if(profileIdClaim == null) throw new Exception("Missing profileId in token payload");
+
+            return Convert.ToInt32(profileIdClaim.Value);
+        }
 
         public async Task ChangePasswordAsync(ChangePasswordData data)
         {

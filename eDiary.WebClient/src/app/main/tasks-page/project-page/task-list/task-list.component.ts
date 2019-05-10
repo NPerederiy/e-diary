@@ -1,15 +1,9 @@
 import { Component, OnInit, Input, ViewChild, ElementRef } from '@angular/core';
+import { ICardEditor } from 'src/shared/models/interfaces/card-creator.interface';
 import { TaskCard } from 'src/shared/models/task-card.model';
 import { TaskList } from 'src/shared/models/task-list.model';
 
-interface ITaskListEditor{
-  value: string;
-  list: TaskList;
-  hasContent(): boolean;
-  saveChanges(): void;
-}
-
-class HeaderEditor implements ITaskListEditor{
+class HeaderEditor implements ICardEditor{
   value: string;
   list: TaskList;
   constructor(list: TaskList) {
@@ -26,7 +20,7 @@ class HeaderEditor implements ITaskListEditor{
   }
 }
 
-class CardCreator implements ITaskListEditor{
+class CardCreator implements ICardEditor{
   value: string;
   list: TaskList;
 
@@ -54,8 +48,8 @@ export class TaskListComponent implements OnInit {
   @Input() list: TaskList;
   @ViewChild('headerInput') headerInput: ElementRef;
   @ViewChild('cardInput') cardInput: ElementRef;
-  headerEditor: ITaskListEditor;
-  cardCreator: ITaskListEditor;
+  headerEditor: ICardEditor;
+  cardCreator: ICardEditor;
 
   scrollbarOptions = { 
     axis: 'y', 
@@ -88,7 +82,7 @@ export class TaskListComponent implements OnInit {
     // }
   }
 
-  closeEditor(editor: ITaskListEditor){
+  closeEditor(editor: ICardEditor){
     if(this.isEmpty(editor.value)){
       if(editor.hasContent()){
         console.log("this field can't be empty");

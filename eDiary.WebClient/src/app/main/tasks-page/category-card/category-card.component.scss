@@ -4,11 +4,27 @@
 #container{
     background-color: $light-color;
     max-width: 240px;
-    padding: 12px;
+    // padding: 12px;
+    padding: 10px 12px;
 }
 
 .content{
-    margin: 2px 4px 4px 4px;
+    // margin: 2px 4px 4px 4px;
     font-family: $regular-font;
     color: rgba($regular-color, 0.7);
+    padding: 2px 0;
+}
+
+.input{
+    min-height: unset;
+    height: unset;
+    border-bottom-color: $light-color;
+    // padding: unset;
+    padding: 1px 0 2px 0;
+}
+
+.input,
+.input:hover,
+.input:focus{
+    border-bottom-color: $button-menu-focused-color;
 }

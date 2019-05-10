@@ -6,8 +6,8 @@ namespace eDiary.API.Services.Security
     public static class AuthOptions
     {
         public const string ISSUER = "AuthServer165613299"; 
-        public const string AUDIENCE = "diaryUser"; 
-        public const int LIFETIME = 1; // minutes
+        public const string AUDIENCE = "diaryUser";
+        public const int LIFETIME = 60; //1; // minutes
         private static readonly byte[] key; 
         private const int aesKeySize = 16;
 

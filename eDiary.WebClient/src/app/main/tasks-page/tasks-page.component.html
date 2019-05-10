@@ -1,7 +1,13 @@
 <div id="container" *ngIf="!isProjectSelected()">
   <div class="categories">
-    <category-card *ngFor="let c of categories" [card]="c" (click)="openCategoryProjects(c)"></category-card>
-    <div class="add-category-button" (click)="addCategory()">+ Category</div>
+    <category-card 
+      *ngFor="let c of categories" 
+      [card]="c" 
+      (click)="editCategory(categoryCard)" 
+      (editorClosed)="saveCategoryChanges(c)"
+      #categoryCard
+    ></category-card>
+    <div class="add-category-button" *ngIf="!isNewCategoryCreating" (click)="addCategory()">+ Category</div>
   </div>
 
   <div style="width: calc(100vw - 111px); height: 100%;" malihu-scrollbar [scrollbarOptions]="scrollbarOptions">

@@ -1,6 +1,8 @@
 ﻿using eDiary.API.Filters;
 using eDiary.API.Models.BusinessObjects;
+using eDiary.API.Services.Security.Interfaces;
 using eDiary.API.Services.Tasks.Interfaces;
+using eDiary.API.Services.Validation;
 using eDiary.API.Util;
 using Ninject;
 using System;
@@ -14,56 +16,44 @@ using System.Web.Http.Cors;
 
 namespace eDiary.API.Controllers
 {
-    [RoutePrefix("categories")]
     [JwtAuthentication]
     [ConsoleLogger]
     [ExceptionFilter]
     [EnableCors(origins: "http://localhost:4200", headers: "*", methods: "*")]
-    public class PrjCategoriesController : ApiController
+    public class ProjectCategoriesController : ApiController
     {
         private readonly IProjectCategoryService pcs;
+        private readonly IIdentityService iis;
 
-        public PrjCategoriesController()
+        public ProjectCategoriesController()
         {
             pcs = NinjectKernel.Kernel.Get<IProjectCategoryService>();
+            iis = NinjectKernel.Kernel.Get<IIdentityService>();
         }
         
         [HttpGet]
         public async Task<IEnumerable<ProjectCategoryCard>> GetAllCategories()
         {
-            var headers = Request.Headers;
-            if (headers.Contains("Authorization"))
-            {
-                var token = headers.GetValues("Authorization").First().Split(' ')[1];
-
-                var handler = new JwtSecurityTokenHandler();
-                var jsonToken = handler.ReadToken(token) as JwtSecurityToken;
-                var l = jsonToken.Payload.Claims as List<System.Security.Claims.Claim>;
-
-                var profileIdClaim = (from x in jsonToken.Payload.Claims
-                        where x.Type == "profileId"
-                        select x).First();
-
-                return await pcs.GetCategoriesByProfileIdAsync(Convert.ToInt32(profileIdClaim.Value));
-            }
-
-            throw new Exception("Missing profileId in token payload");
+            return await pcs.GetCategoriesByProfileIdAsync(iis.GetProfileIdFromTokenPayload(GetTokenFromHeader()));
         }
         
         [HttpGet]
         public async Task<ProjectCategoryCard> GetCategoryById(int? id)
         {
-            Validate(id);
+            Services.Validation.Validate.NotNull(id, "Category id");
             return await pcs.GetCategoryAsync((int)id);
         }
-        
+
         [HttpPost]
-        public async Task CreateCategory(ProjectCategoryCard category)
+        public async Task<int> CreateCategory([FromBody] string name)
         {
-            Validate(category);
-            await pcs.CreateCategoryAsync(category);
+            //Services.Validation.Validate.NotNull(name, "Category name");
+            var profileId = iis.GetProfileIdFromTokenPayload(GetTokenFromHeader());
+            var categoryId = await pcs.CreateCategoryAsync(name, profileId);
+
+            return categoryId;
         }
-        
+
         [HttpPut]
         public async Task UpdateCategory(ProjectCategoryCard category)
         {
@@ -74,8 +64,13 @@ namespace eDiary.API.Controllers
         [HttpDelete]
         public async Task DeleteCategoryById(int? id)
         {
-            Validate(id);
+            Services.Validation.Validate.NotNull(id, "Category id");
             await pcs.DeleteCategoryAsync((int)id);
+        }
+
+        private string GetTokenFromHeader()
+        {
+            return Request.Headers.GetValues("Authorization").First().Split(' ')[1];
         }
     }
 }
