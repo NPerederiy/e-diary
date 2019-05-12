@@ -21,24 +21,19 @@ export class CategoryCardComponent implements OnInit {
     }
   }
 
-  openEditor(){
+  public openEditor(){
     this.editorOpened.emit();
     this.card.isEditing = true;
     this.focusOnEditor();
-    console.log("Editing...");
-    
   }
 
-  blurEditor(){
-    setTimeout(() => this.categoryEditor.nativeElement.blur());
-  }
-
-  closeEditor(){
-    // if(!this.card.name){
-    //   this.card.name = "Unnamed category"
-    // }
+  public closeEditor(){
     this.card.isEditing = false;
     this.editorClosed.emit();
+  }
+
+  public blurEditor(){
+    setTimeout(() => this.categoryEditor.nativeElement.blur());
   }
   
   private focusOnEditor(){

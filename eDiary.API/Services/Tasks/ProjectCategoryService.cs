@@ -41,6 +41,7 @@ namespace eDiary.API.Services.Tasks
         public async Task<int> CreateCategoryAsync(string name, int profileId)
         {
             Validate.NotNull(name, "Category name");
+            Validate.NotNull(profileId, "Profile id");
 
             var category = new Entities.ProjectCategory
             {
@@ -52,11 +53,13 @@ namespace eDiary.API.Services.Tasks
             return category.Id;
         }
         
-        public async Task UpdateCategoryAsync(ProjectCategoryCard card)
+        public async Task UpdateCategoryAsync(int id, string name)
         {
-            Validate.NotNull(card, "Project category card");
-            var category = await FindCategoryAsync(x => x.Id == card.CategoryId);
-            category.Name = card.Name;
+            Validate.NotNull(id, "Project category card");
+            Validate.NotNull(id, "Project category name");
+
+            var category = await FindCategoryAsync(x => x.Id == id);
+            category.Name = name;
             uow.ProjectCategoryRepository.Update(category);
         }
 

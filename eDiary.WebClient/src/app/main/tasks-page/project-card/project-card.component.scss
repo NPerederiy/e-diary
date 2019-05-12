@@ -2,9 +2,11 @@
 @import "src/shared/styles/base64-icons.scss";
 
 #container{
+    display: flex;
     background-color: $light-color;
     padding: 12px;
     min-width: 200px;
+    min-height: 376px;
 }
 
 .content{
@@ -36,5 +38,29 @@
     }
     .chart-legend{
         margin-top: -40px;
+    }
+}
+
+.editor{
+    display: flex;
+    justify-self: center;
+    justify-content: center;
+    align-self: center;
+    align-items: center;
+    flex-grow: 1;
+
+    .input{
+        min-height: unset;
+        height: unset;
+        width: 212px;
+        border-bottom-color: $light-color;
+        padding: 1px 0 2px 0;
+        margin: 8px;
+    }
+    
+    .input,
+    .input:hover,
+    .input:focus{
+        border-bottom-color: $button-menu-focused-color;
     }
 }

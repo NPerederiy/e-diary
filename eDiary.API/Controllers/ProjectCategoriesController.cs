@@ -55,10 +55,12 @@ namespace eDiary.API.Controllers
         }
 
         [HttpPut]
-        public async Task UpdateCategory(ProjectCategoryCard category)
+        public async Task UpdateCategory(UpdateCategoryData category)
         {
-            Validate(category);
-            await pcs.UpdateCategoryAsync(category);
+            Services.Validation.Validate.NotNull(category);
+            Services.Validation.Validate.NotNull(category.Id, "Category id");
+            Services.Validation.Validate.NotNull(category.Name, "Category name");
+            await pcs.UpdateCategoryAsync(category.Id, category.Name);
         }
         
         [HttpDelete]

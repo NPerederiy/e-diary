@@ -1,4 +1,4 @@
-import { Component, OnInit, Input } from '@angular/core';
+import { Component, OnInit, Input, Output, ViewChild, ElementRef, EventEmitter } from '@angular/core';
 import { ProjectCard } from 'src/shared/models/project-card.model';
 
 @Component({
@@ -9,8 +9,11 @@ import { ProjectCard } from 'src/shared/models/project-card.model';
 
 export class ProjectCardComponent implements OnInit {
   @Input() card: ProjectCard;
+  @Output() editorOpened: EventEmitter<any> = new EventEmitter();
+  @Output() editorClosed: EventEmitter<any> = new EventEmitter();
+  @ViewChild('projectEditor') projectEditor: ElementRef;
   
-  public doughnutChartLabels: string[] = ['Hot', 'Important', 'Completed', 'In progress', 'Overdue'];  
+  public doughnutChartLabels: string[] = ['Hot', 'Important', 'Completed', 'In progress', 'Overdue'];  // TODO: Get this from API
   public doughnutChartData: number[] = [];
   public doughnutChartType: string = 'doughnut';
   public doughnutChartOptions:any = {
@@ -28,7 +31,7 @@ export class ProjectCardComponent implements OnInit {
     }    
   };
   
-  private colors: string[] = [
+  private readonly colors: string[] = [
     'rgba(231, 76, 60, 1)', // '#e74c3c', // red
     'rgba(241, 196, 15, 1)', // '#f1c40f', // yellow
     'rgba(46, 204, 113, 1)', // '#2ecc71', // green
@@ -44,7 +47,7 @@ export class ProjectCardComponent implements OnInit {
     // '#0cc3f0', // blue
   ]
 
-  private hoverColors: string[] = [
+  private readonly hoverColors: string[] = [
     'rgba(231, 76, 60, 0.8)', // '#e74c3c', // red
     'rgba(241, 196, 15, 0.8)', // '#f1c40f', // yellow
     'rgba(46, 204, 113, 0.8)', // '#2ecc71', // green
@@ -66,6 +69,40 @@ export class ProjectCardComponent implements OnInit {
   constructor() {}
   
   ngOnInit() {
+    if(this.card.isEditing){
+      this.focusOnEditor();
+    }
+    this.initChart();
+  }
+
+  public openEditor(){
+    this.editorOpened.emit();
+    this.card.isEditing = true;
+    this.focusOnEditor();
+  }
+
+  public closeEditor(){
+    this.card.isEditing = false;
+    this.editorClosed.emit();
+  }
+
+  public blurEditor(){
+    setTimeout(() => this.projectEditor.nativeElement.blur());
+  }
+
+  public chartClicked(e: any) {
+    // console.log(e);
+  }
+
+  public chartHovered(e: any) {
+    // console.log(e);
+  }
+
+  private focusOnEditor(){
+    setTimeout(() => this.projectEditor.nativeElement.focus());
+  }
+
+  private initChart(){
     this.doughnutChartData.push(this.card.hotTaskCount);
     this.doughnutChartData.push(this.card.importantTaskCount);
     this.doughnutChartData.push(this.card.completedTaskCount);
@@ -99,15 +136,5 @@ export class ProjectCardComponent implements OnInit {
       }
       this.doughnutChartData.push(1);
     }
-
   }
-
-  public chartClicked(e:any):void {
-    console.log(e);
-  }
-
-  public chartHovered(e:any):void {
-    console.log(e);
-  }
-
 }

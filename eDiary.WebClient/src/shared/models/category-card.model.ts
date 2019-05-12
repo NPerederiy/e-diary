@@ -6,10 +6,10 @@ export class CategoryCard{
     isEditing: boolean;
     projects: ProjectCard[];
 
-    constructor(name: string, id?:number, projects?: ProjectCard[], isEditing?: boolean) {
+    constructor(name: string, id?:number, projects?: ProjectCard[]) {
         this.id = id || 0;
         this.name = name;
         this.projects = projects || [];
-        this.isEditing = isEditing || false;
+        this.isEditing = false;
     }
 }

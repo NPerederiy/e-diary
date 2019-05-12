@@ -155,6 +155,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Controllers\AuthenticationController.cs" />
+    <Compile Include="Controllers\CreateProjectData.cs" />
     <Compile Include="Controllers\FolderController.cs" />
     <Compile Include="Controllers\NotesController.cs" />
     <Compile Include="Controllers\ProjectCategoriesController.cs" />

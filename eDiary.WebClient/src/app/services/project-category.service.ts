@@ -17,13 +17,21 @@ export class ProjectCategoryService{
         return this.http.get(`${this.serverURI}/api/${this.controllerName}`).toPromise();
     }
 
+    public getCategoryProjects(category: CategoryCard){
+        // TODO: implement
+        
+        return category.projects; // TODO: check!
+    }
+
     public addCategory(categoryName: string){
         let contentType = new HttpHeaders({'content-type': 'application/json'});
         return this.http.post(`${this.serverURI}/api/${this.controllerName}`, JSON.stringify(categoryName), {headers: contentType}).toPromise();
     }
 
-    public updateCategoryName(category: CategoryCard){
+    public renameCategory(category: CategoryCard){
         // TODO: implement 
+
+        this.updateCategory(category);
     }
 
     // public updateCategoryProjects(category: CategoryCard){
@@ -33,11 +41,11 @@ export class ProjectCategoryService{
     public updateCategory(category: CategoryCard){  // TODO: Verify 
         console.log("update category");
 
-        let body: any = {};
-        body.categoryId = category.id;
-        body.name = category.name;
-        body.projects = category.projects;
-        return this.http.put(`${this.serverURI}/api/${this.controllerName}`, body).toPromise()
+        // let body: any = {};
+        // body.categoryId = category.id;
+        // body.name = category.name;
+        // body.projects = category.projects;
+        // return this.http.put(`${this.serverURI}/api/${this.controllerName}`, body).toPromise()
         
     }
 

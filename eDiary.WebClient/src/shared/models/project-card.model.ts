@@ -7,6 +7,7 @@ export class ProjectCard{
     inProgressTaskCount: number;
     overdueTaskCount: number;
     totalTaskCount: number;
+    isEditing: boolean;
 
     constructor(name: string, id?: number, hotTaskCount?: number, importantTaskCount?: number, completedTaskCount?: number, 
         inProgressTaskCount?: number, overdueTaskCount?: number) {
@@ -22,5 +23,6 @@ export class ProjectCard{
                             this.completedTaskCount +
                             this.inProgressTaskCount +
                             this.overdueTaskCount;
+        this.isEditing = false;
     }
 }

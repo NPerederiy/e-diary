@@ -21,9 +21,10 @@ namespace eDiary.API.Services.Tasks
             uow = NinjectKernel.Kernel.Get<IUnitOfWork>();
         }
 
-        public async Task<IEnumerable<ProjectCard>> GetAllProjectsAsync()
+        public async Task<IEnumerable<ProjectCard>> GetProjectsByProfileIdAsync(int profileId)
         {
-            return ConvertToProjectCards(await uow.ProjectRepository.GetAllAsync());
+            var projects = await uow.ProjectRepository.GetByConditionAsync(x => x.UserId == profileId);
+            return ConvertToProjectCards(projects);
         }
 
         public async Task<IEnumerable<ProjectCard>> GetProjectsByCategoryAsync(int categoryId)
@@ -42,22 +43,29 @@ namespace eDiary.API.Services.Tasks
             return new ProjectPage(await FindProjectAsync(x => x.Id == projectId));
         }
         
-        public async Task CreateProjectAsync(ProjectCard card)
+        public async Task<int> CreateProjectAsync(string name, int? categoryId, int profileId)
         {
-            Validate.NotNull(card, "Project card");
+            Validate.NotNull(name, "Project name");
+
             var p = new Entities.Project
             {
-                Name = card.Name,
-                //UserId = ???                 // TODO: Add userId
+                Name = name,
+                CategoryId = categoryId,
+                UserId = profileId
             };
             await uow.ProjectRepository.CreateAsync(p);
+
+            return p.Id;
         }
         
-        public async Task UpdateProjectAsync(ProjectCard card)
+        public async Task UpdateProjectAsync(int projectId, string name, int? categoryId)
         {
-            Validate.NotNull(card, "Project card");
-            var project = await FindProjectAsync(x => x.Id == card.ProjectId);
-            project.Name = card.Name;
+            Validate.NotNull(name, "Project name");
+
+            var project = await FindProjectAsync(x => x.Id == projectId);
+            project.Name = name;
+            project.CategoryId = categoryId;
+
             uow.ProjectRepository.Update(project);
         }
 

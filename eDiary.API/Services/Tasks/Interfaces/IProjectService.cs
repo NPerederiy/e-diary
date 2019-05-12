@@ -6,12 +6,12 @@ namespace eDiary.API.Services.Tasks.Interfaces
 {
     public interface IProjectService
     {
-        Task<IEnumerable<ProjectCard>> GetAllProjectsAsync();
+        Task<IEnumerable<ProjectCard>> GetProjectsByProfileIdAsync(int profileId);
         Task<IEnumerable<ProjectCard>> GetProjectsByCategoryAsync(int categoryId);
         Task<ProjectCard> GetProjectCardAsync(int projectId);
         Task<ProjectPage> GetProjectPageAsync(int projectId);
-        Task CreateProjectAsync(ProjectCard project);
-        Task UpdateProjectAsync(ProjectCard project);
+        Task<int> CreateProjectAsync(string name, int? categoryId, int profileId);
+        Task UpdateProjectAsync(int projectId, string name, int? categoryId);
         Task DeleteProjectAsync(int id);
     }
 }

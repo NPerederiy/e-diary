@@ -1,5 +1,5 @@
 <div id="container" class="shadow">
-  <div class="content">
+  <div class="content" *ngIf="!card.isEditing">
     <div class="header">
       {{ card.projectName }}
     </div>
@@ -15,7 +15,26 @@
     </canvas>
     <div class="total-count">{{ card.totalTaskCount }}</div>
     <div class="chart-legend">
-      <chart-legend-item *ngFor="let l of doughnutChartLabels; let j = index" [value]='l' [color]='colors[j]' [count]='doughnutChartData[j]'></chart-legend-item>
+      <chart-legend-item 
+        *ngFor="let l of doughnutChartLabels; let j = index" 
+        [value]='l' 
+        [color]='colors[j]' 
+        [count]='doughnutChartData[j]'
+      ></chart-legend-item>
     </div>
+  </div>
+  <div class="editor">
+    <input 
+      *ngIf="card.isEditing"
+      class="input" 
+      type="text" 
+      tabindex="1" 
+      autofocus=true 
+      placeholder="Project name"
+      (blur)="closeEditor()"
+      (keyup.enter)="blurEditor()"
+      [(ngModel)]="card.projectName"
+      #projectEditor
+    >
   </div>
 </div>

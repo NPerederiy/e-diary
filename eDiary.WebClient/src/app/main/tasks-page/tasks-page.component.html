@@ -1,21 +1,52 @@
-<div id="container" *ngIf="!isProjectSelected()">
+<div id="container" *ngIf="!currentProject">
   <div class="categories">
+    <div 
+      class="all-projects-button shadow"
+      (click)="showAllProjects()"
+    >
+      All projects
+    </div>
     <category-card 
       *ngFor="let c of categories" 
       [card]="c" 
-      (click)="editCategory(categoryCard)" 
+      (click)="selectCategory(c)"
       (editorClosed)="saveCategoryChanges(c)"
       #categoryCard
-    ></category-card>
-    <div class="add-category-button" *ngIf="!isNewCategoryCreating" (click)="addCategory()">+ Category</div>
+    >
+    <!-- (click)="editCategory(categoryCard)"  -->
+    </category-card>
+    <div
+      class="add-category-button" 
+      *ngIf="!isNewCategoryCreating" 
+      (click)="addCategory()">
+        New Category
+      </div>
   </div>
 
   <div style="width: calc(100vw - 111px); height: 100%;" malihu-scrollbar [scrollbarOptions]="scrollbarOptions">
     <div class="projects">
-      <project-card *ngFor="let p of projects" [card]="p" (click)="openProjectPage(p)"></project-card>
-      <div class="add-project-button" (click)="addProject()">+ Project</div>
+      <project-card 
+        *ngFor="let p of projects" 
+        [card]="p" 
+        (click)="selectProject(p)"
+        (editorClosed)="saveProjectChanges(p)"
+        #projectCard
+        >
+      <!-- (click)="editProject(projectCard)" -->
+      </project-card>
+      <div 
+        class="add-project-button" 
+        *ngIf="!isNewProjectCreating" 
+        (click)="addProject()">
+        <div class="icon">
+          <div class="behind"></div>
+          <div class="infront">
+          </div>
+        </div>
+        <div class="text">New Project</div>
+      </div>
     </div>
   </div>
   <!-- <sidebar [buttons]="sidebarButtons"></sidebar> -->
 </div>
-<project-page [project]="currentProject" *ngIf="isProjectSelected()"></project-page>
+<project-page [project]="currentProject" *ngIf="currentProject"></project-page>

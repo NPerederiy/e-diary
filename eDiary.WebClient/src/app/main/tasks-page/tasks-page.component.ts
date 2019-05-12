@@ -1,8 +1,10 @@
-import { Component, OnInit, ViewChild, ElementRef } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { CategoryCard } from 'src/shared/models/category-card.model';
 import { ProjectCard } from 'src/shared/models/project-card.model';
 import { ProjectCategoryService } from 'src/app/services/project-category.service';
 import { CategoryCardComponent } from './category-card/category-card.component';
+import { ProjectCardComponent } from './project-card/project-card.component';
+import { ProjectService } from 'src/app/services/project.service';
 
 @Component({
   selector: 'tasks-page',
@@ -17,7 +19,8 @@ export class TasksPageComponent implements OnInit {
   currentCategory: CategoryCard = null;
   currentProject: ProjectCard = null;
 
-  isNewCategoryCreating = false;
+  private isNewCategoryCreating = false;
+  private isNewProjectCreating = false;
 
   scrollbarOptions = { 
     axis: 'x', 
@@ -27,99 +30,120 @@ export class TasksPageComponent implements OnInit {
   };
 
   constructor(
-    private prjCategoryService: ProjectCategoryService
-  ) {
-    // this.categories.push(new CategoryCard("University"));
-    // this.categories.push(new CategoryCard("Work"));
-    // this.categories.push(new CategoryCard("Family"));
-    // this.categories.push(new CategoryCard("TRVL"));
+    private projectCategoryService: ProjectCategoryService,
+    private projectService: ProjectService
+  ) { }
 
-    this.projects.push(new ProjectCard("Project name1"));
-    this.projects.push(new ProjectCard("Flight to the Moon", 0, 2, 10, 15, 7, 3, ));
-    this.projects.push(new ProjectCard("Hyperloop launch", 0, 95, 131, 452, 33, 31));
-    this.projects.push(new ProjectCard("Trip around the world", 0, 30, 55, 201, 115, 9));
-    this.projects.push(new ProjectCard("Complete the diary", 0, 30, 15, 281, 105, 9));
+  ngOnInit() {
+    this.loadCategories();
+    this.loadProjects();
   }
 
-  /*async*/ ngOnInit() {
-    /*await*/ this.prjCategoryService.getAllCategories().then((categories: {name: string, projects:{
-      projectName: string,
-      projectId: number,
-      hotTaskCount: number,
-      importantTaskCount: number,
-      completedTaskCount: number,
-      inProgressTaskCount: number,
-      overdueTaskCount: number,
-      totalTaskCount: number }[] }[] ) => {
-        categories.forEach(c => {
-          let projects: ProjectCard[] = [];
-          c.projects.forEach(p => {
-            projects.push(new ProjectCard(
-              p.projectName, 
-              p.projectId, 
-              p.hotTaskCount, 
-              p.importantTaskCount, 
-              p.completedTaskCount, 
-              p.inProgressTaskCount, 
-              p.overdueTaskCount));
-          });
-          this.categories.push(new CategoryCard(c.name, 0, projects));
-        });
-      },
-      (error: any) => console.error(error)
-    );
-    // console.log('Current project: ',this.currentProject);
-    // console.log('Categories: ', this.categories);
-  }
-
-  isProjectSelected(): boolean{
-    return this.currentProject !== null;
-  }
-
-  openProjectPage(card: ProjectCard){
-    this.currentProject = card;
-  }
-
-  openCategoryProjects(card: CategoryCard){
-    console.log('Click: ', card);
-  }
-
-  editCategory(card: CategoryCardComponent){
-    console.log(card);
-    card.openEditor();
-  }
-
-  addCategory(){
-    this.categories.push(new CategoryCard("", 0, [], true));
+  /* ---------- Category ---------- */
+  
+  public addCategory(){
+    let c = new CategoryCard("");
+    c.isEditing = true;
+    this.categories.push(c);
     this.isNewCategoryCreating = true;
   }
 
-  saveCategoryChanges(card: CategoryCard){
+  public editCategory(category: CategoryCardComponent){
+    category.openEditor();
+  }
+
+  public removeCategory(card: CategoryCard){  // TODO: verify
+    this.projectCategoryService.deleteCategory(card.id);
+    this.categories.splice(this.categories.indexOf(card), 1);
+    console.log('Categories list after removing the item: ', this.categories); // TODO: remove this line later
+  }
+
+  public saveCategoryChanges(card: CategoryCard){
     if(this.isNewCategoryCreating){
       if(card.name){
-        console.log(card.name);
-        
-        this.prjCategoryService.addCategory(card.name);
+        this.projectCategoryService.addCategory(card.name);
       } else {
         this.categories.pop();
       }
       this.isNewCategoryCreating = false;
     } else {
       if(card.name){
-        this.prjCategoryService.updateCategory(card); 
+        this.projectCategoryService.renameCategory(card); 
       }
-    }
-
-
-    if (this.isNewCategoryCreating && card.name) {
-       
-    } else if (this.isNewCategoryCreating && card.name) {
-      this.prjCategoryService.updateCategory(card); 
     }
   }
 
-  addProject(){
-    console.log('addProject');
-    
+  public loadCategories(){
+    this.projectCategoryService.getAllCategories()
+      .then((categories: CategoryCard[] ) => {
+        this.categories = categories;
+      },
+      (error: any) => {
+        return console.error(error);
+      });
+  }
+
+  public selectCategory(card: CategoryCard){
+    console.log('selected category: ', card); // TODO: remove this line later
+    this.currentCategory = card;
+    this.projects = card.projects;
+  }
+
+  /* ---------- Project ---------- */
+
+  public addProject(){
+    let p = new ProjectCard("");
+    p.isEditing = true;
+    this.projects.push(p);
+    this.isNewProjectCreating = true;
+  }
+
+  public editProject(project: ProjectCardComponent){
+    project.openEditor();
+  }
+
+  public removeProject(card: ProjectCard){
+    this.projectService.removeProject(card.projectId);
+  }
+
+  public saveProjectChanges(card: ProjectCard){
+    if(this.isNewProjectCreating){
+      if(card.projectName){
+        if(this.currentCategory){
+          this.projectService.addProject(card.projectName, this.currentCategory.id)
+        } else {
+          this.projectService.addProject(card.projectName);
+        }
+      } else {
+        this.projects.pop();
+      }
+      this.isNewProjectCreating = false;
+    } else {
+      if(card.projectName){
+        this.projectService.renameProject(card); 
+      }
+    }
+  }
+  
+  public loadProjects(){
+    if(this.currentCategory){
+      this.projects = this.currentCategory.projects;
+    } else {
+      this.projectService.getAllProjects()
+      .then((projects: ProjectCard[]) => {        
+        this.projects = projects;
+      }, (error: any) => {
+        return console.error(error);
+      });
+    }
+  }
+
+  public selectProject(card: ProjectCard){
+    this.currentProject = card;
+  }
+
+  public showAllProjects(){
+    this.currentCategory = null;
+    this.loadProjects();
   }
 }

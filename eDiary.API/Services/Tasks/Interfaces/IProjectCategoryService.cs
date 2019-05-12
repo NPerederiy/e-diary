@@ -10,7 +10,7 @@ namespace eDiary.API.Services.Tasks.Interfaces
         Task<IEnumerable<ProjectCategoryCard>> GetCategoriesByProfileIdAsync(int profileId);
         Task<ProjectCategoryCard> GetCategoryAsync(int id);
         Task<int> CreateCategoryAsync(string name, int profileId);
-        Task UpdateCategoryAsync(ProjectCategoryCard category);
+        Task UpdateCategoryAsync(int id, string name);
         Task DeleteCategoryAsync(int id);
     }
 }

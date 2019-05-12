@@ -12,7 +12,7 @@ namespace eDiary.API.Models.BusinessObjects
         public string Name { get; set; }
 
         [Required(ErrorMessage = "Category ID is required")]
-        [JsonProperty("categoryId")]
+        [JsonProperty("id")]
         public int CategoryId { get; set; }
         
         [JsonProperty("projects")]

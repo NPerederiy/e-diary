@@ -1,4 +1,5 @@
 @import "src/shared/styles/global-variables.scss";
+@import "src/shared/styles/base64-icons.scss";
 
 #container{
     width: 100%;
@@ -24,10 +25,22 @@
 }
 
 category-card,
+.all-projects-button,
 .add-category-button {
     cursor: pointer;
     min-width: 200px;
     margin: 8px;
+}
+
+.all-projects-button{
+    display: flex;
+    align-items: center;
+    background-color: $light-color;
+    max-width: 240px;
+    padding: 10px 12px;
+    min-width: 176px;
+    font-family: $regular-font;
+    color: rgba($regular-color, 0.7);
 }
 
 project-card,
@@ -35,6 +48,7 @@ project-card,
 {
     cursor: pointer;
     margin: 8px;
+    min-height: 396px;
 }
 
 .add-category-button,
@@ -46,6 +60,7 @@ project-card,
     min-width: 174px;
     // padding: 12px;
     padding: 10px 12px;
+    color: rgba(55, 51, 49, 0.7);
 }
 
 .add-project-button{
@@ -53,13 +68,61 @@ project-card,
     // height: 396px;
 
     display: flex;
+    flex-direction: column;
     justify-content: center;
     align-items: center;
+
+    .text{
+        margin-top: 2em;
+        color: rgba(55, 51, 49, 0.7);
+    }
+
+    .icon{
+        // display: flex;
+        // flex-direction: column;
+        // justify-content: center;
+        // align-items: center;
+        width: 100px;
+        height: 100px;
+
+        // background-color: rgb(179, 203, 204);
+        
+        .behind,
+        .infront{ 
+            border: 2px solid rgba($regular-color, 0.2);
+            margin: 0 auto;
+        }
+
+        .infront{
+            background-color: $background-regular-color;
+            height: calc(100% - 4px);
+            width: 60%;
+            margin-top: calc(8px - 100%);
+        }
+        
+        .behind{
+            height: 80%;
+            width: 80%;
+            margin-top: 8%;
+        }
+    }
 }
 
 .add-category-button:hover,
 .add-project-button:hover{
     background-color: rgba($light-color, 0.6);
+}
+
+.add-project-button:hover{
+    .icon{
+        .infront{
+            background-color: $light-color;
+        } 
+
+        .behind{
+            background-color: rgba($light-color, 0.6);
+        }
+    } 
 }
 
 // .button.add{

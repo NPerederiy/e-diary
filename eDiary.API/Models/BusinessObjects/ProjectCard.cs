@@ -8,7 +8,7 @@ namespace eDiary.API.Models.BusinessObjects
     public class ProjectCard
     {
         [Required(ErrorMessage = "Name is required")]
-        [JsonProperty("name")]
+        [JsonProperty("projectName")]
         public string Name { get; set; }
 
         [Required(ErrorMessage = "Project ID is required")]
@@ -18,13 +18,13 @@ namespace eDiary.API.Models.BusinessObjects
         [JsonProperty("hotTaskCount")]
         public int HotTaskCount { get; set; }
         
-        [JsonProperty("impTaskCount")]
+        [JsonProperty("importantTaskCount")]
         public int ImportantTaskCount { get; set; }
         
-        [JsonProperty("complTaskCount")]
+        [JsonProperty("completedTaskCount")]
         public int CompletedTaskCount { get; set; }
         
-        [JsonProperty("inProgTaskCount")]
+        [JsonProperty("inProgressTaskCount")]
         public int InProgressTaskCount { get; set; }
         
         [JsonProperty("overdueTaskCount")]
