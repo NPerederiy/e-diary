@@ -44,10 +44,12 @@ namespace eDiary.API.Controllers
         }
         
         [HttpPost]
-        public async Task CreateTaskAsync(TaskCard task)
+        public async Task<int> CreateTaskAsync(CreateTaskData task)
         {
-            Validate(task);
-            await ts.CreateTaskAsync(task);
+            Services.Validation.Validate.NotNull(task);
+            Services.Validation.Validate.NotNull(task.Header, "Task header");
+            Services.Validation.Validate.NotNull(task.SectionId, "Section id");
+            return await ts.CreateTaskAsync(task.Header, task.SectionId);
         }
         
         [HttpPut]

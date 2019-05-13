@@ -1,38 +1,38 @@
 <div id="container">
   <div class="header">
     <div class="icon"></div>
-    <div *ngIf="headerEditor === null" class="column-name" (click)="openHeaderEditor()">
-      {{ list.name }}
+    <div *ngIf="!section.isEditing" class="column-name" (click)="openSectionEditor()">
+      {{ section.name }}
     </div>
-    <div *ngIf="headerEditor !== null">
+    <div *ngIf="section.isEditing">
       <input 
         class="input" 
         type="text" 
         tabindex="1" 
         autofocus=true 
-        (blur)="closeEditor(headerEditor)" 
-        (keyup.enter)="headerInputBlur()"
-        [(ngModel)]="headerEditor.value"
+        placeholder="Section name"
+        (blur)="closeSectionEditor()"
+        (keyup.enter)="blurEditor(headerInput)"
+        [(ngModel)]="section.name"
         #headerInput
       >
     </div>
   </div>
-  <div *ngIf="headerEditor === null || headerEditor.hasContent()" class="scrollable vertical" malihu-scrollbar [scrollbarOptions]="scrollbarOptions">
-    <task-card class="card" *ngFor="let c of list.cards" [card]="c" (contextmenu)="showContextMenu()"></task-card>
-    <div *ngIf="cardCreator === null" class="button shadow" (click)="openCardCreator()">
+  <div 
+    *ngIf="!section.isEditing || section.cards" 
+    class="scrollable vertical" 
+    malihu-scrollbar 
+    [scrollbarOptions]="scrollbarOptions"
+  >
+    <task-card 
+      class="card" 
+      *ngFor="let c of section.cards" 
+      [card]="c" 
+      (contextmenu)="showContextMenu()"
+      (editorClosed)="saveTaskChanges(c)"
+    ></task-card>
+    <div *ngIf="!isNewTaskCardCreating" class="button shadow" (click)="addTask()">
       +
-    </div>
-    <div *ngIf="cardCreator !== null" class="card-creator shadow">
-      <input 
-        class="input" 
-        type="text" 
-        tabindex="1" 
-        autofocus=true 
-        (blur)="closeEditor(cardCreator)" 
-        (keyup.enter)="cardInputBlur()"
-        [(ngModel)]="cardCreator.value"
-        #cardInput
-      >
     </div>
   </div>
 </div>

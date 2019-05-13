@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 
 namespace eDiary.API.Models.Entities
 {
@@ -7,10 +8,10 @@ namespace eDiary.API.Models.Entities
         public int Id { get; set; } // Id (Primary key)
         public string Header { get; set; } // Header (length: 2147483647)
         public string Description { get; set; } // Description (length: 2147483647)
-        public string Deadline { get; set; } // Deadline (length: 2147483647)
+        public DateTime? Deadline { get; set; } // Deadline (length: 2147483647)
         public int? Progress { get; set; } // Progress
-        public string CreatedAt { get; set; } // CreatedAt (length: 2147483647)
-        public string UpdatedAt { get; set; } // UpdatedAt (length: 2147483647)
+        public DateTime CreatedAt { get; set; } // CreatedAt (length: 2147483647)
+        public DateTime UpdatedAt { get; set; } // UpdatedAt (length: 2147483647)
         public int StatusId { get; set; } // StatusId
         public int CardStatusId { get; set; } // CardStatusId
         public int PriorityId { get; set; } // PriorityId

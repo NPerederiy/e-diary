@@ -32,22 +32,27 @@ namespace eDiary.API.Controllers
         [HttpGet]
         public async Task<SectionCard> GetSectionByIdAsync(int? id)
         {
-            Validate(id);
+            Services.Validation.Validate.NotNull(id, "Section id");
             return await ss.GetSectionAsync((int)id);
         }
         
         [HttpPost]
-        public async Task CreateSectionAsync(SectionCard section)
+        public async Task<int> CreateSectionAsync(CreateSectionData section)
         {
-            Validate(section);
-            await ss.CreateSectionAsync(section);
+            Services.Validation.Validate.NotNull(section);
+            Services.Validation.Validate.NotNull(section.Name, "Section name");
+            Services.Validation.Validate.NotNull(section.ProjectId, "Project id");
+            return await ss.CreateSectionAsync(section.Name, section.ProjectId);
         }
         
         [HttpPut]
-        public async Task UpdateSectionAsync(SectionCard section)
+        public async Task UpdateSectionAsync(UpdateSectionData section)
         {
-            Validate(section);
-            await ss.UpdateSectionAsync(section);
+            Services.Validation.Validate.NotNull(section);
+            Services.Validation.Validate.NotNull(section.Name, "Section name");
+            Services.Validation.Validate.NotNull(section.SectionId, "Section id");
+            Services.Validation.Validate.NotNull(section.ProjectId, "Project id");
+            await ss.UpdateSectionAsync(section.SectionId, section.Name, section.ProjectId);
         }
         
         [HttpDelete]

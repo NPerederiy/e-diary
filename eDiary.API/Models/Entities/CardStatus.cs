@@ -1,5 +1,8 @@
-﻿namespace eDiary.API.Models.Entities
+﻿using System.ComponentModel.DataAnnotations.Schema;
+
+namespace eDiary.API.Models.Entities
 {
+    [Table("dbo.CardStatuses")]
     public class CardStatus
     {
         public int Id { get; set; } // Id (Primary key)

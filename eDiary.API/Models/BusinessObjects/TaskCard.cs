@@ -71,9 +71,12 @@ namespace eDiary.API.Models.BusinessObjects
             Description = entity.Description;
             TaskStatus = entity.Status.Name;
             CardStatus = entity.CardStatus.Name;
-            CreatedAt = entity.CreatedAt;
-            UpdatedAt = entity.UpdatedAt;
-            Deadline = entity.Deadline;
+            CreatedAt = entity.CreatedAt.ToLongDateString();
+            UpdatedAt = entity.UpdatedAt.ToLongDateString();
+            if (entity.Deadline != null)
+            {
+                Deadline = ((System.DateTime)entity.Deadline).ToLongDateString();
+            }
             Progress = entity.Progress.Value;
             Priority = entity.Priority.Name;
             Difficulty = entity.Difficulty.Name;

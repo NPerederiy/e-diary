@@ -9,6 +9,25 @@
     // border-radius: 5px;
 }
 
+.card-creator{  
+    color: rgba($regular-color, 0.7);
+    padding: 10px 12px;
+
+    display: flex;
+    flex-direction: column;
+    justify-content: stretch;
+
+    .input{
+        width: unset;
+        border-bottom-color: transparent;
+    }
+
+    .input:hover,
+    .input:focus{
+        border-bottom-color: $button-menu-focused-color;
+    }
+}
+
 .status-line{
     min-height: 34px;
     display: flex;

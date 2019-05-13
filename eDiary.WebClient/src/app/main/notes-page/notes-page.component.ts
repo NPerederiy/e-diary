@@ -49,23 +49,9 @@ export class NotesPageComponent implements OnInit {
 
     console.log(' page2 ' + this.currentFolder);
     this.currentFolder.cards.push(
-      new NoteCard("Magic happens!", "hello world qqqqqq wwwwwww eeeeee 3333333 3333 33333 33333 333333"),
-      new NoteCard("Very loooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooong name","good times are comin'"),
-      new NoteCard("To implement","add handling of looooong folder names", CardStatus.important),
-      new NoteCard("To implement","add handling of looooong category & project names", CardStatus.important),
-      new NoteCard("Feature","display the number of items contained in each folder", CardStatus.important),
-      new NoteCard("To implement","Добавить ExceptionHandler для 401 ошибки и отправлять токены на бэк для получения новой пары токенов. ", CardStatus.important),
-      new NoteCard("To implement","Добавить поле для ввода имени категории при её создании", CardStatus.important),
-      new NoteCard("To implement","Добавить возможность переименовать, удалить категорию", CardStatus.important),
-      new NoteCard("Feature","remove paddings in headerEditor", CardStatus.important),
-      new NoteCard("To implement","Добавить обработчик на ошибку net::ERR_CONNECTION_REFUSED", CardStatus.important),
+      new NoteCard("Magic happens!", "Hello world qqqqqq wwwWwww eeeeee 3333333 3333 33333 33333 333333"),
+      new NoteCard("Very loooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooong name","good times are comin'")
     );
-    
-    // for (let i = 0; i < 198; i++) {
-    //   this.currentFolder.cards.push(
-    //     new NoteCard(`new note (${i})`)
-    //   );
-    // }
 
     this.currentFolder.subfolders.push(new Folder());
     this.currentFolder.subfolders.push(new Folder());

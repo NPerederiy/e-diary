@@ -1,6 +1,6 @@
 ﻿using Newtonsoft.Json;
 
-namespace eDiary.API.Controllers
+namespace eDiary.API.Models.BusinessObjects
 {
     public class CreateProjectData
     {

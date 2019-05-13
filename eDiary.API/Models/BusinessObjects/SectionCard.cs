@@ -19,7 +19,7 @@ namespace eDiary.API.Models.BusinessObjects
         [JsonProperty("projectId")]
         public int ProjectId { get; set; }
         
-        [JsonProperty("tasks")]
+        [JsonProperty("cards")]
         public TaskCard[] Tasks { get; set; }
 
         public SectionCard(Section entity)

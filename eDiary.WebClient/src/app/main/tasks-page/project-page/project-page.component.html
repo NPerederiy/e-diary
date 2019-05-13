@@ -1,9 +1,13 @@
 <div id="container">
   <div style="max-width: calc(100vw - 170px);" malihu-scrollbar [scrollbarOptions]="scrollbarOptions">
     <div class="content">
-      <task-list *ngFor="let l of cardLists" [list]="l"></task-list>  
+      <task-list 
+        *ngFor="let s of sections" 
+        [section]="s"
+        (editorClosed)="saveSectionChanges(s)"
+        ></task-list>  
       <div class="headline">
-        <div class="button add" (click)="addColumn()">+ {{ 'buttons.addColumn' | translate }}</div>
+        <div class="button add" (click)="addSection()">+ {{ 'buttons.addColumn' | translate }}</div>
       </div>
     </div>
   </div>

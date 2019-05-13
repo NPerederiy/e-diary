@@ -155,10 +155,10 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Controllers\AuthenticationController.cs" />
-    <Compile Include="Controllers\CreateProjectData.cs" />
     <Compile Include="Controllers\FolderController.cs" />
     <Compile Include="Controllers\NotesController.cs" />
     <Compile Include="Controllers\ProjectCategoriesController.cs" />
+    <Compile Include="Controllers\ProjectPageController.cs" />
     <Compile Include="Controllers\ProjectsController.cs" />
     <Compile Include="Controllers\RegistrationController.cs" />
     <Compile Include="Controllers\SectionsController.cs" />
@@ -176,6 +176,9 @@
     <Compile Include="Models\BusinessObjects\AuthTokens.cs" />
     <Compile Include="Models\BusinessObjects\ChangePasswordData.cs" />
     <Compile Include="Models\BusinessObjects\CommentBO.cs" />
+    <Compile Include="Models\BusinessObjects\CreateProjectData.cs" />
+    <Compile Include="Models\BusinessObjects\CreateSectionData.cs" />
+    <Compile Include="Models\BusinessObjects\CreateTaskData.cs" />
     <Compile Include="Models\BusinessObjects\FileBO.cs" />
     <Compile Include="Models\BusinessObjects\FolderBO.cs" />
     <Compile Include="Models\BusinessObjects\LinkBO.cs" />
@@ -189,6 +192,9 @@
     <Compile Include="Models\BusinessObjects\TagBO.cs" />
     <Compile Include="Models\BusinessObjects\TaskCard.cs" />
     <Compile Include="Models\BusinessObjects\TokenPayload.cs" />
+    <Compile Include="Models\BusinessObjects\UpdateCategoryData.cs" />
+    <Compile Include="Models\BusinessObjects\UpdateProjectData.cs" />
+    <Compile Include="Models\BusinessObjects\UpdateSectionData.cs" />
     <Compile Include="Models\BusinessObjects\UserProfileBO.cs" />
     <Compile Include="Models\BusinessObjects\UserSettingsBO.cs" />
     <Compile Include="Models\EF\Interfaces\IRepository.cs" />

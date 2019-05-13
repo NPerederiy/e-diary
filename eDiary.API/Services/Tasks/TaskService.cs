@@ -52,23 +52,26 @@ namespace eDiary.API.Services.Tasks
             return new TaskCard(await TryFindTask(id));
         }
         
-        public async Task CreateTaskAsync(TaskCard card)
+        public async Task<int> CreateTaskAsync(string header, int sectionId)
         {
-            Validate.NotNull(card, "Task card");
+            var time = DateTime.Now;
+            //Validate.NotNull(card, "Task card");
             var t = new Entities.Task
             {
-                Header = card.Header,
-                Description = card.Description,
-                Status = (await uow.StatusRepository.GetByConditionAsync(x => x.Name == card.TaskStatus)).FirstOrDefault(),
-                CardStatus = (await uow.CardStatusRepository.GetByConditionAsync(x => x.Name == card.CardStatus)).FirstOrDefault(),
-                CreatedAt = card.CreatedAt,
-                UpdatedAt = card.CreatedAt,
-                Deadline = card.Deadline,
-                Progress = card.Progress,
-                Priority = (await uow.PriorityRepository.GetByConditionAsync(x => x.Name == card.Priority)).FirstOrDefault(),
-                Difficulty = (await uow.DifficultyRepository.GetByConditionAsync(x => x.Name == card.Difficulty)).FirstOrDefault()
+                Header = header,
+                SectionId = sectionId,
+                Description = "",
+                Status = (await uow.StatusRepository.GetByConditionAsync(x => x.Id == 1)).FirstOrDefault(),
+                CardStatus = (await uow.CardStatusRepository.GetByConditionAsync(x => x.Name == "Hidden")).FirstOrDefault(),
+                CreatedAt = time,
+                UpdatedAt = time,
+                Deadline = null,
+                Progress = 0,
+                Priority = (await uow.PriorityRepository.GetByConditionAsync(x => x.Name == "Would have")).FirstOrDefault(),
+                Difficulty = (await uow.DifficultyRepository.GetByConditionAsync(x => x.Name == "Low")).FirstOrDefault()
             };
             await uow.TaskRepository.CreateAsync(t);
+            return t.Id;
         }
         
         public async Task UpdateTaskAsync(TaskCard card)
@@ -80,9 +83,16 @@ namespace eDiary.API.Services.Tasks
             task.Description = card.Description;
             task.Status = (await uow.StatusRepository.GetByConditionAsync(x => x.Name == card.CardStatus)).FirstOrDefault();
             task.CardStatus = (await uow.CardStatusRepository.GetByConditionAsync(x => x.Name == card.CardStatus)).FirstOrDefault();
-            task.CreatedAt = card.CreatedAt;
-            task.UpdatedAt = card.UpdatedAt;
-            task.Deadline = card.Deadline;
+            task.CreatedAt = DateTime.Parse(card.CreatedAt);
+            task.UpdatedAt = DateTime.Parse(card.UpdatedAt);
+            if(card.Deadline == null)
+            {
+                task.Deadline = null;
+            }
+            else
+            {
+                task.Deadline = DateTime.Parse(card.Deadline);
+            }
             task.Progress = card.Progress;
             task.Priority = (await uow.PriorityRepository.GetByConditionAsync(x => x.Name == card.Priority)).FirstOrDefault();
             task.Difficulty = (await uow.DifficultyRepository.GetByConditionAsync(x => x.Name == card.Difficulty)).FirstOrDefault();

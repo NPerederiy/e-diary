@@ -49,6 +49,8 @@ import { FolderCardComponent } from './main/notes-page/folder/folder-card/folder
 import { FolderAddButtonComponent } from './main/notes-page/folder/folder-add-button/folder-add-button.component';
 import { ProjectCategoryService } from './services/project-category.service';
 import { ProjectService } from './services/project.service';
+import { TaskSectionService } from './services/task-section.service';
+import { TaskService } from './services/task.service';
 
 @NgModule({
   declarations: [
@@ -111,7 +113,9 @@ import { ProjectService } from './services/project.service';
     NoteFolderService,
     NoteService,
     ProjectService,
-    ProjectCategoryService
+    ProjectCategoryService,
+    TaskService,
+    TaskSectionService
   ],
   bootstrap: [AppComponent]
 })

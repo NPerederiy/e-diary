@@ -38,22 +38,21 @@ namespace eDiary.API.Services.Tasks
             return new SectionCard(await FindSectionAsync(x => x.Id == id));
         }
         
-        public async Task CreateSectionAsync(SectionCard card)
+        public async Task<int> CreateSectionAsync(string name, int projectId)
         {
-            Validate.NotNull(card, "Section card");
             var s = new Entities.Section
             {
-                Name = card.Name,
-                ProjectId = card.ProjectId
+                Name = name,
+                ProjectId = projectId
             };
             await uow.SectionRepository.CreateAsync(s);
+            return s.Id;
         }
         
-        public async Task UpdateSectionAsync(SectionCard card)
+        public async Task UpdateSectionAsync(int sectionId, string name, int projectId)
         {
-            Validate.NotNull(card, "Section card");
-            var section = await FindSectionAsync(x => x.Id == card.SectionId);
-            section.Name = card.Name;
+            var section = await FindSectionAsync(x => x.Id == sectionId);
+            section.Name = name;
             uow.SectionRepository.Update(section);
         }
 

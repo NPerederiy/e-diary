@@ -76,6 +76,19 @@
     border-bottom-color: $button-menu-focused-color;
 }
 
+.input::-webkit-input-placeholder{
+    color: $light-color;
+}
+.input::-moz-placeholder{
+    color: $light-color;
+}
+.input:-moz-placeholder{
+    color: $light-color;
+}
+.input:-ms-input-placeholder{
+    color: $light-color;
+}
+
 .scrollable.vertical{
     overflow-y: auto;
     height: calc(100vh - 40px);

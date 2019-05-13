@@ -1,42 +1,7 @@
-import { Component, OnInit, Input, ViewChild, ElementRef } from '@angular/core';
-import { ICardEditor } from 'src/shared/models/interfaces/card-creator.interface';
+import { Component, OnInit, Input, ViewChild, ElementRef, Output, EventEmitter } from '@angular/core';
 import { TaskCard } from 'src/shared/models/task-card.model';
-import { TaskList } from 'src/shared/models/task-list.model';
-
-class HeaderEditor implements ICardEditor{
-  value: string;
-  list: TaskList;
-  constructor(list: TaskList) {
-    this.value = list.name;
-    this.list = list;
-  }
-
-  hasContent(): boolean{
-    return this.list.cards.length !== 0;
-  }
-
-  saveChanges(){
-    this.list.name = this.value;
-  }
-}
-
-class CardCreator implements ICardEditor{
-  value: string;
-  list: TaskList;
-
-  constructor(list: TaskList) {
-    this.value = "";
-    this.list = list;
-  }
-
-  hasContent(): boolean{
-    return false;
-  }
-  
-  saveChanges(){
-    this.list.cards.push(new TaskCard(this.value));
-  }
-}
+import { TaskSection } from 'src/shared/models/task-list.model';
+import { TaskService } from 'src/app/services/task.service';
 
 @Component({
   selector: 'task-list',
@@ -45,11 +10,12 @@ class CardCreator implements ICardEditor{
 })
 
 export class TaskListComponent implements OnInit {
-  @Input() list: TaskList;
+  @Input() section: TaskSection;
+  @Output() editorOpened: EventEmitter<any> = new EventEmitter();
+  @Output() editorClosed: EventEmitter<any> = new EventEmitter();
   @ViewChild('headerInput') headerInput: ElementRef;
-  @ViewChild('cardInput') cardInput: ElementRef;
-  headerEditor: ICardEditor;
-  cardCreator: ICardEditor;
+
+  private isNewTaskCardCreating = false;
 
   scrollbarOptions = { 
     axis: 'y', 
@@ -58,76 +24,83 @@ export class TaskListComponent implements OnInit {
     scrollInertia: '200',
   };
 
-  constructor() {
-    this.headerEditor = null;
-    this.cardCreator = null;
-  }
+  constructor(
+    private taskService: TaskService
+  ) { }
   
   ngOnInit() {
-    if(this.isEmpty(this.list.name)){
-      this.headerEditor = new HeaderEditor(this.list);
-      setTimeout(() => this.headerInput.nativeElement.focus());
+    console.log(this.section);
+    
+    if(this.section.isEditing){
+      this.focusOnEditor();
     }
   }
 
-  openCardCreator(){
-    this.cardCreator = new CardCreator(this.list);
-    setTimeout(() => this.cardInput.nativeElement.focus());
+  /* ------ Section ------ */
+
+  public openSectionEditor(){
+    this.editorOpened.emit();
+    this.section.isEditing = true;
+    this.focusOnEditor();
   }
 
-  openHeaderEditor(){
-    // if(this.list.cards.length !== 0 || !this.isEmpty(this.list.name)){
-    this.headerEditor = new HeaderEditor(this.list);
-    setTimeout(() => this.headerInput.nativeElement.focus());
-    // }
+  public closeSectionEditor(){
+    this.section.isEditing = false;
+    this.editorClosed.emit();
   }
 
-  closeEditor(editor: ICardEditor){
-    if(this.isEmpty(editor.value)){
-      if(editor.hasContent()){
-        console.log("this field can't be empty");
-        // throw alert
-      } else {
-        console.log("case 1: no changes made");
-        this.closeAllEditors()
-      }
-    } else {
-      if(this.isContainNotAllowedSigns(editor.value)){
-        console.log("this field contains not allowed signs");
-        // throw alert
-      } else {
-        console.log("case 2: changes saved");
+  /* ------ Task card ------ */
+
+  private addTask(){
+    let t = new TaskCard("");
+    t.isEditing = true;
+    console.log(this.section);
+    
+    this.section.cards.push(t);
+    this.isNewTaskCardCreating = true;
+  }
+
+  private updateTask(){
+    // TODO: implement
+  }
+
+  private removeTask(card: TaskCard){
+    this.taskService.removeTask(card.id);
+  }
+
+  private saveTaskChanges(card: TaskCard){
+    if(this.isNewTaskCardCreating){
+      if(card.header){
+        console.log(this.section);
         
-        editor.saveChanges();
-        this.closeAllEditors()
-        console.log(this.list);
+        this.taskService.addTask(card.header, this.section.sectionId)
+          .then((id: number) => {
+            console.log('task id: ',id);
+            
+            card.id = id;
+          })
+      } else {
+        this.section.cards.pop();
+      }
+      this.isNewTaskCardCreating = false; 
+    } else {
+      if(card.header){
+        this.taskService.updateTask(card);
       }
     }
   }
 
-  showContextMenu(){
+  /* ------ General ------ */
+
+  public showContextMenu(){
     console.log('right click');
   }
 
-  cardInputBlur(){
-    setTimeout(() => this.cardInput.nativeElement.blur());
-  }
-
-  headerInputBlur(){
+  public blurEditor(){
     setTimeout(() => this.headerInput.nativeElement.blur());
   }
 
-  private closeAllEditors(){
-    this.headerEditor = null;
-    this.cardCreator = null;
+  private focusOnEditor(){
+    setTimeout(() => this.headerInput.nativeElement.focus());
   }
-
-  private isContainNotAllowedSigns(s: string): boolean{
-    return false;
-  }
-
-  private isEmpty(s: string): boolean {
-    return s === "";
-  }
-
 }

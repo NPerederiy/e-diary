@@ -1,36 +1,51 @@
 <div id="container" class="shadow">
-  <div *ngIf="isCompleted(); else hot" class="status-line completed">
-    <div class="icon"></div>
-    <div class="status" >
-      {{ 'cardStatus.completed' | translate}}
-    </div>
+  <div *ngIf="card.isEditing; else cardContent" class="card-creator shadow">
+    <input 
+      class="input" 
+      type="text" 
+      tabindex="1" 
+      autofocus=true 
+      placeholder="Task header"
+      (blur)="closeEditor()"
+      (keyup.enter)="blurEditor()"
+      [(ngModel)]="card.header"
+      #cardInput
+    >
   </div>
-  <div *ngIf="isHot(); else important" class="status-line hot" #hot>
-    <div class="icon"></div>
-    <div class="status" >
-      {{ 'cardStatus.hot' | translate}}
+  <ng-template #cardContent>
+    <div *ngIf="isCompleted(); else hot" class="status-line completed">
+      <div class="icon"></div>
+      <div class="status" >
+        {{ 'cardStatus.completed' | translate}}
+      </div>
     </div>
-  </div>
-  <div *ngIf="isImportant(); else deleted" class="status-line important" #important>
-    <div class="icon"></div>
-    <div class="status" >
-      {{ 'cardStatus.important' | translate }}
+    <div *ngIf="isHot(); else important" class="status-line hot" #hot>
+      <div class="icon"></div>
+      <div class="status" >
+        {{ 'cardStatus.hot' | translate}}
+      </div>
     </div>
-  </div>
-  <div *ngIf="isDeleted()" class="status-line deleted" #deleted>
-    <div class="icon"></div>
-    <div class="status" >
-      {{ 'cardStatus.deleted' | translate }}
+    <div *ngIf="isImportant(); else deleted" class="status-line important" #important>
+      <div class="icon"></div>
+      <div class="status" >
+        {{ 'cardStatus.important' | translate }}
+      </div>
     </div>
-  </div>
-
-  <div class="task-info">
-    <div class="header">
-      {{ card.header }}
+    <div *ngIf="isDeleted()" class="status-line deleted" #deleted>
+      <div class="icon"></div>
+      <div class="status" >
+        {{ 'cardStatus.deleted' | translate }}
+      </div>
     </div>
-    <div class="descr">
-      {{ card.descr }}
+  
+    <div class="task-info">
+      <div class="header">
+        {{ card.header }}
+      </div>
+      <div class="descr">
+        {{ card.descr }}
+      </div>
+      <div class="info-icons"></div>
     </div>
-    <div class="info-icons"></div>
-  </div>
+  </ng-template>
 </div>

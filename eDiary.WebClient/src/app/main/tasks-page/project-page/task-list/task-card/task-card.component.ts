@@ -1,4 +1,4 @@
-import { Component, OnInit, Input } from '@angular/core';
+import { Component, OnInit, Input, ElementRef, ViewChild, EventEmitter, Output } from '@angular/core';
 import { TaskCard } from 'src/shared/models/task-card.model';
 import { CardStatus } from 'src/shared/models/card-status.enum';
 import { TaskStatus } from 'src/shared/models/task-status.enum';
@@ -11,31 +11,54 @@ import { TaskStatus } from 'src/shared/models/task-status.enum';
 
 export class TaskCardComponent implements OnInit {
   @Input() card: TaskCard;
+  @Output() editorOpened: EventEmitter<any> = new EventEmitter();
+  @Output() editorClosed: EventEmitter<any> = new EventEmitter();
+  @ViewChild('cardInput') cardInput: ElementRef;
 
   constructor() { }
 
   ngOnInit() {
+    if(this.card.isEditing){
+      this.focusOnEditor();
+    }
   }
 
-  isHidden(): boolean {
+  private openEditor(){
+    this.editorOpened.emit();
+    this.card.isEditing = true;
+    this.focusOnEditor();
+  }
+
+  private closeEditor(){
+    this.card.isEditing = false;
+    this.editorClosed.emit();
+  }
+
+  private blurEditor(){
+    setTimeout(() => this.cardInput.nativeElement.blur());
+  }
+
+  private focusOnEditor(){
+    setTimeout(() => this.cardInput.nativeElement.focus());
+  }
+
+  private isHidden(): boolean {
     return this.card.cardStatus === CardStatus.hidden;
   }
   
-  isHot(): boolean {
+  private isHot(): boolean {
     return this.card.cardStatus === CardStatus.hot;
   }
   
-  isImportant(): boolean {
+  private isImportant(): boolean {
     return this.card.cardStatus === CardStatus.important;
   }
 
-  isCompleted(): boolean {
+  private isCompleted(): boolean {
     return this.card.cardStatus === CardStatus.completed;
   }
 
-  isDeleted(): boolean {
+  private isDeleted(): boolean {
     return this.card.cardStatus === CardStatus.deleted;
   }
-
-
 }
