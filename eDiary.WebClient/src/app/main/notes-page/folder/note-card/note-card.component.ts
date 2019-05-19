@@ -1,5 +1,4 @@
 import { Component, OnInit, Input } from '@angular/core';
-import { CardStatus } from 'src/shared/models/card-status.enum';
 import { NoteCard } from 'src/shared/models/note-card.model';
 
 @Component({
@@ -16,14 +15,14 @@ export class NoteCardComponent implements OnInit {
   }
 
   isDefault(): boolean {
-    return this.card.cardStatus === CardStatus.hidden;
+    return this.card.cardStatus === "Hidden";
   }
   
   isImportant(): boolean {
-    return this.card.cardStatus === CardStatus.important;
+    return this.card.cardStatus === "Important";
   }
   
   isDeleted(): boolean {
-    return this.card.cardStatus === CardStatus.deleted;
+    return this.card.cardStatus === "Deleted";
   }
 }

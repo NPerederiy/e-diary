@@ -1,7 +1,6 @@
 import { Injectable } from "@angular/core";
 import { HttpClient } from "@angular/common/http";
 import { NoteCard } from "src/shared/models/note-card.model";
-import { CardStatus } from "src/shared/models/card-status.enum";
 import { NoteFolderService } from "./note-folder.service";
 
 @Injectable()
@@ -32,7 +31,7 @@ export class NoteService{
     }
 
     public toggleImportant(note: NoteCard){
-        note.cardStatus = note.cardStatus === CardStatus.hidden ? CardStatus.important : CardStatus.hidden;
+        note.cardStatus = note.cardStatus === "Hidden" ? "Important" : "Hidden";
         this.setLastEditTime(note);
         this.updateNote(note);
     }

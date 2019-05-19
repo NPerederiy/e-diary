@@ -1,14 +1,11 @@
-import { TaskStatus } from "./task-status.enum";
-import { CardStatus } from "./card-status.enum";
-
 export class TaskCard{
     taskId: number;
 
     header: string;
     descr: string;
 
-    taskStatus: TaskStatus;
-    cardStatus: CardStatus;
+    taskStatus: string;
+    cardStatus: string;
 
     createdAt: string;
     updatedAt: string;
@@ -30,8 +27,8 @@ export class TaskCard{
         header: string, 
         taskId?: number, 
         descr?: string, 
-        taskStatus?: TaskStatus, 
-        cardStatus?: CardStatus,
+        taskStatus?: string, 
+        cardStatus?: string,
         createdAt?: string,
         updatedAt?: string,
         deadline?: string,
@@ -45,12 +42,12 @@ export class TaskCard{
         tags?: any[]
         ){
         this.taskId = taskId || 0;
-        
+
         this.header = header;
         this.descr = descr || "";
 
-        this.taskStatus = taskStatus || TaskStatus.toDo;
-        this.cardStatus = cardStatus || CardStatus.hidden;
+        this.taskStatus = taskStatus || "To do";
+        this.cardStatus = cardStatus || "Hidden";
 
         this.createdAt = createdAt;
         this.updatedAt = updatedAt;

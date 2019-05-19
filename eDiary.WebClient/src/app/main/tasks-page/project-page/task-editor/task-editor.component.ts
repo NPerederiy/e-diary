@@ -1,8 +1,6 @@
 import { Component, OnInit, Input, EventEmitter, Output } from '@angular/core';
 import { TaskCard } from 'src/shared/models/task-card.model';
 import { TaskService } from 'src/app/services/task.service';
-import { TaskStatus } from 'src/shared/models/task-status.enum';
-import { CardStatus } from 'src/shared/models/card-status.enum';
 
 @Component({
   selector: 'task-editor',
@@ -27,8 +25,8 @@ export class TaskEditorComponent implements OnInit {
   };
 
   private completeTask(){
-    this.task.taskStatus = TaskStatus.done;
-    this.task.cardStatus = CardStatus.completed;
+    this.task.taskStatus = "Done";
+    this.task.cardStatus = "Completed";
     console.log(this.task);
     this.saveChanges();    
     this.closeEditor();
@@ -37,14 +35,14 @@ export class TaskEditorComponent implements OnInit {
   private archiveTask(){
     // TODO: throw confirmation request
     // TODO: implement card archivation
-    this.task.cardStatus = CardStatus.deleted; // CardStatus.archived
+    this.task.cardStatus = "Deleted"; // CardStatus.archived
     this.taskService.archiveTask(this.task.taskId);
     this.closeEditor();
   }
 
   private removeTask(){
     // TODO: throw confirmation request
-    this.task.cardStatus = CardStatus.deleted;
+    this.task.cardStatus = "Deleted";
     this.taskService.removeTask(this.task.taskId);
     this.closeEditor();
   }
@@ -54,6 +52,6 @@ export class TaskEditorComponent implements OnInit {
   }
 
   private isCompleted(){
-    return this.task.taskStatus === TaskStatus.done;
+    return this.task.taskStatus === "Done";
   }
 }

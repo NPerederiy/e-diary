@@ -3,7 +3,6 @@ import { MenuButtonType } from 'src/shared/models/menu-button-type.enum';
 import { MenuButton } from 'src/shared/models/menu-button.model';
 import { Folder } from 'src/shared/models/note-folder.model';
 import { NoteCard } from 'src/shared/models/note-card.model';
-import { CardStatus } from 'src/shared/models/card-status.enum';
 import { UserProfileService } from 'src/app/services/user-profile.service';
 import { UserSettingsService } from 'src/app/services/user-settings.service';
 import { UserProfile } from 'src/shared/models/user-profile.model';
@@ -60,6 +59,4 @@ export class NotesPageComponent implements OnInit {
     this.currentFolder.subfolders.push(new Folder());
     this.currentFolder.subfolders.push(new Folder());
   }
-  
-
 }

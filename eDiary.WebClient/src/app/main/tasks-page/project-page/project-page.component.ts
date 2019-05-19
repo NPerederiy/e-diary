@@ -1,7 +1,5 @@
 import { Component, OnInit, Input } from '@angular/core';
 import { TaskCard } from 'src/shared/models/task-card.model';
-import { TaskStatus } from 'src/shared/models/task-status.enum';
-import { CardStatus } from 'src/shared/models/card-status.enum';
 import { TaskSection } from 'src/shared/models/task-list.model';
 import { MenuButton } from 'src/shared/models/menu-button.model';
 import { MenuButtonType } from 'src/shared/models/menu-button-type.enum';

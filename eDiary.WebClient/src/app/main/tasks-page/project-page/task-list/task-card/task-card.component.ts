@@ -1,7 +1,5 @@
 import { Component, OnInit, Input, ElementRef, ViewChild, EventEmitter, Output } from '@angular/core';
 import { TaskCard } from 'src/shared/models/task-card.model';
-import { CardStatus } from 'src/shared/models/card-status.enum';
-import { TaskStatus } from 'src/shared/models/task-status.enum';
 
 @Component({
   selector: 'task-card',
@@ -43,22 +41,22 @@ export class TaskCardComponent implements OnInit {
   }
 
   private isHidden(): boolean {
-    return this.card.cardStatus === CardStatus.hidden;
+    return this.card.cardStatus === "Hidden";
   }
   
   private isHot(): boolean {
-    return this.card.cardStatus === CardStatus.hot;
+    return this.card.cardStatus === "Hot";
   }
   
   private isImportant(): boolean {
-    return this.card.cardStatus === CardStatus.important;
+    return this.card.cardStatus === "Important";
   }
 
   private isCompleted(): boolean {
-    return this.card.cardStatus === CardStatus.completed;
+    return this.card.cardStatus === "Completed";
   }
 
   private isDeleted(): boolean {
-    return this.card.cardStatus === CardStatus.deleted;
+    return this.card.cardStatus === "Deleted";
   }
 }
