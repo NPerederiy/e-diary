@@ -1,0 +1,120 @@
+@import "src/shared/styles/global-variables.scss";
+
+#container{
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    background-color: $notification-backdrop-color;
+}
+
+.editor{
+    background-color: $light-color;
+    height: 80vh;
+    min-width: 700px;
+    max-width: 700px;
+
+    display: grid;
+    grid-template-rows: 70px 1fr;
+    grid-template-columns: 1fr 240px;
+
+    .left-header{
+        grid-row: 1;
+        grid-column: 1;
+        display: flex;
+        padding: 12px;
+
+        .button{
+            background-color: $light-color;
+            color: $regular-color;
+            padding: 0 12px;
+            font-size: 20px;
+        }
+
+        .button.complete:hover{
+            background-color: rgba(61, 204, 61, 0.3);
+        }
+
+        .button.archive:hover{
+            background-color: $button-focused-color2;
+        }
+    }
+
+    .right-header{
+        grid-row: 1;
+        grid-column: 2;
+        display: flex;
+        justify-content: flex-end;
+        align-items: stretch;
+
+        .button{
+            background-color: unset;
+            color: $regular-color;
+        }
+
+        .button:hover{
+            background-color: rgba(0, 0, 0, 0.05);
+        }
+    }
+    
+    .left-header,
+    .right-header{
+        background-color: rgba(0, 0, 0, 0.05);
+    }
+    
+    .left-column{
+        grid-row: 2;
+        grid-column: 1;
+        padding: 10px 12px;
+        display: flex;
+        flex-direction: column;
+
+        textarea{
+            padding: 0 2px 4px;
+            resize: none;
+            border-color: rgba(0, 0, 0, 0.1);
+            color: rgba($regular-color, 0.8);
+            overflow-wrap: break-word;
+        }
+
+        textarea:hover{
+            border-color: $button-menu-focused-color;
+        }
+
+        .task-header{
+            font-family: $regular-font;
+            font-size: 14pt;
+            min-height: 3rem;
+        }
+
+        .task-descr{
+            margin: 8px 0;
+            min-height: 6rem;
+        }
+    }
+
+    .right-column{
+        grid-row: 2;
+        grid-column: 2;
+        background-color: rgba(0, 0, 0, 0.02);
+    }
+
+    .button{
+        height: unset;
+        min-height: 40px;
+        min-width: 40px;
+    }
+}
+
+.editor.shadow{
+    box-shadow: rgba(0, 0, 0, 0.02) 0px 0px 0px 1px, 
+                rgba(0, 0, 0, 0.05) 0px 1px 2px 0px, 
+                rgba(0, 0, 0, 0.05) 0px 2px 8px 0px;
+}
+

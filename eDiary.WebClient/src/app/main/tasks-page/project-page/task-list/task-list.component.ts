@@ -2,6 +2,7 @@ import { Component, OnInit, Input, ViewChild, ElementRef, Output, EventEmitter }
 import { TaskCard } from 'src/shared/models/task-card.model';
 import { TaskSection } from 'src/shared/models/task-list.model';
 import { TaskService } from 'src/app/services/task.service';
+import { TaskEditorComponent } from '../task-editor/task-editor.component';
 
 @Component({
   selector: 'task-list',
@@ -11,11 +12,14 @@ import { TaskService } from 'src/app/services/task.service';
 
 export class TaskListComponent implements OnInit {
   @Input() section: TaskSection;
-  @Output() editorOpened: EventEmitter<any> = new EventEmitter();
-  @Output() editorClosed: EventEmitter<any> = new EventEmitter();
+  @Output() sectionEditing: EventEmitter<any> = new EventEmitter();
+  @Output() sectionEdited: EventEmitter<any> = new EventEmitter();
+  @Output() taskEditing: EventEmitter<TaskCard> = new EventEmitter();
   @ViewChild('headerInput') headerInput: ElementRef;
 
   private isNewTaskCardCreating = false;
+
+  public editor: TaskEditorComponent;
 
   scrollbarOptions = { 
     axis: 'y', 
@@ -39,23 +43,25 @@ export class TaskListComponent implements OnInit {
   /* ------ Section ------ */
 
   public openSectionEditor(){
-    this.editorOpened.emit();
+    this.sectionEditing.emit();
     this.section.isEditing = true;
     this.focusOnEditor();
   }
 
   public closeSectionEditor(){
     this.section.isEditing = false;
-    this.editorClosed.emit();
+    this.sectionEdited.emit();
   }
 
   /* ------ Task card ------ */
 
+  public openTaskEditor(task: TaskCard){
+    this.taskEditing.emit(task);
+  }
+
   private addTask(){
     let t = new TaskCard("");
-    t.isEditing = true;
-    console.log(this.section);
-    
+    t.isEditing = true; 
     this.section.cards.push(t);
     this.isNewTaskCardCreating = true;
   }
@@ -65,7 +71,7 @@ export class TaskListComponent implements OnInit {
   }
 
   private removeTask(card: TaskCard){
-    this.taskService.removeTask(card.id);
+    this.taskService.removeTask(card.taskId);
   }
 
   private saveTaskChanges(card: TaskCard){
@@ -77,7 +83,7 @@ export class TaskListComponent implements OnInit {
           .then((id: number) => {
             console.log('task id: ',id);
             
-            card.id = id;
+            card.taskId = id;
           })
       } else {
         this.section.cards.pop();

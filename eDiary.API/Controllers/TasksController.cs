@@ -53,16 +53,31 @@ namespace eDiary.API.Controllers
         }
         
         [HttpPut]
-        public async Task UpdateTaskAsync(TaskCard task)
+        public async Task UpdateTaskAsync(UpdateTaskData task)
         {
-            Validate(task);
+            Services.Validation.Validate.NotNull(task);
+            Services.Validation.Validate.NotNull(task.TaskId, "Task id");
+            Services.Validation.Validate.NotNull(task.Header, "Task header");
+            Services.Validation.Validate.NotNull(task.TaskStatus, "Task status");
+            Services.Validation.Validate.NotNull(task.CardStatus, "Task card status");
             await ts.UpdateTaskAsync(task);
         }
-        
+
+        //[HttpPut]
+        //public async Task UpdateTaskAsync(UpdateTaskData task)
+        //{
+        //    Services.Validation.Validate.NotNull(task);
+        //    Services.Validation.Validate.NotNull(task.Id, "Task id");
+        //    Services.Validation.Validate.NotNull(task.Header, "Task header");
+        //    Services.Validation.Validate.NotNull(task.TaskStatus, "Task status");
+        //    Services.Validation.Validate.NotNull(task.CardStatus, "Task card status");
+        //    await ts.UpdateTaskAsync(task);
+        //}
+
         [HttpDelete]
         public async Task DeleteTaskByIdAsync(int? id)
         {
-            Validate(id);
+            Services.Validation.Validate.NotNull(id);
             await ts.DeleteTaskAsync((int)id);
         }
     }

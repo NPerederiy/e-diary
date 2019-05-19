@@ -8,6 +8,7 @@ import { MenuButtonType } from 'src/shared/models/menu-button-type.enum';
 import { ProjectCard } from 'src/shared/models/project-card.model';
 import { TaskSectionService } from 'src/app/services/task-section.service';
 import { TaskListComponent } from './task-list/task-list.component';
+import { NotificationService } from 'src/app/services/notification.service';
 
 @Component({
   selector: 'project-page',
@@ -22,6 +23,7 @@ export class ProjectPageComponent implements OnInit {
   sidebarButtons: MenuButton[] = [];
 
   private isNewSectionCreating = false;
+  private editingTask: TaskCard = null;
   private oldSectionName: string;
 
   scrollbarOptions = { 
@@ -32,7 +34,8 @@ export class ProjectPageComponent implements OnInit {
   };
 
   constructor(
-    private sectionService: TaskSectionService
+    private sectionService: TaskSectionService,
+    private notificationService: NotificationService
     ) {
     this.sidebarButtons.push(new MenuButton(MenuButtonType.RecentActions));
     this.sidebarButtons.push(new MenuButton(MenuButtonType.Search));
@@ -52,23 +55,23 @@ export class ProjectPageComponent implements OnInit {
 
   /* ---------- Section ---------- */
 
-  addSection(){    
+  public addSection(){    
     let s = new TaskSection("");
     s.isEditing = true;
     this.sections.push(s);
     this.isNewSectionCreating = true;    
   }
 
-  editSection(component: TaskListComponent){
+  public editSection(component: TaskListComponent){
     this.oldSectionName = component.section.name;
     component.openSectionEditor();
   }
 
-  removeSection(section: TaskSection){
+  public removeSection(section: TaskSection){
     this.sectionService.removeSection(section.sectionId);
   }
 
-  saveSectionChanges(section: TaskSection){
+  private saveSectionChanges(section: TaskSection){
     if(this.isNewSectionCreating){
       if(section.name){
         this.sectionService.addSection(section.name, this.project.projectId)
@@ -91,5 +94,17 @@ export class ProjectPageComponent implements OnInit {
         this.oldSectionName = null;
       }
     }
+  }
+
+  /* ---------- Task ---------- */
+
+  public openTaskEditor(e: TaskCard){
+    this.notificationService.blurBackgroundElements(['main-menu', 'project-page']);
+    this.editingTask = e;
+  }
+
+  public closeTaskEditor(){
+    this.notificationService.unblurBackgroundElements(['main-menu', 'project-page']);
+    this.editingTask = null;
   }
 }

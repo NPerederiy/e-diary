@@ -124,4 +124,8 @@
         // text-align: center;
     }
 
+    div.blurred{
+        filter: $notification-backdrop-blur;
+        -webkit-filter: $notification-backdrop-blur;
+    }
 }

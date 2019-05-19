@@ -110,6 +110,7 @@ namespace eDiary.API.Models.BusinessObjects
         private int CalcTotalTaskCount()
         {
             return CompletedTaskCount + ImportantTaskCount + HotTaskCount + OverdueTaskCount;
+            //return Tasks.Count;
         }
 
     }

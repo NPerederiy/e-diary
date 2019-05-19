@@ -51,6 +51,8 @@ import { ProjectCategoryService } from './services/project-category.service';
 import { ProjectService } from './services/project.service';
 import { TaskSectionService } from './services/task-section.service';
 import { TaskService } from './services/task.service';
+import { TaskEditorComponent } from './main/tasks-page/project-page/task-editor/task-editor.component';
+import { NotificationService } from './services/notification.service';
 
 @NgModule({
   declarations: [
@@ -66,6 +68,7 @@ import { TaskService } from './services/task.service';
     TasksPageComponent,
     TaskListComponent,
     TaskCardComponent,
+    TaskEditorComponent,
     SidebarComponent,
     SidebarButtonComponent,
     PathLineComponent,
@@ -115,7 +118,8 @@ import { TaskService } from './services/task.service';
     ProjectService,
     ProjectCategoryService,
     TaskService,
-    TaskSectionService
+    TaskSectionService,
+    NotificationService
   ],
   bootstrap: [AppComponent]
 })

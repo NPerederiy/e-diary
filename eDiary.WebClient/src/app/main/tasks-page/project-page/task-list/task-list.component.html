@@ -18,18 +18,19 @@
       >
     </div>
   </div>
-  <div 
-    *ngIf="!section.isEditing || section.cards" 
-    class="scrollable vertical" 
-    malihu-scrollbar 
-    [scrollbarOptions]="scrollbarOptions"
-  >
+    <div 
+      *ngIf="!section.isEditing || section.cards" 
+      class="scrollable vertical" 
+      malihu-scrollbar 
+      [scrollbarOptions]="scrollbarOptions"
+    >
     <task-card 
-      class="card" 
-      *ngFor="let c of section.cards" 
-      [card]="c" 
-      (contextmenu)="showContextMenu()"
-      (editorClosed)="saveTaskChanges(c)"
+    class="card" 
+    *ngFor="let c of section.cards" 
+    [card]="c" 
+    (click)="openTaskEditor(c)"
+    (taskCreated)="saveTaskChanges(c)"
+    (contextmenu)="showContextMenu()"
     ></task-card>
     <div *ngIf="!isNewTaskCardCreating" class="button shadow" (click)="addTask()">
       +

@@ -55,7 +55,6 @@ namespace eDiary.API.Services.Tasks
         public async Task<int> CreateTaskAsync(string header, int sectionId)
         {
             var time = DateTime.Now;
-            //Validate.NotNull(card, "Task card");
             var t = new Entities.Task
             {
                 Header = header,
@@ -74,17 +73,17 @@ namespace eDiary.API.Services.Tasks
             return t.Id;
         }
         
-        public async Task UpdateTaskAsync(TaskCard card)
+        public async Task UpdateTaskAsync(UpdateTaskData card)
         {
-            Validate.NotNull(card, "Task card");
-            var task = await TryFindTask(card.TaskId);
+            var task = await TryFindTask((int)card.TaskId);
+            var time = DateTime.Now;
 
             task.Header = card.Header;
             task.Description = card.Description;
             task.Status = (await uow.StatusRepository.GetByConditionAsync(x => x.Name == card.CardStatus)).FirstOrDefault();
             task.CardStatus = (await uow.CardStatusRepository.GetByConditionAsync(x => x.Name == card.CardStatus)).FirstOrDefault();
             task.CreatedAt = DateTime.Parse(card.CreatedAt);
-            task.UpdatedAt = DateTime.Parse(card.UpdatedAt);
+            task.UpdatedAt = time;
             if(card.Deadline == null)
             {
                 task.Deadline = null;

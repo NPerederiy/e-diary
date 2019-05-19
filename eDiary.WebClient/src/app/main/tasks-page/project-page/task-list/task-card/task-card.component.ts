@@ -11,8 +11,8 @@ import { TaskStatus } from 'src/shared/models/task-status.enum';
 
 export class TaskCardComponent implements OnInit {
   @Input() card: TaskCard;
-  @Output() editorOpened: EventEmitter<any> = new EventEmitter();
-  @Output() editorClosed: EventEmitter<any> = new EventEmitter();
+  @Output() taskCreating: EventEmitter<any> = new EventEmitter();
+  @Output() taskCreated: EventEmitter<any> = new EventEmitter();
   @ViewChild('cardInput') cardInput: ElementRef;
 
   constructor() { }
@@ -24,14 +24,14 @@ export class TaskCardComponent implements OnInit {
   }
 
   private openEditor(){
-    this.editorOpened.emit();
+    this.taskCreating.emit();
     this.card.isEditing = true;
     this.focusOnEditor();
   }
 
   private closeEditor(){
     this.card.isEditing = false;
-    this.editorClosed.emit();
+    this.taskCreated.emit();
   }
 
   private blurEditor(){

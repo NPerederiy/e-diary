@@ -1,10 +1,11 @@
-<div id="container">
+<div id="project-page">
   <div style="max-width: calc(100vw - 170px);" malihu-scrollbar [scrollbarOptions]="scrollbarOptions">
     <div class="content">
       <task-list 
         *ngFor="let s of sections" 
         [section]="s"
-        (editorClosed)="saveSectionChanges(s)"
+        (taskEditing)="openTaskEditor($event)"
+        (sectionEdited)="saveSectionChanges(s)"
         ></task-list>  
       <div class="headline">
         <div class="button add" (click)="addSection()">+ {{ 'buttons.addColumn' | translate }}</div>
@@ -13,3 +14,8 @@
   </div>
   <sidebar [buttons]="sidebarButtons"></sidebar>
 </div>
+<task-editor 
+  *ngIf="editingTask" 
+  [task]="editingTask"
+  (taskEdited)="closeTaskEditor()"
+></task-editor>

@@ -11,6 +11,8 @@ $button-focused-color: #D96E1A;
 $box-shadow-color: rgba(0,0,0,0.5);
 $button-menu-focused-color: #FFC000;
 $button-menu-regular-color: rgba(83, 83, 83, 0.5);
+$button-focused-color2: rgb(255, 225, 100);
+$notification-backdrop-color: rgba(0, 0, 0, 0.3);
 
 /* --- card colors --- */
 
@@ -33,4 +35,6 @@ $bold-font: HP-Simplified, Latin-Greek-Cyrillic-Regular, $default-font;
 $warning-font: $regular-font;
 $placeholder-font: $light-font;
 
-/* ------------- */
+/* --- effects --- */
+
+$notification-backdrop-blur: blur(4px);
