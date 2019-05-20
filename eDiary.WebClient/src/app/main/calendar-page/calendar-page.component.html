@@ -1,6 +1,6 @@
 <div id="container">
   <calendar-month *ngIf="currentViewType === 1; else week"></calendar-month>
-  <calendar-week *ngIf="currentViewType === 2; else day" #week></calendar-week>
-  <calendar-day *ngIf="currentViewType === 3" #day></calendar-day>
+  <ng-template #week><calendar-week *ngIf="currentViewType === 2; else day" ></calendar-week></ng-template>
+  <ng-template #day><calendar-day *ngIf="currentViewType === 3"></calendar-day></ng-template>
   <sidebar [buttons]="sidebarButtons"></sidebar>
 </div>

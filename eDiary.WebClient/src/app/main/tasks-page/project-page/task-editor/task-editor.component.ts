@@ -20,6 +20,10 @@ export class TaskEditorComponent implements OnInit {
     console.log(this.task);
   }
 
+  public isCompleted(){
+    return this.task.taskStatus === "Done";
+  }
+  
   public closeEditor(){
     this.taskEdited.emit();
   };
@@ -49,9 +53,5 @@ export class TaskEditorComponent implements OnInit {
 
   private saveChanges(){
     this.taskService.updateTask(this.task);
-  }
-
-  private isCompleted(){
-    return this.task.taskStatus === "Done";
   }
 }

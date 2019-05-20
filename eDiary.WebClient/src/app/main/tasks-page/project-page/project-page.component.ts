@@ -20,8 +20,8 @@ export class ProjectPageComponent implements OnInit {
   sections: TaskSection[] = []; 
   sidebarButtons: MenuButton[] = [];
 
+  public editingTask: TaskCard = null;
   private isNewSectionCreating = false;
-  private editingTask: TaskCard = null;
   private oldSectionName: string;
 
   scrollbarOptions = { 

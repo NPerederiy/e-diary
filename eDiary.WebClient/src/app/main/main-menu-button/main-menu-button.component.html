@@ -3,17 +3,23 @@
     <div class="icon home"></div>
     <div class="text"></div>
   </div>
-  <div *ngIf="isTasks(); else notes" class="content" #tasks>
+  <ng-template #tasks>
+    <div *ngIf="isTasks(); else notes" class="content">
       <div class="icon tasks"></div>
       <div class="text">{{ 'module.tasks' | translate }}</div>
-  </div>
-  <div *ngIf="isNotes(); else calendar" class="content" #notes>
+    </div>
+  </ng-template>
+  <ng-template #notes>
+    <div *ngIf="isNotes(); else calendar" class="content">
       <div class="icon notes"></div>
       <div class="text">{{ 'module.notes' | translate }}</div>
-  </div>
-  <div *ngIf="isCalendar()" class="content" #calendar>
+    </div>
+  </ng-template>
+  <ng-template #calendar>
+    <div *ngIf="isCalendar()" class="content">
       <div class="icon calendar"></div>
       <div class="text">{{ 'module.calendar' | translate }}</div>
-  </div>
+    </div>
+  </ng-template>
   <div class="sidebar"></div>
 </div>

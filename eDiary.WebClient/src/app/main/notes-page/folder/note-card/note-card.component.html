@@ -4,24 +4,28 @@
     <!-- <div class="button menu">&#x2630;</div> -->
     <div class="button plus">+</div>
   </div>
-  <div *ngIf="isImportant(); else deleted" class="status-line important" #important>
-    <div class="flex-start">
-      <div class="icon important"></div>
-      <div class="status" >
-        {{ 'cardStatus.important' | translate }}
+  <ng-template #important>
+    <div *ngIf="isImportant(); else deleted" class="status-line important">
+      <div class="flex-start">
+        <div class="icon important"></div>
+        <div class="status" >
+          {{ 'cardStatus.important' | translate }}
+        </div>
+      </div>
+      <!-- <div class="button menu">&#x2630;</div> -->
+      <div class="button plus">+</div>
+    </div>
+  </ng-template>
+  <ng-template #deleted>
+    <div *ngIf="isDeleted()" class="status-line deleted">
+      <div class="flex-start">
+        <div class="icon deleted"></div>
+        <div class="status" >
+          {{ 'cardStatus.deleted' | translate }}
+        </div>
       </div>
     </div>
-    <!-- <div class="button menu">&#x2630;</div> -->
-    <div class="button plus">+</div>
-  </div>
-  <div *ngIf="isDeleted()" class="status-line deleted" #deleted>
-    <div class="flex-start">
-      <div class="icon deleted"></div>
-      <div class="status" >
-        {{ 'cardStatus.deleted' | translate }}
-      </div>
-    </div>
-  </div>
+  </ng-template>
   <div class="note-info">
     <div class="header fade-1">
       {{ card.header }}

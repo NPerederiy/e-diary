@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewChild } from '@angular/core';
 import { Router } from '@angular/router';
 import * as SHA from 'js-sha512';
 import { FormGroup, FormBuilder, FormControl, Validators, AbstractControl } from '@angular/forms';
@@ -58,6 +58,10 @@ export class RegisterComponent implements OnInit {
 
   public get passwords() {
     return this.form.controls.passwords;
+  }
+
+  public isPasswordType(e: HTMLInputElement){
+    return e.type === 'password';
   }
 
   ngOnInit() {
