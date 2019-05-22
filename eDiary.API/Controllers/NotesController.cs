@@ -13,7 +13,7 @@ namespace eDiary.API.Controllers
     [JwtAuthentication]
     [ConsoleLogger]
     [ExceptionFilter]
-    [EnableCors(origins: "http://localhost:4200", headers: "*", methods: "*")]
+    [EnableCors(origins: "*", headers: "*", methods: "*")]
     public class NotesController : ApiController
     {
         private readonly INoteService ns;

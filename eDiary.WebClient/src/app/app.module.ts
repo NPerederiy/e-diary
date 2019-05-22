@@ -54,6 +54,8 @@ import { TaskService } from './services/task.service';
 import { TaskEditorComponent } from './main/tasks-page/project-page/task-editor/task-editor.component';
 import { NotificationService } from './services/notification.service';
 
+import { CommonModule, APP_BASE_HREF, LocationStrategy, HashLocationStrategy} from '@angular/common';
+
 @NgModule({
   declarations: [
     AppComponent,
@@ -95,7 +97,7 @@ import { NotificationService } from './services/notification.service';
     TranslateModule.forRoot({
       loader: {
         provide: TranslateLoader,
-        useFactory: HttpLoaderFactory,
+        useFactory: HttpLoaderFactory,      
         deps: [HttpClient]
       }
     }),
@@ -103,6 +105,14 @@ import { NotificationService } from './services/notification.service';
     ChartsModule
   ],
   providers: [
+    { 
+      provide: APP_BASE_HREF, 
+      useValue: '/' 
+    },
+    { 
+      provide: LocationStrategy, 
+      useClass: HashLocationStrategy 
+    },
     {
       provide: HTTP_INTERCEPTORS,
       useClass: AppendAuthHeader,
@@ -128,5 +138,5 @@ export class AppModule { }
 
 // The HttpLoaderFactory is required for AOT (ahead of time) compilation in the project
 export function HttpLoaderFactory(http: HttpClient) {
-  return new TranslateHttpLoader(http);
+  return new TranslateHttpLoader(http, './assets/i18n/', '.json');
 }

@@ -279,12 +279,6 @@
     </BootstrapperPackage>
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\eDiary\eDiary.csproj">
-      <Project>{0AE8A81F-76C6-4418-9A3F-70A2EBE7FF86}</Project>
-      <Name>eDiary</Name>
-    </ProjectReference>
-  </ItemGroup>
-  <ItemGroup>
     <Service Include="{508349B6-6B84-4DF5-91F0-309BEEBAD82D}" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

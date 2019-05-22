@@ -13,7 +13,7 @@ namespace eDiary.API.Controllers
     [Route("UserProfiles")]
     [ConsoleLogger]
     [ExceptionFilter]
-    [EnableCors(origins: "http://localhost:4200", headers: "*", methods: "*")]
+    [EnableCors(origins: "*", headers: "*", methods: "*")]
     public class UserProfilesController : ApiController
     {
         private readonly IUserService ups;

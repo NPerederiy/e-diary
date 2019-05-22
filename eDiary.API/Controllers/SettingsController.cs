@@ -14,7 +14,7 @@ namespace eDiary.API.Controllers
     [ConsoleLogger]
     [ExceptionFilter]
     [JwtAuthentication]
-    [EnableCors(origins: "http://localhost:4200", headers: "*", methods: "*")]
+    [EnableCors(origins: "*", headers: "*", methods: "*")]
     public class SettingsController : ApiController
     {
         private readonly ISettingsService ss;
