@@ -1,5 +1,7 @@
 export enum MenuButtonType{
     /* --- main menu --- */
+    
+    Logout = 0,
     Home = 1,
     Tasks = 2,
     Notes = 3,

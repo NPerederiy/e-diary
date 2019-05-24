@@ -1,7 +1,7 @@
 <div id="container" [ngClass]="{ 'active': btn.isActive === true }">
   <div *ngIf="isHome(); else tasks" class="content">
     <div class="icon home"></div>
-    <div class="text"></div>
+    <div class="text">{{ 'module.home' | translate }}</div>
   </div>
   <ng-template #tasks>
     <div *ngIf="isTasks(); else notes" class="content">
@@ -16,9 +16,15 @@
     </div>
   </ng-template>
   <ng-template #calendar>
-    <div *ngIf="isCalendar()" class="content">
+    <div *ngIf="isCalendar(); else logout" class="content">
       <div class="icon calendar"></div>
       <div class="text">{{ 'module.calendar' | translate }}</div>
+    </div>
+  </ng-template>
+  <ng-template #logout>
+    <div *ngIf="isLogout()" class="content">
+      <div class="icon logout"></div>
+      <div class="text">{{ 'auth.logoutBtnText' | translate }}</div>
     </div>
   </ng-template>
   <div class="sidebar"></div>

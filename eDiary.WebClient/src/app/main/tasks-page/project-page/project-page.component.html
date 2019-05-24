@@ -1,5 +1,5 @@
 <div id="project-page">
-  <div style="max-width: calc(100vw - 170px);" malihu-scrollbar [scrollbarOptions]="scrollbarOptions">
+  <div style="max-width: calc(100vw - 110px);" malihu-scrollbar [scrollbarOptions]="scrollbarOptions">
     <div class="content">
       <task-list 
         *ngFor="let s of sections" 
@@ -12,7 +12,7 @@
       </div>
     </div>
   </div>
-  <sidebar [buttons]="sidebarButtons"></sidebar>
+  <!-- <sidebar [buttons]="sidebarButtons"></sisdebar> -->
 </div>
 <task-editor 
   *ngIf="editingTask" 

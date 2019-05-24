@@ -5,7 +5,8 @@
     },
     "auth":{
         "insertPass": "Введіть свій пароль",
-        "loginBtnText": "Увійти"
+        "loginBtnText": "Увійти",
+        "logoutBtnText": "Вийти"
     },
     "reg":{
         "formHeader": "Додавання нового користувача",
@@ -20,6 +21,7 @@
         "incorrectPassword": "Невірний пароль"
     },
     "module": {
+        "home": "Головна",
         "tasks": "Задачі",
         "notes": "Нотатки",
         "calendar": "Календар"
@@ -73,7 +75,7 @@
         }
     },
     "directories":{
-        "root": "Головна"
+        "root": "Корінь"
     },
     "month":{
         "Jan": "СІЧ",

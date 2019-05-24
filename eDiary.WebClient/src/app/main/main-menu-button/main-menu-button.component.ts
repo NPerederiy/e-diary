@@ -33,4 +33,8 @@ export class MainMenuButtonComponent implements OnInit {
   isCalendar(): boolean {
     return this.btn.type === MenuButtonType.Calendar;
   }
+
+  isLogout(): boolean {
+    return this.btn.type === MenuButtonType.Logout;
+  }
 }

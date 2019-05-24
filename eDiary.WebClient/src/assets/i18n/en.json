@@ -5,7 +5,8 @@
     },
     "auth":{
         "insertPass": "Enter your password below",
-        "loginBtnText": "Log in"
+        "loginBtnText": "Log in",
+        "logoutBtnText": "Log out"
     },
     "reg":{
         "formHeader": "Register new user",  
@@ -20,6 +21,7 @@
         "incorrectPassword": "Incorrect password"
     },
     "module": {
+        "home": "Home",
         "tasks": "Tasks",
         "notes": "Notes",
         "calendar": "Calendar"

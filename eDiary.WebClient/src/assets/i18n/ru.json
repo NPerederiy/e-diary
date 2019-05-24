@@ -5,7 +5,8 @@
     },
     "auth":{
         "insertPass": "Введите свой пароль",
-        "loginBtnText": "Войти"
+        "loginBtnText": "Войти",
+        "logoutBtnText": "Выйти"
     },
     "reg":{
         "formHeader": "Добавление нового пользователя",
@@ -20,6 +21,7 @@
         "incorrectPassword": "Неверный пароль"
     },
     "module": {
+        "home": "Главная",
         "tasks": "Задачи",
         "notes": "Заметки",
         "calendar": "Календарь"
@@ -73,7 +75,7 @@
         }
     },
     "directories":{
-        "root": "Главная"
+        "root": "Корень"
     },
     "month":{
         "Jan": "ЯНВ",

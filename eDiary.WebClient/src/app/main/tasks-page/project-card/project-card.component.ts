@@ -32,11 +32,11 @@ export class ProjectCardComponent implements OnInit {
   };
   
   private readonly colors: string[] = [
-    'rgba(231, 76, 60, 1)', // '#e74c3c', // red
-    'rgba(241, 196, 15, 1)', // '#f1c40f', // yellow
-    'rgba(46, 204, 113, 1)', // '#2ecc71', // green
-    'rgba(52, 152, 219, 1)', // '#3498db', // blue
-    'rgba(155, 89, 182, 1)', // '#9b59b6', // purple
+    '#ff5576', // 'rgba(231, 76, 60, 1)', // '#e74c3c', // red
+    '#f7da59', // 'rgba(241, 196, 15, 1)', // '#f1c40f', // yellow
+    '#6dc188', // 'rgba(46, 204, 113, 1)', // '#2ecc71', // green
+    '#71c2ff', // 'rgba(52, 152, 219, 1)', // '#3498db', // blue
+    '#ad80e7', // 'rgba(155, 89, 182, 1)', // '#9b59b6', // purple
     'rgba(230, 126, 34, 1)', // '#e67e22', // orange
     'rgba(26, 188, 156, 1)', // '#1abc9c', // green2
     'rgba(189, 189, 189, 0.8)', // Grey

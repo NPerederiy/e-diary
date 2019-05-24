@@ -1,7 +1,7 @@
 @import "src/shared/styles/global-variables.scss";
 
 #container{
-    background-color: $light-color;
+    background-color: $background-regular-color;//$light-color;
     background-image: url(../assets/images/backgrounds/background1.jpeg);
     background-size: cover;
 }

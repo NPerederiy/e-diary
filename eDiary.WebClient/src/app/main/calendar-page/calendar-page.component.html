@@ -2,5 +2,5 @@
   <calendar-month *ngIf="currentViewType === 1; else week"></calendar-month>
   <ng-template #week><calendar-week *ngIf="currentViewType === 2; else day" ></calendar-week></ng-template>
   <ng-template #day><calendar-day *ngIf="currentViewType === 3"></calendar-day></ng-template>
-  <sidebar [buttons]="sidebarButtons"></sidebar>
+  <!-- <sidebar [buttons]="sidebarButtons"></sidebar> -->
 </div>

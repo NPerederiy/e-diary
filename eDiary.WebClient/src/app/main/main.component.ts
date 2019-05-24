@@ -18,6 +18,7 @@ export class MainComponent implements OnInit {
   menuButtons: MenuButton[] = [];
   userProfile: UserProfile;
   userSettings: UserSettings;
+  logoutButton: MenuButton;
 
   constructor(
       private userProfileService: UserProfileService, 
@@ -28,10 +29,11 @@ export class MainComponent implements OnInit {
     ) {
     this.menuButtons.push(
       new MenuButton(MenuButtonType.Home, "", true),
-      // new MenuButton(MenuButtonType.Tasks, "Tasks"),
-      // new MenuButton(MenuButtonType.Notes, "Notes"),
+      new MenuButton(MenuButtonType.Tasks, "Tasks"),
+      new MenuButton(MenuButtonType.Notes, "Notes"),
       new MenuButton(MenuButtonType.Calendar, "Calendar"),
     )
+    this.logoutButton = new MenuButton(MenuButtonType.Logout, "Logout")
   }
 
   ngOnInit() {
@@ -42,14 +44,14 @@ export class MainComponent implements OnInit {
     if(sessionStorage["uprofile"]){
       this.userProfileService.updateUserProfile(JSON.parse(sessionStorage.getItem("uprofile")));
     } else {
-      this.accountService.logout();
+      this.logout();
     }}
     
     if(!this.userSettings.userId){ 
       if (sessionStorage["uprofile"]){
         this.userSettingsService.updateUserSettings(JSON.parse(sessionStorage.getItem("usettings")));
       } else {
-        this.accountService.logout();
+        this.logout();
       }
     }
   }
@@ -76,5 +78,9 @@ export class MainComponent implements OnInit {
       this.router.navigate(["calendar"], {relativeTo: this.route});
         break;
     }
+  }
+
+  public logout(){
+    this.accountService.logout();
   }
 }

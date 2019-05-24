@@ -2,6 +2,7 @@
     <div id="main-menu" class="main-menu">
         <main-menu-button *ngFor="let i of menuButtons" [btn]="i" (click)="openPage(i)"></main-menu-button>
         <div class="decor-line"></div>
+        <main-menu-button [btn]="logoutButton" (click)="logout()"></main-menu-button>
     </div>
     <div id="auxilary-router">
         <router-outlet></router-outlet> 

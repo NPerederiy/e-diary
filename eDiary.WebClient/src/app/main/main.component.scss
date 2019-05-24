@@ -12,14 +12,20 @@
 }
 
 .main-menu{
-    background-color: $regular-color;
-}
+    display: flex;
+    flex-direction: column;
+    background-color: $light-color;// $regular-color;
 
-.main-menu .decor-line{
-    float: right;
-    width: 6px;
-    height: 100%;
-    background-color: $button-menu-regular-color;
+    .decor-line{
+        flex-grow: 1;
+        align-self: flex-end;
+        width: 4px;
+        background-color: #454c55;//$button-menu-regular-color;
+    }
+
+    main-menu-button{
+        flex-grow: 0;
+    }
 }
 
 #auxilary-router{
