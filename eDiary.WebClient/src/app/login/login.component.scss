@@ -76,5 +76,47 @@
 
 #pass-form{
     text-align: center;
-    padding: 30px;
+    // padding: 30px;
+    // padding: 25px 16% 20px 16%;
+    padding: 30px 16% 15px 16%;
+}
+
+.fields{
+    display: grid;
+    grid-template-rows: 30px 18px;
+    margin-bottom: 10px;
+}
+
+.alert{
+    color: $warning-color;
+    font-family: $warning-font;
+    font-size: 14px;
+    bottom: 0;
+    text-align: start;
+}
+
+.button{
+    width: 100%;
+    border: 0;
+}
+
+.eye{
+    position: absolute;
+    margin: 4px;
+    // justify-self: end;
+    
+    margin-left: 208px;
+    
+    // position: relative;
+    // display: block;
+    // margin-top: -29px;
+
+    width: 20px;
+    height: 20px;
+    background-image: url(../../assets/images/icons/icon-eye-orange-30.png);
+    background-size: cover;
+}
+
+.eye:active{
+    background-image: url(../../assets/images/icons/icon-invisible-orange-30.png);
 }

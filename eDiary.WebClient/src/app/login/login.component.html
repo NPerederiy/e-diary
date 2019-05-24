@@ -5,18 +5,63 @@
       <div class="header">{{ 'app.name' | translate }}</div><br/>
       <div class="subheader">{{ 'app.tagline' | translate }}</div>
     </div>
-    <form (ngSubmit)="onSubmit()">
+    <form (ngSubmit)="onSubmit()" [formGroup]="form">
       <span *ngIf="!currentUser">
-        <user-profile class="user-profile" tabindex="0" autofocus=true *ngFor="let a of accounts" [profile]="a.profile" (keyup.enter)="chooseLogin(a)" (click)="chooseLogin(a)"></user-profile>
-        <div class="button add" tabindex="0" autofocus=true (keyup.enter)="redirectToRegistration()" (click)="redirectToRegistration()">{{ addButtonText }}</div>
+        <user-profile
+          class="user-profile" 
+          tabindex="0" 
+          autofocus=true 
+          *ngFor="let a of accounts" 
+          [profile]="a.profile" 
+          (keyup.enter)="chooseLogin(a)" 
+          (click)="chooseLogin(a)"
+        ></user-profile>
+        <div 
+          class="button add" 
+          tabindex="0" 
+          autofocus=true 
+          (keyup.enter)="redirectToRegistration()" 
+          (click)="redirectToRegistration()"
+        >
+          {{ addButtonText }}
+        </div>
       </span>
       <span *ngIf="currentUser">
         <div id="pass-form">
           <div class="plain-text">{{ 'auth.insertPass' | translate }}</div>
-          <input type="hidden" autocomplete="username" />
-          <input class="input" type="password" tabindex="1" autofocus=true autocomplete="current-password" (blur)="validateInput(password)" (keyup.enter)="login(password)" #password/>
+          <!-- <input type="hidden" autocomplete="username" /> -->
+          <div class="fields">
+            <div class="eye" (mousedown)="showPassword(p)" (mouseup)="hidePassword(p)" (mouseleave)="hidePassword(p)"></div>
+            <input 
+              formControlName="password"
+              class="input" 
+              type="password"
+              name="password" 
+              tabindex="0" 
+              autofocus=true 
+              autocomplete="current-password"
+              placeholder="{{ 'placeholders.userAccount.password' | translate }}"
+              (input)="hidePasswordAlert()"
+              [ngClass]="{ 'pass': isPasswordType(p), 'ng-invalid warning': getPasswordElement().touched && getPasswordElement().invalid }"
+              #p
+            />
+            <div *ngIf="isPasswAlertShown || getPasswordElement().touched && getPasswordElement().invalid">
+              <div *ngIf="getPasswordElement().invalid && getPasswordElement().errors.required" class="alert">{{ 'error.isRequired' | translate }}</div>
+              <div *ngIf="getPasswordElement().invalid && getPasswordElement().errors.minlength" class="alert">{{ 'error.minLength6' | translate }}</div>
+              <div *ngIf="isPasswAlertShown" class="alert">{{ 'error.incorrectPassword' | translate }}</div>
+            </div>
+          </div>
         </div>      
-        <div class="button" type="submit" tabindex="0" autofocus=true (keyup.enter)="login(password)" (click)="login(password)">{{ 'auth.loginBtnText' | translate }}</div>
+        <button 
+          class="button" 
+          type="submit" 
+          tabindex="0" 
+          autofocus=true 
+          (keyup.enter)="login(p)" 
+          (click)="login(p)"
+        >
+          {{ 'auth.loginBtnText' | translate }}
+        </button>
       </span>     
     </form>
   </div>

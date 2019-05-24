@@ -17,7 +17,7 @@
             tabindex="0" 
             autofocus=true 
             autocomplete="name" 
-            placeholder="{{ 'reg.fname' | translate }}"
+            placeholder="{{ 'placeholders.userAccount.fname' | translate }}"
             [ngClass]="{ 'ng-invalid warning': controls.fname.touched &&  controls.fname.invalid }"
           />
           <div *ngIf="controls.fname.touched && controls.fname.errors">
@@ -34,7 +34,7 @@
             tabindex="0" 
             autofocus=true 
             autocomplete="family-name" 
-            placeholder="{{ 'reg.lname' | translate }}"
+            placeholder="{{ 'placeholders.userAccount.lname' | translate }}"
             [ngClass]="{ 'ng-invalid warning': controls.lname.touched && controls.lname.invalid }"
           />
           <div *ngIf="controls.lname.touched && controls.lname.invalid">
@@ -52,7 +52,7 @@
             tabindex="0" 
             autofocus=true 
             autocomplete="new-password"
-            placeholder="{{ 'reg.password' | translate }}"
+            placeholder="{{ 'placeholders.userAccount.password' | translate }}"
             [ngClass]="{ 'pass': isPasswordType(p), 'ng-invalid warning': isPasswordTouched() && getPasswordElement().invalid }"
             #p
           />
@@ -70,7 +70,7 @@
             name="confirmPassword" 
             tabindex="0" 
             autofocus=true 
-            placeholder="{{ 'reg.passwordConfirm' | translate }}"
+            placeholder="{{ 'placeholders.userAccount.passwordConfirm' | translate }}"
             [ngClass]="{ 'pass': isPasswordType(cp),'ng-invalid warning': isConfirmPasswordTouched() && passwords.invalid }"
             #cp
           />
@@ -92,7 +92,7 @@
             tabindex="0" 
             autofocus=true 
             autocomplete="email" 
-            placeholder="{{ 'reg.email' | translate }}"
+            placeholder="{{ 'placeholders.userAccount.email' | translate }}"
             [ngClass]="{ 'ng-invalid warning': controls.email.touched && controls.email.invalid }"
           />
           <div *ngIf="controls.email.touched && controls.email.invalid">

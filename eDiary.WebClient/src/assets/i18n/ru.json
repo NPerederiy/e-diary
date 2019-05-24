@@ -9,19 +9,15 @@
     },
     "reg":{
         "formHeader": "Добавление нового пользователя",
-        "btnText": "Добавить",
-        "fname": "Имя",
-        "lname": "Фамилия",
-        "password": "Пароль",
-        "passwordConfirm": "Подтверждение пароля",
-        "email": "Эл. почта"        
+        "btnText": "Добавить"       
     },
     "error": {
         "isRequired": "Является обязательным полем",
         "lettersOnly": "Может содержать только буквы",
         "minLength6": "Минимум 6 символов в длину",
         "passwordsNotMatch": "Пароли не совпадают",
-        "emailNotValid": "Некорректная форма записи"
+        "emailNotValid": "Некорректная форма записи",
+        "incorrectPassword": "Неверный пароль"
     },
     "module": {
         "tasks": "Задачи",
@@ -56,6 +52,13 @@
         }        
     },
     "placeholders":{
+        "userAccount":{
+            "fname": "Имя",
+            "lname": "Фамилия",
+            "password": "Пароль",
+            "passwordConfirm": "Подтверждение пароля",
+            "email": "Эл. почта" 
+        },
         "taskPage":{
             "categoryName" : "Название категории",
             "projectName" : "Название проекта",

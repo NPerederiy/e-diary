@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpErrorResponse } from '@angular/common/http';
 import { AppUser } from 'src/shared/models/app-user.model';
 import * as SHA from 'js-sha512';
 import { UserProfile } from 'src/shared/models/user-profile.model';
@@ -33,7 +33,8 @@ export class AccountService {
         body.language = this.translate.currentLang;  
         return await this.http.post(`${this.serverURI}/api/Registration`, body).toPromise()
             .then(async (tokens: { access: string; refresh: string; }) => {
-                return await this.saveTokensAndProfile(tokens, new UserProfile(fname, lname, email, null));
+                let a = await this.saveTokensAndProfile(tokens, new UserProfile(fname, lname, email, null));
+                return a === 0;
             })
             .catch((error: any) => {
                 console.error(error);
@@ -41,7 +42,7 @@ export class AccountService {
             });
     }
 
-    public async login(user: AppUser, password: string): Promise<boolean>{
+    public async login(user: AppUser, password: string): Promise<number>{
         let body: any = {};
         body.username = user.username;
         body.password = this.encode(password);
@@ -49,9 +50,8 @@ export class AccountService {
             .then(async (tokens: { access: string; refresh: string; }) => {
                 return await this.saveTokensAndProfile(tokens, user.profile);
             })
-            .catch((error: any) => {
-                console.error(error);
-                return false;
+            .catch((error: HttpErrorResponse) => {
+                return error.status;
             });
     }
 
@@ -62,14 +62,14 @@ export class AccountService {
         this.router.navigateByUrl('/login');
     }
 
-    private async saveTokensAndProfile(tokens: { access: string; refresh: string; }, profile: UserProfile): Promise<boolean>{
+    private async saveTokensAndProfile(tokens: { access: string; refresh: string; }, profile: UserProfile): Promise<number>{
         if(tokens){
             this.tokenService.saveTokens(tokens);
             profile.profileId = this.tokenService.getDecodedAccessToken(tokens.access)["profileId"];
             await this.userProfileService.setProfile(profile);
-            return true;
+            return 0;
         }
-        return false;
+        return 1;
     }
 
     private encode(pass: string): string{

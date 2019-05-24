@@ -9,19 +9,15 @@
     },
     "reg":{
         "formHeader": "Додавання нового користувача",
-        "btnText": "Додати",
-        "fname": "Ім'я",
-        "lname": "Прізвище",
-        "password": "Пароль",
-        "passwordConfirm": "Підтвердження паролю",
-        "email": "Ел. пошта"        
+        "btnText": "Додати"     
     },
     "error": {
         "isRequired": "Є обов'язковим полем",
         "lettersOnly": "Може містити тільки літери",
         "minLength6": "Мінімум 6 символів у довжину",
         "passwordsNotMatch": "Паролі не співпадають",
-        "emailNotValid": "Некоректна форма запису"
+        "emailNotValid": "Некоректна форма запису",
+        "incorrectPassword": "Невірний пароль"
     },
     "module": {
         "tasks": "Задачі",
@@ -56,6 +52,13 @@
         }
     },
     "placeholders":{
+        "userAccount":{
+            "fname": "Ім'я",
+            "lname": "Прізвище",
+            "password": "Пароль",
+            "passwordConfirm": "Підтвердження паролю",
+            "email": "Ел. пошта"
+        },
         "taskPage":{
             "categoryName" : "Назва категорії",
             "projectName" : "Назва проекту",

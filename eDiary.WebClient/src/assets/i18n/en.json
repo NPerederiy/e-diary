@@ -8,20 +8,16 @@
         "loginBtnText": "Log in"
     },
     "reg":{
-        "formHeader": "Register new user",
-        "btnText": "Register",
-        "fname": "First name",
-        "lname": "Last name",
-        "password": "Password",
-        "passwordConfirm": "Password confirmation",
-        "email": "Email"        
+        "formHeader": "Register new user",  
+        "btnText": "Register"
     },
     "error": {
         "isRequired": "Field is required",
         "lettersOnly": "Must contain only letters",
         "minLength6": "Must be at least 6 chars",
         "passwordsNotMatch": "Passwords do not match",
-        "emailNotValid": "Email must be a valid email address"
+        "emailNotValid": "Email must be a valid email address",
+        "incorrectPassword": "Incorrect password"
     },
     "module": {
         "tasks": "Tasks",
@@ -56,16 +52,23 @@
         }      
     },
     "placeholders":{
+        "userAccount":{
+            "fname": "First name",
+            "lname": "Last name",
+            "password": "Password",
+            "passwordConfirm": "Password confirmation",
+            "email": "Email" 
+        },
         "taskPage":{
             "categoryName" : "Category name",
             "projectName" : "Project name",
             "sectionName" : "Column name",
-            "taskHeader" : "Task",
+            "taskHeader" : "Task header",
             "taskDescription" : "Task description"
         },
         "notePage":{
             "folderName" : "Folder name",
-            "noteHeader" : "Note",
+            "noteHeader" : "Note header",
             "noteDescription" : "Note description"
         }
     },

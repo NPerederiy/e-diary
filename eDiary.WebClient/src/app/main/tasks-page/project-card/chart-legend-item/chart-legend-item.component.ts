@@ -15,4 +15,14 @@ export class ChartLegendItemComponent implements OnInit {
 
   ngOnInit() { }
 
+  getDictionaryKeyForValue(){
+    switch(this.value){
+      case 'Hot' : return 'cardStatus.hot-pl';
+      case 'Important' : return 'cardStatus.important-pl';
+      case 'In progress' : return 'cardStatus.inProgress-pl'; 
+      case 'Completed' : return 'cardStatus.completed-pl';
+      case 'Overdue' : return 'cardStatus.overdue-pl';
+    }
+  }
+
 }
