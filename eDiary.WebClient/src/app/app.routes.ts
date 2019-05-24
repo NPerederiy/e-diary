@@ -19,8 +19,9 @@ export const appRoutes: Routes = [
         path: 'app', 
         component: MainComponent,
         children: [
-            { path: '', component: HomePageComponent },
-            { path: 'tasks', component: TasksPageComponent },
+            // { path: '', component: HomePageComponent },
+            // { path: 'tasks', component: TasksPageComponent },
+            { path: '', component: TasksPageComponent },
             { path: 'notes', component: NotesPageComponent },
             { path: 'calendar', component: CalendarPageComponent }
         ]

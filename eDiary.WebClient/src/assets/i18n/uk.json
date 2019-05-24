@@ -31,11 +31,43 @@
     "cardStatus":{
         "hot": "Гаряча",
         "important": "Важлива",
+        "inProgress" : "У процесі",
         "completed": "Завершена",
-        "deleted": "Видалена"
+        "deleted": "Видалена",
+        "overdue" : "Прострочена",
+        "hot-pl": "Гарячі",
+        "important-pl": "Важливі",
+        "inProgress-pl" : "У процесі",
+        "completed-pl": "Завершені",
+        "deleted-pl": "Видалені",
+        "overdue-pl" : "Прострочені"
     },
     "buttons":{
-        "addColumn": "Додати колонку"
+        "common" : {
+            "complete" : "Завершити",
+            "remove" : "Видалити",
+            "archive" : "Архівувати"
+        },
+        "taskPage":{
+            "addCategory": "Нова Категорія",
+            "addProject" : "Новий Проект",
+            "addColumn": "Додати колонку",
+            "allProjects" : "Всі проекти"
+        }
+    },
+    "placeholders":{
+        "taskPage":{
+            "categoryName" : "Назва категорії",
+            "projectName" : "Назва проекту",
+            "sectionName" : "Назва колонки",
+            "taskHeader" : "Заголовок задачі",
+            "taskDescription" : "Опис задачі"
+        },
+        "notePage":{
+            "folderName" : "Назва теки",
+            "noteHeader" : "Заголовок нотатки",
+            "noteDescription" : "Опис нотатки"
+        }
     },
     "directories":{
         "root": "Головна"

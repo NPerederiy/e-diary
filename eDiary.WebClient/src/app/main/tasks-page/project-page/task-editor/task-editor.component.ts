@@ -51,7 +51,14 @@ export class TaskEditorComponent implements OnInit {
     this.closeEditor();
   }
 
-  private saveChanges(){
-    this.taskService.updateTask(this.task);
+  public saveChanges(){
+    console.log(this.task);
+    
+    this.taskService.updateTask(this.task)
+      .then((updatedAt: string) => {
+        this.task.updatedAt = updatedAt;
+      }, (error) => {
+        console.error(error);
+      })
   }
 }

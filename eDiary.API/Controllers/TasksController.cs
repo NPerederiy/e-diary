@@ -44,7 +44,7 @@ namespace eDiary.API.Controllers
         }
         
         [HttpPost]
-        public async Task<int> CreateTaskAsync(CreateTaskData task)
+        public async Task<CreateTaskResponseData> CreateTaskAsync(CreateTaskData task)
         {
             Services.Validation.Validate.NotNull(task);
             Services.Validation.Validate.NotNull(task.Header, "Task header");
@@ -53,14 +53,14 @@ namespace eDiary.API.Controllers
         }
         
         [HttpPut]
-        public async Task UpdateTaskAsync(UpdateTaskData task)
+        public async Task<string> UpdateTaskAsync(UpdateTaskData task)
         {
             Services.Validation.Validate.NotNull(task);
             Services.Validation.Validate.NotNull(task.TaskId, "Task id");
             Services.Validation.Validate.NotNull(task.Header, "Task header");
             Services.Validation.Validate.NotNull(task.TaskStatus, "Task status");
             Services.Validation.Validate.NotNull(task.CardStatus, "Task card status");
-            await ts.UpdateTaskAsync(task);
+            return await ts.UpdateTaskAsync(task);
         }
 
         //[HttpPut]

@@ -30,7 +30,7 @@
       type="text" 
       tabindex="1" 
       autofocus=true 
-      placeholder="Project name"
+      placeholder="{{ 'placeholders.taskPage.projectName' | translate}}"
       (blur)="closeEditor()"
       (keyup.enter)="blurEditor()"
       [(ngModel)]="card.projectName"

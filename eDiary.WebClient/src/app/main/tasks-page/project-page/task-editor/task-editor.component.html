@@ -6,14 +6,15 @@
         class="button complete shadow"
         (click)="completeTask()"
       >
-        Complete
+        {{ 'buttons.common.complete' | translate }}
       </div>
       <div
         *ngIf="isCompleted()"
         class="button archive shadow"
         (click)="archiveTask()"
       >
-        Archive
+      {{ 'buttons.common.remove' | translate }}
+      <!-- {{ 'buttons.taskPage.archive' | translate }} -->
       </div>
     </div>
     <div class="right-header">
@@ -22,13 +23,15 @@
     <div class="left-column">
       <textarea
         class="task-header" 
-        placeholder="Task header"
+        placeholder="{{ 'placeholders.taskPage.taskHeader' | translate}}"
         [(ngModel)]="task.header"
+        (ngModelChange)="saveChanges()"
       ></textarea>
       <textarea
         class="task-descr" 
-        placeholder="Task description"
+        placeholder="{{ 'placeholders.taskPage.taskDescription' | translate}}"
         [(ngModel)]="task.descr"
+        (ngModelChange)="saveChanges()"
       ></textarea>
     </div>
     <div class="right-column">

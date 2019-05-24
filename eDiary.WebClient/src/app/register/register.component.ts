@@ -1,4 +1,4 @@
-import { Component, OnInit, ViewChild } from '@angular/core';
+import { Component, OnInit, ViewChild, ElementRef } from '@angular/core';
 import { Router } from '@angular/router';
 import * as SHA from 'js-sha512';
 import { FormGroup, FormBuilder, FormControl, Validators, AbstractControl } from '@angular/forms';
@@ -58,6 +58,36 @@ export class RegisterComponent implements OnInit {
 
   public get passwords() {
     return this.form.controls.passwords;
+  }
+
+  public isTouched(e: ElementRef){
+    console.log(e);
+    
+    return e.nativeElement.touched;
+  }
+
+  public isPasswordTouched(){
+    return this.form.get('passwords.password').touched;
+  }
+
+  public isConfirmPasswordTouched(){  
+    return this.form.get('passwords.confirmPassword').touched;
+  }
+
+  public getPasswordValue(){
+    return this.form.get('passwords.password').value;
+  }
+
+  public getConfirmPasswordValue(){
+    return this.form.get('passwords.password').value;
+  }
+
+  public getPasswordElement(){
+    return this.form.get('passwords.password');
+  }
+
+  public getConfirmPasswordElement(){
+    return this.form.get('passwords.password');
   }
 
   public isPasswordType(e: HTMLInputElement){

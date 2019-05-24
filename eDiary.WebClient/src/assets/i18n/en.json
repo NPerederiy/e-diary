@@ -31,11 +31,43 @@
     "cardStatus": {
         "hot": "Hot",
         "important": "Important",
-        "completed": "Completed",
-        "deleted": "Deleted"
+        "inProgress" : "In progress",
+        "completed" : "Completed",
+        "deleted" : "Deleted",
+        "overdue" : "Overdue",
+        "hot-pl": "Hot",
+        "important-pl": "Important",
+        "inProgress-pl" : "In progress",
+        "completed-pl" : "Completed",
+        "deleted-pl" : "Deleted",
+        "overdue-pl" : "Overdue"
     },
     "buttons":{
-        "addColumn": "Add a column"
+        "common" : {
+            "complete" : "Complete",
+            "remove" : "Remove",
+            "archive" : "Archive"
+        },
+        "taskPage":{
+            "addCategory": "New Category",
+            "addProject" : "New Project",
+            "addColumn" : "Add a column",
+            "allProjects" : "All projects"
+        }      
+    },
+    "placeholders":{
+        "taskPage":{
+            "categoryName" : "Category name",
+            "projectName" : "Project name",
+            "sectionName" : "Column name",
+            "taskHeader" : "Task",
+            "taskDescription" : "Task description"
+        },
+        "notePage":{
+            "folderName" : "Folder name",
+            "noteHeader" : "Note",
+            "noteDescription" : "Note description"
+        }
     },
     "directories":{
         "root": "Root"

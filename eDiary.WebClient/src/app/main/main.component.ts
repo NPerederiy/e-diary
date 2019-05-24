@@ -28,8 +28,8 @@ export class MainComponent implements OnInit {
     ) {
     this.menuButtons.push(
       new MenuButton(MenuButtonType.Home, "", true),
-      new MenuButton(MenuButtonType.Tasks, "Tasks"),
-      new MenuButton(MenuButtonType.Notes, "Notes"),
+      // new MenuButton(MenuButtonType.Tasks, "Tasks"),
+      // new MenuButton(MenuButtonType.Notes, "Notes"),
       new MenuButton(MenuButtonType.Calendar, "Calendar"),
     )
   }
@@ -63,7 +63,8 @@ export class MainComponent implements OnInit {
     btn.setActive();
     switch(btn.type){
       case MenuButtonType.Home:
-        this.router.navigate(["app"]);
+        // this.router.navigate(["app"]);
+        this.router.navigateByUrl('/');
         break;
       case MenuButtonType.Tasks:
       this.router.navigate(["tasks"], {relativeTo: this.route});

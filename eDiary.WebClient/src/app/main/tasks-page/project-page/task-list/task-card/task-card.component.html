@@ -5,7 +5,7 @@
       type="text" 
       tabindex="1" 
       autofocus=true 
-      placeholder="Task header"
+      placeholder="{{ 'placeholders.taskPage.taskHeader' | translate}}"
       (blur)="closeEditor()"
       (keyup.enter)="blurEditor()"
       [(ngModel)]="card.header"

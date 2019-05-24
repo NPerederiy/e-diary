@@ -52,7 +52,7 @@ namespace eDiary.API.Services.Tasks
             return new TaskCard(await TryFindTask(id));
         }
         
-        public async Task<int> CreateTaskAsync(string header, int sectionId)
+        public async Task<CreateTaskResponseData> CreateTaskAsync(string header, int sectionId)
         {
             var time = DateTime.Now;
             var t = new Entities.Task
@@ -70,10 +70,10 @@ namespace eDiary.API.Services.Tasks
                 Difficulty = (await uow.DifficultyRepository.GetByConditionAsync(x => x.Name == "Low")).FirstOrDefault()
             };
             await uow.TaskRepository.CreateAsync(t);
-            return t.Id;
+            return new CreateTaskResponseData(t.Id, t.CreatedAt.ToString("yyyy-MM-ddTHH:mm:ss.fffffK"), t.UpdatedAt.ToString("yyyy-MM-ddTHH:mm:ss.fffffK"));
         }
         
-        public async Task UpdateTaskAsync(UpdateTaskData card)
+        public async Task<string> UpdateTaskAsync(UpdateTaskData card)
         {
             var task = await TryFindTask((int)card.TaskId);
             var time = DateTime.Now;
@@ -97,6 +97,7 @@ namespace eDiary.API.Services.Tasks
             task.Difficulty = (await uow.DifficultyRepository.GetByConditionAsync(x => x.Name == card.Difficulty)).FirstOrDefault();
 
             uow.TaskRepository.Update(task);
+            return time.ToString("yyyy-MM-ddTHH:mm:ss.fffffK");
         }
 
         public async Task DeleteTaskAsync(int id)

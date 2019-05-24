@@ -196,6 +196,7 @@
     <Compile Include="Models\BusinessObjects\UpdateProjectData.cs" />
     <Compile Include="Models\BusinessObjects\UpdateSectionData.cs" />
     <Compile Include="Models\BusinessObjects\UpdateTaskData.cs" />
+    <Compile Include="Models\BusinessObjects\UpdateTaskResponseData.cs" />
     <Compile Include="Models\BusinessObjects\UserProfileBO.cs" />
     <Compile Include="Models\BusinessObjects\UserSettingsBO.cs" />
     <Compile Include="Models\EF\Interfaces\IRepository.cs" />

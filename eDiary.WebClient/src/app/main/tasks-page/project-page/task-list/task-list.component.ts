@@ -74,16 +74,19 @@ export class TaskListComponent implements OnInit {
     this.taskService.removeTask(card.taskId);
   }
 
-  private saveTaskChanges(card: TaskCard){
+  private async saveTaskChanges(card: TaskCard){
     if(this.isNewTaskCardCreating){
       if(card.header){
         console.log(this.section);
+        console.log(card);
         
-        this.taskService.addTask(card.header, this.section.sectionId)
-          .then((id: number) => {
-            console.log('task id: ',id);
+        await this.taskService.addTask(card.header, this.section.sectionId)
+          .then((data: {id: number, createdAt: string, updatedAt: string}) => {
+            console.log('task data: ', data);
             
-            card.taskId = id;
+            card.taskId = data.id;
+            card.createdAt = data.createdAt;
+            card.updatedAt = data.updatedAt;
           })
       } else {
         this.section.cards.pop();

@@ -24,8 +24,12 @@ export class TaskSectionService{
     }
 
     public updateSection(section: TaskSection){
-        // TODO: Implement
-        console.log("update section");
+        let body: any = {};
+        body.sectionId = section.sectionId;
+        body.name = section.name;
+        body.projectId = section.projectId;
+
+        return this.http.put(`${this.serverURI}/api/${this.controllerName}`, body).toPromise();
     }
 
     public removeSection(id: number){

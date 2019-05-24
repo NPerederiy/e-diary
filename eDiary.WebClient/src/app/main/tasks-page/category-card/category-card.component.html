@@ -7,7 +7,7 @@
     type="text" 
     tabindex="1" 
     autofocus=true 
-    placeholder="Category name"
+    placeholder="{{ 'placeholders.taskPage.categoryName' | translate}}"
     (blur)="closeEditor()"
     (keyup.enter)="blurEditor()"
     [(ngModel)]="card.name"

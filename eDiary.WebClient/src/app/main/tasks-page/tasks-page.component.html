@@ -4,7 +4,7 @@
       class="all-projects-button shadow"
       (click)="showAllProjects()"
     >
-      All projects
+      {{ 'buttons.taskPage.allProjects' | translate }}
     </div>
     <category-card 
       *ngFor="let c of categories" 
@@ -19,7 +19,7 @@
       class="add-category-button" 
       *ngIf="!isNewCategoryCreating" 
       (click)="addCategory()">
-        New Category
+        {{ 'buttons.taskPage.addCategory' | translate }}
       </div>
   </div>
 
@@ -43,7 +43,9 @@
           <div class="infront">
           </div>
         </div>
-        <div class="text">New Project</div>
+        <div class="text">
+          {{ 'buttons.taskPage.addProject' | translate }}
+        </div>
       </div>
     </div>
   </div>

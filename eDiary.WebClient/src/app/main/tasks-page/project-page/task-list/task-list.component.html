@@ -10,7 +10,7 @@
         type="text" 
         tabindex="1" 
         autofocus=true 
-        placeholder="Section name"
+        placeholder="{{ 'placeholders.taskPage.sectionName' | translate}}"
         (blur)="closeSectionEditor()"
         (keyup.enter)="blurEditor(headerInput)"
         [(ngModel)]="section.name"

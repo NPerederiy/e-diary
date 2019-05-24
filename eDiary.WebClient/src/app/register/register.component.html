@@ -53,12 +53,12 @@
             autofocus=true 
             autocomplete="new-password"
             placeholder="{{ 'reg.password' | translate }}"
-            [ngClass]="{ 'pass': isPasswordType(p), 'ng-invalid warning': form.controls.password.touched && form.controls.password.invalid }"
+            [ngClass]="{ 'pass': isPasswordType(p), 'ng-invalid warning': isPasswordTouched() && getPasswordElement().invalid }"
             #p
           />
-          <div *ngIf="form.controls.password.touched && form.controls.password.invalid">
-            <div *ngIf="form.controls.password.errors.required" class="alert">{{ 'error.isRequired' | translate }}</div>
-            <div *ngIf="form.controls.password.errors.minlength" class="alert">{{ 'error.minLength6' | translate }}</div>
+          <div *ngIf="isPasswordTouched() && getPasswordElement().invalid">
+            <div *ngIf="getPasswordElement().errors.required" class="alert">{{ 'error.isRequired' | translate }}</div>
+            <div *ngIf="getPasswordElement().errors.minlength" class="alert">{{ 'error.minLength6' | translate }}</div>
           </div>
         </div>
         <div class="fields" formGroupName="passwords">
@@ -71,15 +71,15 @@
             tabindex="0" 
             autofocus=true 
             placeholder="{{ 'reg.passwordConfirm' | translate }}"
-            [ngClass]="{ 'pass': isPasswordType(cp),'ng-invalid warning': form.controls.confirmPassword.touched && passwords.invalid }"
+            [ngClass]="{ 'pass': isPasswordType(cp),'ng-invalid warning': isConfirmPasswordTouched() && passwords.invalid }"
             #cp
           />
-          <div *ngIf="form.controls.confirmPassword.touched && form.controls.confirmPassword.errors; else passwordGroupErrors">
-            <div *ngIf="form.controls.confirmPassword.errors.required"
+          <div *ngIf="isConfirmPasswordTouched() && getConfirmPasswordElement().errors; else passwordGroupErrors">
+            <div *ngIf="getConfirmPasswordElement().errors.required"
              class="alert">{{ 'error.isRequired' | translate }}</div>
           </div>
           <ng-template #passwordGroupErrors>
-            <div *ngIf="form.controls.confirmPassword.value !== '' && passwords.errors && passwords.errors.passwordsNotMatch"
+            <div *ngIf="getConfirmPasswordValue() !== '' && passwords.errors && passwords.errors.passwordsNotMatch"
               class="alert">{{ 'error.passwordsNotMatch' | translate }}</div>
           </ng-template>
         </div>  
